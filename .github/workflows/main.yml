@@ -1,13 +1,35 @@
+<<<<<<< HEAD
 name: TypeScript CI
 
 on: [push, pull_request]
+=======
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+      - qa
+      - staging
+      - production
+  pull_request:
+    branches:
+      - main
+      - qa
+      - staging
+      - production
+>>>>>>> d3cd049 (ci-cd-1 Created github action yaml)
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
+<<<<<<< HEAD
     - name: Checkout repository
+=======
+    - name: Checkout code
+>>>>>>> d3cd049 (ci-cd-1 Created github action yaml)
       uses: actions/checkout@v2
 
     - name: Set up Node.js
@@ -21,5 +43,49 @@ jobs:
     - name: Compile TypeScript
       run: npm run build
 
+<<<<<<< HEAD
     - name: Run tests
       run: npm test
+=======
+    - name: Run code
+      run: npm start
+      
+    - name: Run tests
+      run: npm test
+
+  deploy_qa:
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/qa'
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Mock QA Deployment
+      run: echo "Deploying to QA environment..."
+      
+  deploy_staging:
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/staging'
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Mock Staging Deployment
+      run: echo "Deploying to Staging environment..."
+
+  deploy_production:
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/production'
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Mock Production Deployment
+      run: echo "Deploying to Production environment..."
+>>>>>>> d3cd049 (ci-cd-1 Created github action yaml)
