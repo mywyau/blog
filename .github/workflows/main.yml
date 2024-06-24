@@ -19,22 +19,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
+    - name: Checkout code
+      uses: actions/checkout@v2
+
     - name: Start SSH agent
       run: eval $(ssh-agent)
-
-    - name: Set correct permissions for SSH key
-      run: chmod 600 ~/.ssh/id_rsa  
-
-    - name: Add SSH key
-      run: ssh-add -v ~/.ssh/id_rsa
       
     - name: Set up SSH
       uses: webfactory/ssh-agent@v0.5.3
       with:
         ssh-private-key: ${{ secrets.EC2_SSH_KEY }}
 
-    - name: Checkout code
-      uses: actions/checkout@v2
+    - name: Set correct permissions for SSH key
+      run: chmod 600 ~/.ssh/id_rsa  
+
+    - name: Add SSH key
+      run: ssh-add -v ~/.ssh/id_rsa    
+
 
     - name: Set up Node.js
       uses: actions/setup-node@v2
@@ -52,6 +53,10 @@ jobs:
       
     - name: Run tests
       run: npm test
+
+    - name: Deploy to QA
+      run: |
+        ssh ec2-user@ip-172-31-23-197 "cd ~/my-project/ci-cd && git pull origin main"  
 
   # deploy_qa:
   #   needs: build
