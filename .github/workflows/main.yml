@@ -60,7 +60,7 @@ jobs:
     - name: Debug SSH key addition
       run: |
               mkdir -p ~/.ssh
-              echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+              echo "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/id_rsa
               chmod 600 ~/.ssh/id_rsa
               ssh-add ~/.ssh/id_rsa
               ssh-keyscan -H ec2-18-134-249-218.eu-west-2.compute.amazonaws.com >> ~/.ssh/known_hosts
