@@ -57,7 +57,24 @@ jobs:
       # run: |
         # echo "ec2-18-134-249-218.eu-west-2.compute.amazonaws.com ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEArG5i8+BdY..." >> ~/.ssh/known_hosts
 
-        
+    - name: Debug SSH key addition
+      run: |
+              mkdir -p ~/.ssh
+              echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+              chmod 600 ~/.ssh/id_rsa
+              ssh-add ~/.ssh/id_rsa
+              ssh-keyscan -H ec2-18-134-249-218.eu-west-2.compute.amazonaws.com >> ~/.ssh/known_hosts
+              ssh -o StrictHostKeyChecking=no -v ec2-user@ec2-18-134-249-218.eu-west-2.compute.amazonaws.com "echo 'SSH Connection Established'"
+  
+    - name: Deploy to EC2
+      run: |
+          ssh -o StrictHostKeyChecking=no ec2-user@ec2-18-134-249-218.eu-west-2.compute.amazonaws.com <<EOF
+            cd ~/my-project/ci-cd
+            git pull origin main
+            # Add any other commands you need to run to deploy your application
+          EOF    
+
+
     - name: Add EC2 host key to known_hosts
       run: |
             ssh-keyscan -H ec2-18-134-249-218.eu-west-2.compute.amazonaws.com >> ~/.ssh/known_hosts
