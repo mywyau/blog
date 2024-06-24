@@ -17,8 +17,13 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
+      
+    - name: Set up SSH
+      uses: webfactory/ssh-agent@v0.5.3
+      with:
+        ssh-private-key: ${{ secrets.EC2_SSH_KEY }}
+
     - name: Checkout code
       uses: actions/checkout@v2
 
