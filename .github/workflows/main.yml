@@ -30,8 +30,12 @@ jobs:
       with:
         ssh-private-key: ${{ secrets.EC2_SSH_KEY }}
 
-    - name: Add SSH key
-      run: ssh-add -v <(echo "${{ secrets.EC2_SSH_KEY }}")
+    - name: Install SSH key
+      run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -t rsa <your-ec2-ip> >> ~/.ssh/known_hosts
 
     # - name: Add SSH key
     #   run: ssh-add -v ~/.ssh/id_rsa    
@@ -53,51 +57,10 @@ jobs:
     - name: Run tests
       run: npm test
 
-    # - name: Add EC2 host key to known_hosts
-      # run: |
-        # echo "ec2-18-134-249-218.eu-west-2.compute.amazonaws.com ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEArG5i8+BdY..." >> ~/.ssh/known_hosts
-
-    # - name: Debug SSH key addition
-    #   run: |
-    #           mkdir -p ~/.ssh
-    #           echo "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/id_rsa
-    #           chmod 600 ~/.ssh/id_rsa
-    #           ssh-add ~/.ssh/id_rsa
-    #           ssh-keyscan -H ec2-18-134-249-218.eu-west-2.compute.amazonaws.com >> ~/.ssh/known_hosts
-    #           ssh -o StrictHostKeyChecking=no -v ec2-user@ec2-18-134-249-218.eu-west-2.compute.amazonaws.com "echo 'SSH Connection Established'"
-  
     - name: Deploy to EC2
       run: |
-          ssh -o StrictHostKeyChecking=no ec2-user@ec2-18-134-249-218.eu-west-2.compute.amazonaws.com <<EOF
-            cd ~/my-project/ci-cd
-            git pull origin main
-            # Add any other commands you need to run to deploy your application
-          EOF    
-
-
-    - name: Add EC2 host key to known_hosts
-      run: |
-            ssh-keyscan -H ec2-18-134-249-218.eu-west-2.compute.amazonaws.com >> ~/.ssh/known_hosts
-      
-    - name: Deploy to EC2
-      run: |
-        ssh -o StrictHostKeyChecking=no ec2-user@ec2-18-134-249-218.eu-west-2.compute.amazonaws.com <<EOF
-        cd ~/my-project/ci-cd
-        git pull origin main
-        # Add any other commands you need to run to deploy your application
-        EOF        
-
-    # - name: Deploy to QA EC2
-    #   run: |
-    #     ssh -o StrictHostKeyChecking=no ec2-user@ec2-18-134-249-218.eu-west-2.compute.amazonaws.com <<EOF
-    #       cd ~/my-project/ci-cd
-    #       git pull origin main
-    #       # Add any other commands you need to run to deploy your application
-    #     EOF
-
-    # - name: Deploy to QA
-    #   run: |
-    #     ssh ec2-18-134-249-218.eu-west-2.compute.amazonaws.com "cd ~/my-project/ci-cd && git pull origin main"  
+        scp -r ./* username@<your-ec2-ip>:/path/to/destination
+        ssh username@<your-ec2-ip> 'bash -s' < deploy_script.sh
 
   # deploy_qa:
   #   needs: build
