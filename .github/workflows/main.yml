@@ -30,12 +30,11 @@ jobs:
       with:
         ssh-private-key: ${{ secrets.EC2_SSH_KEY }}
 
-    - name: Set correct permissions for SSH key
-      run: chmod 600 ~/.ssh/id_rsa  
-
     - name: Add SSH key
-      run: ssh-add -v ~/.ssh/id_rsa    
+      run: ssh-add -v <(echo "${{ secrets.EC2_SSH_KEY }}")
 
+    # - name: Add SSH key
+    #   run: ssh-add -v ~/.ssh/id_rsa    
 
     - name: Set up Node.js
       uses: actions/setup-node@v2
