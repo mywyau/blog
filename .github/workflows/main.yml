@@ -55,7 +55,7 @@ jobs:
 
     - name: Deploy to QA
       run: |
-        ssh ec2-user@ip-172-31-23-197 "cd ~/my-project/ci-cd && git pull origin main"  
+        ssh ec2-18-134-249-218.eu-west-2.compute.amazonaws.com "cd ~/my-project/ci-cd && git pull origin main"  
 
   # deploy_qa:
   #   needs: build
