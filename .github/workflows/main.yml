@@ -57,7 +57,10 @@ jobs:
     #     ssh ec2-user@ec2-18-134-249-218.eu-west-2.compute.amazonaws.com 'cd ~/my-project/ci-cd && git pull origin main && npm install && npm run build && pm2 restart all'
 
     - name: Install TypeScript
-      run: npm install -g typescript
+      run: npm install -g typescript  
+      
+    - name: Install pm2
+      run: npm install -g pm2
 
     - name: Install dependencies
       run: npm install
@@ -78,5 +81,8 @@ jobs:
           git pull origin main &&
           npm install &&
           npm run build &&
-          pm2 restart all
+          npm start &&
+          npm test
         '
+
+# pm2 restart all
