@@ -17,15 +17,29 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
+    - name: Start SSH agent
+      run: eval $(ssh-agent -s)
+      
+    - name: Set up SSH
+      uses: webfactory/ssh-agent@v0.5.3
       with:
-        node-version: '14'
+        ssh-private-key: ${{ secrets.EC2_SSH }}
+
+    - name: Add EC2 host to known_hosts
+      run: |
+            mkdir -p ~/.ssh
+            ssh-keyscan -H ec2-18-134-249-218.eu-west-2.compute.amazonaws.com >> ~/.ssh/known_hosts
+      shell: bash  
+
+    - name: Install TypeScript
+      run: npm install -g typescript  
+      
+    - name: Install pm2
+      run: npm install -g pm2
 
     - name: Install dependencies
       run: npm install
@@ -39,38 +53,15 @@ jobs:
     - name: Run tests
       run: npm test
 
-  # deploy_qa:
-  #   needs: build
-  #   runs-on: ubuntu-latest
-  #   if: github.ref == 'refs/heads/qa'
+    - name: Deploy to EC2
+      run: |
+        ssh ec2-user@ec2-18-134-249-218.eu-west-2.compute.amazonaws.com '
+          cd ~/my-project/ci-cd &&
+          git pull origin main &&
+          npm install &&
+          npm run build &&
+          npm start &&
+          npm test
+        '
 
-  #   steps:
-  #   - name: Checkout code
-  #     uses: actions/checkout@v2
-
-  #   - name: Mock QA Deployment
-  #     run: echo "Deploying to QA environment..."
-      
-  # deploy_staging:
-  #   needs: build
-  #   runs-on: ubuntu-latest
-  #   if: github.ref == 'refs/heads/staging'
-
-  #   steps:
-  #   - name: Checkout code
-  #     uses: actions/checkout@v2
-
-  #   - name: Mock Staging Deployment
-  #     run: echo "Deploying to Staging environment..."
-
-  # deploy_production:
-  #   needs: build
-  #   runs-on: ubuntu-latest
-  #   if: github.ref == 'refs/heads/production'
-
-  #   steps:
-  #   - name: Checkout code
-  #     uses: actions/checkout@v2
-
-  #   - name: Mock Production Deployment
-  #     run: echo "Deploying to Production environment..."
+# pm2 restart all

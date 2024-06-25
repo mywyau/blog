@@ -2,4 +2,9 @@ export function greet(): string {
     return "Hello, World!";
   }
   
-  console.log(greet());
+export function greet_tomy(): string {
+  return "Hello, Tomy!";
+}
+
+console.log(greet());
+console.log(greet_tomy());
