@@ -1,4 +1,5 @@
 
+// import styles from "../app/styles/tailwind.css"; // Adjust the path as per your actual file structure
 
 import type { MetaFunction } from "@remix-run/node";
 
