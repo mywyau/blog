@@ -1,4 +1,7 @@
 // app/routes/index.tsx
+
+import styles from "../app/styles/tailwind.css"; // Adjust the path as per your actual file structure
+
 import { Link } from "@remix-run/react";
 
 export default function Welcome() {

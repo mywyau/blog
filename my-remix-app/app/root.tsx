@@ -6,16 +6,14 @@ import {
   ScrollRestoration,
 } from "@remix-run/react";
 
-import { LinksFunction, MetaFunction } from '@remix-run/node';
+import { LinksFunction, MetaFunction } from "@remix-run/node";
 
-import tailwindStyles from './styles/tailwind.css';
-
-import Welcome from './components/Welcome';
+import styles from "../app/styles/tailwind.css"; // Adjust the path as per your actual file structure
 
 
-export const links: LinksFunction = () => {
-  return [{ rel: 'stylesheet', href: tailwindStyles }];
-};
+export const links: LinksFunction = () => [
+  { rel: "stylesheet", href: styles },
+];
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -27,7 +25,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
-        <Welcome />
         {children}
         <ScrollRestoration />
         <Scripts />
