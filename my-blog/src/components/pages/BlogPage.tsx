@@ -1,14 +1,14 @@
-// src/pages/BlogPost.tsx
+// src/pages/BlogPage.tsx
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import BlogList from '../BlogList';
 
-const BlogPost: React.FC = () => {
-  const { id } = useParams<{ id: string }>();
+const BlogPage: React.FC = () => {
   // Sample data for demonstration
-  const post = {
-    title: `Post ${id}`,
-    content: `This is the content of post ${id}.`
-  };
+  const posts = [
+    { id: 1, title: 'First Post', excerpt: 'This is the first post.' },
+    { id: 2, title: 'Second Post', excerpt: 'This is the second post.' },
+    { id: 3, title: 'Third Post', excerpt: 'This is the third post.' },
+  ];
 
   return (
     <div className="min-h-screen bg-gray-100">
@@ -18,8 +18,7 @@ const BlogPost: React.FC = () => {
         </div>
       </header>
       <main className="container mx-auto p-4">
-        <h1 className="text-4xl font-bold mb-4">{post.title}</h1>
-        <p className="text-gray-700 text-lg">{post.content}</p>
+        <BlogList posts={posts} />
       </main>
       <footer className="bg-gray-800 text-white py-4 mt-4">
         <div className="container mx-auto text-center">
@@ -30,4 +29,4 @@ const BlogPost: React.FC = () => {
   );
 };
 
-export default BlogPost;
+export default BlogPage;

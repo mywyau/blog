@@ -1,10 +1,12 @@
 // src/components/BlogList.tsx
 import React from 'react';
 import { Link } from 'react-router-dom';
+import BlogCard from './blog_card/BlogCard';
 
 interface Post {
   id: number;
   title: string;
+  excerpt: string;
 }
 
 interface BlogListProps {
@@ -21,6 +23,8 @@ const BlogList: React.FC<BlogListProps> = ({ posts }) => {
             <Link to={`/post/${post.id}`} className="text-blue-500 hover:underline">
               {post.title}
             </Link>
+
+            <BlogCard id={post.id} title={post.title} excerpt={post.excerpt} />
           </li>
         ))}
       </ul>
