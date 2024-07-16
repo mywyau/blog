@@ -7,16 +7,14 @@ project to practice & learn React github workflows and aws.
 
 ```
 npm start
-
 ```
 
-Nav to:
+Navigate to:
 
 ```
 http://localhost:3000/
 ```
 
----
 
 ## tests
 
