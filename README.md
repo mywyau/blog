@@ -2,7 +2,6 @@
 
 project to practice & learn React github workflows and aws.
 
----
 
 ## Start app
 
