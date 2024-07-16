@@ -22,10 +22,6 @@ const BlogList: React.FC<BlogListProps> = ({ posts }) => {
       <ul>
         {posts.map(post => (
           <li key={post.id} className="mb-2">
-            <Link to={`/post/${post.id}`} className="text-blue-500 hover:underline">
-              {post.title}
-            </Link>
-
             <BlogCard id={post.id} title={post.title} excerpt={post.excerpt} />
           </li>
         ))}
