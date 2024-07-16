@@ -1,18 +1,13 @@
-// src/App.test.tsx
-import React from 'react';
 import { render, screen } from '@testing-library/react';
+import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
-import App from './App';
-import BlogPage from './views/components/pages/BlogPage';
-import BlogPost from './views/components/BlogPost';
-import About from './views/components/pages/About';
-import Contacts from './views/components/pages/Contacts';
+import App from '../src/App';
 
 // Mocking the components to verify their rendering
-jest.mock('./components/pages/BlogPage', () => () => <div>BlogPage Component</div>);
-jest.mock('./components/BlogPost', () => () => <div>BlogPost Component</div>);
-jest.mock('./components/pages/About', () => () => <div>About Component</div>);
-jest.mock('./components/pages/Contacts', () => () => <div>Contacts Component</div>);
+jest.mock('../src/views/components/pages/BlogPage', () => () => <div>BlogPage Component</div>);
+jest.mock('../src/views/components/BlogPost', () => () => <div>BlogPost Component</div>);
+jest.mock('../src/views/components/pages/About', () => () => <div>About Component</div>);
+jest.mock('../src/views/components/pages/Contacts', () => () => <div>Contacts Component</div>);
 
 describe('App', () => {
   it('renders the BlogPage component at the root path', () => {

@@ -1,8 +1,6 @@
-// src/components/BlogCard.test.tsx
-import React from 'react';
 import { render } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import BlogCard from './BlogCard';
+import BlogCard from '../src/views/components/blog_card/BlogCard';
 
 describe('BlogCard', () => {
   it('renders the blog card with title and excerpt', () => {
