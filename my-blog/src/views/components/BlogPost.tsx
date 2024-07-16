@@ -1,6 +1,8 @@
 // src/pages/BlogPost.tsx
 import React from 'react';
 import { useParams } from 'react-router-dom';
+import { messages } from '../../messages/messages';
+import Navbar from './NavBar';
 
 const BlogPost: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -13,9 +15,7 @@ const BlogPost: React.FC = () => {
   return (
     <div className="min-h-screen bg-gray-100">
       <header className="bg-blue-600 text-white py-4">
-        <div className="container mx-auto">
-          <h1 className="text-3xl font-bold">My Blog</h1>
-        </div>
+        <Navbar />
       </header>
       <main className="container mx-auto p-4">
         <h1 className="text-4xl font-bold mb-4">{post.title}</h1>
