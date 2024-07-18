@@ -12,7 +12,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ id, title, excerpt }) => {
   return (
     <div className="bg-white rounded-lg shadow-lg p-6 mb-4">
       <h2 className="text-2xl font-bold mb-2">
-        <Link to={`/post/${id}`} className="text-blue-500 hover:underline">
+        <Link to={`/post/${id}`} className="text-green-500 hover:underline">
           {title}
         </Link>
       </h2>
