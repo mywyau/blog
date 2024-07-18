@@ -4,19 +4,19 @@ import { MemoryRouter } from 'react-router-dom';
 import App from '../src/App';
 
 // Mocking the components to verify their rendering
-jest.mock('../src/views/components/pages/BlogPage', () => () => <div>BlogPage Component</div>);
+jest.mock('../src/views/components/pages/LandingPage', () => () => <div>LandingPage Component</div>);
 jest.mock('../src/views/components/BlogPost', () => () => <div>BlogPost Component</div>);
 jest.mock('../src/views/components/pages/About', () => () => <div>About Component</div>);
 jest.mock('../src/views/components/pages/Contacts', () => () => <div>Contacts Component</div>);
 
 describe('App', () => {
-  it('renders the BlogPage component at the root path', () => {
+  it('renders the LandingPage component at the root path', () => {
     render(
       <MemoryRouter initialEntries={['/']}>
         <App />
       </MemoryRouter>
     );
-    expect(screen.getByText('BlogPage Component')).toBeInTheDocument();
+    expect(screen.getByText('LandingPage Component')).toBeInTheDocument();
   });
 
   it('renders the BlogPost component at the /post/:id path', () => {

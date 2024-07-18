@@ -1,4 +1,4 @@
-// src/pages/BlogPage.tsx
+// src/pages/LandingPage.tsx
 import React from 'react';
 import BlogList from '../BlogList';
 import Copyright from '../Copyright';
@@ -8,7 +8,7 @@ import Button from '../Button';
 import PostButton from '../PostButton';
 
 
-const BlogPage: React.FC = () => {
+const LandingPage: React.FC = () => {
   // Sample data for demonstration
   const posts = [
     { id: 1, title: 'First Post', excerpt: 'This is the first post.' },
@@ -34,4 +34,4 @@ const BlogPage: React.FC = () => {
   );
 };
 
-export default BlogPage;
+export default LandingPage;

@@ -8,18 +8,18 @@ const Navbar: React.FC = () => {
       <div className="container mx-auto flex justify-between items-center">
         <div className="font-bold">
           <Link to="/" className="text-white text-4xl hover:text-gray-300">
-            My Blog
+            Home
           </Link>
         </div>
         <div>
-          <Link to="/" className="text-white text-2xl hover:text-gray-300 mx-2">
-            Home
-          </Link>
           <Link to="/about" className="text-white text-2xl hover:text-gray-300 mx-2">
             About
           </Link>
           <Link to="/contact" className="text-white text-2xl hover:text-gray-300 mx-2">
             Contact
+          </Link>
+          <Link to="/contact" className="text-white text-2xl hover:text-gray-300 mx-2">
+            Interests
           </Link>
         </div>
       </div>

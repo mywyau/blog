@@ -1,6 +1,6 @@
 // src/messages.ts
 export const messages = {
-    blogPage: {
+    LandingPage: {
       title: "Michael Yau",
       description: "This is where you can find the latest posts."
     },
