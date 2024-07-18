@@ -21,4 +21,5 @@ jobs:
           npm install
 
       - run: |
+          cd my-blog
           npm test
