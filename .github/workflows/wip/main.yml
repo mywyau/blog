@@ -1,0 +1,73 @@
+name: CI/CD Pipeline
+
+on: [push, pull_request]
+
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    steps:
+      # The primary purpose of this step is to fetch your repository's code from GitHub and make it available in the runner's workspace. 
+      # This is typically the first step in most workflows, as subsequent steps often depend on having access to the repository's files.
+      # actions/checkout@v2 is a pre-built GitHub Action maintained by GitHub. It is designed to handle the process of checking out code efficiently and securely.
+    - name: Checkout code   
+      uses: actions/checkout@v2
+
+    - name: Navigate to app
+      run: cd ~/my-project/ci-cd/remix-app
+    
+    # - name: Install TypeScript
+    #   run: npm install -g typescript  
+      
+    # - name: Install pm2
+    #   run: npm install -g pm2
+
+    # - name: Install dependencies
+    #   run: npm install
+
+    # - name: Compile TypeScript
+    #   run: npm run build
+
+    # - name: Run code
+    #   run: npm start
+      
+    # - name: Run tests
+    #   run: npm test
+
+  job2: 
+    runs-on: ubuntu-latest
+    needs: job1
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+  
+      - name: Start SSH agent
+        run: eval $(ssh-agent -s)
+        
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.EC2_SSH }}
+  
+      - name: Add EC2 host to known_hosts
+        run: |
+              mkdir -p ~/.ssh
+              ssh-keyscan -H ec2-18-134-249-218.eu-west-2.compute.amazonaws.com >> ~/.ssh/known_hosts
+        shell: bash  
+
+      - name: Deploy to EC2
+        run: |
+          ssh ec2-user@ec2-18-134-249-218.eu-west-2.compute.amazonaws.com '
+            cd ~/my-project/ci-cd &&
+            git pull origin main &&
+            npm install -g typescript 
+            npm install -g pm2 
+            npm install &&
+            npm run build &&
+            npm start &&
+            npm test
+          '
+  # job3: 
+  #   runs-on: ubuntu-latest
+  #   needs: [job1, job2]
+
+# pm2 restart all
