@@ -1,29 +1,21 @@
-name: CI/CD Pipeline
+# .github/workflows/ci.yml
+
+name: run unit tests
 
 on: [push, pull_request]
 
 jobs:
-  job1:
+  test:
     runs-on: ubuntu-latest
+
     steps:
-      
-    - name: Checkout code   
-      uses: actions/checkout@v3
+      - uses: actions/checkout@v2
 
-    - name: Navigate to app
-      run: cd ~/my-project/ci-cd/my-blog
-    
-    - name: Install TypeScript
-      run: npm install -g typescript  
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
 
-    - name: Install dependencies
-      run: npm install
+      - run: npm install
 
-    - name: Compile TypeScript
-      run: npm run build
-
-    - name: Run code
-      run: npm start
-      
-    - name: Run tests
-      run: npm test
+      - run: npm run test
