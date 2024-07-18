@@ -2,7 +2,7 @@
 
 name: run unit tests
 
-on: [push, pull_request]
+on: [push]
 
 jobs:
   test:
@@ -16,6 +16,9 @@ jobs:
         with:
           node-version: '14'
 
-      - run: npm install
+      - run: |
+          cd my-blog
+          npm install
 
-      - run: npm test
+      - run: |
+          npm test
