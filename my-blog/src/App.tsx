@@ -6,6 +6,8 @@ import BlogPost from './views/components/BlogPost';
 import About from './views/components/pages/About';
 import Contacts from './views/components/pages/Contacts';
 
+
+
 const App: React.FC = () => {
   return (
     <Routes>

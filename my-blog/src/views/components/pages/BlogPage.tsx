@@ -1,9 +1,9 @@
 // src/pages/BlogPage.tsx
 import React from 'react';
 import BlogList from '../BlogList';
-import Title from '../title/Title';
+import Copyright from '../Copyright';
 import Navbar from '../NavBar';
-import { messages } from '../../../messages/messages';
+import Title from '../title/Title';
 
 
 const BlogPage: React.FC = () => {
@@ -15,19 +15,15 @@ const BlogPage: React.FC = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-100">
-      <header className="bg-blue-600 text-white py-4">
+    <div className="min-h-screen bg-cambridge-blue">
+      <header className="py-4">
         <Navbar />
         <Title />
       </header>
       <main className="container mx-auto p-4">
         <BlogList posts={posts} />
       </main>
-      <footer className="bg-gray-800 text-white py-4 mt-4">
-        <div className="container mx-auto text-center">
-          <p>&copy; 2024 My Blog. All rights reserved.</p>
-        </div>
-      </footer>
+      <Copyright />
     </div>
   );
 };
