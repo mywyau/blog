@@ -19,7 +19,9 @@ jobs:
       - run: |
           cd my-blog
           npm install
-
-      - run: |
-          cd my-blog
           npm test
+
+
+      # - run: |
+      #     cd my-blog
+      #     npm test
