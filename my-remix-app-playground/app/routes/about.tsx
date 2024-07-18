@@ -13,14 +13,14 @@ export default function About() {
             </p>
             <Link
                 to="/"
-                className="text-white bg-blue-600 hover:bg-blue-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                className="text-raisin-black bg-blue-600 hover:bg-blue-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
             >
                 Go back to Hello World Page
             </Link>
 
             <Link
                 to="/index"
-                className="text-white bg-blue-600 hover:bg-blue-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                className="text-raisin-black bg-blue-600 hover:bg-blue-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
             >
                 Go back to Home Page
             </Link>

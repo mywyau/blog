@@ -15,8 +15,8 @@ const BlogPage: React.FC = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-100">
-      <header className="text-white py-4">
+    <div className="min-h-screen bg-cambridge-blue">
+      <header className="py-4">
         <Navbar />
         <Title />
       </header>

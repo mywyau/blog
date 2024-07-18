@@ -17,7 +17,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ id, title, excerpt }) => {
         </Link>
       </h2>
       <p className="text-gray-700">{excerpt}</p>
-      <Link to={`/post/${id}`} className="text-blue-500 hover:underline mt-4 inline-block">
+      <Link to={`/post/${id}`} className="text-azure hover:underline mt-4 inline-block">
         Read more
       </Link>
     </div>

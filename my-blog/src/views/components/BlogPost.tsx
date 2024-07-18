@@ -14,7 +14,7 @@ const BlogPost: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gray-100">
-      <header className="bg-blue-600 text-white py-4">
+      <header className="bg-celadon-600 text-raisin-black py-4">
         <Navbar />
       </header>
       <main className="container mx-auto p-4">
