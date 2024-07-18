@@ -4,6 +4,8 @@ import BlogList from '../BlogList';
 import Copyright from '../Copyright';
 import Navbar from '../NavBar';
 import Title from '../title/Title';
+import Button from '../Button';
+import PostButton from '../PostButton';
 
 
 const BlogPage: React.FC = () => {
@@ -15,13 +17,17 @@ const BlogPage: React.FC = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-cambridge-blue">
+    <div className="font-nunito min-h-screen bg-cambridge-blue">
       <header className="py-4">
         <Navbar />
         <Title />
       </header>
       <main className="container mx-auto p-4">
         <BlogList posts={posts} />
+        <Button>Primary Button</Button>
+        <Button variant="secondary">Secondary Button</Button>
+        <Button variant="danger">Danger Button</Button>
+        <PostButton />
       </main>
       <Copyright />
     </div>

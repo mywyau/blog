@@ -5,7 +5,7 @@ import Copyright from '../Copyright';
 
 const Contact: React.FC = () => {
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="font-nunito min-h-screen bg-gray-50">
       <Navbar />
       <div className="container mx-auto p-4">
         <h1 className="text-4xl font-bold mb-4">Contact</h1>
