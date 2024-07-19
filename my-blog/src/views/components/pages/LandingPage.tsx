@@ -59,7 +59,7 @@ const LandingPage: React.FC = () => {
         <Button variant="secondary">Secondary Button</Button>
         <Button variant="danger">Danger Button</Button>
         <PostButton />
-        
+
       </main>
       <Copyright />
     </div>
