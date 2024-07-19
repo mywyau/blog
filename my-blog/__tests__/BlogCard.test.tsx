@@ -1,27 +1,57 @@
-import { render } from '@testing-library/react';
-import { MemoryRouter } from 'react-router-dom';
-import BlogCard from '../src/views/components/blog_card/BlogCard';
+// src/components/BlogCard.test.tsx
+import '@testing-library/jest-dom/extend-expect';
+import { render, screen } from '@testing-library/react';
+import { BrowserRouter as Router } from 'react-router-dom';
+import BlogCard from '../src/views/components/blog/BlogCard';
 
 describe('BlogCard', () => {
-  it('renders the blog card with title and excerpt', () => {
-    const { getByText } = render(
-      <MemoryRouter>
-        <BlogCard id={1} title="Test Title" excerpt="Test Excerpt" />
-      </MemoryRouter>
-    );
+  const blogCardProps = {
+    id: 1,
+    title: 'Test Blog Post',
+    excerpt: 'This is a test excerpt for the blog post.',
+  };
 
-    expect(getByText('Test Title')).toBeInTheDocument();
-    expect(getByText('Test Excerpt')).toBeInTheDocument();
-    expect(getByText('Read more')).toBeInTheDocument();
+  const renderComponent = (props = blogCardProps) => {
+    return render(
+      <Router>
+        <BlogCard {...props} />
+      </Router>
+    );
+  };
+
+  test('renders BlogCard component', () => {
+    renderComponent();
+    expect(screen.getByText(blogCardProps.title)).toBeInTheDocument();
+    expect(screen.getByText(blogCardProps.excerpt)).toBeInTheDocument();
   });
 
-  it('links to the correct post page', () => {
-    const { getByText } = render(
-      <MemoryRouter>
-        <BlogCard id={1} title="Test Title" excerpt="Test Excerpt" />
-      </MemoryRouter>
-    );
+  test('renders the title with correct link', () => {
+    renderComponent();
+    const titleLink = screen.getByText(blogCardProps.title).closest('a');
+    expect(titleLink).toHaveAttribute('href', `/post/${blogCardProps.id}`);
+  });
 
-    expect(getByText('Read more')).toHaveAttribute('href', '/post/1');
+  test('renders the "Read more" link with correct href', () => {
+    renderComponent();
+    const readMoreLink = screen.getByText('Read more').closest('a');
+    expect(readMoreLink).toHaveAttribute('href', `/post/${blogCardProps.id}`);
+  });
+
+  test('renders the title with correct class', () => {
+    renderComponent();
+    const titleElement = screen.getByText(blogCardProps.title);
+    expect(titleElement).toHaveClass('text-green-500 hover:underline');
+  });
+
+  test('renders the "Read more" link with correct class', () => {
+    renderComponent();
+    const readMoreLink = screen.getByText('Read more');
+    expect(readMoreLink).toHaveClass('text-azure hover:underline mt-4 inline-block');
+  });
+
+  test('renders the blog card with correct structure and classes', () => {
+    renderComponent();
+    const cardElement = screen.getByRole('article'); // Assuming div acts as an article here
+    expect(cardElement).toHaveClass('bg-white rounded-lg shadow-lg p-6 mb-4');
   });
 });

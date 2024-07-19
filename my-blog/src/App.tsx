@@ -2,7 +2,7 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import LandingPage from './views/components/pages/LandingPage';
-import BlogPost from './views/components/BlogPost';
+import BlogPost from './views/components/blog/BlogPost';
 import About from './views/components/pages/About';
 import Contacts from './views/components/pages/Contacts';
 

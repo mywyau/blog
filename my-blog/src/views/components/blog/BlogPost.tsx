@@ -1,8 +1,8 @@
 // src/pages/BlogPost.tsx
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import Copyright from './Copyright';
-import Navbar from './NavBar';
+import Copyright from '../Copyright';
+import Navbar from '../NavBar';
 
 const BlogPost: React.FC = () => {
   const { id } = useParams<{ id: string }>();

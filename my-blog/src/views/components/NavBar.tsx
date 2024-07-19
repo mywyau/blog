@@ -7,18 +7,18 @@ const Navbar: React.FC = () => {
     <nav className="bg-true-blue p-4 shadow-lg">
       <div className="container mx-auto flex justify-between items-center">
         <div className="font-bold">
-          <Link to="/" className="text-white text-4xl hover:text-gray-300">
+          <Link id="home" to="/" className="text-white text-4xl hover:text-gray-300">
             Home
           </Link>
         </div>
         <div>
-          <Link to="/about" className="text-white text-2xl hover:text-gray-300 mx-2">
+          <Link id="about" to="/about" className="text-white text-2xl hover:text-gray-300 mx-2">
             About
           </Link>
-          <Link to="/contact" className="text-white text-2xl hover:text-gray-300 mx-2">
+          <Link id="contact" to="/contact" className="text-white text-2xl hover:text-gray-300 mx-2">
             Contact
           </Link>
-          <Link to="/contact" className="text-white text-2xl hover:text-gray-300 mx-2">
+          <Link id="interests" to="/interests" className="text-white text-2xl hover:text-gray-300 mx-2">
             Interests
           </Link>
         </div>

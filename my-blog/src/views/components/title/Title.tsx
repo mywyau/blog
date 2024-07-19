@@ -5,7 +5,7 @@ import { messages } from '../../../messages/blog_page_messages';
 const Title: React.FC = () => {
   return (
     <div className="font-nunito flex justify-center items-center h-64 bg-white">
-      <h1 className="text-black text-6xl font-extrabold">
+      <h1 id="landing-page-name" className="text-black text-6xl font-extrabold">
         {messages.LandingPage.title}
       </h1>
     </div>
