@@ -3,3 +3,15 @@ npm install
 npm install --save-dev @testing-library/jest-dom
 
 
+----------------------------------------------------------------
+
+dependencies are a pain
+
+default for now:
+
+import '@testing-library/jest-dom';
+import { fireEvent, render, screen } from '@testing-library/react';
+import React from 'react';
+import Button from '../src/views/components/Button';
+
+----------------------------------------------------------------
