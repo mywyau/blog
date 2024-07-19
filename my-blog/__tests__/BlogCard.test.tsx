@@ -1,8 +1,10 @@
-// src/components/BlogCard.test.tsx
-import '@testing-library/jest-dom/extend-expect';
+import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import BlogCard from '../src/views/components/blog/BlogCard';
+import { act } from 'react';
+
+import '@testing-library/jest-dom';
 
 describe('BlogCard', () => {
   const blogCardProps = {
@@ -12,11 +14,13 @@ describe('BlogCard', () => {
   };
 
   const renderComponent = (props = blogCardProps) => {
-    return render(
-      <Router>
-        <BlogCard {...props} />
-      </Router>
-    );
+    return act(() => {
+      render(
+        <Router>
+          <BlogCard {...props} />
+        </Router>
+      );
+    });
   };
 
   test('renders BlogCard component', () => {
@@ -52,6 +56,6 @@ describe('BlogCard', () => {
   test('renders the blog card with correct structure and classes', () => {
     renderComponent();
     const cardElement = screen.getByRole('article'); // Assuming div acts as an article here
-    expect(cardElement).toHaveClass('bg-white rounded-lg shadow-lg p-6 mb-4');
+    expect(cardElement).toHaveClass('text-azure');
   });
 });

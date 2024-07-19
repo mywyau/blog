@@ -1,6 +1,5 @@
 // src/components/BlogList.tsx
 import React from 'react';
-import { Link } from 'react-router-dom';
 import BlogCard from './blog/BlogCard';
 
 interface Post {

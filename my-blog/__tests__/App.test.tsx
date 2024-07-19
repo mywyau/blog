@@ -1,48 +1,59 @@
-import { render, screen } from '@testing-library/react';
-import React from 'react';
-import { MemoryRouter } from 'react-router-dom';
+import '@testing-library/jest-dom';
+
 import App from '../src/App';
+import React from 'react';
+import { render, screen } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
+import { act } from 'react';
 
 // Mocking the components to verify their rendering
 jest.mock('../src/views/components/pages/LandingPage', () => () => <div>LandingPage Component</div>);
-jest.mock('../src/views/components/BlogPost', () => () => <div>BlogPost Component</div>);
+jest.mock('../src/views/components/blog/BlogPost', () => () => <div>BlogPost Component</div>);
 jest.mock('../src/views/components/pages/About', () => () => <div>About Component</div>);
 jest.mock('../src/views/components/pages/Contacts', () => () => <div>Contacts Component</div>);
 
 describe('App', () => {
-  it('renders the LandingPage component at the root path', () => {
-    render(
-      <MemoryRouter initialEntries={['/']}>
-        <App />
-      </MemoryRouter>
-    );
+  it('renders the LandingPage component at the root path', async () => {
+    await act(async () => {
+      render(
+        <MemoryRouter initialEntries={['/']}>
+          <App />
+        </MemoryRouter>
+      );
+    });
     expect(screen.getByText('LandingPage Component')).toBeInTheDocument();
   });
 
-  it('renders the BlogPost component at the /post/:id path', () => {
-    render(
-      <MemoryRouter initialEntries={['/post/1']}>
-        <App />
-      </MemoryRouter>
-    );
+  it('renders the BlogPost component at the /post/:id path', async () => {
+    await act(async () => {
+      render(
+        <MemoryRouter initialEntries={['/post/1']}>
+          <App />
+        </MemoryRouter>
+      );
+    });
     expect(screen.getByText('BlogPost Component')).toBeInTheDocument();
   });
 
-  it('renders the About component at the /about path', () => {
-    render(
-      <MemoryRouter initialEntries={['/about']}>
-        <App />
-      </MemoryRouter>
-    );
+  it('renders the About component at the /about path', async () => {
+    await act(async () => {
+      render(
+        <MemoryRouter initialEntries={['/about']}>
+          <App />
+        </MemoryRouter>
+      );
+    });
     expect(screen.getByText('About Component')).toBeInTheDocument();
   });
 
-  it('renders the Contacts component at the /contact path', () => {
-    render(
-      <MemoryRouter initialEntries={['/contact']}>
-        <App />
-      </MemoryRouter>
-    );
+  it('renders the Contacts component at the /contact path', async () => {
+    await act(async () => {
+      render(
+        <MemoryRouter initialEntries={['/contact']}>
+          <App />
+        </MemoryRouter>
+      );
+    });
     expect(screen.getByText('Contacts Component')).toBeInTheDocument();
   });
 });
