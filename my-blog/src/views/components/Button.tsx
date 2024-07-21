@@ -17,7 +17,7 @@ const Button: React.FC<ButtonProps> = ({ variant = 'primary', children, ...props
       buttonClasses += ' bg-true-blue text-white hover:bg-cardinal';
       break;
     default:
-      buttonClasses += ' bg-true-blue text-white hover:bg-true-blue';
+      buttonClasses += ' bg-true-blue text-white hover:bg-blue-500';
       break;
   }
 
