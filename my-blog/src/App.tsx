@@ -9,7 +9,9 @@ import Skills from './views/components/pages/Skills';
 import WorkLog from './views/components/pages/Irl';
 import CreateBlogPost from './views/components/pages/CreateBlogPost';
 import Interests from './views/components/pages/Interests';
+import ButtonAssetsPage from './views/components/pages/ButtonAssetsPage';
 
+const baseUrl = "ice-barrage"
 
 const App: React.FC = () => {
   return (
@@ -21,6 +23,7 @@ const App: React.FC = () => {
       <Route path="/interests" element={<Interests />} />
       <Route path="/skills" element={<Skills />} />
       <Route path="/work-log" element={<WorkLog />} />
+      <Route path="/button-assets" element={<ButtonAssetsPage />} />
       <Route path="/create-blog-post" element={<CreateBlogPost />} />
     </Routes>
   );

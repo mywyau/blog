@@ -28,9 +28,12 @@ const Navbar: React.FC = () => {
           <Link id="work-log" to="/work-log" className="text-white text-2xl hover:text-gray-300">
             WorkLog
           </Link>
-          <Link 
-            id="create-blog-post" 
-            to="/create-blog-post" 
+          <Link id="work-log" to="/button-assets" className="text-white text-2xl hover:text-gray-300">
+            ButtonAssetsPage
+          </Link>
+          <Link
+            id="create-blog-post"
+            to="/create-blog-post"
             className="bg-cambridge-blue text-black text-xl font-semibold py-3 px-8 rounded hover:bg-gray-100 transition-colors duration-300"
           >
             Create

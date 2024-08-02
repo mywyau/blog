@@ -1,19 +1,13 @@
-// src/components/PostButton.tsx
 import React from 'react';
 
-const PostButton: React.FC = () => {
+const GETButton: React.FC = () => {
   const handleClick = async () => {
     try {
-      const response = await fetch('http://localhost:3000/post/1', {
+      const response = await fetch('http://localhost:8080/blog/posts/retrieve/1', {
         method: 'GET',
         headers: {
-        //   'Content-Type': 'application/json',
+          'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          title: 'foo',
-          body: 'bar',
-          userId: 1,
-        }),
       });
 
       if (!response.ok) {
@@ -21,17 +15,17 @@ const PostButton: React.FC = () => {
       }
 
       const data = await response.json();
-      console.log('Successfully posted:', data);
+      console.log('Successful GET blog post:', data);
     } catch (error) {
-      console.error('Error posting data:', error);
+      console.error('Error retrieving data:', error);
     }
   };
 
   return (
     <button onClick={handleClick} className="bg-true-blue hover:bg-cardinal text-white py-2 px-4 rounded-md focus:outline-none">
-      Post Data
+      GET Post
     </button>
   );
 };
 
-export default PostButton;
+export default GETButton;
