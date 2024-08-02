@@ -7,6 +7,7 @@ import Navbar from '../NavBar';
 import Pagination from '../Pagination';
 import PostButton from '../PostButton';
 import Title from '../title/Title';
+import PostCreator from '../PostCreator';
 
 
 const LandingPage: React.FC = () => {
@@ -54,12 +55,10 @@ const LandingPage: React.FC = () => {
           totalPosts={posts.length}
           paginate={(pageNumber) => setCurrentPage(pageNumber)}
         />
-
         <Button>Primary Button</Button>
         <Button variant="secondary">Secondary Button</Button>
         <Button variant="danger">Danger Button</Button>
         <PostButton />
-
       </main>
       <Copyright />
     </div>

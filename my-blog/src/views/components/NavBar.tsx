@@ -27,6 +27,9 @@ const Navbar: React.FC = () => {
           <Link id="work-log" to="/work-log" className="text-white text-2xl hover:text-gray-300 mx-2">
             WorkLog
           </Link>
+          <Link id="work-log" to="/create-blog-post" className="text-white text-2xl hover:text-gray-300 mx-2">
+            Create Blog Post
+          </Link>
         </div>
       </div>
     </nav>

@@ -7,6 +7,7 @@ import About from './views/components/pages/About';
 import Contacts from './views/components/pages/Contacts';
 import Skills from './views/components/pages/Skills';
 import WorkLog from './views/components/pages/Irl';
+import CreateBlogPost from './views/components/pages/CreateBlogPost';
 
 
 const App: React.FC = () => {
@@ -18,6 +19,7 @@ const App: React.FC = () => {
       <Route path="/contact" element={<Contacts />} />
       <Route path="/skills" element={<Skills />} />
       <Route path="/work-log" element={<WorkLog />} />
+      <Route path="/create-blog-post" element={<CreateBlogPost />} />
     </Routes>
   );
 };
