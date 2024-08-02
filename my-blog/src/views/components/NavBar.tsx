@@ -28,7 +28,7 @@ const Navbar: React.FC = () => {
             WorkLog
           </Link>
           <Link id="work-log" to="/create-blog-post" className="text-white text-2xl hover:text-gray-300 mx-2">
-            Create Blog Post
+            Create
           </Link>
         </div>
       </div>
