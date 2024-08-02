@@ -20,6 +20,26 @@ module.exports = {
         'azure': '#007FFF',
         'cardinal': '#C51E3A',
       },
+      backgroundImage: {
+        'gradient-to-r': 'linear-gradient(to right, var(--tw-gradient-stops))',
+        'gradient-to-l': 'linear-gradient(to left, var(--tw-gradient-stops))',
+        'gradient-to-t': 'linear-gradient(to top, var(--tw-gradient-stops))',
+        'gradient-to-b': 'linear-gradient(to bottom, var(--tw-gradient-stops))',
+      },
+      gradientColorStops: {
+        'primary-start': '#667eea',
+        'primary-end': '#764ba2',
+      },
+            keyframes: {
+        'light-up': {
+          '0%': { opacity: 0.5 },
+          '50%': { opacity: 1 },
+          '100%': { opacity: 0.5 },
+        },
+      },
+      animation: {
+        'light-up': 'light-up 1s ease-in-out infinite',
+      },
     },
   },
   plugins: [],

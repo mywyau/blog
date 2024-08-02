@@ -5,7 +5,6 @@ import Button from '../Button';
 import Copyright from '../Copyright';
 import Navbar from '../NavBar';
 import Pagination from '../Pagination';
-import PostButton from '../GETButton';
 import Title from '../title/Title';
 import PostCreator from '../PostCreator';
 

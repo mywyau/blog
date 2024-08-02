@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+const baseUrl = "ice-barrage";
+
 const Navbar: React.FC = () => {
   return (
     <nav className="bg-true-blue p-4 shadow-lg">

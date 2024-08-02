@@ -7,7 +7,7 @@ const Contact: React.FC = () => {
   return (
     <div className="font-nunito min-h-screen bg-gray-50">
       <Navbar />
-      <div className="container mx-auto p-4">
+      <div className="flex-grow container mx-auto p-4">
         <h1 className="text-4xl font-bold mb-4">Contact</h1>
         <p className="text-gray-700">This is the contact page content.</p>
         <div className="flex justify-center items-center h-screen bg-white">
