@@ -32,34 +32,37 @@ const PostCreator: React.FC = () => {
   };
 
   return (
-    <div>
-      <h2>Create a New Post</h2>
+    <div className="p-4">
       <form
         onSubmit={(e) => {
           e.preventDefault();
           createPost();
         }}
       >
-        <div>
-          <label>
+        <div className="mb-4">
+          <label className="block mb-2">
             Title:
             <input
               type="text"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
+              className="w-full border border-gray-300 rounded p-2"
             />
           </label>
         </div>
-        <div>
-          <label>
+        <div className="mb-4">
+          <label className="block mb-2">
             Content:
             <textarea
               value={content}
               onChange={(e) => setContent(e.target.value)}
+              className="w-full h-64 border border-gray-300 rounded p-2"
             />
           </label>
         </div>
-        <button type="submit" className='bg-true-blue text-white hover:bg-cardinal'>Create Post</button>
+        <button type="submit" className='bg-true-blue text-white hover:bg-cambridge-blue px-4 py-2 rounded'>
+          Create Post
+        </button>
       </form>
     </div>
   );

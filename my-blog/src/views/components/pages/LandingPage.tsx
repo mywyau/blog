@@ -55,14 +55,10 @@ const LandingPage: React.FC = () => {
           totalPosts={posts.length}
           paginate={(pageNumber) => setCurrentPage(pageNumber)}
         />
-
-        <PostCreator />
-
         <Button>Primary Button</Button>
         <Button variant="secondary">Secondary Button</Button>
         <Button variant="danger">Danger Button</Button>
         <PostButton />
-
       </main>
       <Copyright />
     </div>
