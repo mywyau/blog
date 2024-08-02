@@ -15,7 +15,7 @@ describe(
       expect(buttonElement).toBeInTheDocument();
       expect(buttonElement).toHaveClass('bg-true-blue');
       expect(buttonElement).toHaveClass('text-white');
-      expect(buttonElement).toHaveClass('hover:bg-true-blue');
+      expect(buttonElement).toHaveClass('hover:bg-blue-500');
     });
 
     it('renders a Secondary button with secondary styles', () => {
@@ -58,3 +58,4 @@ describe(
     });
   }
 );
+

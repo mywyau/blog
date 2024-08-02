@@ -28,3 +28,9 @@ npm test
 
 ```
 
+## To run a single test suite
+
+```
+npx jest -t Navbar
+```
+
