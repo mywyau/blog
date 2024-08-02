@@ -8,6 +8,7 @@ import Contacts from './views/components/pages/Contacts';
 import Skills from './views/components/pages/Skills';
 import WorkLog from './views/components/pages/Irl';
 import CreateBlogPost from './views/components/pages/CreateBlogPost';
+import Interests from './views/components/pages/Interests';
 
 
 const App: React.FC = () => {
@@ -17,6 +18,7 @@ const App: React.FC = () => {
       <Route path="/post/:id" element={<BlogPost />} />
       <Route path="/about" element={<About />} />
       <Route path="/contact" element={<Contacts />} />
+      <Route path="/interests" element={<Interests />} />
       <Route path="/skills" element={<Skills />} />
       <Route path="/work-log" element={<WorkLog />} />
       <Route path="/create-blog-post" element={<CreateBlogPost />} />
