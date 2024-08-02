@@ -18,9 +18,7 @@ const ButtonAssetsPage: React.FC = () => {
           <Button variant="gradient" disabled>Disabled Gradient Button</Button>
         </div>
       </div>
-      <footer className="mt-auto">
         <Copyright />
-      </footer>
     </div>
   );
 };

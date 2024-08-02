@@ -15,6 +15,11 @@ const Navbar: React.FC = () => {
         </div>
         {/* Navigation Links */}
         <div className="flex items-center space-x-6">
+          
+          <p id="mobile-number" className="text-white text-sm hover:text-gray-300">
+            07402205071
+          </p>
+
           <Link id="about" to="/about" className="text-white text-2xl hover:text-gray-300">
             About
           </Link>
@@ -31,7 +36,7 @@ const Navbar: React.FC = () => {
             WorkLog
           </Link>
           <Link id="work-log" to="/button-assets" className="text-white text-2xl hover:text-gray-300">
-            ButtonAssetsPage
+            Assets
           </Link>
           <Link
             id="create-blog-post"
