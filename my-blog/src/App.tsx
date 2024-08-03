@@ -1,17 +1,24 @@
 // src/App.tsx
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
-import LandingPage from './views/pages/LandingPage';
+import { Route, Routes } from 'react-router-dom';
 import BlogPost from './views/blog/BlogPost';
 import About from './views/pages/About';
+import ButtonsPage from './views/pages/assets_pages/ButtonsPage';
+import CheckboxesPage from './views/pages/assets_pages/CheckboxesPage';
+import FormsPage from './views/pages/assets_pages/FormsPage';
+import ImagesPage from './views/pages/assets_pages/ImagesPage';
+import LoadingPage from './views/pages/assets_pages/LoadingPage';
+import RadioPage from './views/pages/assets_pages/RadioPage';
+import VideosPage from './views/pages/assets_pages/VideosPage';
+import ButtonAssetsPage from './views/pages/AssetsPage';
 import Contacts from './views/pages/Contacts';
-import Skills from './views/pages/Skills';
-import WorkLog from './views/pages/Irl';
 import CreateBlogPost from './views/pages/CreateBlogPost';
 import Interests from './views/pages/Interests';
-import ButtonAssetsPage from './views/pages/ButtonAssetsPage';
-import Images from './views/pages/Images';
+import WorkLog from './views/pages/Irl';
+import LandingPage from './views/pages/LandingPage';
 import PrivacyPolicy from './views/pages/PrivacyPolicy';
+import Skills from './views/pages/Skills';
+import TermsOfService from './views/pages/TermsOfService';
 
 const baseUrl = "ice-barrage"
 
@@ -25,10 +32,21 @@ const App: React.FC = () => {
       <Route path="/interests" element={<Interests />} />
       <Route path="/skills" element={<Skills />} />
       <Route path="/work-log" element={<WorkLog />} />
-      <Route path="/button-assets" element={<ButtonAssetsPage />} />
+      <Route path="/assets" element={<ButtonAssetsPage />} />
       <Route path="/create-blog-post" element={<CreateBlogPost />} />
-      <Route path="/images" element={<Images />} />
+
+      {/* <Route path="/images" element={<Images />} /> */}
       <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+      <Route path="/terms-of-service" element={<TermsOfService />} />
+
+      <Route path="/buttons" element={<ButtonsPage />} />
+      <Route path="/images" element={<ImagesPage />} />
+      <Route path="/loading" element={<LoadingPage />} />
+      <Route path="/forms" element={<FormsPage />} />
+      <Route path="/checkboxes" element={<CheckboxesPage />} />
+      <Route path="/radios" element={<RadioPage />} />
+      <Route path="/videos" element={<VideosPage />} />
+
     </Routes>
   );
 };
