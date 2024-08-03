@@ -1,14 +1,9 @@
-// src/pages/LandingPage.tsx
 import React, { useState } from 'react';
 import BlogList from '../BlogList';
-import Button from '../Button';
 import Copyright from '../Copyright';
 import Navbar from '../NavBar';
 import Pagination from '../Pagination';
-import PostButton from '../GETButton';
 import Title from '../title/Title';
-import PostCreator from '../PostCreator';
-
 
 const LandingPage: React.FC = () => {
   // Sample data for demonstration
@@ -39,24 +34,16 @@ const LandingPage: React.FC = () => {
         <Title />
       </header>
       <main className="container mx-auto p-4">
-
-        <BlogList posts={posts} />
-
-        {
-          /* {
-            currentPosts.map((post) => (
-              <BlogPost key={post.id} post={post} />
-            ))
-          } */
-        }
-
+        <BlogList posts={currentPosts} />
         <Pagination
           postsPerPage={postsPerPage}
           totalPosts={posts.length}
           paginate={(pageNumber) => setCurrentPage(pageNumber)}
         />
       </main>
-      <Copyright />
+      <footer className="mt-auto">
+        <Copyright />
+      </footer>
     </div>
   );
 };
