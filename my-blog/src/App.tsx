@@ -11,6 +11,7 @@ import CreateBlogPost from './views/pages/CreateBlogPost';
 import Interests from './views/pages/Interests';
 import ButtonAssetsPage from './views/pages/ButtonAssetsPage';
 import Images from './views/pages/Images';
+import PrivacyPolicy from './views/pages/PrivacyPolicy';
 
 const baseUrl = "ice-barrage"
 
@@ -27,6 +28,7 @@ const App: React.FC = () => {
       <Route path="/button-assets" element={<ButtonAssetsPage />} />
       <Route path="/create-blog-post" element={<CreateBlogPost />} />
       <Route path="/images" element={<Images />} />
+      <Route path="/privacy-policy" element={<PrivacyPolicy />} />
     </Routes>
   );
 };

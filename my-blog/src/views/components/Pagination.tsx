@@ -15,7 +15,7 @@ const Pagination: React.FC<PaginationProps> = ({ postsPerPage, totalPosts, pagin
 
   return (
     <nav>
-      <ul className="flex justify-center space-x-4 mt-4">
+      <ul className="flex justify-right space-x-4 mt-4">
         {pageNumbers.map((number) => (
           <li key={number}>
             <button

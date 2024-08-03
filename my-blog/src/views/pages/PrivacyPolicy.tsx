@@ -1,9 +1,9 @@
 import React from 'react';
-import { messages } from '../../messages/about';
+import { messages } from '../../messages/privacy_policy';
 import Copyright from '../components/Copyright';
 import Navbar from '../components/NavBar';
 
-const About: React.FC = () => {
+const PrivacyPolicy: React.FC = () => {
   return (
     <div className="flex flex-col min-h-screen font-nunito bg-gray-100">
       <Navbar />
@@ -26,7 +26,7 @@ const About: React.FC = () => {
           <div className="flex flex-col flex-none w-full pt-10 pb-10 md:w-2/3">
             <div className="bg-white rounded-lg shadow-lg p-8 flex-grow">
               <div className="">
-                <h2 className="text-2xl pb-5">About me</h2>
+                <h2 className="text-2xl pb-5">PrivacyPolicy</h2>
                 <p className="text-base text-gray-700 mb-4">{messages.lorem.p1}</p>
                 <p className="text-base text-gray-700 mb-4">{messages.lorem.p2}</p>
                 <p className="text-base text-gray-700 mb-4">{messages.lorem.p3}</p>
@@ -42,4 +42,4 @@ const About: React.FC = () => {
   );
 };
 
-export default About;
+export default PrivacyPolicy;

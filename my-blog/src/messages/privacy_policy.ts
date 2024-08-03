@@ -1,7 +1,7 @@
 // src/messages.ts
 export const messages = {
   about: {
-    title: "About"
+    title: "Privacy Policy"
   },
   content: {
     p1: "Lorem ipsum dolor sit amet, consectetur adip"
