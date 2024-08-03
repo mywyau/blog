@@ -15,7 +15,7 @@ const Navbar: React.FC = () => {
       <div className="container mx-auto flex justify-between items-center">
         {/* Brand or Home Link */}
         <div className="flex items-center space-x-4">
-          <Link id="home" to="/" className="text-white text-4xl hover:text-gray-300">
+          <Link id="home" to="/" className="text-white text-3xl hover:text-gray-300">
             Home
           </Link>
         </div>
@@ -31,37 +31,37 @@ const Navbar: React.FC = () => {
           </button>
         </div>
         {/* Navigation Links */}
-        <div className={`md:flex items-center space-x-6 ${isOpen ? 'block' : 'hidden'} md:block w-full md:w-auto`}>
-          <div className="flex flex-col md:flex-row md:items-center md:space-x-6">
+        <div className={`md:flex items-center md:space-x-6 ${isOpen ? 'block' : 'hidden'} md:block absolute md:static right-0 top-16 md:top-auto bg-true-blue md:bg-transparent p-4 md:p-0 w-64 md:w-auto`}>
+          <div className="flex flex-col md:flex-row md:items-center md:space-x-6 space-y-4 md:space-y-0">
             <p id="mobile-number" className="text-white text-sm hover:text-gray-300">
               07402205071
             </p>
-            <Link id="about" to="/about" className="text-white text-2xl hover:text-gray-300">
+            <Link id="about" to="/about" className="text-white text-lg hover:text-gray-300">
               About
             </Link>
-            <Link id="contact" to="/contact" className="text-white text-2xl hover:text-gray-300">
+            <Link id="contact" to="/contact" className="text-white text-lg hover:text-gray-300">
               Contact
             </Link>
-            <Link id="interests" to="/interests" className="text-white text-2xl hover:text-gray-300">
+            <Link id="interests" to="/interests" className="text-white text-lg hover:text-gray-300">
               Interests
             </Link>
-            <Link id="skills" to="/skills" className="text-white text-2xl hover:text-gray-300">
+            <Link id="skills" to="/skills" className="text-white text-lg hover:text-gray-300">
               Skills
             </Link>
-            <Link id="work-log" to="/work-log" className="text-white text-2xl hover:text-gray-300">
+            <Link id="work-log" to="/work-log" className="text-white text-lg hover:text-gray-300">
               WorkLog
             </Link>
-            <Link id="button-assets" to="/button-assets" className="text-white text-2xl hover:text-gray-300">
+            <Link id="button-assets" to="/button-assets" className="text-white text-lg hover:text-gray-300">
               Assets
             </Link>
+            <Link
+              id="create-blog-post"
+              to="/create-blog-post"
+              className="bg-cambridge-blue text-black text-lg font-semibold py-3 px-7 rounded hover:bg-gray-100 transition-colors duration-300 flex items-center justify-center"
+            >
+              Create
+            </Link>
           </div>
-          <Link
-            id="create-blog-post"
-            to="/create-blog-post"
-            className="bg-cambridge-blue text-black text-xl font-semibold py-3 px-8 rounded hover:bg-gray-100 transition-colors duration-300 mt-4 md:mt-0 md:ml-6"
-          >
-            Create
-          </Link>
         </div>
       </div>
     </nav>
