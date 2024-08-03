@@ -1,15 +1,16 @@
 // src/App.tsx
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import LandingPage from './views/components/pages/LandingPage';
-import BlogPost from './views/components/blog/BlogPost';
-import About from './views/components/pages/About';
-import Contacts from './views/components/pages/Contacts';
-import Skills from './views/components/pages/Skills';
-import WorkLog from './views/components/pages/Irl';
-import CreateBlogPost from './views/components/pages/CreateBlogPost';
-import Interests from './views/components/pages/Interests';
-import ButtonAssetsPage from './views/components/pages/ButtonAssetsPage';
+import LandingPage from './views/pages/LandingPage';
+import BlogPost from './views/blog/BlogPost';
+import About from './views/pages/About';
+import Contacts from './views/pages/Contacts';
+import Skills from './views/pages/Skills';
+import WorkLog from './views/pages/Irl';
+import CreateBlogPost from './views/pages/CreateBlogPost';
+import Interests from './views/pages/Interests';
+import ButtonAssetsPage from './views/pages/ButtonAssetsPage';
+import Images from './views/pages/Images';
 
 const baseUrl = "ice-barrage"
 
@@ -25,6 +26,7 @@ const App: React.FC = () => {
       <Route path="/work-log" element={<WorkLog />} />
       <Route path="/button-assets" element={<ButtonAssetsPage />} />
       <Route path="/create-blog-post" element={<CreateBlogPost />} />
+      <Route path="/images" element={<Images />} />
     </Routes>
   );
 };

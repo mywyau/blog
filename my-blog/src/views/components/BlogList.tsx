@@ -1,6 +1,6 @@
 // src/components/BlogList.tsx
 import React from 'react';
-import BlogCard from './blog/BlogCard';
+import BlogCard from '../blog/BlogCard';
 
 interface Post {
   id: number;

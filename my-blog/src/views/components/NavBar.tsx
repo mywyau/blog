@@ -33,9 +33,6 @@ const Navbar: React.FC = () => {
         {/* Navigation Links */}
         <div className={`md:flex items-center md:space-x-6 ${isOpen ? 'block' : 'hidden'} md:block absolute md:static right-0 top-16 md:top-auto bg-true-blue md:bg-transparent p-4 md:p-0 w-64 md:w-auto`}>
           <div className="flex flex-col md:flex-row md:items-center md:space-x-6 space-y-4 md:space-y-0">
-            <p id="mobile-number" className="text-white text-sm hover:text-gray-300">
-              07402205071
-            </p>
             <Link id="about" to="/about" className="text-white text-lg hover:text-gray-300">
               About
             </Link>
@@ -53,6 +50,9 @@ const Navbar: React.FC = () => {
             </Link>
             <Link id="button-assets" to="/button-assets" className="text-white text-lg hover:text-gray-300">
               Assets
+            </Link>
+            <Link id="button-assets" to="/images" className="text-white text-lg hover:text-gray-300">
+              Images
             </Link>
             <Link
               id="create-blog-post"

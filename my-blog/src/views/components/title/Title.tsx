@@ -1,6 +1,6 @@
 // src/components/Title.tsx
 import React from 'react';
-import { messages } from '../../../messages/blog_page_messages';
+import { messages } from '../../../messages/blog_page';
 
 const Title: React.FC = () => {
   return (
