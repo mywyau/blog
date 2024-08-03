@@ -17,5 +17,5 @@
     "jsx": "react-jsx",
     "types": ["jest", "@testing-library/jest-dom"]
   },
-  "include": ["src", "__tests__/BlogCard.test.tsx"]
+  "include": ["src", "__tests__/BlogCard.test.tsx", "jest.config.js"]
 }

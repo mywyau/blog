@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter as Router } from 'react-router-dom';
-import BlogCard from '../src/views/components/blog/BlogCard';
+import BlogCard from '../src/views/blog/BlogCard';
 import { act } from 'react';
 
 import '@testing-library/jest-dom';

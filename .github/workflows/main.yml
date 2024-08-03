@@ -1,6 +1,4 @@
-# .github/workflows/ci.yml
-
-name: run unit tests
+name: Run Unit Tests
 
 on: [push]
 
@@ -9,23 +7,28 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
           node-version: '14'
 
-      - run: |
+      - name: Cache node modules
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/my-blog/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install dependencies
+        run: |
           cd my-blog
           npm install
-          npm install --save-dev @types/jest
-          npm install --save-dev @testing-library/react @testing-library/jest-dom @types/testing-library__jest-dom
-          npm install --save-dev jest-environment-jsdom 
-          npm install --save-dev @testing-library/react@latest
+
+      - name: Run tests
+        run: |
+          cd my-blog
           npm test
-
-
-      # - run: |
-      #     cd my-blog
-      #     npm test

@@ -7,10 +7,10 @@ import { MemoryRouter } from 'react-router-dom';
 import { act } from 'react';
 
 // Mocking the components to verify their rendering
-jest.mock('../src/views/components/pages/LandingPage', () => () => <div>LandingPage Component</div>);
-jest.mock('../src/views/components/blog/BlogPost', () => () => <div>BlogPost Component</div>);
-jest.mock('../src/views/components/pages/About', () => () => <div>About Component</div>);
-jest.mock('../src/views/components/pages/Contacts', () => () => <div>Contacts Component</div>);
+jest.mock('../src/views/pages/LandingPage', () => () => <div>LandingPage Component</div>);
+jest.mock('../src/views/blog/BlogPost', () => () => <div>BlogPost Component</div>);
+jest.mock('../src/views/pages/About', () => () => <div>About Component</div>);
+jest.mock('../src/views/pages/Contacts', () => () => <div>Contacts Component</div>);
 
 describe('App', () => {
   it('renders the LandingPage component at the root path', async () => {
