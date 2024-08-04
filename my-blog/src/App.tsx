@@ -14,11 +14,13 @@ import ButtonAssetsPage from './views/pages/AssetsPage';
 import Contacts from './views/pages/Contacts';
 import CreateBlogPost from './views/pages/CreateBlogPost';
 import Interests from './views/pages/Interests';
-import WorkLog from './views/pages/Irl';
+import Irl from './views/pages/Irl';
 import LandingPage from './views/pages/LandingPage';
 import PrivacyPolicy from './views/pages/PrivacyPolicy';
 import Skills from './views/pages/Skills';
 import TermsOfService from './views/pages/TermsOfService';
+import WorkLog from './views/pages/WorkLog';
+import Videos from './views/pages/Videos';
 
 const baseUrl = "ice-barrage"
 
@@ -45,7 +47,7 @@ const App: React.FC = () => {
       <Route path="/forms" element={<FormsPage />} />
       <Route path="/checkboxes" element={<CheckboxesPage />} />
       <Route path="/radios" element={<RadioPage />} />
-      <Route path="/videos" element={<VideosPage />} />
+      <Route path="/videos" element={<Videos />} />
 
     </Routes>
   );
