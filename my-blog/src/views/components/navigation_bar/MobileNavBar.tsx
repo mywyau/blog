@@ -1,13 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-const MobileNavBar: React.FC = () => {
+interface MobileNavBarProps {
+  isOpen: boolean;
+  toggleMenu: () => void;
+}
 
-  const [isOpen, setIsOpen] = useState(false);
-
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-  };
-
+const MobileNavBar: React.FC<MobileNavBarProps> = ({ isOpen, toggleMenu }) => {
   return (
     <button
       onClick={toggleMenu}
