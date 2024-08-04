@@ -48,11 +48,11 @@ const Navbar: React.FC = () => {
             <Link id="work-log" to="/work-log" className="text-white text-lg hover:text-gray-300">
               WorkLog
             </Link>
-            <Link id="button-assets" to="/button-assets" className="text-white text-lg hover:text-gray-300">
+            <Link id="assets" to="/assets" className="text-white text-lg hover:text-gray-300">
               Assets
             </Link>
-            <Link id="button-assets" to="/images" className="text-white text-lg hover:text-gray-300">
-              Images
+            <Link id="videos" to="/videos" className="text-white text-2xl hover:text-gray-300">
+              Videos
             </Link>
             <Link
               id="create-blog-post"

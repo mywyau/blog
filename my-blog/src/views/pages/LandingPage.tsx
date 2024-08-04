@@ -31,9 +31,8 @@ const LandingPage: React.FC = () => {
     <div className="font-nunito min-h-screen bg-cambridge-blue">
       <header className="py-4">
         <Navbar />
-        <Title />
       </header>
-      <main className="container mx-auto p-4">
+      <main className="container mx-auto p-10">
         <BlogList posts={currentPosts} />
         <Pagination
           postsPerPage={postsPerPage}
