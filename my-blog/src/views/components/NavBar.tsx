@@ -51,9 +51,6 @@ const Navbar: React.FC = () => {
             <Link id="assets" to="/assets" className="text-white text-lg hover:text-gray-300">
               Assets
             </Link>
-            <Link id="videos" to="/videos" className="text-white text-2xl hover:text-gray-300">
-              Videos
-            </Link>
             <Link
               id="create-blog-post"
               to="/create-blog-post"
