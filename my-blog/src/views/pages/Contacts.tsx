@@ -37,7 +37,7 @@ const Contact: React.FC = () => {
                 <p className="text-base text-gray-700 mb-4">{messages.lorem.p2}</p>
                 <p className="text-base text-gray-700 mb-4">{messages.lorem.p3}</p>
                 <p className="text-base text-gray-700 mb-4">{messages.lorem.p4}</p>
-                <p className="text-base text-gray-700 mb-4">{messages.lorem.p5}</p>
+                {/* <p className="text-base text-gray-700 mb-4">{messages.lorem.p5}</p> */}
               </div>
             </div>
           </div>
