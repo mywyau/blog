@@ -19,6 +19,7 @@ import Skills from './views/pages/Skills';
 import TermsOfService from './views/pages/TermsOfService';
 import Videos from './views/pages/Videos';
 import WorkLog from './views/pages/WorkLog';
+import VideosPage from './views/pages/assets_pages/VideosPage';
 
 const baseUrl = "ice-barrage"
 
@@ -45,7 +46,7 @@ const App: React.FC = () => {
       <Route path="/forms" element={<FormsPage />} />
       <Route path="/checkboxes" element={<CheckboxesPage />} />
       <Route path="/radios" element={<RadioPage />} />
-      <Route path="/videos" element={<Videos />} />
+      <Route path="/videos" element={<VideosPage />} />
 
     </Routes>
   );
