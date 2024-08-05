@@ -43,11 +43,14 @@ npm test -- -t="BlogList component"
 or
 
 ```
-npm test -- -t="<name of testName>"
+npm test -- -t="name of testName"
 ```
+
 
 or
 
 ```
-npm test -- -p="BlogList.test.tsx"
+npm test -- /__tests__/CopyRight.test.tsx
 ```
+
+

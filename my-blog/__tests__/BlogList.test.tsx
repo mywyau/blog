@@ -23,11 +23,6 @@ describe('BlogList component', () => {
 
         const blogCardElements = screen.getAllByText('BlogCard Component');
         expect(blogCardElements.length).toBe(samplePosts.length);
-
-        // Check if BlogCard components are rendered
-        // samplePosts.forEach(post => {
-        // expect(screen.getByText('BlogCard Component')).toBeInTheDocument();
-        // });
     });
 
     test('passes correct props to BlogCard components', () => {
