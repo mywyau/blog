@@ -1,5 +1,5 @@
 // src/components/SkillsCard.tsx
-import React, { useState } from 'react';
+import React from 'react';
 // import { messages } from '../../messages/skills';
 
 interface WorkLogCardProps {

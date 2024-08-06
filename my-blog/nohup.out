@@ -1,0 +1,243 @@
+
+> my-blog@0.1.0 start
+> react-scripts start
+
+(node:54126) [DEP_WEBPACK_DEV_SERVER_ON_AFTER_SETUP_MIDDLEWARE] DeprecationWarning: 'onAfterSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+(node:54126) [DEP_WEBPACK_DEV_SERVER_ON_BEFORE_SETUP_MIDDLEWARE] DeprecationWarning: 'onBeforeSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
+Starting the development server...
+
+Compiled successfully!
+
+You can now view my-blog in the browser.
+
+  Local:            http://localhost:3000
+  On Your Network:  http://192.168.1.106:3000
+
+Note that the development build is not optimized.
+To create a production build, use npm run build.
+
+webpack compiled successfully
+Files successfully emitted, waiting for typecheck results...
+Issues checking in progress...
+No issues found.
+Compiling...
+Failed to compile.
+
+Module not found: SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: Unexpected token / in JSON at position 599
+ERROR in Module not found: SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: Unexpected token / in JSON at position 599
+
+ERROR in Module not found: SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: Unexpected token / in JSON at position 599
+
+ERROR in main
+Module not found: SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: Unexpected token / in JSON at position 599
+
+ERROR in Module not found: SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: Unexpected token / in JSON at position 599
+
+ERROR in Error: Child compilation failed:
+  Module not found: SyntaxError: /Users/michaelyau/my-project/blog/my-blog/packa  ge.json (directory description file): SyntaxError: /Users/michaelyau/my-projec  t/blog/my-blog/package.json (directory description file): SyntaxError: /Users/  michaelyau/my-project/blog/my-blog/package.json (directory description file):   SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory   description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/pac  kage.json (directory description file): SyntaxError: Unexpected token / in JSO  N at position 599
+  ModuleNotFoundError: Module not found: SyntaxError: /Users/michaelyau/my-proje  ct/blog/my-blog/package.json (directory description file): SyntaxError: /Users  /michaelyau/my-project/blog/my-blog/package.json (directory description file):   SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (director  y description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/pa  ckage.json (directory description file): SyntaxError: /Users/michaelyau/my-pro  ject/blog/my-blog/package.json (directory description file): SyntaxError: Unex  pected token / in JSON at position 599
+      at /Users/michaelyau/my-project/blog/my-blog/node_modules/webpack/lib/Comp  ilation.js:2100:28
+      at /Users/michaelyau/my-project/blog/my-blog/node_modules/webpack/lib/Norm  alModuleFactory.js:904:13
+      at eval (eval at create (/Users/michaelyau/my-project/blog/my-blog/node_mo  dules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:10:1)
+      at /Users/michaelyau/my-project/blog/my-blog/node_modules/webpack/lib/Norm  alModuleFactory.js:341:22
+      at eval (eval at create (/Users/michaelyau/my-project/blog/my-blog/node_mo  dules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:9:1)
+      at /Users/michaelyau/my-project/blog/my-blog/node_modules/webpack/lib/Norm  alModuleFactory.js:518:22
+      at /Users/michaelyau/my-project/blog/my-blog/node_modules/webpack/lib/Norm  alModuleFactory.js:155:11
+      at /Users/michaelyau/my-project/blog/my-blog/node_modules/webpack/lib/Norm  alModuleFactory.js:738:23
+      at /Users/michaelyau/my-project/blog/my-blog/node_modules/neo-async/async.  js:2830:7
+      at done (/Users/michaelyau/my-project/blog/my-blog/node_modules/neo-async/  async.js:2925:13)
+  
+  - Compilation.js:2100 
+    [my-blog]/[webpack]/lib/Compilation.js:2100:28
+  
+  - NormalModuleFactory.js:904 
+    [my-blog]/[webpack]/lib/NormalModuleFactory.js:904:13
+  
+  
+  - NormalModuleFactory.js:341 
+    [my-blog]/[webpack]/lib/NormalModuleFactory.js:341:22
+  
+  
+  - NormalModuleFactory.js:518 
+    [my-blog]/[webpack]/lib/NormalModuleFactory.js:518:22
+  
+  - NormalModuleFactory.js:155 
+    [my-blog]/[webpack]/lib/NormalModuleFactory.js:155:11
+  
+  - NormalModuleFactory.js:738 
+    [my-blog]/[webpack]/lib/NormalModuleFactory.js:738:23
+  
+  - async.js:2830 
+    [my-blog]/[neo-async]/async.js:2830:7
+  
+  - async.js:2925 done
+    [my-blog]/[neo-async]/async.js:2925:13
+  
+  - child-compiler.js:174 
+    [my-blog]/[html-webpack-plugin]/lib/child-compiler.js:174:18
+  
+  - Compiler.js:625 finalCallback
+    [my-blog]/[webpack]/lib/Compiler.js:625:5
+  
+  - Compiler.js:660 
+    [my-blog]/[webpack]/lib/Compiler.js:660:11
+  
+  - Compiler.js:1349 
+    [my-blog]/[webpack]/lib/Compiler.js:1349:17
+  
+  
+  - task_queues:95 process.processTicksAndRejections
+    node:internal/process/task_queues:95:5
+
+1 ERROR in child compilations (Use 'stats.children: true' resp. '--stats-children' for more details)
+webpack compiled with 6 errors
+No issues found.
+Compiling...
+Failed to compile.
+
+Module not found: SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: Unexpected token / in JSON at position 599
+ERROR in Module not found: SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: Unexpected token / in JSON at position 599
+
+ERROR in Module not found: SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: Unexpected token / in JSON at position 599
+
+ERROR in main
+Module not found: SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: Unexpected token / in JSON at position 599
+
+ERROR in Module not found: SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: Unexpected token / in JSON at position 599
+
+ERROR in Error: Child compilation failed:
+  Module not found: SyntaxError: /Users/michaelyau/my-project/blog/my-blog/packa  ge.json (directory description file): SyntaxError: /Users/michaelyau/my-projec  t/blog/my-blog/package.json (directory description file): SyntaxError: /Users/  michaelyau/my-project/blog/my-blog/package.json (directory description file):   SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory   description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/pac  kage.json (directory description file): SyntaxError: Unexpected token / in JSO  N at position 599
+  ModuleNotFoundError: Module not found: SyntaxError: /Users/michaelyau/my-proje  ct/blog/my-blog/package.json (directory description file): SyntaxError: /Users  /michaelyau/my-project/blog/my-blog/package.json (directory description file):   SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (director  y description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/pa  ckage.json (directory description file): SyntaxError: /Users/michaelyau/my-pro  ject/blog/my-blog/package.json (directory description file): SyntaxError: Unex  pected token / in JSON at position 599
+      at /Users/michaelyau/my-project/blog/my-blog/node_modules/webpack/lib/Comp  ilation.js:2100:28
+      at /Users/michaelyau/my-project/blog/my-blog/node_modules/webpack/lib/Norm  alModuleFactory.js:904:13
+      at eval (eval at create (/Users/michaelyau/my-project/blog/my-blog/node_mo  dules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:10:1)
+      at /Users/michaelyau/my-project/blog/my-blog/node_modules/webpack/lib/Norm  alModuleFactory.js:341:22
+      at eval (eval at create (/Users/michaelyau/my-project/blog/my-blog/node_mo  dules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:9:1)
+      at /Users/michaelyau/my-project/blog/my-blog/node_modules/webpack/lib/Norm  alModuleFactory.js:518:22
+      at /Users/michaelyau/my-project/blog/my-blog/node_modules/webpack/lib/Norm  alModuleFactory.js:155:11
+      at /Users/michaelyau/my-project/blog/my-blog/node_modules/webpack/lib/Norm  alModuleFactory.js:738:23
+      at /Users/michaelyau/my-project/blog/my-blog/node_modules/neo-async/async.  js:2830:7
+      at done (/Users/michaelyau/my-project/blog/my-blog/node_modules/neo-async/  async.js:2925:13)
+  
+  - Compilation.js:2100 
+    [my-blog]/[webpack]/lib/Compilation.js:2100:28
+  
+  - NormalModuleFactory.js:904 
+    [my-blog]/[webpack]/lib/NormalModuleFactory.js:904:13
+  
+  
+  - NormalModuleFactory.js:341 
+    [my-blog]/[webpack]/lib/NormalModuleFactory.js:341:22
+  
+  
+  - NormalModuleFactory.js:518 
+    [my-blog]/[webpack]/lib/NormalModuleFactory.js:518:22
+  
+  - NormalModuleFactory.js:155 
+    [my-blog]/[webpack]/lib/NormalModuleFactory.js:155:11
+  
+  - NormalModuleFactory.js:738 
+    [my-blog]/[webpack]/lib/NormalModuleFactory.js:738:23
+  
+  - async.js:2830 
+    [my-blog]/[neo-async]/async.js:2830:7
+  
+  - async.js:2925 done
+    [my-blog]/[neo-async]/async.js:2925:13
+  
+  - child-compiler.js:174 
+    [my-blog]/[html-webpack-plugin]/lib/child-compiler.js:174:18
+  
+  - Compiler.js:625 finalCallback
+    [my-blog]/[webpack]/lib/Compiler.js:625:5
+  
+  - Compiler.js:660 
+    [my-blog]/[webpack]/lib/Compiler.js:660:11
+  
+  - Compiler.js:1349 
+    [my-blog]/[webpack]/lib/Compiler.js:1349:17
+  
+  
+  - task_queues:95 process.processTicksAndRejections
+    node:internal/process/task_queues:95:5
+
+1 ERROR in child compilations (Use 'stats.children: true' resp. '--stats-children' for more details)
+webpack compiled with 6 errors
+No issues found.
+Compiling...
+Failed to compile.
+
+Module not found: SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: Unexpected token / in JSON at position 599
+ERROR in Module not found: SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: Unexpected token / in JSON at position 599
+
+ERROR in Module not found: SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: Unexpected token / in JSON at position 599
+
+ERROR in main
+Module not found: SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: Unexpected token / in JSON at position 599
+
+ERROR in Module not found: SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory description file): SyntaxError: Unexpected token / in JSON at position 599
+
+ERROR in Error: Child compilation failed:
+  Module not found: SyntaxError: /Users/michaelyau/my-project/blog/my-blog/packa  ge.json (directory description file): SyntaxError: /Users/michaelyau/my-projec  t/blog/my-blog/package.json (directory description file): SyntaxError: /Users/  michaelyau/my-project/blog/my-blog/package.json (directory description file):   SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (directory   description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/pac  kage.json (directory description file): SyntaxError: Unexpected token / in JSO  N at position 599
+  ModuleNotFoundError: Module not found: SyntaxError: /Users/michaelyau/my-proje  ct/blog/my-blog/package.json (directory description file): SyntaxError: /Users  /michaelyau/my-project/blog/my-blog/package.json (directory description file):   SyntaxError: /Users/michaelyau/my-project/blog/my-blog/package.json (director  y description file): SyntaxError: /Users/michaelyau/my-project/blog/my-blog/pa  ckage.json (directory description file): SyntaxError: /Users/michaelyau/my-pro  ject/blog/my-blog/package.json (directory description file): SyntaxError: Unex  pected token / in JSON at position 599
+      at /Users/michaelyau/my-project/blog/my-blog/node_modules/webpack/lib/Comp  ilation.js:2100:28
+      at /Users/michaelyau/my-project/blog/my-blog/node_modules/webpack/lib/Norm  alModuleFactory.js:904:13
+      at eval (eval at create (/Users/michaelyau/my-project/blog/my-blog/node_mo  dules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:10:1)
+      at /Users/michaelyau/my-project/blog/my-blog/node_modules/webpack/lib/Norm  alModuleFactory.js:341:22
+      at eval (eval at create (/Users/michaelyau/my-project/blog/my-blog/node_mo  dules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:9:1)
+      at /Users/michaelyau/my-project/blog/my-blog/node_modules/webpack/lib/Norm  alModuleFactory.js:518:22
+      at /Users/michaelyau/my-project/blog/my-blog/node_modules/webpack/lib/Norm  alModuleFactory.js:155:11
+      at /Users/michaelyau/my-project/blog/my-blog/node_modules/webpack/lib/Norm  alModuleFactory.js:738:23
+      at /Users/michaelyau/my-project/blog/my-blog/node_modules/neo-async/async.  js:2830:7
+      at done (/Users/michaelyau/my-project/blog/my-blog/node_modules/neo-async/  async.js:2925:13)
+  
+  - Compilation.js:2100 
+    [my-blog]/[webpack]/lib/Compilation.js:2100:28
+  
+  - NormalModuleFactory.js:904 
+    [my-blog]/[webpack]/lib/NormalModuleFactory.js:904:13
+  
+  
+  - NormalModuleFactory.js:341 
+    [my-blog]/[webpack]/lib/NormalModuleFactory.js:341:22
+  
+  
+  - NormalModuleFactory.js:518 
+    [my-blog]/[webpack]/lib/NormalModuleFactory.js:518:22
+  
+  - NormalModuleFactory.js:155 
+    [my-blog]/[webpack]/lib/NormalModuleFactory.js:155:11
+  
+  - NormalModuleFactory.js:738 
+    [my-blog]/[webpack]/lib/NormalModuleFactory.js:738:23
+  
+  - async.js:2830 
+    [my-blog]/[neo-async]/async.js:2830:7
+  
+  - async.js:2925 done
+    [my-blog]/[neo-async]/async.js:2925:13
+  
+  - child-compiler.js:174 
+    [my-blog]/[html-webpack-plugin]/lib/child-compiler.js:174:18
+  
+  - Compiler.js:625 finalCallback
+    [my-blog]/[webpack]/lib/Compiler.js:625:5
+  
+  - Compiler.js:660 
+    [my-blog]/[webpack]/lib/Compiler.js:660:11
+  
+  - Compiler.js:1349 
+    [my-blog]/[webpack]/lib/Compiler.js:1349:17
+  
+  
+  - task_queues:95 process.processTicksAndRejections
+    node:internal/process/task_queues:95:5
+
+1 ERROR in child compilations (Use 'stats.children: true' resp. '--stats-children' for more details)
+webpack compiled with 6 errors
+No issues found.
+Compiling...
+Compiled successfully!
+webpack compiled successfully
+No issues found.
