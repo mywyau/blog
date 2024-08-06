@@ -34,3 +34,23 @@ npm test
 npx jest -t Navbar
 ```
 
+or 
+
+```
+npm test -- -t="BlogList component"
+```
+
+or
+
+```
+npm test -- -t="name of testName"
+```
+
+
+or
+
+```
+npm test -- /__tests__/CopyRight.test.tsx
+```
+
+

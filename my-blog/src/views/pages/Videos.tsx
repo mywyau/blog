@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Copyright from '../components/Copyright';
 import Navbar from '../components/NavBar';
+import AssetsNavigationBar from '../components/navigation_bar/AssetsNavigationBar';
 
 interface Video {
   id: number;
@@ -35,7 +36,7 @@ const Videos: React.FC = () => {
 
   return (
     <div className="flex flex-col min-h-screen font-nunito bg-gray-100">
-      <Navbar />
+      <AssetsNavigationBar />
       <div className="flex-grow container mx-auto p-4">
         <h1 className="text-4xl font-bold text-center bg-gradient-to-r from-blue-500 to-green-500 bg-clip-text text-transparent pt-6">
           Video Clips
