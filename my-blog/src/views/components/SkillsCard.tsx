@@ -1,12 +1,11 @@
 // src/components/SkillsCard.tsx
 import React from 'react';
-import { messages } from '../../messages/skills';
 
 interface SkillsCardProps {
     id: number;
     skill: string;
     description: string;
-  }
+}
 
 const SkillsCard: React.FC<SkillsCardProps> = ({ id, skill, description }) => {
     return (

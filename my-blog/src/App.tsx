@@ -9,6 +9,7 @@ import FormsPage from './views/pages/assets_pages/FormsPage';
 import ImagesPage from './views/pages/assets_pages/ImagesPage';
 import LoadingPage from './views/pages/assets_pages/LoadingPage';
 import RadioPage from './views/pages/assets_pages/RadioPage';
+import VideosPage from './views/pages/assets_pages/VideosPage';
 import ButtonAssetsPage from './views/pages/AssetsPage';
 import Contacts from './views/pages/Contacts';
 import CreateBlogPost from './views/pages/CreateBlogPost';
@@ -17,11 +18,8 @@ import LandingPage from './views/pages/LandingPage';
 import PrivacyPolicy from './views/pages/PrivacyPolicy';
 import Skills from './views/pages/Skills';
 import TermsOfService from './views/pages/TermsOfService';
-import Videos from './views/pages/Videos';
 import WorkLog from './views/pages/WorkLog';
-import VideosPage from './views/pages/assets_pages/VideosPage';
 
-const baseUrl = "ice-barrage"
 
 const App: React.FC = () => {
   return (

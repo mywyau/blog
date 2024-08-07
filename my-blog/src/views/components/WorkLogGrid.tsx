@@ -1,5 +1,5 @@
 // src/components/BlogList.tsx
-import React, { useState } from 'react';
+import React from 'react';
 import WorkLogCard from './WorkLogCard';
 
 interface Record {
