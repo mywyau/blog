@@ -28,33 +28,15 @@ jobs:
           cd my-blog
           npm install
 
+      - name: Build React app
+        run: |
+          cd my-blog
+          npm run build
+
       - name: Run unit tests
         run: |
           cd my-blog
           npm test
-
-      # - name: Build the project
-      #   run: |
-      #     cd my-blog
-      #     npm run build
-
-      
-      # - name: Configure Git for deployment
-      #   run: |
-      #     git config --global user.email "47248104+mywyau@users.noreply.github.com"
-      #     git config --global user.name "mywyau"    
-
-      # - name: Deploy to GitHub Pages
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # This is automatically provided to the workflow
-      #   run: |
-      #     cd my-blog
-      #     npm run deploy
-
-      # - name: Check deployment status
-      #   run: |
-      #     echo "Checking if deployment was successful..."
-      #     curl -s -o /dev/null -w "%{http_code}" https://{mywyau}.github.io/ | grep 200
 
   selenium-tests:
     runs-on: ubuntu-latest
@@ -70,35 +52,21 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '18'
+      - name: Build Docker image
+        run: |
+          cd my-blog
+          docker build -t my-blog-proxy .
 
-      # - name: Install dependencies for React app
-      #   run: |
-      #     cd my-blog
-      #     npm install
+      - name: Run Docker container
+        run: |
+          docker run -d -p 6060:6060 --name proxy-server my-blog-proxy
 
-      # - name: Start React app
-      #   run: |
-      #     cd my-blog
-      #     nohup npm start > nohup.out 2>&1 &
-      #   env:
-      #     CI: true
+      - name: Wait for proxy server to be ready
+        run: |
+          sleep 10  # Wait for the container to be fully ready
 
-      # - name: Wait for React app to be available
-      #   run: |
-      #     echo "Waiting for React app to start..."
-      #     for i in {1..30}; do
-      #       curl -sSf http://localhost:3000/ && break
-      #       echo "Waiting..."
-      #       sleep 5
-      #     done
-
-      # - name: Display React app logs
-      #   run: |
-      #     cat my-blog/nohup.out
+      - name: Verify proxy server is running
+        run: curl -I http://localhost:6060
 
       - name: Checkout selenium tests repository
         uses: actions/checkout@v2
@@ -136,8 +104,9 @@ jobs:
         run: |
           sbt test
 
-      - name: Clean up my-blog directory
+      - name: Clean up
         run: |
-          pkill -f "npm start" || true
-          sleep 10  # Give some time for processes to stop
+          docker stop proxy-server
+          docker rm proxy-server
+          docker rmi my-blog-proxy
           rm -rf my-blog || true
