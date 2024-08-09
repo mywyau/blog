@@ -102,7 +102,7 @@ jobs:
 
       - name: Run browser tests
         run: |
-          sbt test
+          sbt -Denvironment=githubActions -Dheadless=true test
 
       - name: Clean up
         run: |
@@ -110,3 +110,5 @@ jobs:
           docker rm proxy-server
           docker rmi my-blog-proxy
           rm -rf my-blog || true
+
+          
