@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getPostById, PostData, updatePostById } from '../../connectors/BlogPostConnector';
+import { getPostById, PostData } from '../../../connectors/BlogPostConnector';
 
 function paragraph(postBody: string): JSX.Element[] {
     return postBody.split('\n').map((para, index) => (
@@ -7,19 +7,20 @@ function paragraph(postBody: string): JSX.Element[] {
     ));
 }
 
-const UpdateBlogPostButton: React.FC = () => {
+const GETPostButton: React.FC = () => {
     const [post, setPost] = useState<PostData | null>(null);
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
     const [loading, setLoading] = useState<boolean>(false);
 
     // Fetch the post when the component mounts
     useEffect(() => {
-        const updatePost = async () => {
+        const fetchPost = async () => {
             setLoading(true);
             setErrorMessage(null);
             setPost(null);
 
-            const { data, error } = await updatePostById("mikey-1"); // Replace '1' with the post ID you want to retrieve
+            // const { data, error } = await getPostById("mikey-1"); 
+            const { data, error } = await getPostById("mikey-2"); 
 
             if (error) {
                 setErrorMessage(error);
@@ -30,7 +31,7 @@ const UpdateBlogPostButton: React.FC = () => {
             setLoading(false);
         };
 
-        updatePost(); // Call the async function
+        fetchPost(); // Call the async function
     }, []); // Empty dependency array means this runs once when the component mounts
 
     return (
@@ -49,4 +50,4 @@ const UpdateBlogPostButton: React.FC = () => {
     );
 };
 
-export default UpdateBlogPostButton;
+export default GETPostButton;

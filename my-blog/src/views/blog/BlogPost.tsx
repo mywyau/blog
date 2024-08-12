@@ -3,10 +3,10 @@ import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { PostData } from '../../connectors/BlogPostConnector';
 import Copyright from '../components/Copyright';
-import DeleteButton from '../components/DeleteButton';
-import GETPostButton from '../components/GETPostButton';
-import Navbar from '../components/NavBar';
-import UpdateBlogPostButton from '../components/UpdateBlogPostButton copy';
+import DeleteButton from '../components/buttons/DeleteButton';
+import GETPostButton from '../components/buttons/GETPostButton';
+import Navbar from '../components/navigation_bar/NavBar';
+import UpdateBlogPostButton from '../components/buttons/UpdateBlogPostButton copy';
 
 const BlogPost: React.FC = () => {
   const { id } = useParams<{ id: string }>();

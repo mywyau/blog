@@ -1,7 +1,7 @@
 // src/pages/About.tsx
 import React from 'react';
 import Copyright from '../components/Copyright';
-import Navbar from '../components/NavBar';
+import Navbar from '../components/navigation_bar/NavBar';
 
 const Irl: React.FC = () => {
   return (

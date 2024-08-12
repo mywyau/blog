@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import BlogList from '../components/BlogList';
+import BlogList from '../blog/BlogList';
 import Copyright from '../components/Copyright';
-import Navbar from '../components/NavBar';
+import Navbar from '../components/navigation_bar/NavBar';
 import Pagination from '../components/Pagination';
 import Title from '../components/title/Title';
 
