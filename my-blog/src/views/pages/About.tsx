@@ -17,7 +17,6 @@ const About: React.FC = () => {
 
       <div className="flex-grow container mx-auto">
         <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
-          {/* Right Box */}
           <div className="flex flex-col flex-none w-full pt-5 pb-5 pl-20 pr-20 md:auto">
             <div className="bg-white rounded-lg shadow-lg p-8 flex-grow">
               <div className="">

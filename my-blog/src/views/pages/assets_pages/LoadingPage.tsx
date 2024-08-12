@@ -11,7 +11,7 @@ const LoadingPage: React.FC = () => {
     // Simulate a network request or some async operation
     setTimeout(() => {
       setIsLoading(false);
-    }, 20000); // 3 seconds delay
+    }, 5000); // 3 seconds delay
   }, []);
 
   return (
