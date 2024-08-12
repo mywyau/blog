@@ -1,11 +1,12 @@
 // src/pages/BlogPost.tsx
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import Copyright from '../components/Copyright';
-import GETPostButton from '../components/GETPostButton';
-import Navbar from '../components/NavBar';
-import DeleteButton from '../components/DeleteButton';
 import { PostData } from '../../connectors/BlogPostConnector';
+import Copyright from '../components/Copyright';
+import DeleteButton from '../components/buttons/DeleteButton';
+import GETPostButton from '../components/buttons/GETPostButton';
+import Navbar from '../components/navigation_bar/NavBar';
+import UpdateBlogPostButton from '../components/buttons/UpdateBlogPostButton copy';
 
 const BlogPost: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -37,6 +38,7 @@ const BlogPost: React.FC = () => {
         {/* Button Container */}
         <div className="flex flex-col space-y-4">
           <GETPostButton />
+          <UpdateBlogPostButton />
           <DeleteButton posts={posts} setPosts={setPosts} />
         </div>
       </main>

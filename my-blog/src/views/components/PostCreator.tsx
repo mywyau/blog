@@ -1,12 +1,16 @@
-import React, { useState } from 'react';
 import axios from 'axios';
+import React, { useState } from 'react';
 
 interface PostData {
+  id: number;
+  post_id: string;
   title: string;
   body: string;
 }
 
 const PostCreator: React.FC = () => {
+  const [id, setId] = useState(0);
+  const [post_id, setPostId] = useState('');
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -14,6 +18,7 @@ const PostCreator: React.FC = () => {
   const baseUrl = "http://localhost:8080";
 
   const maxTitleLength = 100;
+  const maxPostIdLength = 50;
   const maxContentLength = 5000;
 
   const createPost = async () => {
@@ -23,15 +28,18 @@ const PostCreator: React.FC = () => {
     }
 
     const postData: PostData = {
-      title,
+      id: id,
+      post_id: post_id,
+      title: title,
       body: content,
     };
 
     setIsLoading(true);
     try {
-      const response = await axios.post(baseUrl + "/blog/posts/create", postData);
+      const response = await axios.post(baseUrl + `/blog/posts/create`, postData);
       console.log('Post created successfully:', response.data);
       setTitle('');
+      setPostId('');
       setContent('');
     } catch (error) {
       console.error('Error creating post:', error);
@@ -42,6 +50,7 @@ const PostCreator: React.FC = () => {
   };
 
   const remainingTitleChars = maxTitleLength - title.length;
+  const remainingPostIdChars = maxPostIdLength - post_id.length;
   const remainingContentChars = maxContentLength - content.length;
 
   return (
@@ -68,7 +77,23 @@ const PostCreator: React.FC = () => {
             {remainingTitleChars} characters remaining
           </p>
         </div>
-        <div className="mb-4">
+        <div>
+          <label className="block mb-2">
+            Post ID:
+            <input
+              type="text"
+              value={post_id}
+              onChange={(e) => setPostId(e.target.value)}
+              className="w-full border border-gray-300 rounded p-2"
+              maxLength={maxPostIdLength}
+              disabled={isLoading}
+            />
+          </label>
+          <p className="text-gray-600 text-sm">
+            {remainingPostIdChars} characters remaining
+          </p>
+        </div>
+        <div className="mt-4 mb-4">
           <label className="block mb-2">
             Content:
             <textarea

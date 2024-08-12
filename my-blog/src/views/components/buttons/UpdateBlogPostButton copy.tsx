@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getPostById, PostData } from '../../connectors/BlogPostConnector';
+import { getPostById, PostData, updatePostById } from '../../../connectors/BlogPostConnector';
 
 function paragraph(postBody: string): JSX.Element[] {
     return postBody.split('\n').map((para, index) => (
@@ -7,19 +7,19 @@ function paragraph(postBody: string): JSX.Element[] {
     ));
 }
 
-const GETPostButton: React.FC = () => {
+const UpdateBlogPostButton: React.FC = () => {
     const [post, setPost] = useState<PostData | null>(null);
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
     const [loading, setLoading] = useState<boolean>(false);
 
     // Fetch the post when the component mounts
     useEffect(() => {
-        const fetchPost = async () => {
+        const updatePost = async () => {
             setLoading(true);
             setErrorMessage(null);
             setPost(null);
 
-            const { data, error } = await getPostById(1); // Replace '1' with the post ID you want to retrieve
+            const { data, error } = await updatePostById("mikey-1"); // Replace '1' with the post ID you want to retrieve
 
             if (error) {
                 setErrorMessage(error);
@@ -30,7 +30,7 @@ const GETPostButton: React.FC = () => {
             setLoading(false);
         };
 
-        fetchPost(); // Call the async function
+        updatePost(); // Call the async function
     }, []); // Empty dependency array means this runs once when the component mounts
 
     return (
@@ -40,6 +40,8 @@ const GETPostButton: React.FC = () => {
             {post && (
                 <div className="mt-4">
                     <h1 className="text-2xl font-bold pt-6 pb-6">{post.title}</h1>
+                    {paragraph(`${post.id}`)}
+                    {paragraph(post.post_id)}
                     {paragraph(post.body)}
                 </div>
             )}
@@ -47,4 +49,4 @@ const GETPostButton: React.FC = () => {
     );
 };
 
-export default GETPostButton;
+export default UpdateBlogPostButton;

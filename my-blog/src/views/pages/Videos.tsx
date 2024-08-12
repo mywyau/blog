@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Copyright from '../components/Copyright';
-import Navbar from '../components/NavBar';
+import Navbar from '../components/navigation_bar/NavBar';
 import AssetsNavigationBar from '../components/navigation_bar/AssetsNavigationBar';
 
 interface Video {

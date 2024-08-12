@@ -1,5 +1,5 @@
 import React from 'react';
-import Button from '../../components/Button';
+import Button from '../../components/buttons/Button';
 import Copyright from '../../components/Copyright';
 import AssetsNavigationBar from '../../components/navigation_bar/AssetsNavigationBar';
 

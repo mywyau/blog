@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { messages } from '../../messages/worklog';
 import Copyright from '../components/Copyright';
-import Navbar from '../components/NavBar';
+import Navbar from '../components/navigation_bar/NavBar';
 import WorkLogGrid from '../components/WorkLogGrid';
 import WorkLogPagination from '../components/WorkLogPagination';
 

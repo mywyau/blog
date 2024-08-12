@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { deleteAllRequest, DeleteResponseBody, PostData } from '../../connectors/BlogPostConnector';
+import { deleteAllRequest, DeleteResponseBody, PostData } from '../../../connectors/BlogPostConnector';
 
 const DeleteButton: React.FC<{ posts: PostData[]; setPosts: React.Dispatch<React.SetStateAction<PostData[]>> }> = ({ posts, setPosts }) => {
     

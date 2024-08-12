@@ -2,7 +2,7 @@
 import React from 'react';
 import { messages } from '../../messages/interests';
 import Copyright from '../components/Copyright';
-import Navbar from '../components/NavBar';
+import Navbar from '../components/navigation_bar/NavBar';
 import InterestsCard from '../components/InterestsCard';
 
 const Interests: React.FC = () => {
