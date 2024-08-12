@@ -3,7 +3,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 
-import Navbar from '../src/views/components/navigation_bar/NavBar';
+import Navbar from '../../../../src/views/components/navigation_bar/NavBar';
 
 
 describe('Navbar', () => {

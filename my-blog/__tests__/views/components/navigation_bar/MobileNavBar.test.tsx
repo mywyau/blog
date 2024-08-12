@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import MobileNavBar from '../src/views/components/navigation_bar/MobileNavBar';
+import MobileNavBar from '../../../../src/views/components/navigation_bar/MobileNavBar';
 
 describe('MobileNavBar component', () => {
     

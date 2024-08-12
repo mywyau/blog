@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom';
 import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
-import Button from '../src/views/components/buttons/Button';
+import Button from '../../../../src/views/components/buttons/Button';
 
 describe('Button component', () => {
   it('renders a Primary button with default styles', () => {

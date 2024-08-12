@@ -1,9 +1,9 @@
 import { render, screen } from '@testing-library/react';
-import BlogCard from '../src/views/blog/BlogCard';
-import BlogList from '../src/views/blog/BlogList';
+import BlogCard from '../../../src/views/blog/BlogCard';
+import BlogList from '../../../src/views/blog/BlogList';
 
 // Mocking BlogCard component
-jest.mock('../src/views/blog/BlogCard', () => {
+jest.mock('../../../src/views/blog/BlogCard', () => {
     return jest.fn(() => <div>BlogCard Component</div>);
 });
 

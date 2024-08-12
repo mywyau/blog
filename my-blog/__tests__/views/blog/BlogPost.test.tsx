@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
 // import '@testing-library/jest-dom/extend-expect';
-import BlogPost from '../src/views/blog/BlogPost';
+import BlogPost from '../../../src/views/blog/BlogPost';
 
 // Mocking the useParams hook from react-router-dom
 jest.mock('react-router-dom', () => ({
