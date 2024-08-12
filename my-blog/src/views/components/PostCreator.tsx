@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-// Define an interface for the post data
 interface PostData {
   title: string;
   body: string;
@@ -10,33 +9,38 @@ interface PostData {
 const PostCreator: React.FC = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const baseUrl = "http://localhost:8080";
 
-  // Maximum length for the title
   const maxTitleLength = 100;
-  
   const maxContentLength = 5000;
 
-  // Function to handle POST request
   const createPost = async () => {
+    if (title.trim() === '' || content.trim() === '') {
+      alert('Title and content cannot be empty');
+      return;
+    }
+
     const postData: PostData = {
-      title: title,
+      title,
       body: content,
     };
 
+    setIsLoading(true);
     try {
-      const response = await axios.post(baseUrl + "/blog/post/create", postData);
+      const response = await axios.post(baseUrl + "/blog/posts/create", postData);
       console.log('Post created successfully:', response.data);
-      // Optionally reset form or handle success
       setTitle('');
       setContent('');
     } catch (error) {
       console.error('Error creating post:', error);
+      alert('Failed to create the post. Please try again.');
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  // Calculate remaining characters
   const remainingTitleChars = maxTitleLength - title.length;
   const remainingContentChars = maxContentLength - content.length;
 
@@ -57,6 +61,7 @@ const PostCreator: React.FC = () => {
               onChange={(e) => setTitle(e.target.value)}
               className="w-full border border-gray-300 rounded p-2"
               maxLength={maxTitleLength}
+              disabled={isLoading}
             />
           </label>
           <p className="text-gray-600 text-sm">
@@ -71,14 +76,19 @@ const PostCreator: React.FC = () => {
               onChange={(e) => setContent(e.target.value)}
               className="w-full h-64 border border-gray-300 rounded p-2"
               maxLength={maxContentLength}
+              disabled={isLoading}
             />
           </label>
           <p className="text-gray-600 text-sm">
             {remainingContentChars} characters remaining
           </p>
         </div>
-        <button type="submit" className='bg-true-blue text-white hover:bg-cambridge-blue px-4 py-2 rounded'>
-          Create Post
+        <button
+          type="submit"
+          disabled={isLoading}
+          className="bg-true-blue text-white hover:bg-cambridge-blue px-4 py-2 rounded"
+        >
+          {isLoading ? 'Creating...' : 'Create Post'}
         </button>
       </form>
     </div>
