@@ -122,7 +122,7 @@ describe('BlogPostConnector API functions', () => {
 
             const result = await deleteAllRequest();
 
-            expect(mockedAxios.delete).toHaveBeenCalledWith('http://localhost:8080/blog/posts/all/message');
+            expect(mockedAxios.delete).toHaveBeenCalledWith('http://localhost:8080/blog/post/all/message');
             expect(result.data).toEqual(successMessage);
             expect(result.error).toBeUndefined();
         });

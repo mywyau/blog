@@ -68,7 +68,7 @@ describe('PostCreator Component', () => {
 
     await waitFor(() => {
       expect(mockedAxios.post).toHaveBeenCalledWith(
-        'http://localhost:8080/blog/posts/create',
+        'http://localhost:8080/blog/post/create',
         {
           id: 0,
           post_id: 'test-post',
