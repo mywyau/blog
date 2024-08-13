@@ -36,7 +36,7 @@ const PostCreator: React.FC = () => {
 
     setIsLoading(true);
     try {
-      const response = await axios.post(baseUrl + `/blog/posts/create`, postData);
+      const response = await axios.post(baseUrl + `/blog/post/create`, postData);
       console.log('Post created successfully:', response.data);
       setTitle('');
       setPostId('');

@@ -63,7 +63,7 @@ export interface DeleteResponseBody {
 // Function to fetch post data by ID
 export async function deleteAllRequest(): Promise<{ data?: DeleteResponseBody; error?: string }> {
     try {
-        const response = await axios.delete(`${baseUrl}/blog/posts/all/message`);
+        const response = await axios.delete(`${baseUrl}/blog/post/all/message`);
         return { data: response.data };
     } catch (error) {
         const axiosError = error as AxiosError;
