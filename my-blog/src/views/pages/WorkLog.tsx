@@ -3,8 +3,8 @@ import React, { useState } from 'react';
 import { messages } from '../../messages/worklog';
 import Copyright from '../components/Copyright';
 import Navbar from '../components/navigation_bar/NavBar';
-import WorkLogGrid from '../components/WorkLogGrid';
-import WorkLogPagination from '../components/WorkLogPagination';
+import WorkLogGrid from '../components/worklog/WorkLogGrid';
+import WorkLogPagination from '../components/worklog/WorkLogPagination';
 
 
 const WorkLog: React.FC = () => {

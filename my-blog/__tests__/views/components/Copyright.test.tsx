@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import Copyright from '../src/views/components/Copyright';
+import Copyright from '../../../src/views/components/Copyright';
 
 
 
