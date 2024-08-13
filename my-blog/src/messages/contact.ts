@@ -1,5 +1,6 @@
 // src/messages/contact.ts
-export const messages = {
+
+const messages = {
   title: "Contact Details",
   phoneNumber: {
     mobile: "07402205071"
@@ -24,3 +25,5 @@ export const messages = {
   }
 
 };
+
+export default messages

@@ -11,7 +11,7 @@ import LoadingPage from './views/pages/assets_pages/LoadingPage';
 import RadioPage from './views/pages/assets_pages/RadioPage';
 import VideosPage from './views/pages/assets_pages/VideosPage';
 import ButtonAssetsPage from './views/pages/AssetsPage';
-import Contacts from './views/pages/Contacts';
+import Contacts from './views/pages/ContactsPage';
 import CreateBlogPost from './views/pages/CreateBlogPost';
 import Interests from './views/pages/Interests';
 import LandingPage from './views/pages/LandingPage';

@@ -20,7 +20,7 @@ const GETPostButton: React.FC = () => {
             setPost(null);
 
             // const { data, error } = await getPostById("mikey-1"); 
-            const { data, error } = await getPostById("mikey-2"); 
+            const { data, error } = await getPostById(1); 
 
             if (error) {
                 setErrorMessage(error);

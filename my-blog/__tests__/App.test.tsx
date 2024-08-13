@@ -13,7 +13,7 @@ jest.mock('../src/views/pages/assets_pages/ImagesPage', () => () => <div>ImagesP
 jest.mock('../src/views/pages/assets_pages/LoadingPage', () => () => <div>LoadingPage Component</div>);
 jest.mock('../src/views/pages/assets_pages/RadioPage', () => () => <div>RadioPage Component</div>);
 jest.mock('../src/views/pages/AssetsPage', () => () => <div>ButtonAssetsPage Component</div>);
-jest.mock('../src/views/pages/Contacts', () => () => <div>Contacts Component</div>);
+jest.mock('../src/views/pages/ContactsPage', () => () => <div>Contacts Component</div>);
 jest.mock('../src/views/pages/CreateBlogPost', () => () => <div>CreateBlogPost Component</div>);
 jest.mock('../src/views/pages/Interests', () => () => <div>Interests Component</div>);
 jest.mock('../src/views/pages/LandingPage', () => () => <div>LandingPage Component</div>);
