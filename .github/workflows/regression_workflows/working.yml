@@ -1,0 +1,159 @@
+name: CI Pipeline
+
+on: [push]
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+
+    services:
+      # Set up PostgreSQL service container
+      postgres:
+        image: postgres:14
+        env:
+          POSTGRES_USER: myuser
+          POSTGRES_PASSWORD: mypassword
+          POSTGRES_DB: postgres
+        options: >-
+          --network-alias postgres
+        ports:
+          - 5432:5432    
+
+      # Set up Selenium service container
+      selenium:
+        image: selenium/standalone-chrome:latest
+        ports:
+          - 4444:4444        
+
+    steps:
+      # Create a custom Docker network
+      - name: Create Docker network
+        run: docker network create my-blog-network
+      
+      # Connect PostgreSQL service to custom network
+      - name: Connect PostgreSQL to network
+        run: docker network connect my-blog-network ${{ job.services.postgres.id }}
+
+      # Seed the PostgreSQL database
+      - name: Seed the Database
+        run: |
+          sleep 10  # Wait for PostgreSQL to start up
+          docker exec ${{ job.services.postgres.id }} psql -U myuser -d postgres -c "
+          CREATE TABLE posts (
+              id SERIAL PRIMARY KEY,
+              post_id VARCHAR NOT NULL,
+              title VARCHAR NOT NULL,
+              body TEXT NOT NULL,
+              created_at TIMESTAMPTZ DEFAULT now()
+          );
+          "
+
+      # Checkout frontend repository
+      - name: Checkout frontend repository
+        uses: actions/checkout@v2
+
+      # Set up Docker Buildx
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      # Cache Docker layers
+      - name: Cache Docker layers
+        uses: actions/cache@v2
+        with:
+          path: /tmp/.buildx-cache
+          key: ${{ runner.os }}-buildx-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-buildx-
+
+      # Build frontend Docker image
+      - name: Build frontend Docker image
+        run: |
+          cd my-blog
+          docker build -t my-blog-frontend .
+
+      # Run frontend unit tests
+      - name: Run frontend unit tests
+        run: docker run --rm my-blog-frontend npm test
+
+      # Checkout backend repository
+      - name: Checkout backend repository
+        uses: actions/checkout@v2
+        with:
+          repository: mywyau/tarnish
+          path: backend-repo
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      # Build backend Docker image
+      - name: Build backend Docker image
+        run: |
+          cd backend-repo
+          docker build -t my-blog-backend .
+
+      # Check the Database Content
+      - name: Check Database Content
+        run: docker exec ${{ job.services.postgres.id }} psql -U myuser -d postgres -c "SELECT * FROM posts;"
+
+      # Run frontend Docker container on the custom network
+      - name: Run frontend Docker container
+        run: docker run -d --network my-blog-network -p 3000:3000 --name frontend my-blog-frontend
+
+      # Run backend Docker container on the custom network
+      - name: Run backend Docker container
+        run: docker run -d --network my-blog-network -p 8080:8080 --name backend my-blog-backend
+
+      # Fetch and display logs if the frontend service failed
+      - name: Display Frontend Logs
+        run: docker logs frontend
+
+      # Fetch and display logs if the backend service failed
+      - name: Display Backend Logs
+        run: docker logs backend
+
+      # Checkout Selenium tests repository
+      - name: Checkout selenium tests repository
+        uses: actions/checkout@v2
+        with:
+          repository: mywyau/concurrent_ui-tests
+          token: ${{ secrets.GITHUB_TOKEN }}   
+
+      # Install Nix
+      - name: Install Nix
+        run: |
+          curl -L https://nixos.org/nix/install | sh
+          . /home/runner/.nix-profile/etc/profile.d/nix.sh
+          nix-env --version
+  
+      # Set up Nix shell
+      - name: Set up Nix shell
+        run: |
+          . /home/runner/.nix-profile/etc/profile.d/nix.sh
+          nix-shell --run "echo 'Running inside Nix shell!'"
+  
+      # Install chromedriver via Nix
+      - name: Install chromedriver via Nix
+        run: |
+          . /home/runner/.nix-profile/etc/profile.d/nix.sh
+          nix-env -iA nixpkgs.chromedriver
+  
+      # Set up PATH for chromedriver
+      - name: Set up PATH for chromedriver
+        run: |
+          echo "/home/runner/.nix-profile/bin" >> $GITHUB_PATH
+          . /home/runner/.nix-profile/etc/profile.d/nix.sh
+          which chromedriver
+  
+      # Install dependencies for Selenium tests
+      - name: Install dependencies for Selenium tests
+        run: sbt compile
+  
+      # Run Selenium Browser tests
+      - name: Run Selenium Browser tests
+        run: sbt -Denvironment=githubActions -Dheadless=true test    
+
+      # Clean up
+      - name: Clean up
+        run: |
+          docker stop frontend backend
+          docker rm frontend backend
+          docker rmi my-blog-frontend my-blog-backend
+          docker network rm my-blog-network

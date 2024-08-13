@@ -5,41 +5,40 @@ on: [push]
 jobs:
   ci:
     runs-on: ubuntu-latest
-    
-    steps:
 
-      # Install Docker Compose
+    steps:
+     # Install Docker Compose
       - name: Install Docker Compose
         run: |
           DOCKER_COMPOSE_VERSION=1.29.2
           sudo curl -L "https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
           sudo chmod +x /usr/local/bin/docker-compose
           docker-compose --version
- 
+
       # Checkout repositories
       - name: Checkout repositories
         uses: actions/checkout@v2
         with:
           path: my-blog
-       
+
       - name: Checkout backend repository
         uses: actions/checkout@v2
         with:
           repository: mywyau/tarnish
           path: backend-repo
           token: ${{ secrets.GITHUB_TOKEN }}
-       
+
       - name: Checkout Selenium tests repository
         uses: actions/checkout@v2
         with:
           repository: mywyau/concurrent_ui-tests
           path: selenium-tests-repo
           token: ${{ secrets.GITHUB_TOKEN }}
-       
+
       # Set up Docker Buildx
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
-       
+
       # Cache Docker layers
       - name: Cache Docker layers
         uses: actions/cache@v2
@@ -48,7 +47,7 @@ jobs:
           key: ${{ runner.os }}-buildx-${{ github.sha }}
           restore-keys: |
             ${{ runner.os }}-buildx-
-       
+
       # Create Docker Compose file
       - name: Create Docker Compose file
         run: |
@@ -86,38 +85,29 @@ jobs:
               ports:
                 - '3000:3000'
 
-            selenium:
-              image: selenium/standalone-chrome:latest
-              volumes:
-                - /dev/shm:/dev/shm
-              ports:
-                - "4444:4444"
-
-            selenium-tests:
-              build:
-                context: ./selenium-tests-repo
-              depends_on:
-                - selenium
-                - frontend
-              environment:
-                SELENIUM_URL: http://selenium:4444/wd/hub
-                TARGET_URL: http://frontend:3000
-              command: tail -f /dev/null  # Keeps the container running in standby mode
-  
-          
           volumes:
             pgdata:" > docker-compose.yml
 
-      # Start services with Docker Compose
+      # Start Docker Compose services
       - name: Start services with Docker Compose
-        run: |
-          docker-compose -f ./docker-compose.yml up -d
+        run: docker-compose up -d
 
-      # Wait for services to be ready
-      - name: Wait for services
-        run: sleep 30 # Adjust as necessary to wait for services to be ready
+      - name: Test Backend Connection from Frontend
+        run: docker-compose exec -T frontend curl http://backend:8080/health
+          
+      # Fetch and display logs if the frontend service failed
+      - name: Display Frontend Logs
+        run: docker-compose logs frontend
 
-      # Seed the database
+      # Fetch and display logs if the backend service failed
+      - name: Display Backend Logs
+        run: docker-compose logs backend  
+
+      # Wait for PostgreSQL to be ready
+      - name: Wait for PostgreSQL to be ready
+        run: sleep 20  # Adjust this as needed
+
+      # Seed the PostgreSQL database
       - name: Seed the Database
         run: |
           docker-compose exec -T postgres psql -U myuser -d postgres -c "
@@ -127,34 +117,67 @@ jobs:
               title VARCHAR NOT NULL,
               body TEXT NOT NULL,
               created_at TIMESTAMPTZ DEFAULT now()
-          );"    
+          );"
+
+      - name: Create a Blog Post via Frontend Container
+        run: |
+            docker-compose exec -T frontend curl -X POST http://backend:8080/blog/post/create \
+              -H "Content-Type: application/json" \
+              -d '{
+                  "id": 1,
+                  "post_id": "post_id_mikey",
+                  "title": "My First Post",
+                  "body": "This is the body of my first post."
+              }'  
+
+      # Run frontend unit tests
+      - name: Run frontend unit tests
+        run: docker-compose exec -T frontend npm test
 
       # Check the Database Content
       - name: Check Database Content
         run: docker-compose exec -T postgres psql -U myuser -d postgres -c "SELECT * FROM posts;"
 
-      - name: Test Backend Connection from Frontend
-        run: docker-compose exec -T frontend curl http://backend:8080/health    
-           
-      # Fetch and display logs if the frontend service failed
-      - name: Display Frontend Logs
-        run: docker-compose logs frontend
-    
-      # Run frontend unit tests
-      - name: Run frontend unit tests
-        run: docker-compose exec -T frontend npm test
+
+      # Install Nix
+      - name: Install Nix
+        run: |
+          curl -L https://nixos.org/nix/install | sh
+          . /home/runner/.nix-profile/etc/profile.d/nix.sh
+          nix-env --version
+  
+      # Set up Nix shell
+      - name: Set up Nix shell
+        run: |
+          cd selenium-tests-repo  
+          . /home/runner/.nix-profile/etc/profile.d/nix.sh
+          nix-shell --run "echo 'Running inside Nix shell!'"
+  
+      # Install chromedriver via Nix
+      - name: Install chromedriver via Nix
+        run: |
+          . /home/runner/.nix-profile/etc/profile.d/nix.sh
+          nix-env -iA nixpkgs.chromedriver
+  
+      # Set up PATH for chromedriver
+      - name: Set up PATH for chromedriver
+        run: |
+          echo "/home/runner/.nix-profile/bin" >> $GITHUB_PATH
+          . /home/runner/.nix-profile/etc/profile.d/nix.sh
+          which chromedriver
+  
+      # Install dependencies for Selenium tests
+      - name: Install dependencies for Selenium tests
+        run: |
+          cd selenium-tests-repo  
+          sbt compile
 
       # Run Selenium Browser tests
       - name: Run Selenium Browser tests
-        id: selenium_tests
         run: |
-          docker-compose exec -T selenium-tests sbt -Denvironment=githubActions -Dheadless=true test
+          cd selenium-tests-repo  
+          sbt -Denvironment=githubActions -Dheadless=true test    
 
-      # Capture Logs on Failure
-      - name: Capture Selenium Logs on Failure
-        if: failure()
-        run: docker-compose logs selenium-tests
-
-      # Tear down services
-      - name: Tear down services
-        run: docker-compose -f ./docker-compose.yml down
+      # Clean up
+      - name: Clean up
+        run: docker-compose down --volumes

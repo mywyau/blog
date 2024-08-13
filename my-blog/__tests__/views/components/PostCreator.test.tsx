@@ -2,6 +2,13 @@ import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import axios from 'axios';
 import PostCreator from '../../../src/views/components/PostCreator';
+import { config } from 'dotenv';
+
+config({ path: '../../.env' });
+
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+
+console.log(API_BASE_URL);
 
 jest.mock('axios');
 const mockedAxios = axios as jest.Mocked<typeof axios>;
@@ -67,8 +74,9 @@ describe('PostCreator Component', () => {
     fireEvent.click(screen.getByText(/Create Post/i));
 
     await waitFor(() => {
+      
       expect(mockedAxios.post).toHaveBeenCalledWith(
-        'http://localhost:8080/blog/post/create',
+        API_BASE_URL + '/blog/post/create',
         {
           id: 0,
           post_id: 'test-post',

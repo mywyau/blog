@@ -1,0 +1,147 @@
+name: CI Pipeline
+
+on: [push]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18'
+
+      - name: Cache node modules
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/my-blog/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install dependencies
+        run: |
+          cd my-blog
+          npm install
+
+      - name: Build React app
+        run: |
+          cd my-blog
+          npm run build
+
+      - name: Run unit tests
+        run: |
+          cd my-blog
+          npm test
+
+  selenium-tests:
+    runs-on: ubuntu-latest
+    needs: build-and-test
+
+    services:
+      selenium:
+        image: selenium/standalone-chrome:latest
+        ports:
+          - 4444:4444
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Build Docker image
+        run: |
+          cd my-blog
+          docker build -t my-blog-proxy .
+
+      - name: Run Docker container
+        run: |
+          docker run -d -p 6060:6060 --name proxy-server my-blog-proxy
+
+      - name: Wait for proxy server to be ready
+        run: |
+          sleep 10  # Wait for the container to be fully ready
+
+      - name: Verify proxy server is running
+        run: curl -I http://localhost:6060
+
+      - name: Checkout Tarnish backend repository
+        uses: actions/checkout@v2
+        with:
+          repository: mywyau/tarnish
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install Nix for Tarnish
+        run: |
+          curl -L https://nixos.org/nix/install | sh
+          . /home/runner/.nix-profile/etc/profile.d/nix.sh
+          nix-env --version
+  
+      - name: Set up Tarnish - Nix shell 
+        run: |
+          . /home/runner/.nix-profile/etc/profile.d/nix.sh
+          nix-shell --run "echo 'Running inside Nix shell for Tarnish!'"
+             
+      - name: Setup and Configure PostgreSQL
+        run: |
+          psql -U myuser -d postgres -h localhost -p 5432 -c "DROP SCHEMA public CASCADE; CREATE SCHEMA public;"
+          psql -U myuser -d postgres -h localhost -p 5432 -c "CREATE TABLE posts (
+            id SERIAL PRIMARY KEY,
+            post_id VARCHAR NOT NULL,
+            title VARCHAR NOT NULL,
+            body TEXT NOT NULL
+          );"
+      
+      - name: Spin up backend
+        run: |
+          cargo build
+          cargo run
+          
+      - name: Verify backend server is running
+        run: curl -I http://localhost:8080    
+
+      - name: Checkout selenium tests repository
+        uses: actions/checkout@v2
+        with:
+          repository: mywyau/concurrent_ui-tests
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install Nix
+        run: |
+          curl -L https://nixos.org/nix/install | sh
+          . /home/runner/.nix-profile/etc/profile.d/nix.sh
+          nix-env --version
+
+      - name: Set up Nix shell
+        run: |
+          . /home/runner/.nix-profile/etc/profile.d/nix.sh
+          nix-shell --run "echo 'Running inside Nix shell!'"
+
+      - name: Install chromedriver via Nix
+        run: |
+          . /home/runner/.nix-profile/etc/profile.d/nix.sh
+          nix-env -iA nixpkgs.chromedriver
+
+      - name: Set up PATH for chromedriver
+        run: |
+          echo "/home/runner/.nix-profile/bin" >> $GITHUB_PATH
+          . /home/runner/.nix-profile/etc/profile.d/nix.sh
+          which chromedriver
+
+      - name: Install dependencies for Selenium tests
+        run: |
+          sbt compile
+
+      - name: Run browser tests
+        run: |
+          sbt -Denvironment=githubActions -Dheadless=true test
+
+      - name: Clean up
+        run: |
+          docker stop proxy-server
+          docker rm proxy-server
+          docker rmi my-blog-proxy
+          rm -rf my-blog || true

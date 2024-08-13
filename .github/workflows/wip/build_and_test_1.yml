@@ -3,8 +3,14 @@ name: CI Pipeline
 on: [push]
 
 jobs:
-  build-and-save-images:
+  ci:
     runs-on: ubuntu-latest
+
+    services:
+      selenium:
+        image: selenium/standalone-chrome:latest
+        ports:
+          - 4444:4444
 
     steps:
       - name: Checkout frontend repository
@@ -58,11 +64,6 @@ jobs:
           name: my-blog-backend
           path: my-blog-backend.tar.gz
 
-  frontend-unit-tests:
-    runs-on: ubuntu-latest
-    needs: build-and-save-images
-
-    steps:
       - name: Download frontend Docker image
         uses: actions/download-artifact@v2
         with:
@@ -72,29 +73,9 @@ jobs:
         run: |
           gunzip -c my-blog-frontend.tar.gz | docker load
 
-      - name: Run frontend Docker container for tests
+      - name: Run frontend unit tests
         run: |
           docker run --rm my-blog-frontend npm test
-
-  selenium-tests:
-    runs-on: ubuntu-latest
-    needs: frontend-unit-tests
-
-    services:
-      selenium:
-        image: selenium/standalone-chrome:latest
-        ports:
-          - 4444:4444
-
-    steps:
-      - name: Download frontend Docker image
-        uses: actions/download-artifact@v2
-        with:
-          name: my-blog-frontend
-
-      - name: Load frontend Docker image
-        run: |
-          gunzip -c my-blog-frontend.tar.gz | docker load
 
       - name: Download backend Docker image
         uses: actions/download-artifact@v2

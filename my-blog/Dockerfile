@@ -1,23 +1,29 @@
-# Use an official Node runtime as a parent image
+# Use Node.js as the base image
 FROM node:18
 
-# Set the working directory in the container
-WORKDIR /usr/src/app
+# Set the working directory inside the container
+WORKDIR /app
 
-# Copy package.json and package-lock.json to the working directory
+# Copy package.json and package-lock.json to the container
 COPY package*.json ./
 
-# Install dependencies
+# Install the dependencies
 RUN npm install
 
-# Copy the rest of the application code to the working directory
+# Copy all other files to the container
 COPY . .
 
-# Build the React app
+# Ensure the environment file is in place
+COPY .env.github-actions .env
+
+# Debug: Check the contents of the .env file
+RUN echo "Contents of .env:" && cat .env
+
+# Build the React application
 RUN npm run build
 
-# Expose the port the app runs on
-EXPOSE 6060
+# Expose the port that the app will run on
+EXPOSE 3000
 
-# Define the command to run the proxy server
-CMD ["node", "server.js"]
+# Start the application
+CMD ["npm", "start"]

@@ -1,5 +1,10 @@
 import axios from 'axios';
 import { deleteAllRequest, DeleteResponseBody, getPostById, getViaPost_Id, PostData, updatePostById } from '../../src/connectors/BlogPostConnector';
+import { config } from 'dotenv';
+
+config({ path: '../../.env' });
+
+const apiUrl = process.env.REACT_APP_API_BASE_URL;
 
 jest.mock('axios');
 const mockedAxios = axios as jest.Mocked<typeof axios>;
@@ -20,7 +25,7 @@ describe('BlogPostConnector API functions', () => {
 
             const result = await getPostById(1);
 
-            expect(mockedAxios.get).toHaveBeenCalledWith('http://localhost:8080/blog/post/retrieve/1');
+            expect(mockedAxios.get).toHaveBeenCalledWith(apiUrl + '/blog/post/retrieve/1');
             expect(result.data).toEqual(mockPost);
             expect(result.error).toBeUndefined();
         });
@@ -54,7 +59,7 @@ describe('BlogPostConnector API functions', () => {
 
             const result = await getViaPost_Id('mikey-2');
 
-            expect(mockedAxios.get).toHaveBeenCalledWith('http://localhost:8080/blog/post/retrieve/post-id/mikey-2');
+            expect(mockedAxios.get).toHaveBeenCalledWith(apiUrl + '/blog/post/retrieve/post-id/mikey-2');
             expect(result.data).toEqual(mockPost);
             expect(result.error).toBeUndefined();
         });
@@ -89,7 +94,7 @@ describe('BlogPostConnector API functions', () => {
             const result = await updatePostById('mikey-2');
 
             expect(mockedAxios.put).toHaveBeenCalledWith(
-                'http://localhost:8080/blog/posts/update/mikey-2',
+                apiUrl + '/blog/posts/update/mikey-2',
                 updatedPost
             );
             expect(result.data).toEqual(updatedPost);
@@ -122,7 +127,7 @@ describe('BlogPostConnector API functions', () => {
 
             const result = await deleteAllRequest();
 
-            expect(mockedAxios.delete).toHaveBeenCalledWith('http://localhost:8080/blog/post/all/message');
+            expect(mockedAxios.delete).toHaveBeenCalledWith(apiUrl + '/blog/post/all/message');
             expect(result.data).toEqual(successMessage);
             expect(result.error).toBeUndefined();
         });

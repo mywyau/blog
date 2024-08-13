@@ -19,8 +19,8 @@ const GETPostButton: React.FC = () => {
             setErrorMessage(null);
             setPost(null);
 
-            // const { data, error } = await getViaPost_Id("mikey-2"); 
-            const { data, error } = await getPostById(1); 
+            const { data, error } = await getViaPost_Id("mikey-2"); 
+            // const { data, error } = await getPostById(1); 
 
             if (error) {
                 setErrorMessage(error);
