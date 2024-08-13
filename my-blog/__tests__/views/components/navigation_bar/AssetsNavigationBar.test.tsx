@@ -1,7 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 
 import { BrowserRouter as Router } from 'react-router-dom';
-import AssetsNavigationBar from '../src/views/components/navigation_bar/AssetsNavigationBar';
+import AssetsNavigationBar from '../../../../src/views/components/navigation_bar/AssetsNavigationBar';
 
 describe('AssetsNavigationBar component', () => {
     test('renders the AssetsNavigationBar component with correct links', () => {

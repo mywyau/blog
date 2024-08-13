@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import InterestsCard from '../src/views/components/InterestsCard';
+import InterestsCard from '../../../src/views/components/InterestsCard';
 
 describe('InterestsCard component', () => {
     const mockInterest = {

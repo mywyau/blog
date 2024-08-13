@@ -1,15 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import Copyright from '../components/Copyright';
 import AssetsNavigationBar from '../components/navigation_bar/AssetsNavigationBar';
 
 const AssetsPage: React.FC = () => {
+
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     // Simulate a network request or some async operation
     setTimeout(() => {
       setIsLoading(false);
-    }, 2000); // 5 seconds delay
+    }, 2000); //  seconds delay
   }, []);
 
   return (
