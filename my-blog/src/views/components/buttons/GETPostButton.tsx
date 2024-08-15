@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { getPostById, getViaPost_Id, PostData } from '../../../connectors/BlogPostConnector';
+import React, { useEffect, useState } from 'react';
+import { getViaPost_Id, PostData } from '../../../connectors/BlogPostConnector';
 
 function paragraph(postBody: string): JSX.Element[] {
     return postBody.split('\n').map((para, index) => (
@@ -19,7 +19,7 @@ const GETPostButton: React.FC = () => {
             setErrorMessage(null);
             setPost(null);
 
-            const { data, error } = await getViaPost_Id("mikey-2"); 
+            const { data, error } = await getViaPost_Id("mikey-1");
             // const { data, error } = await getPostById(1); 
 
             if (error) {
@@ -41,8 +41,8 @@ const GETPostButton: React.FC = () => {
             {post && (
                 <div className="mt-4">
                     <h1 className="text-2xl font-bold pt-6 pb-6">{post.title}</h1>
-                    {paragraph(`${post.id}`)}
-                    {paragraph(post.post_id)}
+                    {/* {paragraph(`${post.id}`)}
+                    {paragraph(post.post_id)} */}
                     {paragraph(post.body)}
                 </div>
             )}

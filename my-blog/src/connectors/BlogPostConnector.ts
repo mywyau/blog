@@ -36,14 +36,9 @@ export async function getViaPost_Id(post_id: string): Promise<{ data?: PostData;
     }
 }
 
-export async function updatePostById(post_id: string): Promise<{ data?: PostData; error?: string }> {
+export async function updatePostById(post_id: string, newPostData: PostData): Promise<{ data?: PostData; error?: string }> {
 
-    const newBlogPostData: PostData = {
-        id: 10,
-        post_id: "mikey-2",
-        title: "Hardcoded title update",
-        body: "Some updated content",
-      };
+    const newBlogPostData: PostData = newPostData
 
     try {
         const response = await axios.put(`${API_BASE_URL}/blog/posts/update/${post_id}`, newBlogPostData);
