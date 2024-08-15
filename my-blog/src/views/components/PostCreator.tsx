@@ -15,7 +15,7 @@ const PostCreator: React.FC = () => {
   const [content, setContent] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  const baseUrl = "http://localhost:8080";
+  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
   const maxTitleLength = 100;
   const maxPostIdLength = 50;
@@ -36,14 +36,14 @@ const PostCreator: React.FC = () => {
 
     setIsLoading(true);
     try {
-      const response = await axios.post(baseUrl + `/blog/post/create`, postData);
+      const response = await axios.post(API_BASE_URL + '/blog/post/create', postData);
       console.log('Post created successfully:', response.data);
       setTitle('');
       setPostId('');
       setContent('');
     } catch (error) {
       console.error('Error creating post:', error);
-      alert('Failed to create the post. Please try again.');
+      alert(`[PostCreator][axios.post] Failed to create the post. Please try again. ${API_BASE_URL}/blog/post/create`);
     } finally {
       setIsLoading(false);
     }

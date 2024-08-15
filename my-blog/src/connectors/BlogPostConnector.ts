@@ -1,7 +1,9 @@
 // BlogPostConnector.ts 
 import axios, { AxiosError } from 'axios';
 
-const baseUrl = "http://localhost:8080";
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+
+console.log(API_BASE_URL);
 
 export interface PostData {
     id: number;
@@ -12,7 +14,7 @@ export interface PostData {
 
 export async function getPostById(id: number): Promise<{ data?: PostData; error?: string }> {
     try {
-        const response = await axios.get(`${baseUrl}/blog/post/retrieve/${id}`);
+        const response = await axios.get(`${API_BASE_URL}/blog/post/retrieve/${id}`);
         return { data: response.data };
     } catch (error) {
         const axiosError = error as AxiosError;
@@ -24,7 +26,7 @@ export async function getPostById(id: number): Promise<{ data?: PostData; error?
 
 export async function getViaPost_Id(post_id: string): Promise<{ data?: PostData; error?: string }> {
     try {
-        const response = await axios.get(`${baseUrl}/blog/post/retrieve/post-id/${post_id}`);
+        const response = await axios.get(`${API_BASE_URL}/blog/post/retrieve/post-id/${post_id}`);
         return { data: response.data };
     } catch (error) {
         const axiosError = error as AxiosError;
@@ -44,7 +46,7 @@ export async function updatePostById(post_id: string): Promise<{ data?: PostData
       };
 
     try {
-        const response = await axios.put(`${baseUrl}/blog/posts/update/${post_id}`, newBlogPostData);
+        const response = await axios.put(`${API_BASE_URL}/blog/posts/update/${post_id}`, newBlogPostData);
         return { data: response.data };
     } catch (error) {
         const axiosError = error as AxiosError;
@@ -63,7 +65,7 @@ export interface DeleteResponseBody {
 // Function to fetch post data by ID
 export async function deleteAllRequest(): Promise<{ data?: DeleteResponseBody; error?: string }> {
     try {
-        const response = await axios.delete(`${baseUrl}/blog/post/all/message`);
+        const response = await axios.delete(`${API_BASE_URL}/blog/post/all/message`);
         return { data: response.data };
     } catch (error) {
         const axiosError = error as AxiosError;
