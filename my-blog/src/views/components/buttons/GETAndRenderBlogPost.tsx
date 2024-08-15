@@ -7,7 +7,7 @@ function paragraph(postBody: string): JSX.Element[] {
     ));
 }
 
-const GETPostButton: React.FC = () => {
+const GETAndRenderBlogPost: React.FC = () => {
     const [post, setPost] = useState<PostData | null>(null);
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
     const [loading, setLoading] = useState<boolean>(false);
@@ -50,4 +50,4 @@ const GETPostButton: React.FC = () => {
     );
 };
 
-export default GETPostButton;
+export default GETAndRenderBlogPost;

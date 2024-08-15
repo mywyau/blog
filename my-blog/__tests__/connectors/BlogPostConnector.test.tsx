@@ -82,6 +82,7 @@ describe('BlogPostConnector API functions', () => {
     // Tests for updatePostById
     describe('updatePostById', () => {
         it('should update post data and return the updated data when API call is successful', async () => {
+
             const updatedPost: PostData = {
                 id: 10,
                 post_id: 'mikey-2',
@@ -91,7 +92,7 @@ describe('BlogPostConnector API functions', () => {
 
             mockedAxios.put.mockResolvedValueOnce({ data: updatedPost });
 
-            const result = await updatePostById('mikey-2');
+            const result = await updatePostById('mikey-2', updatedPost);
 
             expect(mockedAxios.put).toHaveBeenCalledWith(
                 apiUrl + '/blog/posts/update/mikey-2',
@@ -102,14 +103,23 @@ describe('BlogPostConnector API functions', () => {
         });
 
         it('should return an error message when API call fails', async () => {
+
             const errorMessage = 'Post not found';
+
+            const updatedPost: PostData = {
+                id: 10,
+                post_id: 'mikey-2',
+                title: 'Hardcoded title update',
+                body: 'Some updated content',
+            };
+
             mockedAxios.put.mockRejectedValueOnce({
                 response: {
                     data: { message: errorMessage },
                 },
             });
 
-            const result = await updatePostById('mikey-2');
+            const result = await updatePostById('mikey-2', updatedPost);
 
             expect(result.data).toBeUndefined();
             expect(result.error).toBe(errorMessage);
@@ -118,7 +128,9 @@ describe('BlogPostConnector API functions', () => {
 
     // Tests for deleteAllRequest
     describe('deleteAllRequest', () => {
+
         it('should return a success message when API call is successful', async () => {
+            
             const successMessage: DeleteResponseBody = {
                 message: 'All posts have been deleted.',
             };
