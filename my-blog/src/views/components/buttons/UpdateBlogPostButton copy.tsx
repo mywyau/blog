@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { getPostById, PostData, updatePostById } from '../../../connectors/BlogPostConnector';
+import React, { useEffect, useState } from 'react';
+import { PostData, updatePostById } from '../../../connectors/BlogPostConnector';
 
 function paragraph(postBody: string): JSX.Element[] {
     return postBody.split('\n').map((para, index) => (
@@ -8,6 +8,7 @@ function paragraph(postBody: string): JSX.Element[] {
 }
 
 const UpdateBlogPostButton: React.FC = () => {
+
     const [post, setPost] = useState<PostData | null>(null);
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
     const [loading, setLoading] = useState<boolean>(false);
@@ -19,7 +20,15 @@ const UpdateBlogPostButton: React.FC = () => {
             setErrorMessage(null);
             setPost(null);
 
-            const { data, error } = await updatePostById("mikey-1"); // Replace '1' with the post ID you want to retrieve
+            const fakeBlogPost: PostData =
+            {
+                id: 1,
+                post_id: "mikey-1",
+                title: "updated title",
+                body: "Some Content"
+            }
+
+            const { data, error } = await updatePostById(fakeBlogPost.post_id, fakeBlogPost); // Replace '1' with the post ID you want to retrieve
 
             if (error) {
                 setErrorMessage(error);

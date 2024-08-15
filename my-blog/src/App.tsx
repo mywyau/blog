@@ -13,6 +13,7 @@ import VideosPage from './views/pages/assets_pages/VideosPage';
 import ButtonAssetsPage from './views/pages/AssetsPage';
 import Contacts from './views/pages/ContactsPage';
 import CreateBlogPost from './views/pages/CreateBlogPost';
+import EditBlogPost from './views/pages/EditBlogPost';
 import Interests from './views/pages/Interests';
 import LandingPage from './views/pages/LandingPage';
 import PrivacyPolicy from './views/pages/PrivacyPolicy';
@@ -33,6 +34,7 @@ const App: React.FC = () => {
       <Route path="/work-log" element={<WorkLog />} />
       <Route path="/assets" element={<ButtonAssetsPage />} />
       <Route path="/create-blog-post" element={<CreateBlogPost />} />
+      <Route path="/edit-blog-post" element={<EditBlogPost />} />
 
       {/* <Route path="/images" element={<Images />} /> */}
       <Route path="/privacy-policy" element={<PrivacyPolicy />} />

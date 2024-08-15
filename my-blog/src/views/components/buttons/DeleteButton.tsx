@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { deleteAllRequest, DeleteResponseBody, PostData } from '../../../connectors/BlogPostConnector';
 
 const DeleteButton: React.FC<{ posts: PostData[]; setPosts: React.Dispatch<React.SetStateAction<PostData[]>> }> = ({ posts, setPosts }) => {
-    
+
     const [deleteResponseBody, setDeleteResponseBody] = useState<DeleteResponseBody | null>(null);
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
     const [loading, setLoading] = useState<boolean>(false);
@@ -31,22 +31,30 @@ const DeleteButton: React.FC<{ posts: PostData[]; setPosts: React.Dispatch<React
     };
 
     return (
-        <div>
-            <button
-                onClick={handleDelete}
-                disabled={loading}
-                className="bg-blue-500 text-white px-4 py-2 rounded"
-            >
-                {loading ? 'Loading...' : 'Delete All Blog Posts'}
-            </button>
+        <form
+            onSubmit={(e) => {
+                e.preventDefault();
+                handleDelete();
+            }}
+        >
+            <div>
+                <button
+                    type="submit"
+                    // onClick={handleDelete}
+                    disabled={loading}
+                    className="bg-blue-500 text-white px-4 py-2 rounded"
+                >
+                    {loading ? 'Loading...' : 'Delete All Blog Posts'}
+                </button>
 
-            {errorMessage && <p className="text-red-500 mt-2">{errorMessage}</p>}
-            {deleteResponseBody && (
-                <div className="mt-4">
-                    <p className="mb-4">{deleteResponseBody.message}</p>
-                </div>
-            )}
-        </div>
+                {errorMessage && <p className="text-red-500 mt-2">{errorMessage}</p>}
+                {deleteResponseBody && (
+                    <div className="mt-4">
+                        <p className="mb-4">{deleteResponseBody.message}</p>
+                    </div>
+                )}
+            </div>
+        </ form>
     );
 };
 
