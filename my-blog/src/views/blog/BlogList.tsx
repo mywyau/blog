@@ -4,6 +4,7 @@ import BlogCard from '../blog/BlogCard';
 
 interface Post {
   id: number;
+  post_id: string;
   title: string;
   content: string;
 }
@@ -18,7 +19,7 @@ const BlogList: React.FC<BlogListProps> = ({ posts }) => {
       <ul>
         {posts.map(post => (
           <li key={post.id} className="mb-2">
-            <BlogCard id={post.id} title={post.title} excerpt={post.content} />
+            <BlogCard id={post.id} post_id ={post.post_id}  title={post.title} excerpt={post.content} />
           </li>
         ))}
       </ul>

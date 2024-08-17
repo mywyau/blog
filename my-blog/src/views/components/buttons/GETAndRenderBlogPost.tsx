@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { getViaPost_Id, PostData } from '../../../connectors/BlogPostConnector';
+import { useParams } from 'react-router-dom';
+
 
 function paragraph(postBody: string): JSX.Element[] {
     return postBody.split('\n').map((para, index) => (
@@ -8,6 +10,10 @@ function paragraph(postBody: string): JSX.Element[] {
 }
 
 const GETAndRenderBlogPost: React.FC = () => {
+
+    const { id } = useParams<{ id: string }>();
+    const postId = id ?? 'default-post-id'; // Replace 'default-post-id' with an appropriate default value or handle it accordingly
+
     const [post, setPost] = useState<PostData | null>(null);
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
     const [loading, setLoading] = useState<boolean>(false);
@@ -19,8 +25,8 @@ const GETAndRenderBlogPost: React.FC = () => {
             setErrorMessage(null);
             setPost(null);
 
-            const { data, error } = await getViaPost_Id("mikey-1");
-            // const { data, error } = await getPostById(1); 
+
+            const { data, error } = await getViaPost_Id(postId);
 
             if (error) {
                 setErrorMessage(error);
