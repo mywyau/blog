@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { getViaPost_Id, PostData } from '../../../connectors/BlogPostConnector';
+import BlogPostConnector from "../../../connectors/BlogPostConnector";
+import { PostData } from '../../../models/PostData';
+
 
 
 function paragraph(postBody: string): JSX.Element[] {
@@ -15,7 +17,7 @@ const GETAndRenderBlogPost: React.FC = () => {
     const calculateReadingTime = (wordCount: number): string => {
         const wordsPerMinute = 200; // Average reading speed
         const minutes = Math.ceil(wordCount / wordsPerMinute);
-        const message = wordsPerMinute < 200 ?  `< ${minutes} min read` : `${minutes} min read`;
+        const message = wordsPerMinute < 200 ? `< ${minutes} min read` : `${minutes} min read`;
         return (message);
     };
 
@@ -45,7 +47,7 @@ const GETAndRenderBlogPost: React.FC = () => {
             setPost(null);
 
 
-            const { data, error } = await getViaPost_Id(postId);
+            const { data, error } = await BlogPostConnector.getViaPostId(postId);
 
             if (error) {
                 setErrorMessage(error);

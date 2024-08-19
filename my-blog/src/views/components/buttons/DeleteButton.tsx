@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
-import { deleteAllRequest, DeleteResponseBody, PostData } from '../../../connectors/BlogPostConnector';
+
+import BlogPostConnector, { DeleteResponseBody } from "../../../connectors/BlogPostConnector";
+import { PostData } from '../../../models/PostData';
+
 
 const DeleteButton: React.FC<{ posts: PostData[]; setPosts: React.Dispatch<React.SetStateAction<PostData[]>> }> = ({ posts, setPosts }) => {
 
@@ -18,7 +21,7 @@ const DeleteButton: React.FC<{ posts: PostData[]; setPosts: React.Dispatch<React
         const previousPosts = [...posts]; // Save a copy of the current posts for potential rollback
         setPosts([]); // Optimistically clear the posts from UI
 
-        const { data, error } = await deleteAllRequest();
+        const { data, error } = await BlogPostConnector.deleteAllRequest();
 
         if (error) {
             setErrorMessage(error);

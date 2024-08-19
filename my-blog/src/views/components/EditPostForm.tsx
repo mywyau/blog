@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { updatePostById } from '../../connectors/BlogPostConnector';
+import BlogPostConnector from '../../connectors/BlogPostConnector';
+
 
 interface PostData {
   id: number;
@@ -38,7 +39,7 @@ const EditPostForm: React.FC = () => {
 
     setIsLoading(true);
     try {
-      const { data, error } = await updatePostById(post_id, newBlogPost); // Replace '1' with the post ID you want to retrieve
+      const { data, error } = await BlogPostConnector.updatePostById(post_id, newBlogPost); // Replace '1' with the post ID you want to retrieve
       console.log('Post edited successfully:', data);
       setTitle('');
       setPostId('');

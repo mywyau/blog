@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { PostData } from '../../connectors/BlogPostConnector';
+import { useParams } from 'react-router-dom';
+import { PostData } from '../../models/PostData';
 import Copyright from '../components/Copyright';
 import DeleteButton from '../components/buttons/DeleteButton';
 import EditButton from '../components/buttons/EditButton';
 import GETAndRenderBlogPost from '../components/buttons/GETAndRenderBlogPost';
 import Navbar from '../components/navigation_bar/NavBar';
-import { useParams } from 'react-router-dom';
 
 const BlogPost: React.FC = () => {
 
