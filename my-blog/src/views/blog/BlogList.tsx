@@ -14,6 +14,9 @@ interface BlogListProps {
 }
 
 const BlogList: React.FC<BlogListProps> = ({ posts }) => {
+
+  
+
   return (
     <div>
       <ul>

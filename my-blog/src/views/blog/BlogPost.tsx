@@ -1,4 +1,3 @@
-// src/pages/BlogPost.tsx
 import React, { useState } from 'react';
 import { PostData } from '../../connectors/BlogPostConnector';
 import Copyright from '../components/Copyright';
@@ -7,7 +6,6 @@ import EditButton from '../components/buttons/EditButton';
 import GETAndRenderBlogPost from '../components/buttons/GETAndRenderBlogPost';
 import Navbar from '../components/navigation_bar/NavBar';
 import { useParams } from 'react-router-dom';
-
 
 const BlogPost: React.FC = () => {
 
@@ -24,12 +22,11 @@ const BlogPost: React.FC = () => {
         <Navbar />
       </header>
 
-      <main className="container mx-auto p-4 flex-grow">
+      <main className="container mx-auto p-4 flex-grow max-w-4xl px-8">
         <div className="flex flex-col space-y-4">
           <GETAndRenderBlogPost />
           {/* Place the buttons in the same div and use flexbox to align them side by side */}
           <div className="flex space-x-4">
-            
             <DeleteButton posts={posts} setPosts={setPosts} />
             <EditButton />
           </div>

@@ -20,7 +20,7 @@ const EditPostForm: React.FC = () => {
 
   const maxTitleLength = 100;
   const maxPostIdLength = 50;
-  const maxContentLength = 5000;
+  const maxContentLength = 20000;
 
   const blogPostToSubmit: PostData = {
     id: id,

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { getViaPost_Id, PostData } from '../../../connectors/BlogPostConnector';
 import { useParams } from 'react-router-dom';
+import { getViaPost_Id, PostData } from '../../../connectors/BlogPostConnector';
 
 
 function paragraph(postBody: string): JSX.Element[] {
@@ -10,6 +10,25 @@ function paragraph(postBody: string): JSX.Element[] {
 }
 
 const GETAndRenderBlogPost: React.FC = () => {
+
+    // Calculate estimated reading time
+    const calculateReadingTime = (wordCount: number): string => {
+        const wordsPerMinute = 200; // Average reading speed
+        const minutes = Math.ceil(wordCount / wordsPerMinute);
+        const message = wordsPerMinute < 200 ?  `< ${minutes} min read` : `${minutes} min read`;
+        return (message);
+    };
+
+    const countWords = (text: string): number => {
+        return text
+            ? text
+                .trim()
+                .replace(/(\r\n|\n|\r)/gm, "")
+                .split(/[.,\s]+/) // Split by spaces, commas, or periods
+                .filter(word => word.length > 0) // Filter out any empty strings
+                .length
+            : 0;
+    };
 
     const { id } = useParams<{ id: string }>();
     const postId = id ?? 'default-post-id'; // Replace 'default-post-id' with an appropriate default value or handle it accordingly
@@ -45,11 +64,17 @@ const GETAndRenderBlogPost: React.FC = () => {
             {loading && <p>Loading...</p>}
             {errorMessage && <p className="text-red-500 mt-2">{errorMessage}</p>}
             {post && (
-                <div className="mt-4">
-                    <h1 className="text-2xl font-bold pt-6 pb-6">{post.title}</h1>
-                    {/* {paragraph(`${post.id}`)}
-                    {paragraph(post.post_id)} */}
-                    {paragraph(post.body)}
+                <div>
+                    <div className="mt-4">
+                        <h1 className="text-2xl font-bold pt-6 pb-6">{post.title}</h1>
+                        <p className='text-sm text-gray-600 mb-6 pt-2'>Word Count: {countWords(post.body)}</p>
+                    </div>
+                    <div>
+                        <p className="text-gray-600 text-sm mb-4">Read time: ~{calculateReadingTime(countWords(post.body))}</p>
+                    </div>
+                    <div>
+                        {paragraph(post.body)}
+                    </div>
                 </div>
             )}
         </div>
