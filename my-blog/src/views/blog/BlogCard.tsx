@@ -1,15 +1,10 @@
 // src/components/BlogCard.tsx
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { PostData } from '../../models/PostData';
 
-interface BlogCardProps {
-  id: number;
-  post_id: string;
-  title: string;
-  excerpt: string;
-}
 
-const BlogCard: React.FC<BlogCardProps> = ({ id, post_id, title, excerpt }) => {
+const BlogCard: React.FC<PostData> = ({ id, post_id, title, body }) => {
   return (
     <div className="bg-white rounded-lg shadow-lg p-6 mb-4">
       <h2 className="text-2xl font-bold mb-2">
@@ -17,7 +12,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ id, post_id, title, excerpt }) => {
           {title}
         </Link>
       </h2>
-      <p className="text-gray-700">{excerpt}</p>
+      <p className="text-gray-700">{body}</p>
       {/* <article className="text-azure">mikey</article> */}
       <Link to={`/post/${post_id}`} className="text-azure hover:underline mt-4 inline-block">
         Read more

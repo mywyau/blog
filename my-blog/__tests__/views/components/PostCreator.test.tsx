@@ -32,7 +32,7 @@ describe('PostCreator Component', () => {
 
     expect(screen.getByText(/100 characters remaining/i)).toBeInTheDocument();
     expect(screen.getByText(/50 characters remaining/i)).toBeInTheDocument();
-    expect(screen.getByText(/5000 characters remaining/i)).toBeInTheDocument();
+    expect(screen.getByText(/20000 characters remaining/i)).toBeInTheDocument();
   });
 
   // TODO: clean up and remove or try to implement error summary as part of the dom/page not as an alert.

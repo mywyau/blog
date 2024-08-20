@@ -1,6 +1,6 @@
 
 
-class TextCountService {
+class TextCountHelper {
 
     // Method to calculate reading time based on word count
     calculateReadingTime(wordCount: number): string {
@@ -23,6 +23,6 @@ class TextCountService {
     }
 }
 
-export default new TextCountService();
+export default new TextCountHelper();
 
 

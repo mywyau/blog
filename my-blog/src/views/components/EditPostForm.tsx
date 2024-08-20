@@ -104,7 +104,7 @@ const EditPostForm: React.FC = () => {
                         {remainingTitleChars} characters remaining
                     </p>
                 </div>
-                <div>
+                {/* <div>
                     <label className="block mb-2">
                         Post ID:
                         <input
@@ -119,7 +119,7 @@ const EditPostForm: React.FC = () => {
                     <p className="text-gray-600 text-sm">
                         {remainingPostIdChars} characters remaining
                     </p>
-                </div>
+                </div> */}
                 <div className="mt-4 mb-4">
                     <label className="block mb-2">
                         Content:

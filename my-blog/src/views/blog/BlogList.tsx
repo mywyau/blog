@@ -13,7 +13,7 @@ const BlogList: React.FC<BlogListProps> = ({ posts }) => {
       <ul>
         {posts.map(post => (
           <li key={post.id} className="mb-2">
-            <BlogCard id={post.id} post_id={post.post_id} title={post.title} excerpt={post.body} />
+            <BlogCard id={post.id} post_id={post.post_id} title={post.title} body={post.body} />
           </li>
         ))}
       </ul>

@@ -1,19 +1,26 @@
 import axios from 'axios';
-import { deleteAllRequest, DeleteResponseBody, getPostById, getViaPost_Id, PostData, updatePostById } from '../../src/connectors/BlogPostConnector';
 import { config } from 'dotenv';
+import BlogPostConnector, { DeleteResponseBody } from '../../src/connectors/BlogPostConnector';
+import { PostData } from '../../src/models/PostData';
 
 config({ path: '../../.env' });
 
 const apiUrl = process.env.REACT_APP_API_BASE_URL;
 
 jest.mock('axios');
+
 const mockedAxios = axios as jest.Mocked<typeof axios>;
+const mockedBlogPostConnector = BlogPostConnector as jest.Mocked<typeof BlogPostConnector>;
+
+const blogPostConnector = BlogPostConnector
 
 describe('BlogPostConnector API functions', () => {
 
     // Tests for getPostById
     describe('getPostById', () => {
+
         it('should return post data when API call is successful', async () => {
+
             const mockPost: PostData = {
                 id: 1,
                 post_id: 'mikey-1',
@@ -23,7 +30,7 @@ describe('BlogPostConnector API functions', () => {
 
             mockedAxios.get.mockResolvedValueOnce({ data: mockPost });
 
-            const result = await getPostById(1);
+            const result = await blogPostConnector.getPostById(1);
 
             expect(mockedAxios.get).toHaveBeenCalledWith(apiUrl + '/blog/post/retrieve/1');
             expect(result.data).toEqual(mockPost);
@@ -38,7 +45,7 @@ describe('BlogPostConnector API functions', () => {
                 },
             });
 
-            const result = await getPostById(1);
+            const result = await blogPostConnector.getPostById(1);
 
             expect(result.data).toBeUndefined();
             expect(result.error).toBe(errorMessage);
@@ -46,8 +53,10 @@ describe('BlogPostConnector API functions', () => {
     });
 
     // Tests for getViaPost_Id
-    describe('getViaPost_Id', () => {
+    describe('getViaPostId', () => {
+
         it('should return post data when API call is successful', async () => {
+
             const mockPost: PostData = {
                 id: 1,
                 post_id: 'mikey-2',
@@ -57,7 +66,7 @@ describe('BlogPostConnector API functions', () => {
 
             mockedAxios.get.mockResolvedValueOnce({ data: mockPost });
 
-            const result = await getViaPost_Id('mikey-2');
+            const result = await blogPostConnector.getViaPostId('mikey-2');
 
             expect(mockedAxios.get).toHaveBeenCalledWith(apiUrl + '/blog/post/retrieve/post-id/mikey-2');
             expect(result.data).toEqual(mockPost);
@@ -72,7 +81,8 @@ describe('BlogPostConnector API functions', () => {
                 },
             });
 
-            const result = await getViaPost_Id('mikey-2');
+            const result = await blogPostConnector.getViaPostId('mikey-2');
+            // const result = await getViaPost_Id('mikey-2');
 
             expect(result.data).toBeUndefined();
             expect(result.error).toBe(errorMessage);
@@ -92,7 +102,10 @@ describe('BlogPostConnector API functions', () => {
 
             mockedAxios.put.mockResolvedValueOnce({ data: updatedPost });
 
-            const result = await updatePostById('mikey-2', updatedPost);
+
+            const result = await blogPostConnector.updatePostById('mikey-2', updatedPost);
+
+            // const result = await updatePostById('mikey-2', updatedPost);
 
             expect(mockedAxios.put).toHaveBeenCalledWith(
                 apiUrl + '/blog/posts/update/mikey-2',
@@ -119,7 +132,8 @@ describe('BlogPostConnector API functions', () => {
                 },
             });
 
-            const result = await updatePostById('mikey-2', updatedPost);
+            const result = await blogPostConnector.updatePostById('mikey-2', updatedPost);
+            // const result = await updatePostById('mikey-2', updatedPost);
 
             expect(result.data).toBeUndefined();
             expect(result.error).toBe(errorMessage);
@@ -130,14 +144,15 @@ describe('BlogPostConnector API functions', () => {
     describe('deleteAllRequest', () => {
 
         it('should return a success message when API call is successful', async () => {
-            
+
             const successMessage: DeleteResponseBody = {
                 message: 'All posts have been deleted.',
             };
 
             mockedAxios.delete.mockResolvedValueOnce({ data: successMessage });
 
-            const result = await deleteAllRequest();
+            const result = await blogPostConnector.deleteAllRequest();
+            // const result = await deleteAllRequest();
 
             expect(mockedAxios.delete).toHaveBeenCalledWith(apiUrl + '/blog/post/all/message');
             expect(result.data).toEqual(successMessage);
@@ -145,14 +160,16 @@ describe('BlogPostConnector API functions', () => {
         });
 
         it('should return an error message when API call fails', async () => {
+
             const errorMessage = 'Failed to delete posts';
+
             mockedAxios.delete.mockRejectedValueOnce({
                 response: {
                     data: { message: errorMessage },
                 },
             });
 
-            const result = await deleteAllRequest();
+            const result = await blogPostConnector.deleteAllRequest();
 
             expect(result.data).toBeUndefined();
             expect(result.error).toBe(errorMessage);

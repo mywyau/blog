@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import BlogCard from '../../../src/views/blog/BlogCard';
 import BlogList from '../../../src/views/blog/BlogList';
+import { PostData } from '../../../src/models/PostData';
 
 // Mocking BlogCard component
 jest.mock('../../../src/views/blog/BlogCard', () => {
@@ -8,9 +9,11 @@ jest.mock('../../../src/views/blog/BlogCard', () => {
 });
 
 describe('BlogList component', () => {
-    const samplePosts = [
-        { id: 1, title: 'Post 1', content: 'Content for post 1' },
-        { id: 2, title: 'Post 2', content: 'Content for post 2' },
+
+    const samplePosts: PostData[] = [
+        { id: 1, post_id: "blog-post-1", title: 'Post 1', body: 'Content for post 1' },
+        { id: 2, post_id: "blog-post-2", title: 'Post 2', body: 'Content for post 2' },
+        { id: 3, post_id: "blog-post-3", title: 'Post 3', body: 'Content for post 3' },
     ];
 
     test('renders without crashing', () => {
@@ -33,8 +36,9 @@ describe('BlogList component', () => {
             expect(BlogCard).toHaveBeenCalledWith(
                 expect.objectContaining({
                     id: post.id,
+                    post_id: post.post_id,
                     title: post.title,
-                    excerpt: post.content,
+                    body: post.body, 
                 }),
                 {}
             );

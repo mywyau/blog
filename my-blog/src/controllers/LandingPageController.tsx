@@ -2,8 +2,9 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import BlogPostConnector from '../connectors/BlogPostConnector';
 import { PostData } from '../models/PostData';
-import TextCountService from '../services/TextCountService';
+import TextCountService from '../services/TextCountHelper';
 import LandingPage from '../views/pages/LandingPage';
+import TextCountHelper from '../services/TextCountHelper';
 
 function paragraph(postBody: string): JSX.Element[] {
     return postBody.split('\n').map((para, index) => (
@@ -12,7 +13,8 @@ function paragraph(postBody: string): JSX.Element[] {
 }
 
 const LandingPageController = () => {
-    const textCountService = TextCountService;
+
+    const textCountHelper = TextCountHelper;
 
     const [posts, setPosts] = useState<PostData[]>([]);
     const [errorMessage, setErrorMessage] = useState<string | null>(null);

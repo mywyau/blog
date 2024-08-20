@@ -41,20 +41,6 @@ class BlogPostConnector {
         }
     }
 
-    // async getAllPosts(): Promise<{ data?: PostData[]; error?: string }> {
-    //     try {
-    //         const response = await axios.get(`${this.baseUrl}/blog/post/get/all`);
-    //         return { data: response.data };
-    //     } catch (error) {
-    //         const axiosError = error as AxiosError;
-    //         return {
-    //             error: axiosError.response?.data?.message ||
-    //                 '[BlogPostConnector][getAllPosts] An error occurred while fetching all posts.',
-    //         };
-    //     }
-    // }
-
-
     async getAllPosts(): Promise<{ data?: PostData[]; error?: string }> {
         try {
             const response = await axios.get(`${this.baseUrl}/blog/post/get/all`);
