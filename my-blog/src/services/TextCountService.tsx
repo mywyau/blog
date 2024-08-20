@@ -1,5 +1,7 @@
+
+
 class TextCountService {
-    
+
     // Method to calculate reading time based on word count
     calculateReadingTime(wordCount: number): string {
         const wordsPerMinute = 200;
@@ -21,5 +23,6 @@ class TextCountService {
     }
 }
 
-// Example usage:
+export default new TextCountService();
+
 

@@ -41,18 +41,47 @@ class BlogPostConnector {
         }
     }
 
+    // async getAllPosts(): Promise<{ data?: PostData[]; error?: string }> {
+    //     try {
+    //         const response = await axios.get(`${this.baseUrl}/blog/post/get/all`);
+    //         return { data: response.data };
+    //     } catch (error) {
+    //         const axiosError = error as AxiosError;
+    //         return {
+    //             error: axiosError.response?.data?.message ||
+    //                 '[BlogPostConnector][getAllPosts] An error occurred while fetching all posts.',
+    //         };
+    //     }
+    // }
+
+
     async getAllPosts(): Promise<{ data?: PostData[]; error?: string }> {
         try {
-            const response = await axios.get(`${this.baseUrl}/blog/post/retrieve/all`);
+            const response = await axios.get(`${this.baseUrl}/blog/post/get/all`);
+            console.log('[BlogPostConnector][getAllPosts] Data retrieved:', response.data);
             return { data: response.data };
         } catch (error) {
-            const axiosError = error as AxiosError;
-            return {
-                error: axiosError.response?.data?.message ||
-                    '[BlogPostConnector][getAllPosts] An error occurred while fetching all posts.',
-            };
+            if (axios.isAxiosError(error)) {
+                console.error(
+                    '[BlogPostConnector][getAllPosts] Axios error occurred:',
+                    error.response?.data?.message || error.message
+                );
+                return {
+                    error: error.response?.data?.message ||
+                        '[BlogPostConnector][getAllPosts] An error occurred while fetching all posts.',
+                };
+            } else {
+                console.error(
+                    '[BlogPostConnector][getAllPosts] Unknown error occurred:',
+                    (error as Error).message
+                );
+                return {
+                    error: '[BlogPostConnector][getAllPosts] An unknown error occurred.',
+                };
+            }
         }
     }
+
 
     async updatePostById(post_id: string, newPostData: PostData): Promise<{ data?: PostData; error?: string }> {
         try {
