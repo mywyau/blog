@@ -4,7 +4,6 @@ import BlogPostConnector from "../../../connectors/BlogPostConnector";
 import { PostData } from '../../../models/PostData';
 
 
-
 function paragraph(postBody: string): JSX.Element[] {
     return postBody.split('\n').map((para, index) => (
         <p key={index} className="mb-4">{para}</p>

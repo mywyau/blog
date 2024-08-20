@@ -9,26 +9,11 @@ function paragraph(postBody: string): JSX.Element[] {
     ));
 }
 
-const calculateReadingTime = (wordCount: number): string => {
-    const wordsPerMinute = 200;
-    const minutes = Math.ceil(wordCount / wordsPerMinute);
-    const message = wordsPerMinute < 200 ? `< ${minutes} min read` : `${minutes} min read`;
-    return (message);
-};
-
-const countWords = (text: string): number => {
-    return text
-        ? text
-            .trim()
-            .replace(/(\r\n|\n|\r)/gm, "")
-            .split(/[.,\s]+/) // Split by spaces, commas, or periods
-            .filter(word => word.length > 0) // Filter out any empty strings
-            .length
-        : 0;
-};
-
 const BlogPostController = () => {
 
+
+    const textCountService = new TextCountService();
+    
     const [posts, setPosts] = useState<PostData[]>([]);
     const { id } = useParams<{ id: string }>();
     const postId = id ?? 'default-post-id'; // Replace 'default-post-id' with an appropriate default value or handle it accordingly
