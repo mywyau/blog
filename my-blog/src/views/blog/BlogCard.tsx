@@ -14,7 +14,7 @@ const BlogCard: React.FC<PostData> = ({ id, post_id, title, body }) => {
       </h2>
       <p className="text-gray-700">{body}</p>
       {/* <article className="text-azure">mikey</article> */}
-      <Link to={`/post/${post_id}`} className="text-azure hover:underline mt-4 inline-block">
+      <Link to={`/post/${post_id}`} id={`read-more-${post_id}`} className="text-azure hover:underline mt-4 inline-block">
         Read more
       </Link>
     </div>

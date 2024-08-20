@@ -67,7 +67,7 @@ const GETAndRenderBlogPost: React.FC = () => {
             {post && (
                 <div>
                     <div className="mt-4">
-                        <h1 className="text-2xl font-bold pt-6 pb-6">{post.title}</h1>
+                        <h1 id="post-title" className="text-2xl font-bold pt-6 pb-6">{post.title}</h1>
                         <p className='text-sm text-gray-600 mb-6 pt-2'>Word Count: {countWords(post.body)}</p>
                     </div>
                     <div>

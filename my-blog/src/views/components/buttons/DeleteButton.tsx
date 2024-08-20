@@ -53,7 +53,7 @@ const DeleteButton: React.FC<{ posts: PostData[]; setPosts: React.Dispatch<React
                 {errorMessage && <p className="text-red-500 mt-2">{errorMessage}</p>}
                 {deleteResponseBody && (
                     <div className="mt-4">
-                        <p className="mb-4">{deleteResponseBody.message}</p>
+                        <p id="delete-button-response-body" className="mb-4">{deleteResponseBody.message}</p>
                     </div>
                 )}
             </div>
