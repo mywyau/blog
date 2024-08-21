@@ -2,18 +2,14 @@ import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { PostData } from '../../models/PostData';
 import Copyright from '../components/Copyright';
-import DeleteButton from '../components/buttons/DeleteButton';
+import DeleteButton from '../components/buttons/DeleteAllButton';
 import EditButton from '../components/buttons/EditButton';
-import GETAndRenderBlogPost from '../components/buttons/GETAndRenderBlogPost';
+import GETAndRenderBlogPost from './GETAndRenderBlogPost';
 import Navbar from '../components/navigation_bar/NavBar';
 
-const BlogPost: React.FC = () => {
+const BlogPostPage: React.FC = () => {
 
-  const [posts, setPosts] = useState<PostData[]>([]); // Initialize your posts here if needed
-
-  const { post_id } = useParams<{ post_id: string }>();
-
-  const postId = post_id ?? 'default-post-id'; // Replace 'default-post-id' with an appropriate default value or handle it accordingly
+  const [posts, setPosts] = useState<PostData[]>([]);
 
   return (
     <div className="font-nunito min-h-screen bg-gray-100 flex flex-col">
@@ -25,7 +21,6 @@ const BlogPost: React.FC = () => {
       <main className="container mx-auto p-4 flex-grow max-w-4xl px-8">
         <div className="flex flex-col space-y-4">
           <GETAndRenderBlogPost />
-          {/* Place the buttons in the same div and use flexbox to align them side by side */}
           <div className="flex space-x-4">
             <DeleteButton posts={posts} setPosts={setPosts} />
             <EditButton />
@@ -40,4 +35,4 @@ const BlogPost: React.FC = () => {
   );
 };
 
-export default BlogPost;
+export default BlogPostPage;

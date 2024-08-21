@@ -4,7 +4,7 @@ import { BrowserRouter, MemoryRouter } from 'react-router-dom';
 import App from '../src/App';
 
 // Mock the components to verify their rendering
-jest.mock('../src/views/blog/BlogPost', () => () => <div>BlogPost Component</div>);
+jest.mock('../src/views/blog/BlogPostPage', () => () => <div>BlogPostPage Component</div>);
 jest.mock('../src/views/pages/About', () => () => <div>About Component</div>);
 jest.mock('../src/views/pages/assets_pages/ButtonsPage', () => () => <div>ButtonsPage Component</div>);
 jest.mock('../src/views/pages/assets_pages/CheckboxesPage', () => () => <div>CheckboxesPage Component</div>);
@@ -42,13 +42,13 @@ describe('App component', () => {
     expect(screen.getByText('About Component')).toBeInTheDocument();
   });
 
-  test('renders BlogPost component for the /post/:id route', () => {
+  test('renders BlogPostPage component for the /post/:id route', () => {
     render(
       <MemoryRouter initialEntries={['/post/1']}>
         <App />
       </MemoryRouter>
     );
-    expect(screen.getByText('BlogPost Component')).toBeInTheDocument();
+    expect(screen.getByText('BlogPostPage Component')).toBeInTheDocument();
   });
 
   test('renders ButtonsPage component for the /buttons route', () => {
