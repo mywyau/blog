@@ -1,61 +1,62 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-import BlogPostConnector from "../../../connectors/BlogPostConnector";
+import { fold, getOrElse, Option } from 'fp-ts/Option';
+import { pipe } from 'fp-ts/function';
+import BlogPostController from '../../../controllers/BlogPostController';
 import { DeleteResponseBody } from '../../../models/DeleteResponseBody';
-import { PostData } from '../../../models/PostData';
 
 
-const DeletePostButton: React.FC<{ post: PostData; setPost: React.Dispatch<React.SetStateAction<PostData>> }> = ({ post, setPost }) => {
+const DeletePostButton: React.FC = () => {
 
-    const [deleteResponseBody, setDeleteResponseBody] = useState<DeleteResponseBody | null>(null);
-    const [errorMessage, setErrorMessage] = useState<string | null>(null);
-    const [loading, setLoading] = useState<boolean>(false);
+    const { handleDelete, loading, errorMessage, deleteResponseBody } = BlogPostController.onDelete();
 
-    const handleDelete = async () => {
-
-        const confirmDelete = window.confirm("Are you sure you want to delete this blog post?");
-        if (!confirmDelete) return;
-
-        setLoading(true);
-        setErrorMessage(null);
-
-        const previousPost = post; // Save a copy of the current posts for potential rollback
-
-        console.log(post.post_id)
-        const { data, error } = await BlogPostConnector.deleteBlogPost(post.post_id);
-
-        if (error) {
-            setErrorMessage(error);
-            setPost(previousPost); // Revert to the previous state if the delete failed
-        } else if (data) {
-            setDeleteResponseBody(data);
-        }
-
-        setLoading(false);
+    function deletetHtml(deleteResponseBody: Option<DeleteResponseBody>): JSX.Element {
+        return (
+            pipe(
+                deleteResponseBody,
+                fold(() => <></>,
+                    (deleteResponseBody) => (
+                        <div className="mt-4">
+                            <p id="delete-button-response-body" className="mb-4">{deleteResponseBody.message}</p>
+                        </div>
+                    )
+                )
+            )
+        )
     };
+
+    const handledError =
+        pipe(
+            errorMessage,
+            getOrElse(() => "")
+        );
+
+    const handledLoading =
+        pipe(
+            loading,
+            getOrElse(() => false)
+        );
 
     return (
         <form
-            onSubmit={(e) => {
-                e.preventDefault();
-                handleDelete();
-            }}
+            onSubmit={
+                (e) => {
+                    e.preventDefault();
+                    handleDelete();
+                }
+            }
         >
             <div>
                 <button
                     type="submit"
-                    disabled={loading}
+                    disabled={handledLoading}
                     className="bg-blue-500 text-white px-4 py-2 rounded"
                 >
-                    {loading ? 'Loading...' : 'Delete this blog post'}
+                    Delete this blog post
                 </button>
 
-                {errorMessage && <p className="text-red-500 mt-2">{errorMessage}</p>}
-                {deleteResponseBody && (
-                    <div className="mt-4">
-                        <p id="delete-button-response-body" className="mb-4">{deleteResponseBody.message}</p>
-                    </div>
-                )}
+                <p className="text-red-500 mt-2">{handledError}</p>
+                {deletetHtml(deleteResponseBody)}
             </div>
         </ form>
     );

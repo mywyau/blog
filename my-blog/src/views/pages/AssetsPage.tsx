@@ -10,7 +10,7 @@ const AssetsPage: React.FC = () => {
     // Simulate a network request or some async operation
     setTimeout(() => {
       setIsLoading(false);
-    }, 2000); //  seconds delay
+    }, 1000); //  seconds delay
   }, []);
 
   return (
