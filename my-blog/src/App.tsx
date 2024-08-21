@@ -1,7 +1,8 @@
 // src/App.tsx
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import BlogPost from './views/blog/BlogPostPage';
+import BlogPostController from './controllers/BlogPostController';
+import LandingPageController from './controllers/LandingPageController';
 import About from './views/pages/About';
 import ButtonsPage from './views/pages/assets_pages/ButtonsPage';
 import CheckboxesPage from './views/pages/assets_pages/CheckboxesPage';
@@ -15,13 +16,10 @@ import Contacts from './views/pages/ContactsPage';
 import CreateBlogPost from './views/pages/CreateBlogPost';
 import EditBlogPost from './views/pages/EditBlogPost';
 import Interests from './views/pages/Interests';
-import LandingPage from './views/pages/LandingPage';
 import PrivacyPolicy from './views/pages/PrivacyPolicy';
 import Skills from './views/pages/Skills';
 import TermsOfService from './views/pages/TermsOfService';
 import WorkLog from './views/pages/WorkLog';
-import LandingPageController from './controllers/LandingPageController';
-import BlogPostController from './controllers/BlogPostController';
 
 
 
