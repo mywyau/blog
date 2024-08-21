@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
+import { PostData } from '../../models/PostData';
 import BlogList from '../blog/BlogList';
 import Copyright from '../components/Copyright';
 import Navbar from '../components/navigation_bar/NavBar';
 import Pagination from '../components/Pagination';
-import Title from '../components/title/Title';
-import { PostData } from '../../models/PostData';
 
-interface BlogListProps {
+interface LandingPageProps {
   posts: PostData[];
+  errorMessage: string;
 }
 
-const LandingPage: React.FC<BlogListProps> = ({posts}) => {
+const LandingPage: React.FC<LandingPageProps> = ({ posts, errorMessage }) => {
 
   const [currentPage, setCurrentPage] = useState(1);
   const postsPerPage = 5;
@@ -25,6 +25,9 @@ const LandingPage: React.FC<BlogListProps> = ({posts}) => {
         <Navbar />
       </header>
       <main className="container mx-auto p-10">
+        {/* {loading && <p>Loading...</p>} */}
+        {errorMessage && <p className='text-xl text-purple-800'>Error: {errorMessage}</p>}
+
         <BlogList posts={currentPosts} />
         <Pagination
           postsPerPage={postsPerPage}

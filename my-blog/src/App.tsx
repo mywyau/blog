@@ -1,7 +1,7 @@
 // src/App.tsx
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import BlogPost from './views/blog/BlogPost';
+import BlogPost from './views/blog/BlogPostPage';
 import About from './views/pages/About';
 import ButtonsPage from './views/pages/assets_pages/ButtonsPage';
 import CheckboxesPage from './views/pages/assets_pages/CheckboxesPage';
@@ -26,7 +26,8 @@ import LandingPageController from './controllers/LandingPageController';
 const App: React.FC = () => {
   return (
     <Routes>
-      <Route path="/" element={<LandingPageController />} />
+      {/* <Route path="/" element={<LandingPageController />} /> */}
+      <Route path="/" element={<LandingPageController.onPageLoad />} />
       <Route path="/post/:id" element={<BlogPost />} />
       <Route path="/about" element={<About />} />
       <Route path="/contact" element={<Contacts />} />

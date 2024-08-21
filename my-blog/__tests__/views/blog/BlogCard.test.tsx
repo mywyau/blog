@@ -1,63 +1,70 @@
-import { render, screen } from '@testing-library/react';
-import { act } from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
+import React from 'react';
+import { render, screen, fireEvent } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
 import BlogCard from '../../../src/views/blog/BlogCard';
-
-import '@testing-library/jest-dom';
 import { PostData } from '../../../src/models/PostData';
 
+
 describe('BlogCard', () => {
+    const mockPost: PostData = {
+        id: 1,
+        post_id: 'test-post-id',
+        title: 'Test Post',
+        body: 'This is a test post body that is longer than 100 words. '.repeat(10),
+    };
 
-  const blogCardProps: PostData = {
-    id: 1,
-    post_id: 'blog-post-1',
-    title: 'Test Blog Post',
-    body: 'This is a test excerpt for the blog post.',
-  };
+    test('renders the title and body correctly', () => {
+        render(
+            <MemoryRouter>
+                <BlogCard {...mockPost} />
+            </MemoryRouter>
+        );
 
-  const renderComponent = (props = blogCardProps) => {
-    return act(() => {
-      render(
-        <Router>
-          <BlogCard {...props} />
-        </Router>
-      );
+        expect(screen.getByText('Test Post')).toBeInTheDocument();
+        expect(screen.getByText(/This is a test post body/)).toBeInTheDocument();
     });
-  };
 
-  test('renders BlogCard component', () => {
-    renderComponent();
-    expect(screen.getByText(blogCardProps.title)).toBeInTheDocument();
-    expect(screen.getByText(blogCardProps.body)).toBeInTheDocument();
-  });
+    test('renders a "Read more" link with the correct post ID', () => {
+        render(
+            <MemoryRouter>
+                <BlogCard {...mockPost} />
+            </MemoryRouter>
+        );
 
-  test('renders the title with correct link', () => {
-    renderComponent();
-    const titleLink = screen.getByText(blogCardProps.title).closest('a');
-    expect(titleLink).toHaveAttribute('href', `/post/${blogCardProps.post_id}`);
-  });
+        const readMoreLink = screen.getByText('Read more');
+        expect(readMoreLink).toBeInTheDocument();
+        expect(readMoreLink).toHaveAttribute('href', `/post/${mockPost.post_id}`);
+    });
 
-  test('renders the "Read more" link with correct href', () => {
-    renderComponent();
-    const readMoreLink = screen.getByText('Read more').closest('a');
-    expect(readMoreLink).toHaveAttribute('href', `/post/${blogCardProps.post_id}`);
-  });
+    test('selects text within the component when Command + A is pressed', () => {
+        render(
+            <MemoryRouter>
+                <BlogCard {...mockPost} />
+            </MemoryRouter>
+        );
 
-  test('renders the title with correct class', () => {
-    renderComponent();
-    const titleElement = screen.getByText(blogCardProps.title);
-    expect(titleElement).toHaveClass('text-green-500 hover:underline');
-  });
+        const textElement = screen.getByText(/This is a test post body/);
+        textElement.focus();
 
-  test('renders the "Read more" link with correct class', () => {
-    renderComponent();
-    const readMoreLink = screen.getByText('Read more');
-    expect(readMoreLink).toHaveClass('text-azure hover:underline mt-4 inline-block');
-  });
+        fireEvent.keyDown(textElement, { key: 'a', metaKey: true });
 
-  // test('renders the blog card with correct structure and classes', () => {
-  //   renderComponent();
-  //   const cardElement = screen.getByRole('article'); // Assuming div acts as an article here
-  //   expect(cardElement).toHaveClass('text-azure');
-  // });
+        const selection = window.getSelection();
+        expect(selection?.toString()).toBe(textElement.textContent);
+    });
+
+    test('selects text within the component when Control + A is pressed', () => {
+        render(
+            <MemoryRouter>
+                <BlogCard {...mockPost} />
+            </MemoryRouter>
+        );
+
+        const textElement = screen.getByText(/This is a test post body/);
+        textElement.focus();
+
+        fireEvent.keyDown(textElement, { key: 'a', ctrlKey: true });
+
+        const selection = window.getSelection();
+        expect(selection?.toString()).toBe(textElement.textContent);
+    });
 });
