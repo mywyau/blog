@@ -1,11 +1,9 @@
 import axios, { AxiosError } from 'axios';
 import { PostData } from '../models/PostData';
+import { DeleteResponseBody } from '../models/DeleteResponseBody';
 
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
-export interface DeleteResponseBody {
-    message: string;
-}
 
 class BlogPostConnector {
 
@@ -76,8 +74,21 @@ class BlogPostConnector {
         } catch (error) {
             const axiosError = error as AxiosError;
             return {
-                error: axiosError.response?.data?.message || 
-                '[BlogPostConnector][updatePostById] An error occurred while updating the post. The post likely does not exist, has been deleted, or data sent such as post_id is incorrect'
+                error: axiosError.response?.data?.message ||
+                    '[BlogPostConnector][updatePostById] An error occurred while updating the post. The post likely does not exist, has been deleted, or data sent such as post_id is incorrect'
+            };
+        }
+    }
+
+    async deleteBlogPost(post_id: string): Promise<{ data?: DeleteResponseBody; error?: string }> {
+        try {
+            const response = await axios.delete(`${this.baseUrl}/blog/post/single/${post_id}`);
+            return { data: response.data };
+        } catch (error) {
+            const axiosError = error as AxiosError;
+            return {
+                error: axiosError.response?.data?.message ||
+                    '[BlogPostConnector][deleteBlogPost] An error occurred while deleting the blog post.',
             };
         }
     }
@@ -89,8 +100,8 @@ class BlogPostConnector {
         } catch (error) {
             const axiosError = error as AxiosError;
             return {
-                error: axiosError.response?.data?.message || 
-                '[BlogPostConnector][deleteAllRequest] An error occurred while deleting the posts.',
+                error: axiosError.response?.data?.message ||
+                    '[BlogPostConnector][deleteAllRequest] An error occurred while deleting all blog posts.',
             };
         }
     }

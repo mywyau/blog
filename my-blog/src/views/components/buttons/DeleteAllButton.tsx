@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 
-import BlogPostConnector, { DeleteResponseBody } from "../../../connectors/BlogPostConnector";
+import BlogPostConnector from "../../../connectors/BlogPostConnector";
 import { PostData } from '../../../models/PostData';
+import { DeleteResponseBody } from '../../../models/DeleteResponseBody';
 
 
 const DeleteAllButton: React.FC<{ posts: PostData[]; setPosts: React.Dispatch<React.SetStateAction<PostData[]>> }> =
