@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { some, none } from 'fp-ts/Option';
 import { MemoryRouter } from 'react-router-dom';  // Import MemoryRouter to provide routing context
 import BlogPostController from '../../src/controllers/BlogPostController';
-import useBlogPost from '../../src/controllers/hooks/useBlogPost';
+import useBlogPost from '../../src/controllers/hooks/UseBlogPost';
 import { PostData } from '../../src/models/PostData';
 
 // Mock the useBlogPost hook

@@ -5,12 +5,12 @@ import BlogPostConnector from '../connectors/BlogPostConnector';
 import { DeleteResponseBody } from '../models/DeleteResponseBody';
 import { PostData } from '../models/PostData';
 import BlogPostPage from '../views/blog/BlogPostPage';
-import useBlogPost from './hooks/useBlogPost';
+import UseBlogPost from './hooks/UseBlogPost';
 
 
 const BlogPostController: React.FC = () => {
 
-    const { post, loading, errorMessage } = useBlogPost();
+    const { post, loading, errorMessage } = UseBlogPost();
 
     return (
         <BlogPostPage post={post} loading={loading} errorMessage={errorMessage} />

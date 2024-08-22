@@ -3,7 +3,7 @@ import { messages } from '../../messages/about';
 import Copyright from '../components/Copyright';
 import Navbar from '../components/navigation_bar/NavBar';
 
-const About: React.FC = () => {
+const AboutPage: React.FC = () => {
   return (
     <div className="flex flex-col min-h-screen font-nunito bg-gray-100">
       <Navbar />
@@ -35,4 +35,4 @@ const About: React.FC = () => {
   );
 };
 
-export default About;
+export default AboutPage;

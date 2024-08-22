@@ -2,7 +2,7 @@
 import { renderHook, waitFor } from '@testing-library/react';
 import { none, some } from 'fp-ts/Option';
 import BlogPostConnector from '../../../src/connectors/BlogPostConnector';
-import useBlogPost from '../../../src/controllers/hooks/useBlogPost';
+import useBlogPost from '../../../src/controllers/hooks/UseBlogPost';
 
 jest.mock('../../../src/connectors/BlogPostConnector');
 

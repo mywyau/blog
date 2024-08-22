@@ -5,7 +5,7 @@ import Copyright from '../components/Copyright';
 import Navbar from '../components/navigation_bar/NavBar';
 import SkillsCard from '../components/SkillsCard';
 
-const Skills: React.FC = () => {
+const SkillsPage: React.FC = () => {
   return (
     <div className="flex flex-col min-h-screen font-nunito bg-gray-100">
       <Navbar />
@@ -34,4 +34,4 @@ const Skills: React.FC = () => {
   );
 };
 
-export default Skills;
+export default SkillsPage;
