@@ -23,7 +23,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ posts, errorMessage }) => {
   const [post, setPost] = useState<PostData[]>(posts);
 
   return (
-    <div className="font-nunito min-h-screen bg-cambridge-blue">
+    <div className="font-nunito min-h-screen bg-gray-100">
       <header className="py-4">
         <Navbar />
       </header>

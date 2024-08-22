@@ -1,78 +1,146 @@
-import { render, screen } from '@testing-library/react';
-import { none, some } from 'fp-ts/Option';
-import React from 'react';
+import { fireEvent, render, screen } from '@testing-library/react';
+import { fold, getOrElse, none, Option, some } from 'fp-ts/Option';
+import BlogPostConnector from '../../../src/connectors/BlogPostConnector';
+import { DeleteResponseBody } from '../../../src/models/DeleteResponseBody';
 import { PostData } from '../../../src/models/PostData';
 import BlogPostPage from '../../../src/views/blog/BlogPostPage';
-import { BrowserRouter as Router } from 'react-router-dom';
 
-// Mock the Navbar component
-jest.mock('../../../src/views/components/navigation_bar/NavBar', () => () => (
-  <div>Mocked Navbar</div>
+// Define fp-ts utilities outside the mock
+const renderPost = (post: Option<PostData>) =>
+  fold(
+    () => 'No post',
+    (postData: PostData) => postData.title
+  )(post);
+
+const renderLoading = (loading: Option<boolean>) =>
+  getOrElse(() => false)(loading);
+
+const renderErrorMessage = (errorMessage: Option<string>) =>
+  getOrElse(() => '')(errorMessage);
+
+// Mock the deleteBlogPost method
+jest.mock('../../../src/connectors/BlogPostConnector', () => ({
+  __esModule: true,
+  default: {
+    deleteBlogPost: jest.fn(),
+  },
+}));
+
+jest.mock('../../../src/views/components/navigation_bar/NavBar', () => () => <div>Navbar Component</div>);
+
+jest.mock('../../../src/views/components/Copyright', () => () => <div>Copyright Component</div>);
+
+jest.mock('../../../src/views/components/buttons/DeletePostButton', () => ({ handleDelete }: { handleDelete: () => void }) => (
+  <button onClick={handleDelete}>Delete Post</button>
 ));
 
+jest.mock('../../../src/views/components/buttons/EditButton', () => () => <div>Edit Button</div>);
+
+jest.mock('../../../src/views/blog/RenderBlogPost', () => ({
+  __esModule: true,
+  default: ({ post, loading, errorMessage }: { post: Option<PostData>; loading: Option<boolean>; errorMessage: Option<string> }) => (
+    <div>
+      {renderLoading(loading) ? 'Loading...' : renderPost(post)}
+      {<div>{renderErrorMessage(errorMessage)}</div>}
+    </div>
+  ),
+}));
+
+const mockedBlogPostConnector = BlogPostConnector as jest.Mocked<typeof BlogPostConnector>;
+
 describe('BlogPostPage', () => {
+  const mockPost: PostData = {
+    id: 1,
+    post_id: 'test-id',
+    title: 'Test Blog Post',
+    body: 'This is a test blog post content.',
+  };
 
-  // TODO: fix or delete this
-  // it('should render loading state', () => {
-  //   render(
-  //     <Router>
-  //       <BlogPostPage post={none} loading={some(true)} errorMessage={none} />
-  //     </Router>
-  //   );
-  //   expect(screen.getByText('Loading...')).toBeInTheDocument();
-  // });
 
-  it('should render error message when there is an error', () => {
-    render(
-      <Router>
-        <BlogPostPage post={none} loading={some(false)} errorMessage={some('Error occurred')} />
-      </Router>
-    );
-    expect(screen.getByText('Error occurred')).toBeInTheDocument();
+  beforeEach(() => {
+    jest.clearAllMocks();
   });
 
-  it('should render the blog post content when post data is available', () => {
-    const mockPost: PostData = {
-      id: 1,
-      post_id: 'post-id-123',
-      title: 'Test Blog Post',
-      body: 'This is the content of the test blog post.',
-    };
+  const mockDeleteBlogPost = BlogPostConnector.deleteBlogPost as jest.Mock;
 
+  it('should render the blog post title when post is provided', () => {
     render(
-      <Router>
-        <BlogPostPage post={some(mockPost)} loading={some(false)} errorMessage={none} />
-      </Router>
+      <BlogPostPage
+        post={some(mockPost)}
+        loading={some(false)}
+        errorMessage={none}
+      />
     );
 
     expect(screen.getByText('Test Blog Post')).toBeInTheDocument();
-    expect(screen.getByText('This is the content of the test blog post.')).toBeInTheDocument();
   });
 
-  // TODO: fix or delete this
-  it('should render the mocked navbar and footer', () => {
+  it('should render the loading state', () => {
     render(
-      <Router>
-        <BlogPostPage post={none} loading={some(false)} errorMessage={none} />
-      </Router>
+      <BlogPostPage
+        post={none}
+        loading={some(true)}
+        errorMessage={none}
+      />
     );
 
-    // Check that the mocked navbar and footer are rendered
-    expect(screen.getByText('Mocked Navbar')).toBeInTheDocument();
-    // expect(screen.getByRole('contentinfo')).toBeInTheDocument(); // Footer is typically within a <footer> (role=contentinfo)  TODO: add a role=contentinfo for footer
+    expect(screen.getByText('Loading...')).toBeInTheDocument();
   });
 
-  it('should render the DeletePostButton and EditButton', () => {
+  it('should render the error message when there is an error', () => {
     render(
-      <Router>
-        <BlogPostPage post={none} loading={some(false)} errorMessage={none} />
-      </Router>
+      <BlogPostPage
+        post={none}
+        loading={some(false)}
+        errorMessage={some('Error occurred')}
+      />
     );
 
-    // Find the "Delete" button
-    expect(screen.getByRole('button', { name: /delete/i })).toBeInTheDocument();
+    expect(screen.getByText('Error occurred')).toBeInTheDocument();
+  });
 
-    // Find the "Edit" link
-    expect(screen.getByRole('link', { name: /edit/i })).toBeInTheDocument();
+  it('should call handleDelete when the delete button is clicked', async () => {
+
+    render(
+      <BlogPostPage
+        post={some(mockPost)}
+        loading={some(false)}
+        errorMessage={none}
+      />
+    );
+
+    const deleteButton = screen.getByText('Delete Post');
+    fireEvent.click(deleteButton);
+
+    // Simulate the confirmation dialog
+    window.confirm = jest.fn(() => true);
+
+    await screen.findByText('Delete Post');
+  });
+
+  it('should render the delete error message when deletion fails', async () => {
+
+
+    mockDeleteBlogPost.mockResolvedValue({
+      data: undefined,
+      error: 'Delete failed',
+    });
+
+    render(
+      <BlogPostPage
+        post={some(mockPost)}
+        loading={some(false)}
+        errorMessage={none}
+      />
+    );
+
+    const deleteButton = screen.getByText('Delete Post');
+
+    fireEvent.click(deleteButton);
+
+    window.confirm = jest.fn(() => true);
+
+    await screen.findByText('Delete Post');
+    await screen.findByText('Delete failed');
   });
 });

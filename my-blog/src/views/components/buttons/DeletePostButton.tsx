@@ -11,6 +11,22 @@ interface OnDeleteReturn {
     deleteResponseBody: Option<DeleteResponseBody>;
 }
 
+function deletetHtml(deleteResponseBody: Option<DeleteResponseBody>): JSX.Element {
+    return (
+        pipe(
+            deleteResponseBody,
+            fold(
+                () => <></>,
+                (deleteResponseBody) => (
+                    <div className="mt-4">
+                        <p id="delete-button-response-body" className="mb-4">{deleteResponseBody.message}</p>
+                    </div>
+                )
+            )
+        )
+    )
+};
+
 const DeletePostButton: React.FC<OnDeleteReturn> = (
     {
         handleDelete,
@@ -19,21 +35,6 @@ const DeletePostButton: React.FC<OnDeleteReturn> = (
         deleteResponseBody,
     }
 ) => {
-
-    function deletetHtml(deleteResponseBody: Option<DeleteResponseBody>): JSX.Element {
-        return (
-            pipe(
-                deleteResponseBody,
-                fold(() => <></>,
-                    (deleteResponseBody) => (
-                        <div className="mt-4">
-                            <p id="delete-button-response-body" className="mb-4">{deleteResponseBody.message}</p>
-                        </div>
-                    )
-                )
-            )
-        )
-    };
 
     const handledError =
         pipe(
@@ -64,10 +65,9 @@ const DeletePostButton: React.FC<OnDeleteReturn> = (
                 >
                     Delete this blog post
                 </button>
-
-                <p className="text-red-500 mt-2">{handledError}</p>
-                {deletetHtml(deleteResponseBody)}
             </div>
+            <p className="text-red-500 mt-2">{handledError}</p>
+            {deletetHtml(deleteResponseBody)}
         </ form>
     );
 };

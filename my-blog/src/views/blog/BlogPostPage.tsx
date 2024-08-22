@@ -25,6 +25,7 @@ interface OnDeleteReturn {
 
 
 const useDeleteBlogPost = (): OnDeleteReturn => {
+
   const { id } = useParams<{ id: string }>();
   const postId = id ?? 'default-post-id';
 
@@ -66,11 +67,10 @@ const BlogPostPage: React.FC<BlogPostPageProps> = ({ post, loading, errorMessage
 
       <main className="container mx-auto p-4 flex-grow max-w-4xl px-8">
         <div className="flex flex-col space-y-4">
-
+          <EditButton />
           <RenderBlogPost post={post} loading={loading} errorMessage={errorMessage} />
           <div className="flex space-x-4">
             <DeletePostButton handleDelete={handleDelete} loading={loadingState} errorMessage={deleteErrorMessage} deleteResponseBody={deleteResponseBody} />
-            <EditButton />
           </div>
         </div>
       </main>

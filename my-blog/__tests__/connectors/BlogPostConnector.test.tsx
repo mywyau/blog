@@ -1,7 +1,8 @@
 import axios from 'axios';
 import { config } from 'dotenv';
-import BlogPostConnector, { DeleteResponseBody } from '../../src/connectors/BlogPostConnector';
+import BlogPostConnector from '../../src/connectors/BlogPostConnector';
 import { PostData } from '../../src/models/PostData';
+import { DeleteResponseBody } from '../../src/models/DeleteResponseBody';
 
 config({ path: '../../.env' });
 

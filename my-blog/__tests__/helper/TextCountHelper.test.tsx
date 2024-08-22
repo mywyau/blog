@@ -4,34 +4,34 @@ describe('TextCountHelper', () => {
 
     describe('calculateReadingTime', () => {
 
-        it('should return "1 min read" when word count is less than 100', () => {
+        it('should return "1 minute" when word count is less than 100', () => {
             const wordCount = 99;
             const result = TextCountHelper.calculateReadingTime(wordCount);
-            expect(result).toBe('< 1 min read');
+            expect(result).toBe('< 1 minute');
         });
 
-        it('should return "1 min read" when word count is less than 200', () => {
+        it('should return "1 minute" when word count is less than 200', () => {
             const wordCount = 150;
             const result = TextCountHelper.calculateReadingTime(wordCount);
-            expect(result).toBe('~1 min read');
+            expect(result).toBe('1 minute');
         });
 
-        it('should return "1 min read" when word count is exactly 200', () => {
+        it('should return "1 minute" when word count is exactly 200', () => {
             const wordCount = 200;
             const result = TextCountHelper.calculateReadingTime(wordCount);
-            expect(result).toBe('~1 min read');
+            expect(result).toBe('1 minute');
         });
 
-        it('should return "2 min read" when word count is between 201 and 400', () => {
+        it('should return "2 minute" when word count is between 201 and 400', () => {
             const wordCount = 350;
             const result = TextCountHelper.calculateReadingTime(wordCount);
-            expect(result).toBe('~2 min read');
+            expect(result).toBe('~2 minutes');
         });
 
-        it('should return "3 min read" when word count is 600', () => {
+        it('should return "3 minute" when word count is 600', () => {
             const wordCount = 600;
             const result = TextCountHelper.calculateReadingTime(wordCount);
-            expect(result).toBe('~3 min read');
+            expect(result).toBe('~3 minutes');
         });
     });
 
