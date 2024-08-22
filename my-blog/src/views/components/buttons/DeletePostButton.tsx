@@ -2,13 +2,23 @@ import React from 'react';
 
 import { fold, getOrElse, Option } from 'fp-ts/Option';
 import { pipe } from 'fp-ts/function';
-import BlogPostController from '../../../controllers/BlogPostController';
 import { DeleteResponseBody } from '../../../models/DeleteResponseBody';
 
+interface OnDeleteReturn {
+    handleDelete: () => Promise<void>;
+    loading: Option<boolean>;
+    errorMessage: Option<string>;
+    deleteResponseBody: Option<DeleteResponseBody>;
+}
 
-const DeletePostButton: React.FC = () => {
-
-    const { handleDelete, loading, errorMessage, deleteResponseBody } = BlogPostController.onDelete();
+const DeletePostButton: React.FC<OnDeleteReturn> = (
+    {
+        handleDelete,
+        loading,
+        errorMessage,
+        deleteResponseBody,
+    }
+) => {
 
     function deletetHtml(deleteResponseBody: Option<DeleteResponseBody>): JSX.Element {
         return (

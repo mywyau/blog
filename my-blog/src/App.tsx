@@ -29,7 +29,7 @@ const App: React.FC = () => {
   return (
     <Routes>
       <Route path="/" element={<LandingPageController.onPageLoad />} />
-      <Route path="/post/:id" element={<BlogPostController.onPageLoad />} />
+      <Route path="/post/:id" element={<BlogPostController />} />
       <Route path="/about" element={<About />} />
       <Route path="/contact" element={<Contacts />} />
       <Route path="/interests" element={<Interests />} />
