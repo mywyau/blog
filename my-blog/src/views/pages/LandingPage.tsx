@@ -24,7 +24,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ posts, errorMessage }) => {
 
   return (
     <div className="font-nunito min-h-screen bg-gray-100">
-      <header className="py-4">
+      <header className="">
         <Navbar />
       </header>
       <main className="container mx-auto p-10">

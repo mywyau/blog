@@ -64,7 +64,7 @@ const RenderBlogPost: React.FC<RenderBlogPostProps> = ({ post, loading, errorMes
 
     return (
         <div>
-            {handledLoading ? 'Loading...' : 'Delete All Blog Posts'}
+            {handledLoading ? 'Loading...' : ''}
             <p className="text-red-500 mt-2">{handledError}</p>
             {postHtml(post)}
         </div>

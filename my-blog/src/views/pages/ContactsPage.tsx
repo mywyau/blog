@@ -8,7 +8,7 @@ const Contact: React.FC = () => {
     <div className="flex flex-col min-h-screen font-nunito bg-gray-100">
       <Navbar />
       <div className="flex-grow container mx-auto p-4">
-        <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-500 to-green-500 bg-clip-text text-transparent pt-6">{messages.title}</h1>
+        <h1 id="contact-details" className="text-4xl font-bold bg-gradient-to-r from-blue-500 to-green-500 bg-clip-text text-transparent pt-6">{messages.title}</h1>
         <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
           {/* Left Box with Bottom Gray Padding */}
 
