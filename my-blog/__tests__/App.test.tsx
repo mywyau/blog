@@ -5,7 +5,7 @@ import App from '../src/App';
 
 // Mock the components to verify their rendering
 jest.mock('../src/views/blog/BlogPostPage', () => () => <div>BlogPostPage Component</div>);
-jest.mock('../src/views/pages/About', () => () => <div>About Component</div>);
+jest.mock('../src/views/pages/AboutPage', () => () => <div>About Component</div>);
 jest.mock('../src/views/pages/assets_pages/ButtonsPage', () => () => <div>ButtonsPage Component</div>);
 jest.mock('../src/views/pages/assets_pages/CheckboxesPage', () => () => <div>CheckboxesPage Component</div>);
 jest.mock('../src/views/pages/assets_pages/FormsPage', () => () => <div>FormsPage Component</div>);

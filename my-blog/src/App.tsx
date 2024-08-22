@@ -3,7 +3,6 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import BlogPostController from './controllers/BlogPostController';
 import LandingPageController from './controllers/LandingPageController';
-import About from './views/pages/About';
 import ButtonsPage from './views/pages/assets_pages/ButtonsPage';
 import CheckboxesPage from './views/pages/assets_pages/CheckboxesPage';
 import FormsPage from './views/pages/assets_pages/FormsPage';
@@ -20,6 +19,7 @@ import PrivacyPolicy from './views/pages/PrivacyPolicy';
 import Skills from './views/pages/Skills';
 import TermsOfService from './views/pages/TermsOfService';
 import WorkLog from './views/pages/WorkLog';
+import AboutPage from './views/pages/AboutPage';
 
 
 
@@ -28,7 +28,7 @@ const App: React.FC = () => {
     <Routes>
       <Route path="/" element={<LandingPageController.onPageLoad />} />
       <Route path="/post/:id" element={<BlogPostController />} />
-      <Route path="/about" element={<About />} />
+      <Route path="/about" element={<AboutPage />} />
       <Route path="/contact" element={<Contacts />} />
       <Route path="/interests" element={<Interests />} />
       <Route path="/skills" element={<Skills />} />
