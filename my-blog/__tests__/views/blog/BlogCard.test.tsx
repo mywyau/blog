@@ -6,6 +6,7 @@ import { PostData } from '../../../src/models/PostData';
 
 
 describe('BlogCard', () => {
+    
     const mockPost: PostData = {
         id: 1,
         post_id: 'test-post-id',

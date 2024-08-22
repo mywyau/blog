@@ -21,14 +21,15 @@ import Skills from './views/pages/Skills';
 import TermsOfService from './views/pages/TermsOfService';
 import WorkLog from './views/pages/WorkLog';
 import LandingPageController from './controllers/LandingPageController';
+import BlogPostController from './controllers/BlogPostController';
+
 
 
 const App: React.FC = () => {
   return (
     <Routes>
-      {/* <Route path="/" element={<LandingPageController />} /> */}
       <Route path="/" element={<LandingPageController.onPageLoad />} />
-      <Route path="/post/:id" element={<BlogPost />} />
+      <Route path="/post/:id" element={<BlogPostController />} />
       <Route path="/about" element={<About />} />
       <Route path="/contact" element={<Contacts />} />
       <Route path="/interests" element={<Interests />} />
@@ -38,7 +39,6 @@ const App: React.FC = () => {
       <Route path="/create-blog-post" element={<CreateBlogPost />} />
       <Route path="/edit-blog-post/:post_id" element={<EditBlogPost />} />
 
-      {/* <Route path="/images" element={<Images />} /> */}
       <Route path="/privacy-policy" element={<PrivacyPolicy />} />
       <Route path="/terms-of-service" element={<TermsOfService />} />
 

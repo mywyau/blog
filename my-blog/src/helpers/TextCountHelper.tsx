@@ -6,7 +6,18 @@ class TextCountHelper {
     calculateReadingTime(wordCount: number): string {
         const wordsPerMinute = 200;
         const minutes = Math.round(wordCount / wordsPerMinute);
-        const message = minutes < 1 ? `< 1 min read` : `~${minutes} min read`;
+
+        function getTimeMessage(minutes: number): string {
+            if (minutes < 1) {
+                return `< 1 minute`;
+            } else if (minutes == 1) {
+                return `1 minute`;
+            } else {
+                return `~${minutes} minutes`;
+            }
+        }
+
+        const message = getTimeMessage(minutes);
         return message;
     }
 
