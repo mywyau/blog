@@ -5,6 +5,7 @@ import Copyright from '../components/Copyright';
 import Navbar from '../components/navigation_bar/NavBar';
 import WorkLogGrid from '../components/worklog/WorkLogGrid';
 import WorkLogPagination from '../components/worklog/WorkLogPagination';
+import H1 from '../components/general/H1';
 
 
 const WorkLog: React.FC = () => {
@@ -27,9 +28,12 @@ const WorkLog: React.FC = () => {
   return (
     <div className="flex flex-col min-h-screen font-nunito bg-gray-100">
       <Navbar />
-      <div className=" container mx-auto p-4">
+      <H1 message={messages.about.title} />
+      {/* <div className="container mx-auto pt-4">
+        <div className="p-2 sm:p-4">
         <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-500 to-green-500 bg-clip-text text-transparent pt-6">{messages.about.title}</h1>
-      </div>
+        </div>
+      </div> */}
       <div className="flex-grow container mx-auto pb-10">
         <WorkLogGrid records={currentRecords} />
         <WorkLogPagination

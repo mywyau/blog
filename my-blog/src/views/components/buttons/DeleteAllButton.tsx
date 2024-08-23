@@ -56,12 +56,12 @@ const DeleteAllButton: React.FC<{ posts: PostData[]; setPosts: React.Dispatch<Re
                     {errorMessage && <p className="text-red-500 mt-2">{errorMessage}</p>}
                     {deleteResponseBody && (
                         <div className="mt-4">
-                            <p id="delete-button-response-body" className="mb-4">{deleteResponseBody.message}</p>
+                            <p id="delete-button-response-body" className="text-xl text-red-500 mb-4">{deleteResponseBody.message}</p>
                         </div>
                     )}
                 </div>
             </ form>
         );
     };
-
+    
 export default DeleteAllButton;

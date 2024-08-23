@@ -11,7 +11,7 @@ class TextCountHelper {
             if (minutes < 1) {
                 return `< 1 minute`;
             } else if (minutes == 1) {
-                return `1 minute`;
+                return `~1 minute`;
             } else {
                 return `~${minutes} minutes`;
             }

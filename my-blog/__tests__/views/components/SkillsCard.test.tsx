@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import SkillsCard from '../../../src/views/components/SkillsCard';
+import SkillsCard from '../../../src/views/components/skills/SkillsCard';
 
 describe('SkillsCard Component', () => {
   it('renders the skill and description', () => {

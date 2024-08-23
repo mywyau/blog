@@ -1,14 +1,16 @@
 import React from 'react';
 import messages from '../../messages/contact';
 import Copyright from '../components/Copyright';
+import H1 from '../components/general/H1';
 import Navbar from '../components/navigation_bar/NavBar';
 
 const Contact: React.FC = () => {
   return (
     <div className="flex flex-col min-h-screen font-nunito bg-gray-100">
       <Navbar />
+      <H1 message={messages.title} />
+
       <div className="flex-grow container mx-auto p-4">
-        <h1 id="contact-details" className="text-4xl font-bold bg-gradient-to-r from-blue-500 to-green-500 bg-clip-text text-transparent pt-6">{messages.title}</h1>
         <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
           {/* Left Box with Bottom Gray Padding */}
 
@@ -29,8 +31,9 @@ const Contact: React.FC = () => {
             </div>
           </div>
           {/* Right Box */}
-          <div className="flex flex-col flex-none w-full pt-10 pb-10 md:w-2/3">
-            <div className="bg-white rounded-lg shadow-lg p-8 flex-grow">
+          <div className="flex flex-col flex-none w-full pt-4 pb-10 md:w-2/3">
+            {/* <div className="bg-gray-100 rounded-lg shadow-lg p-8 flex-grow"> */}
+            <div className="bg-gray-100 rounded-lg p-8 flex-grow">
               <div className="">
                 <h2 className="text-2xl pb-5">More Content</h2>
                 <p className="text-base text-gray-700 mb-4">{messages.lorem.p1}</p>

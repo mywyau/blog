@@ -1,23 +1,22 @@
 import React from 'react';
 
-interface PaginationProps {
-  postsPerPage: number;
-  totalPosts: number;
+interface SkillsPaginationProps {
+  skillsPerPage: number;
+  totalSkills: number;
   paginate: (pageNumber: number) => void;
 }
 
-const Pagination: React.FC<PaginationProps> = ({ postsPerPage, totalPosts, paginate }) => {
-
+const Pagination: React.FC<SkillsPaginationProps> = ({ skillsPerPage, totalSkills, paginate }) => {
   
   const pageNumbers = [];
 
-  for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
+  for (let i = 1; i <= Math.ceil(totalSkills / skillsPerPage); i++) {
     pageNumbers.push(i);
   }
 
   return (
-    <nav className='pl-2'>
-      <ul className="flex justify-right space-x-4 mt-8">
+    <nav>
+      <ul className="flex justify-right space-x-4">
         {pageNumbers.map((number) => (
           <li key={number}>
             <button

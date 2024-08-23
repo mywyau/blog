@@ -32,7 +32,7 @@ const Navbar: React.FC = () => {
         <div className={`md:flex items-center md:space-x-6 ${isOpen ? 'block' : 'hidden'} md:block absolute md:static right-0 top-16 md:top-auto bg-true-blue md:bg-transparent p-4 md:p-0 w-64 md:w-auto`}>
           <div className="flex flex-col md:flex-row md:items-center md:space-x-6 space-y-4 md:space-y-0">
             <Link id="about" to="/about" className="text-white text-lg hover:text-gray-300">
-              About
+              About Me
             </Link>
             <Link id="contact" to="/contact" className="text-white text-lg hover:text-gray-300">
               Contact
