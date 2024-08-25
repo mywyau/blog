@@ -155,7 +155,7 @@ describe('BlogPostConnector API functions', () => {
             const result = await blogPostConnector.deleteAllRequest();
             // const result = await deleteAllRequest();
 
-            expect(mockedAxios.delete).toHaveBeenCalledWith(apiUrl + '/blog/post/all/message');
+            expect(mockedAxios.delete).toHaveBeenCalledWith(apiUrl + '/blog/post/all');
             expect(result.data).toEqual(successMessage);
             expect(result.error).toBeUndefined();
         });
