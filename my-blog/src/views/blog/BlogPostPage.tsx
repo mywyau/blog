@@ -1,12 +1,12 @@
 import { Option } from 'fp-ts/Option';
 import React from 'react';
-import UseDeleteBlogPost from '../../controllers/hooks/UseDeleteBlogPost';
 import { PostData } from '../../models/PostData';
 import Copyright from '../components/Copyright';
 import DeletePostButton from '../components/buttons/DeletePostButton';
 import EditButton from '../components/buttons/EditButton';
 import Navbar from '../components/navigation_bar/NavBar';
 import RenderBlogPost from './RenderBlogPost';
+import UseDeleteBlogPost from '../../hooks/UseDeleteBlogPost';
 
 interface BlogPostPageProps {
   post: Option<PostData>;

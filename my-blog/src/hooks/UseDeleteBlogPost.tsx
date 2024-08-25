@@ -1,8 +1,8 @@
 import { none, Option, some } from 'fp-ts/Option';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import BlogPostConnector from '../../connectors/BlogPostConnector';
-import { DeleteResponseBody } from '../../models/DeleteResponseBody';
+import { DeleteResponseBody } from '../models/DeleteResponseBody';
+import BlogPostConnector from '../connectors/BlogPostConnector';
 
 
 interface OnDeleteReturn {

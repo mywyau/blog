@@ -1,8 +1,8 @@
 import { none, Option, some } from 'fp-ts/Option';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import BlogPostConnector from '../../connectors/BlogPostConnector';
-import { PostData } from '../../models/PostData';
+import BlogPostConnector from '../connectors/BlogPostConnector';
+import { PostData } from '../models/PostData';
 
 const UseBlogPost = () => {
 

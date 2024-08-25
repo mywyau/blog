@@ -1,6 +1,5 @@
+import UseBlogPost from '../hooks/UseBlogPost';
 import BlogPostPage from '../views/blog/BlogPostPage';
-import UseBlogPost from '../controllers/hooks/UseBlogPost';
-
 
 
 const BlogPostController: React.FC = () => {

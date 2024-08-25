@@ -2,15 +2,15 @@ import { render, screen } from '@testing-library/react';
 import { some, none } from 'fp-ts/Option';
 import { MemoryRouter } from 'react-router-dom';  // Import MemoryRouter to provide routing context
 import BlogPostController from '../../src/controllers/BlogPostController';
-import useBlogPost from '../../src/controllers/hooks/UseBlogPost';
 import { PostData } from '../../src/models/PostData';
+import UseBlogPost from '../../src/hooks/UseBlogPost';
 
 // Mock the useBlogPost hook
-jest.mock('../../src/controllers/hooks/useBlogPost');
+jest.mock('../../src/hooks/UseBlogPost');
 
 describe('BlogPostController', () => {
 
-    const mockUseBlogPost = useBlogPost as jest.MockedFunction<typeof useBlogPost>;
+    const mockUseBlogPost = UseBlogPost as jest.MockedFunction<typeof UseBlogPost>;
 
     it('should render loading state', () => {
         // Mock the return value of useBlogPost to simulate loading state
