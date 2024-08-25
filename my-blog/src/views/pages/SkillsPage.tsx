@@ -11,27 +11,26 @@ import SkillsPagination from '../components/skills/SkillsPagination';
 const SkillsPage: React.FC = () => {
 
   const skillData: SkillData[] = [
-    
-    { id: 1, skill_name: "Python", body: "Lorem ipsum dolor sit amet, consectetur adipiscing el aspect, sed do eiusmod tempor incididunt ut lab" },
-    { id: 2, skill_name: "Rust", body: "Lorem ipsum dolor sit amet, consectetur adipiscing el aspect, sed do eiusmod tempor incididunt ut lab" },
-    { id: 3, skill_name: "Scala", body: "Lorem ipsum dolor sit amet, consectetur adipiscing el aspect, sed do eiusmod tempor incididunt ut lab" },
-    { id: 4, skill_name: "Typescript", body: "Lorem ipsum dolor sit amet, consectetur adipiscing el aspect, sed do eiusmod tempor incididunt ut lab" },
-    { id: 5, skill_name: "Latex", body: "Lorem ipsum dolor sit amet, consectetur adipiscing el aspect, sed do eiusmod tempor incididunt ut lab" },
-    { id: 6, skill_name: "Nix", body: "Lorem ipsum dolor sit amet, consectetur adipiscing el aspect, sed do eiusmod tempor incididunt ut lab" },
-    { id: 7, skill_name: "Git", body: "Lorem ipsum dolor sit amet, consectetur adipiscing el aspect, sed do eiusmod tempor incididunt ut lab" },
-    { id: 8, skill_name: "Docker", body: "Lorem ipsum dolor sit amet, consectetur adipiscing el aspect, sed do eiusmod tempor incididunt ut lab" },
-    { id: 9, skill_name: "Tampermonkey", body: "Lorem ipsum dolor sit amet, consectetur adipiscing el aspect, sed do eiusmod tempor incididunt ut lab" },
-    { id: 10, skill_name: "Selenium", body: "Lorem ipsum dolor sit amet, consectetur adipiscing el aspect, sed do eiusmod tempor incididunt ut lab" },
-    { id: 11, skill_name: "Cats", body: "Lorem ipsum dolor sit amet, consectetur adipiscing el aspect, sed do eiusmod tempor incididunt ut lab" },
-    { id: 12, skill_name: "Cats Effect 3", body: "Lorem ipsum dolor sit amet, consectetur adipiscing el aspect, sed do eiusmod tempor incididunt ut lab" },
-    { id: 13, skill_name: "React", body: "Lorem ipsum dolor sit amet, consectetur adipiscing el aspect, sed do eiusmod tempor incididunt ut lab" },
-    { id: 14, skill_name: "Functional Programming", body: "Lorem ipsum dolor sit amet, consectetur adipiscing el aspect, sed do eiusmod tempor incididunt ut lab" },
-    { id: 15, skill_name: "Sql", body: "Lorem ipsum dolor sit amet, consectetur adipiscing el aspect, sed do eiusmod tempor incididunt ut lab" },
-    { id: 16, skill_name: "Github Actions", body: "Lorem ipsum dolor sit amet, consectetur adipiscing el aspect, sed do eiusmod tempor incididunt ut lab" },
-    { id: 17, skill_name: "Tailwind CSS", body: "Lorem ipsum dolor sit amet, consectetur adipiscing el aspect, sed do eiusmod tempor incididunt ut lab" },
-    { id: 18, skill_name: "MongoDb", body: "Lorem ipsum dolor sit amet, consectetur adipiscing el aspect, sed do eiusmod tempor incididunt ut lab" },
-    { id: 19, skill_name: "Unix", body: "Lorem ipsum dolor sit amet, consectetur adipiscing el aspect, sed do eiusmod tempor incididunt ut lab" },
-    { id: 20, skill_name: "Vim", body: "Lorem ipsum dolor sit amet, consectetur adipiscing el aspect, sed do eiusmod tempor incididunt ut lab" }
+    { id: 1, skill_id: "skill_id_1", skill_name: "Python", body: "Lorem ipsum dolor sit amet, consectetur adipiscing el aspect, sed do eiusmod tempor incididunt ut lab" },
+    { id: 2, skill_id: "skill_id_2", skill_name: "Rust", body: "Lorem ipsum dolor sit amet, consectetur adipiscing el aspect, sed do eiusmod tempor incididunt ut lab" },
+    { id: 3, skill_id: "skill_id_3", skill_name: "Scala", body: "Lorem ipsum dolor sit amet, consectetur adipiscing el aspect, sed do eiusmod tempor incididunt ut lab" },
+    { id: 4, skill_id: "skill_id_4", skill_name: "Typescript", body: "Lorem ipsum dolor sit amet, consectetur adipiscing el aspect, sed do eiusmod tempor incididunt ut lab" },
+    { id: 5, skill_id: "skill_id_5", skill_name: "Latex", body: "Lorem ipsum dolor sit amet, consectetur adipiscing el aspect, sed do eiusmod tempor incididunt ut lab" },
+    { id: 6, skill_id: "skill_id_6", skill_name: "Nix", body: "Lorem ipsum dolor sit amet, consectetur adipiscing el aspect, sed do eiusmod tempor incididunt ut lab" },
+    { id: 7, skill_id: "skill_id_7", skill_name: "Git", body: "Lorem ipsum dolor sit amet, consectetur adipiscing el aspect, sed do eiusmod tempor incididunt ut lab" },
+    { id: 8, skill_id: "skill_id_8", skill_name: "Docker", body: "Lorem ipsum dolor sit amet, consectetur adipiscing el aspect, sed do eiusmod tempor incididunt ut lab" },
+    { id: 9, skill_id: "skill_id_9", skill_name: "Tampermonkey", body: "Lorem ipsum dolor sit amet, consectetur adipiscing el aspect, sed do eiusmod tempor incididunt ut lab" },
+    { id: 10,skill_id: "skill_id_10",  skill_name: "Selenium", body: "Lorem ipsum dolor sit amet, consectetur adipiscing el aspect, sed do eiusmod tempor incididunt ut lab" },
+    { id: 11,skill_id: "skill_id_11",  skill_name: "Cats", body: "Lorem ipsum dolor sit amet, consectetur adipiscing el aspect, sed do eiusmod tempor incididunt ut lab" },
+    { id: 12,skill_id: "skill_id_12",  skill_name: "Cats Effect 3", body: "Lorem ipsum dolor sit amet, consectetur adipiscing el aspect, sed do eiusmod tempor incididunt ut lab" },
+    { id: 13,skill_id: "skill_id_13",  skill_name: "React", body: "Lorem ipsum dolor sit amet, consectetur adipiscing el aspect, sed do eiusmod tempor incididunt ut lab" },
+    { id: 14,skill_id: "skill_id_14",  skill_name: "Functional Programming", body: "Lorem ipsum dolor sit amet, consectetur adipiscing el aspect, sed do eiusmod tempor incididunt ut lab" },
+    { id: 15,skill_id: "skill_id_15",  skill_name: "Sql", body: "Lorem ipsum dolor sit amet, consectetur adipiscing el aspect, sed do eiusmod tempor incididunt ut lab" },
+    { id: 16,skill_id: "skill_id_16",  skill_name: "Github Actions", body: "Lorem ipsum dolor sit amet, consectetur adipiscing el aspect, sed do eiusmod tempor incididunt ut lab" },
+    { id: 17,skill_id: "skill_id_17",  skill_name: "Tailwind CSS", body: "Lorem ipsum dolor sit amet, consectetur adipiscing el aspect, sed do eiusmod tempor incididunt ut lab" },
+    { id: 18,skill_id: "skill_id_18",  skill_name: "MongoDb", body: "Lorem ipsum dolor sit amet, consectetur adipiscing el aspect, sed do eiusmod tempor incididunt ut lab" },
+    { id: 19,skill_id: "skill_id_19",  skill_name: "Unix", body: "Lorem ipsum dolor sit amet, consectetur adipiscing el aspect, sed do eiusmod tempor incididunt ut lab" },
+    { id: 20,skill_id: "skill_id_20",  skill_name: "Vim", body: "Lorem ipsum dolor sit amet, consectetur adipiscing el aspect, sed do eiusmod tempor incididunt ut lab" }
   ];
 
   function sortBySkillName(skills: SkillData[]): SkillData[] {
