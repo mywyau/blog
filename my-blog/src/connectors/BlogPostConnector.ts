@@ -95,7 +95,7 @@ class BlogPostConnector {
 
     async deleteAllRequest(): Promise<{ data?: DeleteResponseBody; error?: string }> {
         try {
-            const response = await axios.delete(`${this.baseUrl}/blog/post/all/message`);
+            const response = await axios.delete(`${this.baseUrl}/blog/post/all`);
             return { data: response.data };
         } catch (error) {
             const axiosError = error as AxiosError;

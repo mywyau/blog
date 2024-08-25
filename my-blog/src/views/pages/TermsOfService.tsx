@@ -8,7 +8,7 @@ const TermsOfService: React.FC = () => {
     <div className="flex flex-col min-h-screen font-nunito bg-gray-100">
       <Navbar />
 
-      <H1 message={"Terms Of Service"} />
+      <H1 id={"terms-of-service"} message={"Terms Of Service"} />
 
       <div className="flex-grow container mx-auto p-4">
 

@@ -8,7 +8,7 @@ const AboutPage: React.FC = () => {
   return (
     <div className="flex flex-col min-h-screen font-nunito bg-gray-100">
       <Navbar />
-      <H1 message={messages.about.title} />
+      <H1 id={"about"} message={messages.about.title} />
       
       {/* <div className="p-4 pb-6 container mx-auto">
         <div className="flex justify-right">
