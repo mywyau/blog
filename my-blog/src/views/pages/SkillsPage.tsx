@@ -11,6 +11,7 @@ import SkillsPagination from '../components/skills/SkillsPagination';
 const SkillsPage: React.FC = () => {
 
   const skillData: SkillData[] = [
+    
     { id: 1, skill_name: "Python", body: "Lorem ipsum dolor sit amet, consectetur adipiscing el aspect, sed do eiusmod tempor incididunt ut lab" },
     { id: 2, skill_name: "Rust", body: "Lorem ipsum dolor sit amet, consectetur adipiscing el aspect, sed do eiusmod tempor incididunt ut lab" },
     { id: 3, skill_name: "Scala", body: "Lorem ipsum dolor sit amet, consectetur adipiscing el aspect, sed do eiusmod tempor incididunt ut lab" },
