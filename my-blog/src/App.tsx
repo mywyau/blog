@@ -16,7 +16,7 @@ import CreateBlogPost from './views/pages/CreateBlogPost';
 import EditBlogPost from './views/pages/EditBlogPost';
 import Interests from './views/pages/Interests';
 import PrivacyPolicy from './views/pages/PrivacyPolicy';
-import Skills from './views/pages/Skills';
+import Skills from './views/pages/SkillsPage';
 import TermsOfService from './views/pages/TermsOfService';
 import WorkLog from './views/pages/WorkLog';
 import AboutPage from './views/pages/AboutPage';

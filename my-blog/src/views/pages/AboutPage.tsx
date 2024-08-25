@@ -2,18 +2,21 @@ import React from 'react';
 import { messages } from '../../messages/about';
 import Copyright from '../components/Copyright';
 import Navbar from '../components/navigation_bar/NavBar';
+import H1 from '../components/general/H1';
 
-const About: React.FC = () => {
+const AboutPage: React.FC = () => {
   return (
     <div className="flex flex-col min-h-screen font-nunito bg-gray-100">
       <Navbar />
-      <div className="p-4 pb-6 container mx-auto">
+      <H1 id={"about"} message={messages.about.title} />
+      
+      {/* <div className="p-4 pb-6 container mx-auto">
         <div className="flex justify-right">
-          <h1 id="about" className="text-6xl font-bold bg-gradient-to-r from-blue-500 to-green-500 bg-clip-text text-transparent pt-6">
+          <h1 id="about" className="text-4xl font-bold bg-gradient-to-r from-blue-500 to-green-500 bg-clip-text text-transparent pt-6">
             {messages.about.title}
           </h1>
         </div>
-      </div>
+      </div> */}
 
       <div className="flex-grow container mx-auto">
         <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
@@ -30,9 +33,10 @@ const About: React.FC = () => {
           </div>
         </div>
       </div>
+
       <Copyright />
     </div>
   );
 };
 
-export default About;
+export default AboutPage;

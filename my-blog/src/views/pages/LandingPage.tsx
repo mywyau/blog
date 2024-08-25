@@ -28,22 +28,32 @@ const LandingPage: React.FC<LandingPageProps> = ({ posts, errorMessage }) => {
         <Navbar />
       </header>
       <main className="container mx-auto p-10">
+
         {/* {loading && <p>Loading...</p>} */}
         {errorMessage && <p className='text-xl text-purple-800'>Error: {errorMessage}</p>}
 
-        <BlogList posts={currentPosts} />
-        <Pagination
-          postsPerPage={postsPerPage}
-          totalPosts={posts.length}
-          paginate={(pageNumber) => setCurrentPage(pageNumber)}
-        />
-        <div className="pt-4">
-          <DeleteAllButton posts={post} setPosts={setPost} />
+        <div className="flex flex-grow container mx-auto font-nunito min-h-screen bg-gray-100">
+          <div className="flex-grow">
+            <BlogList posts={currentPosts} />
+            <Pagination
+              postsPerPage={postsPerPage}
+              totalPosts={posts.length}
+              paginate={(pageNumber) => setCurrentPage(pageNumber)}
+            />
+          </div>
         </div>
+
+        <div className="flex justify-start">
+          <div className="pt-4 sm:p-4">
+            <DeleteAllButton posts={post} setPosts={setPost} />
+          </div>
+        </div>
+
       </main>
       <footer className="mt-auto">
         <Copyright />
       </footer>
+
     </div>
   );
 };

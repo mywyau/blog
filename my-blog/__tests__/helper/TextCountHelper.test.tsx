@@ -13,13 +13,13 @@ describe('TextCountHelper', () => {
         it('should return "1 minute" when word count is less than 200', () => {
             const wordCount = 150;
             const result = TextCountHelper.calculateReadingTime(wordCount);
-            expect(result).toBe('1 minute');
+            expect(result).toBe('~1 minute');
         });
 
         it('should return "1 minute" when word count is exactly 200', () => {
             const wordCount = 200;
             const result = TextCountHelper.calculateReadingTime(wordCount);
-            expect(result).toBe('1 minute');
+            expect(result).toBe('~1 minute');
         });
 
         it('should return "2 minute" when word count is between 201 and 400', () => {

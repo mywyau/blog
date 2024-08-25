@@ -2,11 +2,11 @@
 import { renderHook, waitFor } from '@testing-library/react';
 import { none, some } from 'fp-ts/Option';
 import BlogPostConnector from '../../../src/connectors/BlogPostConnector';
-import useBlogPost from '../../../src/controllers/hooks/useBlogPost';
+import UseBlogPost from '../../../src/hooks/UseBlogPost';
 
 jest.mock('../../../src/connectors/BlogPostConnector');
 
-describe('useBlogPost', () => {
+describe('UseBlogPost', () => {
     const mockPost = { id: 1, post_id: 'test-id', title: 'Test Title', body: 'Test Body' };
 
     beforeEach(() => {
@@ -16,7 +16,7 @@ describe('useBlogPost', () => {
     it('should set loading to true initially', async () => {
         (BlogPostConnector.getViaPostId as jest.Mock).mockResolvedValue({ data: mockPost, error: null });
 
-        const { result } = renderHook(() => useBlogPost());
+        const { result } = renderHook(() => UseBlogPost());
 
         expect(result.current.loading).toEqual(some(true));
 
@@ -26,7 +26,7 @@ describe('useBlogPost', () => {
     it('should set post data when fetched successfully', async () => {
         (BlogPostConnector.getViaPostId as jest.Mock).mockResolvedValue({ data: mockPost, error: null });
 
-        const { result } = renderHook(() => useBlogPost());
+        const { result } = renderHook(() => UseBlogPost());
 
         await waitFor(() => expect(result.current.post).toEqual(some(mockPost)));
         expect(result.current.loading).toEqual(some(false));
@@ -39,10 +39,11 @@ describe('useBlogPost', () => {
         (BlogPostConnector.getViaPostId as jest.Mock).mockResolvedValue({ data: null, error: error });
 
 
-        const { result } = renderHook(() => useBlogPost());
+        const { result } = renderHook(() => UseBlogPost());
 
         await waitFor(() => expect(result.current.errorMessage).toEqual(some(error)));
         expect(result.current.loading).toEqual(some(false));
         expect(result.current.post).toEqual(none);
     });
 });
+

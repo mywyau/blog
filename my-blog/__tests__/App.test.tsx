@@ -18,7 +18,7 @@ jest.mock('../src/views/pages/CreateBlogPost', () => () => <div>CreateBlogPost C
 jest.mock('../src/views/pages/Interests', () => () => <div>Interests Component</div>);
 jest.mock('../src/views/pages/LandingPage', () => () => <div>LandingPage Component</div>);
 jest.mock('../src/views/pages/PrivacyPolicy', () => () => <div>PrivacyPolicy Component</div>);
-jest.mock('../src/views/pages/Skills', () => () => <div>Skills Component</div>);
+jest.mock('../src/views/pages/SkillsPage', () => () => <div>Skills Component</div>);
 jest.mock('../src/views/pages/TermsOfService', () => () => <div>TermsOfService Component</div>);
 jest.mock('../src/views/pages/WorkLog', () => () => <div>WorkLog Component</div>);
 jest.mock('../src/views/pages/Videos', () => () => <div>Videos Component</div>);

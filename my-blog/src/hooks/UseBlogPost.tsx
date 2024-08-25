@@ -1,10 +1,10 @@
 import { none, Option, some } from 'fp-ts/Option';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import BlogPostConnector from '../../connectors/BlogPostConnector';
-import { PostData } from '../../models/PostData';
+import BlogPostConnector from '../connectors/BlogPostConnector';
+import { PostData } from '../models/PostData';
 
-const useBlogPost = () => {
+const UseBlogPost = () => {
 
     const { id } = useParams<{ id: string }>();
     const postId = id ?? 'default-post-id';
@@ -36,4 +36,4 @@ const useBlogPost = () => {
     return { post, loading, errorMessage };
 };
 
-export default useBlogPost;
+export default UseBlogPost;

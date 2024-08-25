@@ -67,7 +67,7 @@ const DeletePostButton: React.FC<OnDeleteReturn> = (
                 </button>
             </div>
             <p className="text-red-500 mt-2">{handledError}</p>
-            {deletetHtml(deleteResponseBody)}
+            <p className="text-xl text-red-500 mt-2">{deletetHtml(deleteResponseBody)}</p>
         </ form>
     );
 };
