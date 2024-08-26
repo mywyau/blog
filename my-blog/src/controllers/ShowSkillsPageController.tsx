@@ -1,35 +1,57 @@
-import { pipe } from 'fp-ts/lib/function';
-import EditSkill from '../hooks/EditSkill';
+// import React, { useEffect, useState } from 'react';
+// import EditSkill from '../hooks/EditSkill';
+// import GetAllSkills from '../hooks/GetAllSkills';
+// import EditSkillPage from '../views/components/skills/EditSkillPage';
+// import SkillsPage from '../views/pages/SkillsPage';
+// import { Option, some, none } from 'fp-ts/lib/Option';
+// import { SkillData } from '../models/SkillData';
+
+// const ShowSkillsPageController: React.FC = () => {
+//     const { skills, getAllSkillErrorMessage } = GetAllSkills();
+
+//     const { getSkillToEdit, editSkillFunction, errorMessage } = EditSkill();
+
+//     const [optGetSkillToEdit, setOptGetSkillToEdit] = useState<Option<SkillData>>(none);
+
+//     useEffect(() => {
+//         const fetchSkillToEdit = async () => {
+//             const skillToEdit = await getSkillToEdit();
+//             setOptGetSkillToEdit(skillToEdit);
+//         };
+        
+//         fetchSkillToEdit();
+//     }, []);
+
+//     const renderSkillsPage = () => {
+//         return (
+//             <SkillsPage skills={skills} errorMessage={getAllSkillErrorMessage ?? ''} />
+//         );
+//     };
+
+//     const renderEditSkillPage = () => {
+//         return (
+//             <EditSkillPage getSkillToEdit={optGetSkillToEdit} editSkillFunction={editSkillFunction} errorMessage={errorMessage} />
+//         );
+//     };
+
+//     // Logic to determine which page to render
+//     const isEditing = false; // Replace with actual logic to check if editing
+//     return isEditing ? renderEditSkillPage() : renderSkillsPage();
+// };
+
+// export default ShowSkillsPageController;
+
+import React from 'react';
 import GetAllSkills from '../hooks/GetAllSkills';
-import EditSkillPage from '../views/components/skills/EditSkillPage';
 import SkillsPage from '../views/pages/SkillsPage';
-import { match, fold } from 'fp-ts/lib/Option';
 
-class ShowSkillsPageController {
+const SkillsPageController: React.FC = () => {
+    
+    const { skills, getAllSkillErrorMessage } = GetAllSkills();
 
-    onPageLoad = () => {
+    return (
+        <SkillsPage skills={skills} errorMessage={getAllSkillErrorMessage ?? ''} />
+    );
+};
 
-        const { skills, getAllSkillErrorMessage } = GetAllSkills();
-        console.log('[ShowSkillsPageController][onPageLoad] Skills:', skills);
-
-        return (
-            <SkillsPage skills={skills} errorMessage={getAllSkillErrorMessage ?? ''} />
-        );
-    };
-
-    editSkill = async () => {
-
-        const { skills, getAllSkillErrorMessage } = GetAllSkills();
-        console.log('[ShowSkillsPageController][getAllPosts] Posts:', skills);
-
-        const { getSkillToEdit, editSkillFunction, errorMessage } = EditSkill();
-
-        const optGetSkillToEdit = await getSkillToEdit()
-
-        return (
-            <EditSkillPage getSkillToEdit={optGetSkillToEdit} editSkillFunction={editSkillFunction} errorMessage={getAllSkillErrorMessage ?? ''} />
-        );
-    };
-}
-
-export default new ShowSkillsPageController;
+export default SkillsPageController;

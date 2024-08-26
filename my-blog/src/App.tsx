@@ -5,6 +5,7 @@ import BlogPostController from './controllers/BlogPostController';
 import CreateSkillsController from './controllers/CreateSkillsController copy';
 import LandingPageController from './controllers/LandingPageController';
 import ShowSkillsPageController from './controllers/ShowSkillsPageController';
+import EditSkillPageController from './controllers/EditSkillsPageController';
 import AboutPage from './views/pages/AboutPage';
 import ButtonsPage from './views/pages/assets_pages/ButtonsPage';
 import CheckboxesPage from './views/pages/assets_pages/CheckboxesPage';
@@ -33,7 +34,8 @@ const App: React.FC = () => {
       <Route path="/about" element={<AboutPage />} />
       <Route path="/contact" element={<Contacts />} />
       <Route path="/interests" element={<Interests />} />
-      <Route path="/skills" element={<ShowSkillsPageController.onPageLoad />} />
+      <Route path="/skills" element={<ShowSkillsPageController />} />
+      <Route path="/edit-skill/:skill_id" element={<EditSkillPageController />} />
       <Route path="/work-log" element={<WorkLog />} />
       <Route path="/assets" element={<ButtonAssetsPage />} />
       <Route path="/create-blog-post" element={<CreateBlogPost />} />

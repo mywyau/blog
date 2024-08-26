@@ -53,6 +53,7 @@ const EditPostForm: React.FC = () => {
         }
 
         setIsLoading(true);
+        
         try {
             const updatedPost: PostData = {
                 id: sqlId, // Use the current postId
