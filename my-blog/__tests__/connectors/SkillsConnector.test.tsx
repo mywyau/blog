@@ -11,8 +11,6 @@ const apiUrl = process.env.REACT_APP_API_BASE_URL;
 jest.mock('axios');
 
 const mockedAxios = axios as jest.Mocked<typeof axios>;
-const mockedSkillsConnector = SkillsConnector as jest.Mocked<typeof SkillsConnector>;
-
 
 const skillsConnector = SkillsConnector
 

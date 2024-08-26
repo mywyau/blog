@@ -20,6 +20,7 @@ import Skills from './views/pages/SkillsPage';
 import TermsOfService from './views/pages/TermsOfService';
 import WorkLog from './views/pages/WorkLog';
 import AboutPage from './views/pages/AboutPage';
+import CreateSkillsController from './controllers/CreateSkillsController copy';
 
 
 
@@ -28,6 +29,7 @@ const App: React.FC = () => {
     <Routes>
       <Route path="/" element={<LandingPageController.onPageLoad />} />
       <Route path="/post/:id" element={<BlogPostController />} />
+      <Route path="/create/skill" element={<CreateSkillsController />} />
       <Route path="/about" element={<AboutPage />} />
       <Route path="/contact" element={<Contacts />} />
       <Route path="/interests" element={<Interests />} />

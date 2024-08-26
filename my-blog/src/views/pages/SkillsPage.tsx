@@ -1,5 +1,6 @@
 // src/pages/About.tsx
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { messages } from '../../messages/skills';
 import { SkillData } from '../../models/SkillData';
 import Copyright from '../components/Copyright';
@@ -20,17 +21,17 @@ const SkillsPage: React.FC = () => {
     { id: 7, skill_id: "skill_id_7", skill_name: "Git", body: "Lorem ipsum dolor sit amet, consectetur adipiscing el aspect, sed do eiusmod tempor incididunt ut lab" },
     { id: 8, skill_id: "skill_id_8", skill_name: "Docker", body: "Lorem ipsum dolor sit amet, consectetur adipiscing el aspect, sed do eiusmod tempor incididunt ut lab" },
     { id: 9, skill_id: "skill_id_9", skill_name: "Tampermonkey", body: "Lorem ipsum dolor sit amet, consectetur adipiscing el aspect, sed do eiusmod tempor incididunt ut lab" },
-    { id: 10,skill_id: "skill_id_10",  skill_name: "Selenium", body: "Lorem ipsum dolor sit amet, consectetur adipiscing el aspect, sed do eiusmod tempor incididunt ut lab" },
-    { id: 11,skill_id: "skill_id_11",  skill_name: "Cats", body: "Lorem ipsum dolor sit amet, consectetur adipiscing el aspect, sed do eiusmod tempor incididunt ut lab" },
-    { id: 12,skill_id: "skill_id_12",  skill_name: "Cats Effect 3", body: "Lorem ipsum dolor sit amet, consectetur adipiscing el aspect, sed do eiusmod tempor incididunt ut lab" },
-    { id: 13,skill_id: "skill_id_13",  skill_name: "React", body: "Lorem ipsum dolor sit amet, consectetur adipiscing el aspect, sed do eiusmod tempor incididunt ut lab" },
-    { id: 14,skill_id: "skill_id_14",  skill_name: "Functional Programming", body: "Lorem ipsum dolor sit amet, consectetur adipiscing el aspect, sed do eiusmod tempor incididunt ut lab" },
-    { id: 15,skill_id: "skill_id_15",  skill_name: "Sql", body: "Lorem ipsum dolor sit amet, consectetur adipiscing el aspect, sed do eiusmod tempor incididunt ut lab" },
-    { id: 16,skill_id: "skill_id_16",  skill_name: "Github Actions", body: "Lorem ipsum dolor sit amet, consectetur adipiscing el aspect, sed do eiusmod tempor incididunt ut lab" },
-    { id: 17,skill_id: "skill_id_17",  skill_name: "Tailwind CSS", body: "Lorem ipsum dolor sit amet, consectetur adipiscing el aspect, sed do eiusmod tempor incididunt ut lab" },
-    { id: 18,skill_id: "skill_id_18",  skill_name: "MongoDb", body: "Lorem ipsum dolor sit amet, consectetur adipiscing el aspect, sed do eiusmod tempor incididunt ut lab" },
-    { id: 19,skill_id: "skill_id_19",  skill_name: "Unix", body: "Lorem ipsum dolor sit amet, consectetur adipiscing el aspect, sed do eiusmod tempor incididunt ut lab" },
-    { id: 20,skill_id: "skill_id_20",  skill_name: "Vim", body: "Lorem ipsum dolor sit amet, consectetur adipiscing el aspect, sed do eiusmod tempor incididunt ut lab" }
+    { id: 10, skill_id: "skill_id_10", skill_name: "Selenium", body: "Lorem ipsum dolor sit amet, consectetur adipiscing el aspect, sed do eiusmod tempor incididunt ut lab" },
+    { id: 11, skill_id: "skill_id_11", skill_name: "Cats", body: "Lorem ipsum dolor sit amet, consectetur adipiscing el aspect, sed do eiusmod tempor incididunt ut lab" },
+    { id: 12, skill_id: "skill_id_12", skill_name: "Cats Effect 3", body: "Lorem ipsum dolor sit amet, consectetur adipiscing el aspect, sed do eiusmod tempor incididunt ut lab" },
+    { id: 13, skill_id: "skill_id_13", skill_name: "React", body: "Lorem ipsum dolor sit amet, consectetur adipiscing el aspect, sed do eiusmod tempor incididunt ut lab" },
+    { id: 14, skill_id: "skill_id_14", skill_name: "Functional Programming", body: "Lorem ipsum dolor sit amet, consectetur adipiscing el aspect, sed do eiusmod tempor incididunt ut lab" },
+    { id: 15, skill_id: "skill_id_15", skill_name: "Sql", body: "Lorem ipsum dolor sit amet, consectetur adipiscing el aspect, sed do eiusmod tempor incididunt ut lab" },
+    { id: 16, skill_id: "skill_id_16", skill_name: "Github Actions", body: "Lorem ipsum dolor sit amet, consectetur adipiscing el aspect, sed do eiusmod tempor incididunt ut lab" },
+    { id: 17, skill_id: "skill_id_17", skill_name: "Tailwind CSS", body: "Lorem ipsum dolor sit amet, consectetur adipiscing el aspect, sed do eiusmod tempor incididunt ut lab" },
+    { id: 18, skill_id: "skill_id_18", skill_name: "MongoDb", body: "Lorem ipsum dolor sit amet, consectetur adipiscing el aspect, sed do eiusmod tempor incididunt ut lab" },
+    { id: 19, skill_id: "skill_id_19", skill_name: "Unix", body: "Lorem ipsum dolor sit amet, consectetur adipiscing el aspect, sed do eiusmod tempor incididunt ut lab" },
+    { id: 20, skill_id: "skill_id_20", skill_name: "Vim", body: "Lorem ipsum dolor sit amet, consectetur adipiscing el aspect, sed do eiusmod tempor incididunt ut lab" }
   ];
 
   function sortBySkillName(skills: SkillData[]): SkillData[] {
@@ -58,7 +59,7 @@ const SkillsPage: React.FC = () => {
             )}
           </div>
         </div>
-        <div className="flex justify-start pb-20">
+        <div className="flex justify-start pb-10">
           <div className="p-2 sm:p-4">
             <SkillsPagination
               skillsPerPage={skillsPerPage}
@@ -67,8 +68,17 @@ const SkillsPage: React.FC = () => {
             />
           </div>
         </div>
-      </div>
 
+        <div className="flex justify-start pb-20">
+          <Link
+            id="add-new-skill"
+            to="/create/skill"
+            className="bg-cambridge-blue text-black text-lg font-semibold py-3 px-7 rounded hover:bg-gray-100 transition-colors duration-300 flex items-center justify-center"
+          >
+            Add New Skill
+          </Link>
+        </div>
+      </div>
       <Copyright />
     </div>
   );
