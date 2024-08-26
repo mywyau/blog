@@ -104,22 +104,6 @@ const EditPostForm: React.FC = () => {
                         {remainingTitleChars} characters remaining
                     </p>
                 </div>
-                {/* <div>
-                    <label className="block mb-2">
-                        Post ID:
-                        <input
-                            type="text"
-                            value={post_id}
-                            onChange={(e) => setSqlPostId(e.target.value)}
-                            className="w-full border border-gray-300 rounded p-2"
-                            maxLength={maxPostIdLength}
-                            disabled={isLoading}
-                        />
-                    </label>
-                    <p className="text-gray-600 text-sm">
-                        {remainingPostIdChars} characters remaining
-                    </p>
-                </div> */}
                 <div className="mt-4 mb-4">
                     <label className="block mb-2">
                         Content:

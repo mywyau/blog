@@ -1,50 +1,33 @@
-import { useEffect, useState } from 'react';
-import BlogPostConnector from '../connectors/BlogPostConnector';
-import { PostData } from '../models/PostData';
-import LandingPage from '../views/pages/LandingPage';
-import SkillsConnector from '../connectors/SkillsConnector';
-import { SkillData } from '../models/SkillData';
+import { pipe } from 'fp-ts/lib/function';
+import EditSkill from '../hooks/EditSkill';
+import GetAllSkills from '../hooks/GetAllSkills';
+import EditSkillPage from '../views/components/skills/EditSkillPage';
 import SkillsPage from '../views/pages/SkillsPage';
+import { match, fold } from 'fp-ts/lib/Option';
 
 class ShowSkillsPageController {
 
     onPageLoad = () => {
 
-        const [skills, setSkills] = useState<SkillData[]>([]);
-        const [errorMessage, setErrorMessage] = useState<string | null>(null);
-        const [loading, setLoading] = useState<boolean>(false);
-
-        useEffect(
-            () => {
-                const fetchPost = async () => {
-                    setErrorMessage(null);
-                    setSkills([]);
-
-                    const { data, error } = await SkillsConnector.getAllSkills();
-
-                    if (error) {
-                        setErrorMessage(error);
-                    } else if (data) {
-                        if (data.length === 0) {
-                            setErrorMessage(`[LandingPageController][getAllPosts] No blog posts retrieved, data base likely empty`);
-                        } else {
-                            setSkills(data);
-                            console.log('[LandingPageController][getAllPosts] Data retrieved:', data);
-                        }
-                    }
-
-                    setLoading(false);
-                };
-
-                fetchPost(); 
-            },
-            [] 
-        );
-
-        console.log('[ShowSkillsPageController][getAllPosts] Posts:', skills);
+        const { skills, getAllSkillErrorMessage } = GetAllSkills();
+        console.log('[ShowSkillsPageController][onPageLoad] Skills:', skills);
 
         return (
-            <SkillsPage skills={skills} errorMessage={errorMessage ?? ''} />
+            <SkillsPage skills={skills} errorMessage={getAllSkillErrorMessage ?? ''} />
+        );
+    };
+
+    editSkill = async () => {
+
+        const { skills, getAllSkillErrorMessage } = GetAllSkills();
+        console.log('[ShowSkillsPageController][getAllPosts] Posts:', skills);
+
+        const { getSkillToEdit, editSkillFunction, errorMessage } = EditSkill();
+
+        const optGetSkillToEdit = await getSkillToEdit()
+
+        return (
+            <EditSkillPage getSkillToEdit={optGetSkillToEdit} editSkillFunction={editSkillFunction} errorMessage={getAllSkillErrorMessage ?? ''} />
         );
     };
 }
