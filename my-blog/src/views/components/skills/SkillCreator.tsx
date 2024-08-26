@@ -4,6 +4,7 @@ import { SkillData } from '../../../models/SkillData';
 
 
 const SkillCreator: React.FC = () => {
+
   const [id, setId] = useState(0);
   const [skill_id, setSkillId] = useState('');
   const [skill_name, setSkillName] = useState('');
@@ -14,7 +15,7 @@ const SkillCreator: React.FC = () => {
 
   const maxSkillNameLength = 100;
   const maxSkillIdLength = 50;
-  const maxContentLength = 2000;
+  const maxContentLength = 400;
 
   const createPost = async () => {
     if (skill_name.trim() === '' || content.trim() === '') {
@@ -58,7 +59,7 @@ const SkillCreator: React.FC = () => {
       >
         <div className="mb-4">
           <label className="block mb-2">
-            skill_name:
+            Skill:
             <input
               type="text"
               value={skill_name}
@@ -74,7 +75,7 @@ const SkillCreator: React.FC = () => {
         </div>
         <div>
           <label className="block mb-2">
-            Post ID:
+            Skill ID:
             <input
               type="text"
               value={skill_id}

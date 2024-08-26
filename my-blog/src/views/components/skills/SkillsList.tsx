@@ -10,7 +10,7 @@ interface SkillListProps {
 const SkillList: React.FC<SkillListProps> = ({ skill }) => {
 
     return (
-        <div>
+        <div className="flex-grow h-full bg-white shadow-md rounded-lg">
             <ul>
                 <li key={skill.id} className="">
                     <SkillCard id={skill.id} skill={skill.skill_name} description={skill.body} />

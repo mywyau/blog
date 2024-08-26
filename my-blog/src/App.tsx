@@ -2,7 +2,10 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import BlogPostController from './controllers/BlogPostController';
+import CreateSkillsController from './controllers/CreateSkillsController copy';
 import LandingPageController from './controllers/LandingPageController';
+import ShowSkillsPageController from './controllers/ShowSkillsPageController';
+import AboutPage from './views/pages/AboutPage';
 import ButtonsPage from './views/pages/assets_pages/ButtonsPage';
 import CheckboxesPage from './views/pages/assets_pages/CheckboxesPage';
 import FormsPage from './views/pages/assets_pages/FormsPage';
@@ -16,11 +19,8 @@ import CreateBlogPost from './views/pages/CreateBlogPost';
 import EditBlogPost from './views/pages/EditBlogPost';
 import Interests from './views/pages/Interests';
 import PrivacyPolicy from './views/pages/PrivacyPolicy';
-import Skills from './views/pages/SkillsPage';
 import TermsOfService from './views/pages/TermsOfService';
 import WorkLog from './views/pages/WorkLog';
-import AboutPage from './views/pages/AboutPage';
-import CreateSkillsController from './controllers/CreateSkillsController copy';
 
 
 
@@ -33,7 +33,7 @@ const App: React.FC = () => {
       <Route path="/about" element={<AboutPage />} />
       <Route path="/contact" element={<Contacts />} />
       <Route path="/interests" element={<Interests />} />
-      <Route path="/skills" element={<Skills />} />
+      <Route path="/skills" element={<ShowSkillsPageController.onPageLoad />} />
       <Route path="/work-log" element={<WorkLog />} />
       <Route path="/assets" element={<ButtonAssetsPage />} />
       <Route path="/create-blog-post" element={<CreateBlogPost />} />
