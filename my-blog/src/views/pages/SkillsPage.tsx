@@ -55,7 +55,7 @@ const SkillsPage: React.FC<SkillsPageProps> = ({ skills, errorMessage }) => {
           <Link
             id="add-new-skill"
             to="/create/skill"
-            className="inline-block font-nunito p-2 pr-6 pl-6 rounded-md focus:outline-none bg-gradient-to-r from-primary-start to-primary-end text-white hover:animate-light-up justify-center"
+            className="inline-block font-nunito p-2 pr-6 pl-6 rounded-md focus:outline-none bg-green-600 text-white hover:bg-green-700 justify-center"
           >
             Add New Skill
           </Link>

@@ -13,8 +13,8 @@ const mockedBlogPostConnector = BlogPostConnector as jest.Mocked<typeof BlogPost
 describe('LandingPageController', () => {
 
     const samplePosts: PostData[] = [
-        { id: 1, post_id: "blog-post-1", title: 'Post 1', body: 'Content for post 1' },
-        { id: 2, post_id: "blog-post-2", title: 'Post 2', body: 'Content for post 2' },
+        { id: 1, post_id: "blog-post-1", title: 'Post 1', body: 'Content for post 1', created_at: new Date(), updated_at: new Date() },
+        { id: 2, post_id: "blog-post-2", title: 'Post 2', body: 'Content for post 2', created_at: new Date(), updated_at: new Date() },
     ];
 
     beforeEach(() => {
@@ -26,7 +26,7 @@ describe('LandingPageController', () => {
 
         render(
             <MemoryRouter>
-                <LandingPageController.onPageLoad />
+                <LandingPageController />
             </MemoryRouter>
         );
 
@@ -42,7 +42,7 @@ describe('LandingPageController', () => {
 
         render(
             <MemoryRouter>
-                <LandingPageController.onPageLoad />
+                <LandingPageController />
             </MemoryRouter>
         );
 
@@ -56,7 +56,7 @@ describe('LandingPageController', () => {
 
         render(
             <MemoryRouter>
-                <LandingPageController.onPageLoad />
+                <LandingPageController />
             </MemoryRouter>
         );
 

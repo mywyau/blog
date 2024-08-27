@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { PostData } from '../../models/PostData';
 import BlogList from '../blog/BlogList';
-import DeleteAllButton from '../components/buttons/DeleteAllButton';
 import Copyright from '../components/Copyright';
 import Navbar from '../components/navigation_bar/NavBar';
 import Pagination from '../components/Pagination';
 import SearchBar from '../components/SearchBar';
+import DeleteAllBlogPostsButton from '../components/buttons/DeleteAllBlogPostsButton';
 
 interface LandingPageProps {
   posts: PostData[];
@@ -25,7 +25,6 @@ const LandingPage: React.FC<LandingPageProps> = ({ posts, errorMessage }) => {
 
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  // const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
   const currentPosts = filteredPosts.slice(indexOfFirstPost, indexOfFirstPost + postsPerPage);
 
   const [post, setPost] = useState<PostData[]>(posts);
@@ -65,7 +64,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ posts, errorMessage }) => {
 
         <div className="flex justify-start">
           <div className="pt-4 sm:p-4">
-            <DeleteAllButton posts={post} setPosts={setPost} />
+            <DeleteAllBlogPostsButton posts={post} setPosts={setPost} />
           </div>
         </div>
 

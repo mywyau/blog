@@ -9,11 +9,16 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <nav className="bg-true-blue p-2 shadow-lg">
+    <nav className="bg-true-blue p-2 shadow-lg fixed w-full z-50">
+      {/*  <nav className="bg-gray-100 p-2 fixed shadow-md w-full z-50"> */}
       <div className="container mx-auto flex justify-between items-center">
         {/* Brand or Home Link */}
         <div className="flex items-center space-x-4">
-          <Link id="home" to="/" className="text-white text-3xl hover:text-gray-300">
+          <Link
+            id="home"
+            to="/"
+            className="text-white text-3xl font-bold hover:text-gray-600 transition-colors duration-300"
+          >
             Home
           </Link>
         </div>
@@ -23,36 +28,81 @@ const Navbar: React.FC = () => {
             onClick={toggleMenu}
             className="text-white focus:outline-none"
           >
-            <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={isOpen ? 'M6 18L18 6M6 6l12 12' : 'M4 6h16M4 12h16m-7 6h7'} />
+            <svg
+              className="h-6 w-6 transition-transform transform-gpu"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+              style={{
+                transform: isOpen ? 'rotate(45deg)' : 'rotate(0)',
+              }}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d={
+                  isOpen
+                    ? 'M6 18L18 6M6 6l12 12'
+                    : 'M4 6h16M4 12h16m-7 6h7'
+                }
+              />
             </svg>
           </button>
         </div>
         {/* Navigation Links */}
-        <div className={`md:flex items-center md:space-x-6 ${isOpen ? 'block' : 'hidden'} md:block absolute md:static right-0 top-16 md:top-auto bg-true-blue md:bg-transparent p-4 md:p-0 w-64 md:w-auto`}>
+        <div
+          className={`md:flex items-center md:space-x-6 ${isOpen ? 'block' : 'hidden'
+            } md:block absolute md:static right-0 top-16 md:top-auto bg-true-blue md:bg-transparent p-4 md:p-0 w-64 md:w-auto shadow-md md:shadow-none rounded-lg md:rounded-none transition-all duration-300`}
+        >
           <div className="flex flex-col md:flex-row md:items-center md:space-x-6 space-y-4 md:space-y-0">
-            <Link id="about-me" to="/about" className="text-white text-lg hover:text-gray-300">
+            <Link
+              id="about-me"
+              to="/about"
+              className="text-white text-lg hover:text-gray-300 transition-colors duration-300"
+            >
               About Me
             </Link>
-            <Link id="contact" to="/contact" className="text-white text-lg hover:text-gray-300">
+            <Link
+              id="contact"
+              to="/contact"
+              className="text-white text-lg hover:text-gray-300 transition-colors duration-300"
+            >
               Contact
             </Link>
-            <Link id="interests" to="/interests" className="text-white text-lg hover:text-gray-300">
+            <Link
+              id="interests"
+              to="/interests"
+              className="text-white text-lg hover:text-gray-300 transition-colors duration-300"
+            >
               Interests
             </Link>
-            <Link id="skills" to="/skills" className="text-white text-lg hover:text-gray-300">
+            <Link
+              id="skills"
+              to="/skills"
+              className="text-white text-lg hover:text-gray-300 transition-colors duration-300"
+            >
               Skills
             </Link>
-            <Link id="work-log" to="/work-log" className="text-white text-lg hover:text-gray-300">
+            <Link
+              id="work-log"
+              to="/work-log"
+              className="text-white text-lg hover:text-gray-300 transition-colors duration-300"
+            >
               WorkLog
             </Link>
-            <Link id="assets" to="/assets" className="text-white text-lg hover:text-gray-300">
+            <Link
+              id="assets"
+              to="/assets"
+              className="text-white text-lg hover:text-gray-300 transition-colors duration-300"
+            >
               Assets
             </Link>
             <Link
               id="create-blog-post"
               to="/create-blog-post"
-              className="bg-cambridge-blue text-black text-lg font-semibold py-3 px-7 rounded hover:bg-gray-100 transition-colors duration-300 flex items-center justify-center"
+              className="bg-emerald text-white text-lg font-semibold py-3 px-7 rounded hover:bg-green-300 hover:text-gray-900 transition-colors duration-300 flex items-center justify-center"
             >
               Create
             </Link>

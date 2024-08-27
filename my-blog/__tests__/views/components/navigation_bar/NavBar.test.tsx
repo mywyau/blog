@@ -75,6 +75,6 @@ describe('Navbar', () => {
     );
     const createButton = screen.getByText(/Create/i);
     expect(createButton).toBeInTheDocument();
-    expect(createButton).toHaveClass('bg-cambridge-blue');
+    expect(createButton).toHaveClass('bg-emerald');
   });
 });

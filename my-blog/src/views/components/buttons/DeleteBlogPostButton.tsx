@@ -27,7 +27,7 @@ function deletetHtml(deleteResponseBody: Option<DeleteResponseBody>): JSX.Elemen
     )
 };
 
-const DeleteSkillButton: React.FC<OnDeleteReturn> = (
+const DeleteBlogPostButton: React.FC<OnDeleteReturn> = (
     {
         handleDelete,
         loading,
@@ -59,11 +59,12 @@ const DeleteSkillButton: React.FC<OnDeleteReturn> = (
         >
             <div>
                 <button
+                    id = {`delete-blog-post`}
                     type="submit"
                     disabled={handledLoading}
-                    className="inline-block font-nunito p-1 pr-3 pl-3 text-sm rounded-md focus:outline-none bg-gradient-to-r from-delete-start to-delete-end text-white hover:animate-light-up"
+                    className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-800"
                 >
-                    Delete this skill
+                    Delete this blog post
                 </button>
             </div>
             <p className="text-red-500 mt-2">{handledError}</p>
@@ -72,4 +73,4 @@ const DeleteSkillButton: React.FC<OnDeleteReturn> = (
     );
 };
 
-export default DeleteSkillButton;
+export default DeleteBlogPostButton;

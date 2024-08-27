@@ -9,15 +9,6 @@ const AboutPage: React.FC = () => {
     <div className="flex flex-col min-h-screen font-nunito bg-gray-100">
       <Navbar />
       <H1 id={"about"} message={messages.about.title} className={""} />
-      
-      {/* <div className="p-4 pb-6 container mx-auto">
-        <div className="flex justify-right">
-          <h1 id="about" className="text-4xl font-bold bg-gradient-to-r from-blue-500 to-green-500 bg-clip-text text-transparent pt-6">
-            {messages.about.title}
-          </h1>
-        </div>
-      </div> */}
-
       <div className="flex-grow container mx-auto">
         <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
           <div className="flex flex-col flex-none w-full pt-0 pb-5 md:pt-0 pr-20 pl-20">

@@ -3,6 +3,7 @@ import { fold, getOrElse, Option } from 'fp-ts/Option';
 import React from 'react';
 import TextCountHelper from '../../helpers/TextCountHelper';
 import { PostData } from '../../models/PostData';
+import H1 from '../components/general/H1';
 
 interface RenderBlogPostProps {
     post: Option<PostData>;
@@ -28,8 +29,8 @@ const RenderBlogPost: React.FC<RenderBlogPostProps> = ({ post, loading, errorMes
                 fold(() => <></>,
                     (post) => (
                         <div>
+                            <H1 id={`blog-post-${post.post_id}`} message={post.title} className={''} />
                             <div className="mt-4">
-                                <h1 id="post-title" className="text-2xl font-bold pt-6 pb-6">{post.title}</h1>
                                 <p className='text-sm text-gray-600 mb-6 pt-2'>
                                     Word Count: {textCountHelper.countWords(post.body)}
                                 </p>

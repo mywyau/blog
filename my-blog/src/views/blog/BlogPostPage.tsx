@@ -2,10 +2,9 @@ import { Option } from 'fp-ts/Option';
 import React from 'react';
 import UseDeleteBlogPost from '../../hooks/UseDeleteBlogPost';
 import { PostData } from '../../models/PostData';
-import Accordion from '../components/Accordion';
 import Copyright from '../components/Copyright';
-import DeletePostButton from '../components/buttons/DeletePostButton';
-import EditButton from '../components/buttons/EditButton';
+import DeleteBlogPostButton from '../components/buttons/DeleteBlogPostButton';
+import EditButton from '../components/buttons/EditBlogPostButton';
 import Navbar from '../components/navigation_bar/NavBar';
 import RenderBlogPost from './RenderBlogPost';
 
@@ -33,7 +32,7 @@ const BlogPostPage: React.FC<BlogPostPageProps> = ({ post, loading, errorMessage
           <RenderBlogPost post={post} loading={loading} errorMessage={errorMessage} />
           <EditButton />
           <div className="flex space-x-4">
-            <DeletePostButton handleDelete={handleDelete} loading={loadingState} errorMessage={deleteErrorMessage} deleteResponseBody={deleteResponseBody} />
+            <DeleteBlogPostButton handleDelete={handleDelete} loading={loadingState} errorMessage={deleteErrorMessage} deleteResponseBody={deleteResponseBody} />
           </div>
         </div>
       </main>

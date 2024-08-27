@@ -1,7 +1,6 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { fold, getOrElse, none, Option, some } from 'fp-ts/Option';
 import BlogPostConnector from '../../../src/connectors/BlogPostConnector';
-import { DeleteResponseBody } from '../../../src/models/DeleteResponseBody';
 import { PostData } from '../../../src/models/PostData';
 import BlogPostPage from '../../../src/views/blog/BlogPostPage';
 
@@ -30,11 +29,11 @@ jest.mock('../../../src/views/components/navigation_bar/NavBar', () => () => <di
 
 jest.mock('../../../src/views/components/Copyright', () => () => <div>Copyright Component</div>);
 
-jest.mock('../../../src/views/components/buttons/DeletePostButton', () => ({ handleDelete }: { handleDelete: () => void }) => (
+jest.mock('../../../src/views/components/buttons/DeleteBlogPostButton', () => ({ handleDelete }: { handleDelete: () => void }) => (
   <button onClick={handleDelete}>Delete Post</button>
 ));
 
-jest.mock('../../../src/views/components/buttons/EditButton', () => () => <div>Edit Button</div>);
+jest.mock('../../../src/views/components/buttons/EditBlogPostButton', () => () => <div>Edit Button</div>);
 
 jest.mock('../../../src/views/blog/RenderBlogPost', () => ({
   __esModule: true,
