@@ -1,10 +1,10 @@
 import React from 'react';
-import EditSkillPage from '../views/components/skills/EditSkillPage';
+import EditSkillsPage from '../views/pages/skills/EditSkillsPage';
 
 const EditSkillPageController: React.FC = () => {
 
     return (
-        <EditSkillPage />
+        <EditSkillsPage />
     );
 };
 

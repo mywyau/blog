@@ -18,21 +18,6 @@ interface BlogPostPageProps {
 
 const BlogPostPage: React.FC<BlogPostPageProps> = ({ post, loading, errorMessage }) => {
 
-  const accordions = [
-    {
-      title: 'Accordion 1',
-      content: 'This is the content of the first accordion.',
-    },
-    {
-      title: 'Accordion 2',
-      content: 'This is the content of the second accordion.',
-    },
-    {
-      title: 'Accordion 3',
-      content: 'This is the content of the third accordion.',
-    },
-  ];
-
 
   const { handleDelete, loadingState, deleteErrorMessage, deleteResponseBody } = UseDeleteBlogPost();
 
@@ -45,9 +30,7 @@ const BlogPostPage: React.FC<BlogPostPageProps> = ({ post, loading, errorMessage
 
       <main className="container mx-auto p-4 flex-grow max-w-4xl px-8">
         <div className="flex flex-col space-y-4">
-          {accordions.map((accordion, index) => (
-            <Accordion key={index} title={accordion.title} content={accordion.content} />
-          ))}          <RenderBlogPost post={post} loading={loading} errorMessage={errorMessage} />
+          <RenderBlogPost post={post} loading={loading} errorMessage={errorMessage} />
           <EditButton />
           <div className="flex space-x-4">
             <DeletePostButton handleDelete={handleDelete} loading={loadingState} errorMessage={deleteErrorMessage} deleteResponseBody={deleteResponseBody} />

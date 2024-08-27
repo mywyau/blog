@@ -60,9 +60,9 @@ class LandingPageController {
         
         console.log('[LandingPageController][getAllPosts] Data retrieved:', state.posts);
 
-        if (state.loading) {
-            return <div>Loading...</div>; // Optionally show a loading state
-        }
+        // if (state.loading) {
+        //     return <div>Loading...</div>; // Optionally show a loading state
+        // }
 
         return (
             <LandingPage posts={state.posts} errorMessage={state.errorMessage ?? ''} />

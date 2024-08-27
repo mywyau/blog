@@ -30,7 +30,7 @@ const SkillsPage: React.FC<SkillsPageProps> = ({ skills, errorMessage }) => {
   return (
     <div className="flex flex-col min-h-screen font-nunito bg-gray-100">
       <Navbar />
-      <H1 id={"skills"} message={messages.about.title} />
+      <H1 id={"skills"} message={messages.about.title} className={""} />
       <div className="flex flex-col flex-grow container mx-auto">
         <div className="flex-grow">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-2">

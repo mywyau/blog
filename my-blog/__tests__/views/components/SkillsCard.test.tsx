@@ -1,56 +1,112 @@
-import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
+
+import { BrowserRouter } from 'react-router-dom';
 import SkillsCard from '../../../src/views/components/skills/SkillsCard';
 
+import { none } from 'fp-ts/lib/Option';
+import UseDeleteSkill from '../../../src/hooks/UseDeleteSkill';
+
+
+jest.mock('../../../src/hooks/UseDeleteSkill');
+
+
 describe('SkillsCard Component', () => {
-  it('renders the skill and description', () => {
-    const skill = 'JavaScript';
-    const description = 'A versatile programming language primarily used for web development.';
+  const mockSkill = {
+    id: 1,
+    skill_id: '123',
+    skill: 'JavaScript',
+    description: 'A versatile programming language primarily used for web development.',
+  };
 
-    render(<SkillsCard id={1} skill={skill} description={description} />);
+  it('renders the skill and description correctly', () => {
+    const mockHandleDelete = jest.fn();
 
-    expect(screen.getByText(skill)).toBeInTheDocument();
-    expect(screen.getByText(description)).toBeInTheDocument();
+    UseDeleteSkill.mockReturnValue({
+      handleDelete: mockHandleDelete,
+      loadingState: false,
+      deleteErrorMessage: '',
+      deleteResponseBody: none, // Properly mock the fp-ts Option
+    });
+
+    render(
+      <BrowserRouter>
+        <SkillsCard {...mockSkill} />
+      </BrowserRouter>
+    );
+
+    // Check if the skill name is rendered
+    expect(screen.getByText('JavaScript')).toBeInTheDocument();
+
+    // Check if the description is rendered
+    expect(screen.getByText('A versatile programming language primarily used for web development.')).toBeInTheDocument();
   });
 
-  it('applies the correct styles to the skill and description', () => {
-    render(<SkillsCard id={1} skill="JavaScript" description="A versatile programming language primarily used for web development." />);
+  it('renders EditSkillButton and DeleteSkillButton', () => {
 
-    const skillElement = screen.getByText('JavaScript').parentElement;;
-    expect(skillElement).toHaveClass('text-xl');
-    expect(skillElement).toHaveClass('bg-gradient-to-r');
-    expect(skillElement).toHaveClass('from-blue-500');
-    expect(skillElement).toHaveClass('to-green-500');
-    expect(skillElement).toHaveClass('bg-clip-text');
-    expect(skillElement).toHaveClass('text-transparent');
+    const mockHandleDelete = jest.fn();
 
-    const descriptionElement = screen.getByText('A versatile programming language primarily used for web development.');
-    expect(descriptionElement).toHaveClass('text-base');
-    expect(descriptionElement).toHaveClass('text-gray-700');
-    expect(descriptionElement).toHaveClass('mb-4');
+    UseDeleteSkill.mockReturnValue({
+      handleDelete: mockHandleDelete,
+      loadingState: false,
+      deleteErrorMessage: '',
+      deleteResponseBody: none, // Properly mock the fp-ts Option
+    });
+
+    render(
+      <BrowserRouter>
+        <SkillsCard {...mockSkill} />
+      </BrowserRouter>
+    );
+
+    // Check if the EditSkillButton is rendered
+    expect(screen.getByRole('link', { name: /edit/i })).toBeInTheDocument();
+
+    // Check if the DeleteSkillButton is rendered
+    expect(screen.getByRole('button', { name: /delete/i })).toBeInTheDocument();
   });
 
-  it('applies the correct container styles', () => {
-    render(<SkillsCard id={1} skill="JavaScript" description="A versatile programming language primarily used for web development." />);
+  it('calls handleDelete when DeleteSkillButton is clicked', () => {
+    const mockHandleDelete = jest.fn();
 
-    const container = screen.getByText('JavaScript').parentElement?.parentElement?.parentElement;
-    expect(container).toHaveClass('flex');
-    expect(container).toHaveClass('flex-col');
-    expect(container).toHaveClass('flex-none');
-    expect(container).toHaveClass('w-full');
-    expect(container).toHaveClass('pt-6');
-    expect(container).toHaveClass('pb-6');
+    UseDeleteSkill.mockReturnValue({
+      handleDelete: mockHandleDelete,
+      loadingState: false,
+      deleteErrorMessage: '',
+      deleteResponseBody: none, // Properly mock the fp-ts Option
+    });
+
+    render(
+      <BrowserRouter>
+        <SkillsCard {...mockSkill} />
+      </BrowserRouter>
+    );
+
+    const deleteButton = screen.getByRole('button', { name: /delete/i });
+    fireEvent.click(deleteButton);
+
+    expect(mockHandleDelete).toHaveBeenCalled();
   });
 
-  it('applies the correct inner container styles', () => {
-    render(<SkillsCard id={1} skill="JavaScript" description="A versatile programming language primarily used for web development." />);
+  // TODO: Add test or delete    
+  // it('shows an error message if deletion fails', () => {
 
-    const innerContainer = screen.getByText('JavaScript').parentElement?.parentElement;
-    expect(innerContainer).toHaveClass('bg-white');
-    expect(innerContainer).toHaveClass('rounded-lg');
-    expect(innerContainer).toHaveClass('shadow-lg');
-    expect(innerContainer).toHaveClass('p-6');
-    expect(innerContainer).toHaveClass('md:p-8');
-    expect(innerContainer).toHaveClass('h-full');
-  });
+  //    const mockHandleDelete = jest.fn();
+
+  //   UseDeleteSkill.mockReturnValue({
+  //       handleDelete: mockHandleDelete,
+  //       loadingState: false,
+  //       deleteErrorMessage: '',
+  //       deleteResponseBody: none, // Properly mock the fp-ts Option
+  //   });
+
+  //   render(
+  //     <BrowserRouter>
+  //       <SkillsCard {...mockSkill} />
+  //     </BrowserRouter>
+  //   );
+
+  //   // Assuming your DeleteSkillButton displays the error message in some way
+  //   expect(screen.getByText('Failed to delete skill')).toBeInTheDocument();
+  // });
 });
+

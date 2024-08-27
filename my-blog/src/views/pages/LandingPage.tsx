@@ -33,7 +33,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ posts, errorMessage }) => {
         {errorMessage && <p className='text-xl text-purple-800'>Error: {errorMessage}</p>}
 
         <div className="flex flex-grow container mx-auto font-nunito min-h-screen bg-gray-100">
-          <div className="flex-grow">
+        <div className="w-full md:w-3/4 lg:w-2/3 mx-auto">
             <BlogList posts={currentPosts} />
             <Pagination
               postsPerPage={postsPerPage}
