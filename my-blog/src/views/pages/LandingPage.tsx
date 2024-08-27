@@ -5,6 +5,7 @@ import DeleteAllButton from '../components/buttons/DeleteAllButton';
 import Copyright from '../components/Copyright';
 import Navbar from '../components/navigation_bar/NavBar';
 import Pagination from '../components/Pagination';
+import SearchBar from '../components/SearchBar';
 
 interface LandingPageProps {
   posts: PostData[];
@@ -16,9 +17,16 @@ const LandingPage: React.FC<LandingPageProps> = ({ posts, errorMessage }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const postsPerPage = 5;
 
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const filteredPosts = posts.filter(post =>
+    post.title.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
+  // const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
+  const currentPosts = filteredPosts.slice(indexOfFirstPost, indexOfFirstPost + postsPerPage);
 
   const [post, setPost] = useState<PostData[]>(posts);
 
@@ -32,14 +40,26 @@ const LandingPage: React.FC<LandingPageProps> = ({ posts, errorMessage }) => {
         {/* {loading && <p>Loading...</p>} */}
         {errorMessage && <p className='text-xl text-purple-800'>Error: {errorMessage}</p>}
 
+        {/* Use the SearchBar component */}
+        <div className="w-full md:w-2/3 lg:w-1/3 mx-auto">
+          <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+        </div>
+
         <div className="flex flex-grow container mx-auto font-nunito min-h-screen bg-gray-100">
-          <div className="flex-grow">
-            <BlogList posts={currentPosts} />
+          <div className="w-full md:w-3/4 lg:w-2/3 mx-auto">
+
+            {currentPosts.length === 0 ? (
+              <p className="text-center text-gray-500">No blog posts found.</p>
+            ) : (
+              <BlogList posts={currentPosts} />
+            )}
+
             <Pagination
               postsPerPage={postsPerPage}
-              totalPosts={posts.length}
+              totalPosts={filteredPosts.length}
               paginate={(pageNumber) => setCurrentPage(pageNumber)}
             />
+
           </div>
         </div>
 

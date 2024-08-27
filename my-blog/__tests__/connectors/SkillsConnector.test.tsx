@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { config } from 'dotenv';
-import BlogPostConnector from '../../src/connectors/BlogPostConnector';
-import { PostData } from '../../src/models/PostData';
+import SkillsConnector from '../../src/connectors/SkillsConnector';
+import { SkillData } from '../../src/models/SkillData';
 import { DeleteResponseBody } from '../../src/models/DeleteResponseBody';
 
 config({ path: '../../.env' });
@@ -12,77 +12,77 @@ jest.mock('axios');
 
 const mockedAxios = axios as jest.Mocked<typeof axios>;
 
-const blogPostConnector = BlogPostConnector
+const skillsConnector = SkillsConnector
 
-describe('BlogPostConnector API functions', () => {
+describe('SkillsConnector API functions', () => {
 
-    // Tests for getPostById
-    describe('getPostById', () => {
+    describe('getSkillById', () => {
 
         it('should return post data when API call is successful', async () => {
 
-            const mockPost: PostData = {
+            const mockSkillData: SkillData = {
                 id: 1,
-                post_id: 'mikey-1',
-                title: 'Test Post',
-                body: 'This is a test post.',
+                skill_id: 'skill_1',
+                skill_name: 'Fake Skill 1',
+                body: 'This is a fake skill.',
             };
 
-            mockedAxios.get.mockResolvedValueOnce({ data: mockPost });
+            mockedAxios.get.mockResolvedValueOnce({ data: mockSkillData });
 
-            const result = await blogPostConnector.getPostById(1);
+            const result = await skillsConnector.getSkillById(1);
 
-            expect(mockedAxios.get).toHaveBeenCalledWith(apiUrl + '/blog/post/retrieve/1');
-            expect(result.data).toEqual(mockPost);
+            expect(mockedAxios.get).toHaveBeenCalledWith(apiUrl + '/blog/skill/retrieve/1');
+            expect(result.data).toEqual(mockSkillData);
             expect(result.error).toBeUndefined();
         });
 
         it('should return an error message when API call fails', async () => {
-            const errorMessage = 'Post not found';
+
+            const errorMessage = 'Skill not found';
             mockedAxios.get.mockRejectedValueOnce({
                 response: {
                     data: { message: errorMessage },
                 },
             });
 
-            const result = await blogPostConnector.getPostById(1);
+            const result = await skillsConnector.getSkillById(1);
 
             expect(result.data).toBeUndefined();
             expect(result.error).toBe(errorMessage);
         });
     });
 
-    // Tests for getViaPost_Id
-    describe('getViaPostId', () => {
+    // Tests for getViaskill_id
+    describe('getViaskill_id', () => {
 
         it('should return post data when API call is successful', async () => {
 
-            const mockPost: PostData = {
+            const mockSkillData: SkillData = {
                 id: 1,
-                post_id: 'mikey-2',
-                title: 'Test Post',
-                body: 'This is a test post.',
+                skill_id: 'skill_1',
+                skill_name: 'Fake Skill 1',
+                body: 'This is a fake skill.',
             };
 
-            mockedAxios.get.mockResolvedValueOnce({ data: mockPost });
+            mockedAxios.get.mockResolvedValueOnce({ data: mockSkillData });
 
-            const result = await blogPostConnector.getViaPostId('mikey-2');
+            const result = await skillsConnector.getViaSkillId('mikey-2');
 
-            expect(mockedAxios.get).toHaveBeenCalledWith(apiUrl + '/blog/post/retrieve/post-id/mikey-2');
-            expect(result.data).toEqual(mockPost);
+            expect(mockedAxios.get).toHaveBeenCalledWith(apiUrl + '/blog/skill/retrieve/skill-id/mikey-2');
+            expect(result.data).toEqual(mockSkillData);
             expect(result.error).toBeUndefined();
         });
 
         it('should return an error message when API call fails', async () => {
-            const errorMessage = 'Post not found';
+
+            const errorMessage = 'Skill not found';
             mockedAxios.get.mockRejectedValueOnce({
                 response: {
                     data: { message: errorMessage },
                 },
             });
 
-            const result = await blogPostConnector.getViaPostId('mikey-2');
-            // const result = await getViaPost_Id('mikey-2');
+            const result = await skillsConnector.getViaSkillId('mikey-2');
 
             expect(result.data).toBeUndefined();
             expect(result.error).toBe(errorMessage);
@@ -93,25 +93,23 @@ describe('BlogPostConnector API functions', () => {
     describe('updatePostById', () => {
         it('should update post data and return the updated data when API call is successful', async () => {
 
-            const updatedPost: PostData = {
+            const mockUpdatedSkillData: SkillData = {
                 id: 10,
-                post_id: 'mikey-2',
-                title: 'Hardcoded title update',
-                body: 'Some updated content',
+                skill_id: 'skill_1',
+                skill_name: 'Fake Skill 1 New',
+                body: 'This is updated fake skill content.',
             };
 
-            mockedAxios.put.mockResolvedValueOnce({ data: updatedPost });
+            mockedAxios.put.mockResolvedValueOnce({ data: mockUpdatedSkillData });
 
 
-            const result = await blogPostConnector.updatePostById('mikey-2', updatedPost);
-
-            // const result = await updatePostById('mikey-2', updatedPost);
+            const result = await skillsConnector.updateSkillById('mikey-2', mockUpdatedSkillData);
 
             expect(mockedAxios.put).toHaveBeenCalledWith(
-                apiUrl + '/blog/posts/update/mikey-2',
-                updatedPost
+                apiUrl + '/blog/skill/update/mikey-2',
+                mockUpdatedSkillData
             );
-            expect(result.data).toEqual(updatedPost);
+            expect(result.data).toEqual(mockUpdatedSkillData);
             expect(result.error).toBeUndefined();
         });
 
@@ -119,11 +117,11 @@ describe('BlogPostConnector API functions', () => {
 
             const errorMessage = 'Post not found';
 
-            const updatedPost: PostData = {
+            const mockUpdatedSkillData: SkillData = {
                 id: 10,
-                post_id: 'mikey-2',
-                title: 'Hardcoded title update',
-                body: 'Some updated content',
+                skill_id: 'skill_1',
+                skill_name: 'Fake Skill 1 New',
+                body: 'This is updated fake skill content.',
             };
 
             mockedAxios.put.mockRejectedValueOnce({
@@ -132,7 +130,7 @@ describe('BlogPostConnector API functions', () => {
                 },
             });
 
-            const result = await blogPostConnector.updatePostById('mikey-2', updatedPost);
+            const result = await skillsConnector.updateSkillById('mikey-2', mockUpdatedSkillData);
             // const result = await updatePostById('mikey-2', updatedPost);
 
             expect(result.data).toBeUndefined();
@@ -151,10 +149,9 @@ describe('BlogPostConnector API functions', () => {
 
             mockedAxios.delete.mockResolvedValueOnce({ data: successMessage });
 
-            const result = await blogPostConnector.deleteAllRequest();
-            // const result = await deleteAllRequest();
+            const result = await skillsConnector.deleteAllRequest();
 
-            expect(mockedAxios.delete).toHaveBeenCalledWith(apiUrl + '/blog/post/all');
+            expect(mockedAxios.delete).toHaveBeenCalledWith(apiUrl + '/blog/skill/all');
             expect(result.data).toEqual(successMessage);
             expect(result.error).toBeUndefined();
         });
@@ -169,7 +166,7 @@ describe('BlogPostConnector API functions', () => {
                 },
             });
 
-            const result = await blogPostConnector.deleteAllRequest();
+            const result = await skillsConnector.deleteAllRequest();
 
             expect(result.data).toBeUndefined();
             expect(result.error).toBe(errorMessage);

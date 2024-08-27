@@ -8,7 +8,7 @@ const Contact: React.FC = () => {
   return (
     <div className="flex flex-col min-h-screen font-nunito bg-gray-100">
       <Navbar />
-      <H1 id={"contacts-page"} message={messages.title} />
+      <H1 id={"contacts-page"} message={messages.title} className={""}/>
 
       <div className="flex-grow container mx-auto p-4">
         <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">

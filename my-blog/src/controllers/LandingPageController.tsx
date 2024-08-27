@@ -3,47 +3,71 @@ import BlogPostConnector from '../connectors/BlogPostConnector';
 import { PostData } from '../models/PostData';
 import LandingPage from '../views/pages/LandingPage';
 
+interface State {
+    posts: PostData[];
+    errorMessage: string | null;
+    loading: boolean;
+}
+
 class LandingPageController {
 
     onPageLoad = () => {
 
-        const [posts, setPosts] = useState<PostData[]>([]);
-        const [errorMessage, setErrorMessage] = useState<string | null>(null);
-        const [loading, setLoading] = useState<boolean>(false);
+        const [state, setState] = useState<State>({
+            posts: [],
+            errorMessage: null,
+            loading: true,
+        });
 
-        useEffect(
-            () => {
-                const fetchPost = async () => {
-                    setErrorMessage(null);
-                    setPosts([]);
-
+        useEffect(() => {
+            console.log("Component rendered");
+            const fetchPost = async () => {
+                try {
                     const { data, error } = await BlogPostConnector.getAllPosts();
 
                     if (error) {
-                        setErrorMessage(error);
+                        setState(prevState => ({
+                            ...prevState,
+                            errorMessage: error,
+                            loading: false,
+                        }));
                     } else if (data) {
                         if (data.length === 0) {
-                            setErrorMessage(`[LandingPageController][getAllPosts] No blog posts retrieved, data base likely empty`);
+                            setState(prevState => ({
+                                ...prevState,
+                                errorMessage: '[LandingPageController][getAllPosts] No blog posts retrieved, database likely empty',
+                                loading: false,
+                            }));
                         } else {
-                            setPosts(data);
-                            console.log('[LandingPageController][getAllPosts] Data retrieved:', data);
+                            setState({
+                                posts: data,
+                                errorMessage: null,
+                                loading: false,
+                            });
                         }
                     }
+                } catch (err) {
+                    setState(prevState => ({
+                        ...prevState,
+                        errorMessage: `[LandingPageController][getAllPosts] Unexpected error: ${err}`,
+                        loading: false,
+                    }));
+                }
+            };
 
-                    setLoading(false);
-                };
+            fetchPost(); // Call the async function when the component mounts
+        }, []); // Empty dependency array ensures this effect runs only once
+        
+        console.log('[LandingPageController][getAllPosts] Data retrieved:', state.posts);
 
-                fetchPost(); // Call the async function when component mounts
-            },
-            [] // Empty dependency array ensures it runs only once on mount
-        );
-
-        console.log('[LandingPageController][getAllPosts] Posts:', posts);
+        // if (state.loading) {
+        //     return <div>Loading...</div>; // Optionally show a loading state
+        // }
 
         return (
-            <LandingPage posts={posts} errorMessage={errorMessage ?? ''} />
+            <LandingPage posts={state.posts} errorMessage={state.errorMessage ?? ''} />
         );
     };
 }
 
-export default new LandingPageController;
+export default new LandingPageController();

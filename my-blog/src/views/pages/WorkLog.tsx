@@ -28,7 +28,7 @@ const WorkLog: React.FC = () => {
   return (
     <div className="flex flex-col min-h-screen font-nunito bg-gray-100">
       <Navbar />
-      <H1 id={"worklog"} message={messages.about.title} />
+      <H1 id={"worklog"} message={messages.about.title} className={""} />
       {/* <div className="container mx-auto pt-4">
         <div className="p-2 sm:p-4">
         <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-500 to-green-500 bg-clip-text text-transparent pt-6">{messages.about.title}</h1>

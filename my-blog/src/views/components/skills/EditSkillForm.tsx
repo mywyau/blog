@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import BlogPostConnector from '../../connectors/BlogPostConnector';
-import { PostData } from '../../models/PostData';
 import { useParams } from 'react-router-dom';
+import { SkillData } from '../../../models/SkillData';
+import SkillsConnector from '../../../connectors/SkillsConnector';
 
-const EditPostForm: React.FC = () => {
+const EditSkillPage: React.FC = () => {
 
     const [sqlId, setSqlId] = useState(0);
-    const [sqlPost_id, setSqlPostId] = useState('');
-    const [title, setTitle] = useState('');
+    const [sqlSkillId, setSqlSkillId] = useState('');
+    const [skillName, setSkillName] = useState('');
     const [content, setContent] = useState('');
 
     const [isLoading, setIsLoading] = useState(false);
@@ -15,12 +15,12 @@ const EditPostForm: React.FC = () => {
 
     const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
-    const maxTitleLength = 100;
-    const maxPostIdLength = 50;
-    const maxContentLength = 20000;
+    const maxSkillNameLength = 100;
+    const maxContentLength = 400;
 
-    const { post_id } = useParams<{ post_id: string }>();
-    const postIdDefaulted = post_id ?? 'default-post-id'; // Replace 'default-post-id' with an appropriate default value or handle it accordingly
+    const { skill_id } = useParams<{ skill_id: string }>();
+    console.log(`${skill_id}`)
+    const skillIdDefaulted = skill_id ?? 'default-skill-id';
 
     useEffect(() => {
 
@@ -28,15 +28,15 @@ const EditPostForm: React.FC = () => {
             setIsLoading(true);
             setErrorMessage(null);
 
-            const { data, error } = await BlogPostConnector.getViaPostId(postIdDefaulted);
+            const { data, error } = await SkillsConnector.getViaSkillId(skillIdDefaulted);
 
             if (error) {
                 setErrorMessage(error);
             } else if (data) {
                 // Preset the form fields with the fetched post data
                 setSqlId(data.id);
-                setSqlPostId(data.post_id);
-                setTitle(data.title);
+                setSqlSkillId(data.skill_id);
+                setSkillName(data.skill_name);
                 setContent(data.body);
             }
 
@@ -44,41 +44,34 @@ const EditPostForm: React.FC = () => {
         };
 
         fetchPost(); // Call the async function when the component mounts
-    }, [sqlPost_id]);
+    }, [sqlSkillId]);
 
     const editPost = async () => {
-        if (title.trim() === '' || content.trim() === '') {
-            alert('Title and content cannot be empty');
-            return;
-        }
-
-        setIsLoading(true);
         
         try {
-            const updatedPost: PostData = {
+            const updatedSkill: SkillData = {
                 id: sqlId, // Use the current postId
-                post_id: sqlPost_id, // Use the updated post_id from state
-                title: title, // Use the updated title from state
+                skill_id: sqlSkillId, // Use the updated post_id from state
+                skill_name: skillName, // Use the updated skillName from state
                 body: content // Use the updated content from state
             };
 
-            const { data, error } = await BlogPostConnector.updatePostById(sqlPost_id, updatedPost);
+            const { data, error } = await SkillsConnector.updateSkillById(sqlSkillId, updatedSkill);
             if (error) {
                 setErrorMessage(error);
-                alert(`[EditPostForm][axios.put] Failed to update the blog post. Please try again. ${API_BASE_URL}/blog/post/update`);
+                alert(`[EditSkillForm][editPost] Failed to update the blog post. Please try again. ${API_BASE_URL}/blog/post/update`);
             } else {
                 console.log('Post edited successfully:', data);
             }
         } catch (error) {
             console.error('Error when editing post:', error);
-            alert(`[EditPostForm][axios.put] Failed to update the blog post. Please try again. ${API_BASE_URL}/blog/post/update`);
+            alert(`[EditSkillForm][editPost] Failed to update the blog post. Please try again. ${API_BASE_URL}/blog/post/update`);
         } finally {
             setIsLoading(false);
         }
     };
 
-    const remainingTitleChars = maxTitleLength - title.length;
-    const remainingPostIdChars = maxPostIdLength - sqlPost_id.length;
+    const semainingSkillNameChars = maxSkillNameLength - skillName.length;
     const remainingContentChars = maxContentLength - content.length;
 
     return (
@@ -91,18 +84,18 @@ const EditPostForm: React.FC = () => {
             >
                 <div className="mb-4">
                     <label className="block mb-2">
-                        Title:
+                        Skill Name:
                         <input
                             type="text"
-                            value={title}
-                            onChange={(e) => setTitle(e.target.value)}
+                            value={skillName}
+                            onChange={(e) => setSkillName(e.target.value)}
                             className="w-full border border-gray-300 rounded p-2"
-                            maxLength={maxTitleLength}
+                            maxLength={maxSkillNameLength}
                             disabled={isLoading}
                         />
                     </label>
                     <p className="text-gray-600 text-sm">
-                        {remainingTitleChars} characters remaining
+                        {semainingSkillNameChars} characters remaining
                     </p>
                 </div>
                 <div className="mt-4 mb-4">
@@ -133,4 +126,4 @@ const EditPostForm: React.FC = () => {
     );
 };
 
-export default EditPostForm;
+export default EditSkillPage;

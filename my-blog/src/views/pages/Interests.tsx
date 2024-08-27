@@ -25,7 +25,7 @@ const Interests: React.FC = () => {
   return (
     <div className="flex flex-col min-h-screen font-nunito bg-gray-100">
       <Navbar />
-      <H1 id={"interests"} message={messages.title} />
+      <H1 id={"interests"} message={messages.title} className={""} />
       <InterestsGrid />
       <Copyright />
     </div>
