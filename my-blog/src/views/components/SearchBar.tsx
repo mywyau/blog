@@ -7,7 +7,7 @@ interface SearchBarProps {
 
 const SearchBar: React.FC<SearchBarProps> = ({ searchQuery, setSearchQuery }) => {
   return (
-    <div className="relative mb-6">
+    <div className="relative mb-6 mt-20">
       <input
         type="text"
         placeholder="Search blog posts..."

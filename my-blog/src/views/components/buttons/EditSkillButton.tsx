@@ -14,7 +14,7 @@ const EditSkillButton: React.FC<EditSkillButtonProps> = ({ skillId }) => {
             <Link
                 id="edit-skill-button"
                 to={editUrl}
-                className="inline-block font-nunito p-1 pr-3 pl-3 text-sm rounded-md focus:outline-none bg-gradient-to-r from-primary-start to-primary-end text-white hover:animate-light-up"
+                className="inline-block font-nunito p-1 pr-3 pl-3 text-sm rounded-md focus:outline-none bg-gradient-to-r from-info-start to-info-end text-white hover:animate-light-up"
             >
                 Edit Skill
             </Link>

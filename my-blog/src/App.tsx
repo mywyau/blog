@@ -16,33 +16,33 @@ import RadioPage from './views/pages/assets_pages/RadioPage';
 import VideosPage from './views/pages/assets_pages/VideosPage';
 import ButtonAssetsPage from './views/pages/AssetsPage';
 import Contacts from './views/pages/ContactsPage';
-import CreateBlogPost from './views/pages/CreateBlogPost';
-import EditBlogPost from './views/pages/EditBlogPost';
-import Interests from './views/pages/Interests';
-import PrivacyPolicy from './views/pages/PrivacyPolicy';
-import TermsOfService from './views/pages/TermsOfService';
-import WorkLog from './views/pages/WorkLog';
+import CreateBlogPostPage from './views/pages/CreateBlogPostPage';
+import EditBlogPostPage from './views/pages/EditBlogPostPage';
+import InterestsPage from './views/pages/InterestsPage';
+import PrivacyPolicyPage from './views/pages/PrivacyPolicyPage';
+import TermsOfServicePage from './views/pages/TermsOfServicePage';
+import WorkLogPage from './views/pages/WorkLogPage';
 
 
 
 const App: React.FC = () => {
   return (
     <Routes>
-      <Route path="/" element={<LandingPageController.onPageLoad />} />
+      <Route path="/" element={<LandingPageController />} />
       <Route path="/post/:id" element={<BlogPostController />} />
       <Route path="/create/skill" element={<CreateSkillsController />} />
       <Route path="/about" element={<AboutPage />} />
       <Route path="/contact" element={<Contacts />} />
-      <Route path="/interests" element={<Interests />} />
+      <Route path="/interests" element={<InterestsPage />} />
       <Route path="/skills" element={<ShowSkillsPageController />} />
       <Route path="/edit-skill/:skill_id" element={<EditSkillPageController />} />
-      <Route path="/work-log" element={<WorkLog />} />
+      <Route path="/work-log" element={<WorkLogPage />} />
       <Route path="/assets" element={<ButtonAssetsPage />} />
-      <Route path="/create-blog-post" element={<CreateBlogPost />} />
-      <Route path="/edit-blog-post/:post_id" element={<EditBlogPost />} />
+      <Route path="/create-blog-post" element={<CreateBlogPostPage />} />
+      <Route path="/edit-blog-post/:post_id" element={<EditBlogPostPage />} />
 
-      <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-      <Route path="/terms-of-service" element={<TermsOfService />} />
+      <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+      <Route path="/terms-of-service" element={<TermsOfServicePage />} />
 
       <Route path="/buttons" element={<ButtonsPage />} />
       <Route path="/images" element={<ImagesPage />} />

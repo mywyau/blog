@@ -1,14 +1,10 @@
 import axios from 'axios';
 import React, { useState } from 'react';
+import { PostData } from '../../models/PostData';
 
-interface PostData {
-  id: number;
-  post_id: string;
-  title: string;
-  body: string;
-}
 
 const PostCreator: React.FC = () => {
+
   const [id, setId] = useState(0);
   const [post_id, setPostId] = useState('');
   const [title, setTitle] = useState('');
@@ -32,11 +28,22 @@ const PostCreator: React.FC = () => {
       post_id: post_id,
       title: title,
       body: content,
+      created_at: new Date(),
+      updated_at: new Date()
     };
 
     setIsLoading(true);
     try {
-      const response = await axios.post(API_BASE_URL + '/blog/post/create', postData);
+      const response = await
+        axios.post(
+          API_BASE_URL + '/blog/post/create',
+          {
+            ...postData,
+            created_at: postData.created_at.toISOString(),
+            updated_at: postData.updated_at.toISOString(),
+          }
+        );
+
       console.log('Post created successfully:', response.data);
       setTitle('');
       setPostId('');
@@ -54,7 +61,7 @@ const PostCreator: React.FC = () => {
   const remainingContentChars = maxContentLength - content.length;
 
   return (
-    <div className="p-4">
+    <div className="">
       <form
         onSubmit={(e) => {
           e.preventDefault();
@@ -62,7 +69,7 @@ const PostCreator: React.FC = () => {
         }}
       >
         <div className="mb-4">
-          <label className="block mb-2">
+          <label id='create-post-title' className="block mb-2">
             Title:
             <input
               type="text"
@@ -78,7 +85,7 @@ const PostCreator: React.FC = () => {
           </p>
         </div>
         <div>
-          <label className="block mb-2">
+          <label id='create-post-post-id' className="block mb-2">
             Post ID:
             <input
               type="text"
@@ -94,7 +101,7 @@ const PostCreator: React.FC = () => {
           </p>
         </div>
         <div className="mt-4 mb-4">
-          <label className="block mb-2">
+          <label id='create-post-content' className="block mb-2">
             Content:
             <textarea
               value={content}

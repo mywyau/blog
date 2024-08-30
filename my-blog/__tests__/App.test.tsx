@@ -14,14 +14,13 @@ jest.mock('../src/views/pages/assets_pages/LoadingPage', () => () => <div>Loadin
 jest.mock('../src/views/pages/assets_pages/RadioPage', () => () => <div>RadioPage Component</div>);
 jest.mock('../src/views/pages/AssetsPage', () => () => <div>ButtonAssetsPage Component</div>);
 jest.mock('../src/views/pages/ContactsPage', () => () => <div>Contacts Component</div>);
-jest.mock('../src/views/pages/CreateBlogPost', () => () => <div>CreateBlogPost Component</div>);
-jest.mock('../src/views/pages/Interests', () => () => <div>Interests Component</div>);
+jest.mock('../src/views/pages/CreateBlogPostPage', () => () => <div>CreateBlogPost Component</div>);
+jest.mock('../src/views/pages/InterestsPage', () => () => <div>Interests Component</div>);
 jest.mock('../src/views/pages/LandingPage', () => () => <div>LandingPage Component</div>);
-jest.mock('../src/views/pages/PrivacyPolicy', () => () => <div>PrivacyPolicy Component</div>);
+jest.mock('../src/views/pages/PrivacyPolicyPage', () => () => <div>PrivacyPolicy Component</div>);
 jest.mock('../src/views/pages/SkillsPage', () => () => <div>Skills Component</div>);
-jest.mock('../src/views/pages/TermsOfService', () => () => <div>TermsOfService Component</div>);
-jest.mock('../src/views/pages/WorkLog', () => () => <div>WorkLog Component</div>);
-jest.mock('../src/views/pages/Videos', () => () => <div>Videos Component</div>);
+jest.mock('../src/views/pages/TermsOfServicePage', () => () => <div>TermsOfService Component</div>);
+jest.mock('../src/views/pages/WorkLogPage', () => () => <div>WorkLog Component</div>);
 
 describe('App component', () => {
   test('renders LandingPage component for the root route', () => {

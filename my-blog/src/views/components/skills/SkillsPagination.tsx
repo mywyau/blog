@@ -21,7 +21,7 @@ const Pagination: React.FC<SkillsPaginationProps> = ({ skillsPerPage, totalSkill
           <li key={number}>
             <button
               onClick={() => paginate(number)}
-              className="bg-blue-500 text-white px-3 py-1 rounded"
+              className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600"
             >
               {number}
             </button>

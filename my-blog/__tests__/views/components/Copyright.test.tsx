@@ -7,7 +7,7 @@ import Copyright from '../../../src/views/components/Copyright';
 describe('Copyright component', () => {
   test('renders copyright text', () => {
     render(<Copyright />);
-    const copyrightText = screen.getByText(/© 2024 My Blog. All rights reserved./i);
+    const copyrightText = screen.getByText(/© 2024 Michael Yau Blog | All rights reserved./i);
     expect(copyrightText).toBeInTheDocument();
   });
 
@@ -33,13 +33,13 @@ describe('Copyright component', () => {
 
   test('renders with responsive padding', () => {
     render(<Copyright />);
-    const containerDiv = screen.getByText(/© 2024 My Blog. All rights reserved./i).parentElement;
+    const containerDiv = screen.getByText(/© 2024 Michael Yau Blog | All rights reserved./i).parentElement;
     expect(containerDiv).toHaveClass('container', 'mx-auto', 'text-center', 'px-4', 'sm:px-6', 'lg:px-8');
   });
 
   test('renders with correct text size', () => {
     render(<Copyright />);
-    const paragraphElement = screen.getByText(/© 2024 My Blog. All rights reserved./i);
+    const paragraphElement = screen.getByText(/© 2024 Michael Yau Blog | All rights reserved./i);
     expect(paragraphElement).toHaveClass('text-xs', 'xs:text-base');
   });
 

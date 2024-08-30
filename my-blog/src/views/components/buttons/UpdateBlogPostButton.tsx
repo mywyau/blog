@@ -27,7 +27,9 @@ const UpdateBlogPostButton: React.FC = () => {
                 id: 1,
                 post_id: "mikey-1",
                 title: "updated title",
-                body: "Some Content"
+                body: "Some Content",
+                created_at: new Date("2024-08-29T12:34:56Z"),
+                updated_at: new Date("2024-08-29T12:34:56Z")
             }
 
             const { data, error } = await BlogPostConnector.updatePostById(fakeBlogPost.post_id, fakeBlogPost); // Replace '1' with the post ID you want to retrieve

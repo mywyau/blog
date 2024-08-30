@@ -19,6 +19,7 @@ module.exports = {
         'raisin-black': '#242124',
         'azure': '#007FFF',
         'cardinal': '#C51E3A',
+        'emerald': '#06e574',
       },
       backgroundImage: {
         'gradient-to-r': 'linear-gradient(to right, var(--tw-gradient-stops))',
@@ -27,10 +28,25 @@ module.exports = {
         'gradient-to-b': 'linear-gradient(to bottom, var(--tw-gradient-stops))',
       },
       gradientColorStops: {
+        'delete-start': '#f56565', // Red
+        'delete-end': '#c53030', // Dark Red
+        
         'primary-start': '#667eea',
         'primary-end': '#764ba2',
+
+        // Gradient for Save Button
+        'save-start': '#48bb78', // Green
+        'save-end': '#2f855a', // Dark Green
+
+        // Gradient for Info Section
+        'info-start': '#63b3ed', // Light Blue
+        'info-end': '#4299e1', // Blue
+
+        // Gradient for Warning Section
+        'warning-start': '#f6e05e', // Yellow
+        'warning-end': '#dd6b20', // Dark Orange
       },
-            keyframes: {
+      keyframes: {
         'light-up': {
           '0%': { opacity: 0.5 },
           '50%': { opacity: 1 },

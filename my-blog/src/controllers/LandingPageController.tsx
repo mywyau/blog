@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
-import BlogPostConnector from '../connectors/BlogPostConnector';
+import React, { useEffect, useState } from 'react';
 import { PostData } from '../models/PostData';
+import BlogPostService from '../service/BlogPostService';
 import LandingPage from '../views/pages/LandingPage';
 
 interface State {
@@ -9,65 +9,50 @@ interface State {
     loading: boolean;
 }
 
-class LandingPageController {
+const LandingPageController: React.FC = () => {
 
-    onPageLoad = () => {
+    const [state, setState] = useState<State>({
+        posts: [],
+        errorMessage: null,
+        loading: true,
+    });
 
-        const [state, setState] = useState<State>({
-            posts: [],
-            errorMessage: null,
-            loading: true,
-        });
+    useEffect(() => {
+        const fetchPosts = async () => {
+            const { data, error } = await BlogPostService.getAllPostsNewestFirst();
+            if (error) {
+                setState(prevState => ({
+                    ...prevState,
+                    errorMessage: error,
+                    loading: false,
+                }));
 
-        useEffect(() => {
-            console.log("Component rendered");
-            const fetchPost = async () => {
-                try {
-                    const { data, error } = await BlogPostConnector.getAllPosts();
-
-                    if (error) {
-                        setState(prevState => ({
-                            ...prevState,
-                            errorMessage: error,
-                            loading: false,
-                        }));
-                    } else if (data) {
-                        if (data.length === 0) {
-                            setState(prevState => ({
-                                ...prevState,
-                                errorMessage: '[LandingPageController][getAllPosts] No blog posts retrieved, database likely empty',
-                                loading: false,
-                            }));
-                        } else {
-                            setState({
-                                posts: data,
-                                errorMessage: null,
-                                loading: false,
-                            });
-                        }
-                    }
-                } catch (err) {
+            } else if (data) {
+                console.log('Fetched and sorted posts:', data); // Log sorted data
+                if (data.length === 0) {
                     setState(prevState => ({
                         ...prevState,
-                        errorMessage: `[LandingPageController][getAllPosts] Unexpected error: ${err}`,
+                        errorMessage: '[LandingPageController][getAllPosts] No blog posts retrieved, database likely empty',
+                        loading: false,
+                    }));
+                } else {
+                    setState(prevState => ({
+                        ...prevState,
+                        posts: data,
+                        errorMessage: null,
                         loading: false,
                     }));
                 }
-            };
+            }
+        };
+        fetchPosts();
+    }, []);
 
-            fetchPost(); // Call the async function when the component mounts
-        }, []); // Empty dependency array ensures this effect runs only once
-        
-        console.log('[LandingPageController][getAllPosts] Data retrieved:', state.posts);
+    console.log('[LandingPageController][getAllPosts] Data retrieved:', state.posts);
 
-        // if (state.loading) {
-        //     return <div>Loading...</div>; // Optionally show a loading state
-        // }
+    return (
+        <LandingPage posts={state.posts} errorMessage={state.errorMessage ?? ''} />
+    );
+};
 
-        return (
-            <LandingPage posts={state.posts} errorMessage={state.errorMessage ?? ''} />
-        );
-    };
-}
-
-export default new LandingPageController();
+export default LandingPageController;

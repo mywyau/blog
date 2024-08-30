@@ -1,72 +1,60 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import BlogPostConnector from '../../connectors/BlogPostConnector';
 import { PostData } from '../../models/PostData';
 import { useParams } from 'react-router-dom';
 
-const EditPostForm: React.FC = () => {
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
-    const [sqlId, setSqlId] = useState(0);
-    const [sqlPost_id, setSqlPostId] = useState('');
-    const [title, setTitle] = useState('');
-    const [content, setContent] = useState('');
+const MAX_TITLE_LENGTH = 100;
+const MAX_CONTENT_LENGTH = 20000;
 
+const useFetchPost = (postId: string) => {
+    const [post, setPost] = useState<PostData | null>(null);
     const [isLoading, setIsLoading] = useState(false);
-    const [errorMessage, setErrorMessage] = useState<string | null>(null);
-
-    const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
-
-    const maxTitleLength = 100;
-    const maxPostIdLength = 50;
-    const maxContentLength = 20000;
-
-    const { post_id } = useParams<{ post_id: string }>();
-    const postIdDefaulted = post_id ?? 'default-post-id'; // Replace 'default-post-id' with an appropriate default value or handle it accordingly
+    const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
-
         const fetchPost = async () => {
             setIsLoading(true);
-            setErrorMessage(null);
+            setError(null);
 
-            const { data, error } = await BlogPostConnector.getViaPostId(postIdDefaulted);
+            const { data, error } = await BlogPostConnector.getViaPostId(postId);
 
             if (error) {
-                setErrorMessage(error);
+                setError(error);
             } else if (data) {
-                // Preset the form fields with the fetched post data
-                setSqlId(data.id);
-                setSqlPostId(data.post_id);
-                setTitle(data.title);
-                setContent(data.body);
+                setPost(data);
             }
 
             setIsLoading(false);
         };
 
-        fetchPost(); // Call the async function when the component mounts
-    }, [sqlPost_id]);
+        fetchPost();
+    }, [postId]);
 
-    const editPost = async () => {
-        if (title.trim() === '' || content.trim() === '') {
+    return { post, isLoading, error };
+};
+
+const useEditPost = (postId: string, onSuccess: (data: PostData) => void) => {
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState<string | null>(null);
+
+    const editPost = useCallback(async (updatedPost: PostData) => {
+        if (updatedPost.title.trim() === '' || updatedPost.body.trim() === '') {
             alert('Title and content cannot be empty');
             return;
         }
 
         setIsLoading(true);
-        
-        try {
-            const updatedPost: PostData = {
-                id: sqlId, // Use the current postId
-                post_id: sqlPost_id, // Use the updated post_id from state
-                title: title, // Use the updated title from state
-                body: content // Use the updated content from state
-            };
+        setError(null);
 
-            const { data, error } = await BlogPostConnector.updatePostById(sqlPost_id, updatedPost);
+        try {
+            const { data, error } = await BlogPostConnector.updatePostById(postId, updatedPost);
             if (error) {
-                setErrorMessage(error);
+                setError(error);
                 alert(`[EditPostForm][axios.put] Failed to update the blog post. Please try again. ${API_BASE_URL}/blog/post/update`);
-            } else {
+            } else if (data) {
+                onSuccess(data);
                 console.log('Post edited successfully:', data);
             }
         } catch (error) {
@@ -75,30 +63,54 @@ const EditPostForm: React.FC = () => {
         } finally {
             setIsLoading(false);
         }
-    };
+    }, [postId, onSuccess]);
 
-    const remainingTitleChars = maxTitleLength - title.length;
-    const remainingPostIdChars = maxPostIdLength - sqlPost_id.length;
-    const remainingContentChars = maxContentLength - content.length;
+    return { editPost, isLoading, error };
+};
+
+const EditPostForm: React.FC = () => {
+    const { post_id } = useParams<{ post_id: string }>();
+    const postIdDefaulted = post_id ?? 'default-post-id';
+
+    const { post, isLoading: isFetching, error: fetchError } = useFetchPost(postIdDefaulted);
+    const { editPost, isLoading: isEditing, error: editError } = useEditPost(postIdDefaulted, (data) => {
+        console.log('Post updated:', data);
+    });
+
+    const [title, setTitle] = useState('');
+    const [content, setContent] = useState('');
+
+    useEffect(() => {
+        if (post) {
+            setTitle(post.title);
+            setContent(post.body);
+        }
+    }, [post]);
+
+    const remainingTitleChars = MAX_TITLE_LENGTH - title.length;
+    const remainingContentChars = MAX_CONTENT_LENGTH - content.length;
+
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        if (post) {
+            editPost({ ...post, title, body: content });
+        }
+    };
 
     return (
         <div className="p-4">
-            <form
-                onSubmit={(e) => {
-                    e.preventDefault();
-                    editPost();
-                }}
-            >
+            <form onSubmit={handleSubmit}>
                 <div className="mb-4">
                     <label className="block mb-2">
                         Title:
                         <input
+                            id="edit-blog-post-text-title"
                             type="text"
                             value={title}
                             onChange={(e) => setTitle(e.target.value)}
                             className="w-full border border-gray-300 rounded p-2"
-                            maxLength={maxTitleLength}
-                            disabled={isLoading}
+                            maxLength={MAX_TITLE_LENGTH}
+                            disabled={isFetching || isEditing}
                         />
                     </label>
                     <p className="text-gray-600 text-sm">
@@ -109,11 +121,12 @@ const EditPostForm: React.FC = () => {
                     <label className="block mb-2">
                         Content:
                         <textarea
+                            id="edit-blog-post-text-area"
                             value={content}
                             onChange={(e) => setContent(e.target.value)}
                             className="w-full h-64 border border-gray-300 rounded p-2"
-                            maxLength={maxContentLength}
-                            disabled={isLoading}
+                            maxLength={MAX_CONTENT_LENGTH}
+                            disabled={isFetching || isEditing}
                         />
                     </label>
                     <p className="text-gray-600 text-sm">
@@ -121,14 +134,15 @@ const EditPostForm: React.FC = () => {
                     </p>
                 </div>
                 <button
+                    id="edit-blog-post"
                     type="submit"
-                    disabled={isLoading}
+                    disabled={isFetching || isEditing}
                     className="bg-true-blue text-white hover:bg-cambridge-blue px-4 py-2 rounded"
                 >
-                    {isLoading ? 'Updating...' : 'Update Post'}
+                    {isFetching || isEditing ? 'Updating...' : 'Update Post'}
                 </button>
             </form>
-            {errorMessage && <p className="text-red-500 mt-4">{errorMessage}</p>}
+            {(fetchError || editError) && <p className="text-red-500 mt-4">{fetchError || editError}</p>}
         </div>
     );
 };

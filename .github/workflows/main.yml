@@ -115,19 +115,36 @@ jobs:
 
       # Wait for services to be ready
       - name: Wait for services
-        run: sleep 30 # Adjust as necessary to wait for services to be ready
+        run: sleep 5 # Adjust as necessary to wait for services to be ready
 
       # Seed the database
       - name: Seed the Database
         run: |
           docker-compose exec -T postgres psql -U myuser -d postgres -c "
-          CREATE TABLE posts (
-              id SERIAL PRIMARY KEY,
-              post_id VARCHAR NOT NULL,
-              title VARCHAR NOT NULL,
-              body TEXT NOT NULL,
-              created_at TIMESTAMPTZ DEFAULT now()
-          );"    
+            CREATE TABLE posts (
+                id SERIAL PRIMARY KEY,
+                post_id VARCHAR NOT NULL,
+                title VARCHAR NOT NULL,
+                body TEXT NOT NULL,
+                created_at TIMESTAMPTZ DEFAULT now(),
+                updated_at TIMESTAMPTZ DEFAULT now()
+            );
+            CREATE TABLE skills (
+                id SERIAL PRIMARY KEY,
+                skill_id VARCHAR NOT NULL,
+                skill_name VARCHAR NOT NULL,
+                body TEXT NOT NULL,
+                created_at TIMESTAMPTZ DEFAULT now(),
+                updated_at TIMESTAMPTZ DEFAULT now()
+            );
+            CREATE TABLE worklog (
+                id SERIAL PRIMARY KEY,
+                worklog_id VARCHAR NOT NULL,
+                work_title VARCHAR NOT NULL,
+                body TEXT NOT NULL,
+                created_at TIMESTAMPTZ DEFAULT now(),
+                updated_at TIMESTAMPTZ DEFAULT now()
+            );"
 
       # Check the Database Content
       - name: Check Database Content

@@ -14,8 +14,17 @@ jest.mock('axios');
 const mockedAxios = axios as jest.Mocked<typeof axios>;
 
 describe('PostCreator Component', () => {
+
+  const mockDate = new Date('2024-08-30T08:49:48.678Z');
+
   beforeEach(() => {
     mockedAxios.post.mockClear();
+    jest.useFakeTimers(); // Optionally, if you are dealing with timers
+    jest.setSystemTime(mockDate); // Set the mock date
+  });
+
+  afterEach(() => {
+    jest.useRealTimers(); // Clean up after each test
   });
 
   it('renders the form fields correctly', () => {
@@ -50,12 +59,18 @@ describe('PostCreator Component', () => {
   // });
 
   it('submits the form when fields are filled', async () => {
+
+    const mockDate = new Date('2024-08-30T08:49:48.678Z');
+    jest.setSystemTime(mockDate);
+
     mockedAxios.post.mockResolvedValueOnce({
       data: {
         id: 1,
         post_id: 'test-post',
         title: 'Test Title',
         body: 'Test Content',
+        created_at: mockDate.toISOString(),
+        updated_at: mockDate.toISOString()
       },
     });
 
@@ -74,7 +89,7 @@ describe('PostCreator Component', () => {
     fireEvent.click(screen.getByText(/Create Post/i));
 
     await waitFor(() => {
-      
+
       expect(mockedAxios.post).toHaveBeenCalledWith(
         API_BASE_URL + '/blog/post/create',
         {
@@ -82,13 +97,17 @@ describe('PostCreator Component', () => {
           post_id: 'test-post',
           title: 'Test Title',
           body: 'Test Content',
+          created_at: mockDate.toISOString(),
+          updated_at: mockDate.toISOString()
         }
       );
-    });
 
-    expect(screen.getByLabelText(/Title:/i)).toHaveValue('');
-    expect(screen.getByLabelText(/Post ID:/i)).toHaveValue('');
-    expect(screen.getByLabelText(/Content:/i)).toHaveValue('');
+
+      expect(screen.getByLabelText(/Title:/i)).toHaveValue('');
+      expect(screen.getByLabelText(/Post ID:/i)).toHaveValue('');
+      expect(screen.getByLabelText(/Content:/i)).toHaveValue('');
+    });
+    jest.useRealTimers(); // Clean up
   });
 
   // TODO: clean up and remove or try to implement error summary as part of the dom/page not as an alert.
