@@ -115,7 +115,7 @@ jobs:
 
       # Wait for services to be ready
       - name: Wait for services
-        run: sleep 30 # Adjust as necessary to wait for services to be ready
+        run: sleep 5 # Adjust as necessary to wait for services to be ready
 
       # Seed the database
       - name: Seed the Database
@@ -126,7 +126,7 @@ jobs:
                 post_id VARCHAR NOT NULL,
                 title VARCHAR NOT NULL,
                 body TEXT NOT NULL,
-                created_at TIMESTAMPTZ DEFAULT now()
+                created_at TIMESTAMPTZ DEFAULT now(),
                 created_at TIMESTAMPTZ DEFAULT now()
             );"  
           docker-compose exec -T postgres psql -U myuser -d postgres -c "
@@ -135,7 +135,7 @@ jobs:
                 skill_id VARCHAR NOT NULL,
                 skill_name VARCHAR NOT NULL,
                 body TEXT NOT NULL,
-                created_at TIMESTAMPTZ DEFAULT now()
+                created_at TIMESTAMPTZ DEFAULT now(),
                 created_at TIMESTAMPTZ DEFAULT now()
             );"   
 
