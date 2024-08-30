@@ -1,25 +1,19 @@
 // src/components/BlogList.tsx
 import React from 'react';
+import { WorkLogData } from '../../../models/WorkLogData';
 import WorkLogCard from './WorkLogCard';
 
-interface Record {
-  id: number;
-  taskTitle: string;
-  description: string;
-}
 
 interface WorkLogListProps {
-  records: Record[];
+  workLogData: WorkLogData;
 }
 
-const WorkLogGrid: React.FC<WorkLogListProps> = ({ records }) => {
+const WorkLogGrid: React.FC<WorkLogListProps> = ({ workLogData }) => {
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 mt-4">
       {
-        records.map(record => (
-          <WorkLogCard id={record.id} taskTitle={record.taskTitle} description={record.description} />
-        ))
+        <WorkLogCard worklog_id={workLogData.worklog_id} taskTitle={workLogData.work_title} description={workLogData.body} />
       }
     </div>
   );

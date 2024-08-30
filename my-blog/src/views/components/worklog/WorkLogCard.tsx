@@ -1,14 +1,15 @@
-// src/components/SkillsCard.tsx
+// src/components/WorklogsCard.tsx
 import React from 'react';
-// import { messages } from '../../messages/skills';
+import EditWorklogButton from '../buttons/EditWorklogButton';
+// import { messages } from '../../messages/Worklogs';
 
 interface WorkLogCardProps {
-    id: number;
+    worklog_id: string;
     taskTitle: string;
     description: string;
 }
 
-const WorkLogCard: React.FC<WorkLogCardProps> = ({ id, taskTitle, description }) => {
+const WorkLogCard: React.FC<WorkLogCardProps> = ({ worklog_id, taskTitle, description }) => {
 
     const countWords = (text: String) => {
         return text ? text.trim().split(/\s+/).length : 0;
@@ -21,6 +22,10 @@ const WorkLogCard: React.FC<WorkLogCardProps> = ({ id, taskTitle, description })
                     <h2>{taskTitle}</h2>
                     <p className='text-sm text-orange-400 mb-4 pt-4'>Word Count: {countWords(description)}</p>
                     <p className="text-base text-gray-700 mb-4">{description}</p>
+                </div>
+                <div className="flex space-x-4"> {/* Flex container for buttons */}
+                    <EditWorklogButton worklogId={worklog_id} />
+                    {/* <DeleteWorklogButton handleDelete={handleDelete} loading={loadingState} errorMessage={deleteErrorMessage} deleteResponseBody={deleteResponseBody} /> */}
                 </div>
             </div>
         </div>
