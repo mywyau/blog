@@ -52,7 +52,7 @@ describe('BlogPostController', () => {
 
     it('should render BlogPostPage component with post title', () => {
         // Define a mock post
-        const mockPost: PostData = { id: 1, post_id: 'test-id', title: 'Test Title', body: 'Test Body' };
+        const mockPost: PostData = { id: 1, post_id: 'test-id', title: 'Test Title', body: 'Test Body', created_at: new Date(), updated_at: new Date() };
 
         // Mock the return value of useBlogPost to simulate a successful post fetch
         mockUseBlogPost.mockReturnValue({
