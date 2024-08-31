@@ -20,7 +20,6 @@ jest.mock('../src/views/pages/LandingPage', () => () => <div>LandingPage Compone
 jest.mock('../src/views/pages/PrivacyPolicyPage', () => () => <div>PrivacyPolicy Component</div>);
 jest.mock('../src/views/pages/SkillsPage', () => () => <div>Skills Component</div>);
 jest.mock('../src/views/pages/TermsOfServicePage', () => () => <div>TermsOfService Component</div>);
-jest.mock('../src/views/pages/WorkLogPage', () => () => <div>WorkLog Component</div>);
 
 describe('App component', () => {
   test('renders LandingPage component for the root route', () => {
@@ -167,12 +166,6 @@ describe('App component', () => {
     expect(screen.getByText('Skills Component')).toBeInTheDocument();
   });
 
-  test('renders WorkLog component for the /work-log route', () => {
-    render(
-      <MemoryRouter initialEntries={['/work-log']}>
-        <App />
-      </MemoryRouter>
-    );
-    expect(screen.getByText('WorkLog Component')).toBeInTheDocument();
-  });
+
+
 });

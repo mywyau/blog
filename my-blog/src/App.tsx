@@ -27,7 +27,6 @@ import TermsOfServicePage from './views/pages/TermsOfServicePage';
 
 
 
-
 const App: React.FC = () => {
   return (
     <Routes>
