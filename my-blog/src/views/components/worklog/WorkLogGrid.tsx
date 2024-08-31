@@ -11,9 +11,9 @@ interface WorkLogListProps {
 const WorkLogGrid: React.FC<WorkLogListProps> = ({ workLogData }) => {
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 mt-4">
+    <div className="h-full flex">
       {
-        <WorkLogCard worklog_id={workLogData.worklog_id} taskTitle={workLogData.work_title} description={workLogData.body} />
+        <WorkLogCard key={workLogData.id} worklog_id={workLogData.worklog_id} taskTitle={workLogData.work_title} description={workLogData.body} />
       }
     </div>
   );

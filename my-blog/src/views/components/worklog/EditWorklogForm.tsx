@@ -20,7 +20,7 @@ const EditWorklogForm: React.FC = () => {
     const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
     const maxWork_titleLength = 100;
-    const maxContentLength = 400;
+    const maxContentLength = 5000;
 
     const { worklog_id } = useParams<{ worklog_id: string }>();
     console.log(`${worklog_id}`)

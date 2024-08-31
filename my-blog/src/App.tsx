@@ -2,11 +2,13 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import BlogPostController from './controllers/BlogPostController';
-import CreateSkillsController from './controllers/CreateSkillsController copy';
+import CreateSkillsController from './controllers/CreateSkillsController';
+import CreateWorklogController from './controllers/CreateWorklogController';
 import EditSkillPageController from './controllers/EditSkillsPageController';
+import EditWorklogPageController from './controllers/EditWorklogPageController copy';
 import LandingPageController from './controllers/LandingPageController';
 import ShowSkillsPageController from './controllers/ShowSkillsPageController';
-import ShowWorklogsPageController from './controllers/ShowWorklogsPageController copy';
+import ShowWorklogsPageController from './controllers/ShowWorklogsPageController';
 import AboutPage from './views/pages/AboutPage';
 import ButtonsPage from './views/pages/assets_pages/ButtonsPage';
 import CheckboxesPage from './views/pages/assets_pages/CheckboxesPage';
@@ -22,7 +24,7 @@ import EditBlogPostPage from './views/pages/EditBlogPostPage';
 import InterestsPage from './views/pages/InterestsPage';
 import PrivacyPolicyPage from './views/pages/PrivacyPolicyPage';
 import TermsOfServicePage from './views/pages/TermsOfServicePage';
-import EditWorklogPageController from './controllers/EditWorklogPageController copy';
+
 
 
 
@@ -40,6 +42,7 @@ const App: React.FC = () => {
       <Route path="/edit-skill/:skill_id" element={<EditSkillPageController />} />
 
       <Route path="/worklog" element={<ShowWorklogsPageController />} />
+      <Route path="worklog/add/new/worklog" element={<CreateWorklogController />} />
       <Route path="/edit-worklog/:worklog_id" element={<EditWorklogPageController />} />
 
       <Route path="/about" element={<AboutPage />} />
