@@ -59,7 +59,7 @@ const Contact: React.FC = () => {
                   <p className="text-2xl text-gray-700 mb-4 pt-5">{messages.phoneNumber.mobile}</p>
                   <FontAwesomeIcon
                     icon={faCopy}
-                    className="ml-2 text-gray-500 cursor-pointer"
+                    className="ml-3 text-gray-500 cursor-pointer"
                     onClick={() => copyToClipboard(messages.phoneNumber.mobile)}
                   />
                 </div>
@@ -80,7 +80,7 @@ const Contact: React.FC = () => {
                   <p className="text-2xl text-gray-700">{messages.address.houseNumber} {messages.address.street}</p>
                   <FontAwesomeIcon
                     icon={faCopy}
-                    className="ml-2 text-gray-500 cursor-pointer"
+                    className="ml-3 text-gray-500 cursor-pointer"
                     onClick={() => copyToClipboard(`${messages.address.houseNumber} ${messages.address.street}`)}
                   />
                 </div>
@@ -89,7 +89,7 @@ const Contact: React.FC = () => {
                   <p className="text-2xl text-gray-700">{messages.address.county}</p>
                   <FontAwesomeIcon
                     icon={faCopy}
-                    className="ml-2 text-gray-500 cursor-pointer"
+                    className="ml-3 text-gray-500 cursor-pointer"
                     onClick={() => copyToClipboard(messages.address.county)}
                   />
                 </div>
@@ -98,7 +98,7 @@ const Contact: React.FC = () => {
                   <p className="text-2xl text-gray-700">{messages.address.city}</p>
                   <FontAwesomeIcon
                     icon={faCopy}
-                    className="ml-2 text-gray-500 cursor-pointer"
+                    className="ml-3 text-gray-500 cursor-pointer"
                     onClick={() => copyToClipboard(messages.address.city)}
                   />
                 </div>
@@ -107,7 +107,7 @@ const Contact: React.FC = () => {
                   <p className="text-2xl text-gray-700">{messages.address.country}</p>
                   <FontAwesomeIcon
                     icon={faCopy}
-                    className="ml-2 text-gray-500 cursor-pointer"
+                    className="ml-3 text-gray-500 cursor-pointer"
                     onClick={() => copyToClipboard(messages.address.country)}
                   />
                 </div>
@@ -116,7 +116,7 @@ const Contact: React.FC = () => {
                   <p className="text-2xl text-gray-700">{messages.address.postcode}</p>
                   <FontAwesomeIcon
                     icon={faCopy}
-                    className="ml-2 text-gray-500 cursor-pointer"
+                    className="ml-3 text-gray-500 cursor-pointer"
                     onClick={() => copyToClipboard(messages.address.postcode)}
                   />
                 </div>
@@ -136,7 +136,7 @@ const Contact: React.FC = () => {
                   <p className="text-2xl text-gray-700">{messages.email}</p>
                   <FontAwesomeIcon
                     icon={faCopy}
-                    className="ml-2 text-gray-500 cursor-pointer"
+                    className="ml-3 text-gray-500 cursor-pointer"
                     onClick={() => copyToClipboard(messages.email)}
                   />
                 </div>
