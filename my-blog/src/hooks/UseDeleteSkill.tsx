@@ -1,9 +1,7 @@
 import { none, Option, some } from 'fp-ts/Option';
 import { useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { DeleteResponseBody } from '../models/DeleteResponseBody';
-import BlogPostConnector from '../connectors/BlogPostConnector';
 import SkillsConnector from '../connectors/SkillsConnector';
+import { DeleteResponseBody } from '../models/DeleteResponseBody';
 
 
 interface OnDeleteReturn {
@@ -14,7 +12,6 @@ interface OnDeleteReturn {
 }
 
 const UseDeleteSkill = (skill_id: string): OnDeleteReturn => {
-
 
     const [deleteResponseBody, setDeleteResponseBody] = useState<Option<DeleteResponseBody>>(none);
     const [deleteErrorMessage, setDeleteErrorMessage] = useState<Option<string>>(none);
