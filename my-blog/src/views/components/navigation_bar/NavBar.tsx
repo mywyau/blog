@@ -86,7 +86,7 @@ const Navbar: React.FC = () => {
               Skills
             </Link>
             <Link
-              id="worklog"
+              id="worklog-nav"
               to="/worklog"
               className="text-white text-lg hover:text-gray-300 transition-colors duration-300"
             >
