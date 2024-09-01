@@ -9,6 +9,7 @@ const MAX_TITLE_LENGTH = 100;
 const MAX_CONTENT_LENGTH = 20000;
 
 const useFetchPost = (postId: string) => {
+
     const [post, setPost] = useState<PostData | null>(null);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
@@ -36,6 +37,7 @@ const useFetchPost = (postId: string) => {
 };
 
 const useEditPost = (postId: string, onSuccess: (data: PostData) => void) => {
+    
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
 

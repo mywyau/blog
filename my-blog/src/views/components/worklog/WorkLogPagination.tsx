@@ -1,16 +1,16 @@
 import React from 'react';
 
 interface WorkLogPaginationProps {
-  recordsPerPage: number;
-  totalrecords: number;
+  worklogPerPage: number;
+  totalWorklogs: number;
   paginate: (pageNumber: number) => void;
 }
 
 
-const WorkLogPagination: React.FC<WorkLogPaginationProps> = ({ recordsPerPage, totalrecords, paginate }) => {
+const WorkLogPagination: React.FC<WorkLogPaginationProps> = ({ worklogPerPage, totalWorklogs, paginate }) => {
   const pageNumbers = [];
 
-  for (let i = 1; i <= Math.ceil(totalrecords / recordsPerPage); i++) {
+  for (let i = 1; i <= Math.ceil(totalWorklogs / worklogPerPage); i++) {
     pageNumbers.push(i);
   }
 

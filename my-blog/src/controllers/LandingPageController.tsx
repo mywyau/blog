@@ -11,11 +11,12 @@ interface State {
 
 const LandingPageController: React.FC = () => {
 
-    const [state, setState] = useState<State>({
-        posts: [],
-        errorMessage: null,
-        loading: true,
-    });
+    const [state, setState] =
+        useState<State>({
+            posts: [],
+            errorMessage: null,
+            loading: true,
+        });
 
     useEffect(() => {
         const fetchPosts = async () => {

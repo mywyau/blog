@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { SkillData } from '../../../models/SkillData';
 import SkillsConnector from '../../../connectors/SkillsConnector';
+import { SkillData } from '../../../models/SkillData';
 
 const EditSkillPage: React.FC = () => {
 
@@ -47,14 +47,15 @@ const EditSkillPage: React.FC = () => {
     }, [sqlSkillId]);
 
     const editPost = async () => {
-        
+
         try {
-            const updatedSkill: SkillData = {
-                id: sqlId, // Use the current postId
-                skill_id: sqlSkillId, // Use the updated post_id from state
-                skill_name: skillName, // Use the updated skillName from state
-                body: content // Use the updated content from state
-            };
+            const updatedSkill:
+                SkillData = {
+                    id: sqlId, // Use the current postId
+                    skill_id: sqlSkillId, // Use the updated post_id from state
+                    skill_name: skillName, // Use the updated skillName from state
+                    body: content // Use the updated content from state
+                };
 
             const { data, error } = await SkillsConnector.updateSkillById(sqlSkillId, updatedSkill);
             if (error) {
