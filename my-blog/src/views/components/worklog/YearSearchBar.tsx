@@ -1,35 +1,38 @@
-// src/components/worklog/YearSearchBar.tsx
 import React, { useState } from 'react';
 
 interface YearSearchBarProps {
-  onYearSearch: (year: number) => void;
+  onYearSearch: (year: number | null) => void;  // Allow null to indicate no specific year
 }
 
 const YearSearchBar: React.FC<YearSearchBarProps> = ({ onYearSearch }) => {
   const [inputYear, setInputYear] = useState<string>('');
 
-  const handleSearch = () => {
-    const year = parseInt(inputYear, 10);
-    if (!isNaN(year)) {
-      onYearSearch(year);
+  const handleSearch = (yearStr: string) => {
+    if (yearStr === '') {
+      onYearSearch(null);  // Pass null to show all posts
+    } else {
+      const year = parseInt(yearStr, 10);
+      if (!isNaN(year)) {
+        onYearSearch(year);
+      }
     }
   };
 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const yearStr = e.target.value;
+    setInputYear(yearStr);
+    handleSearch(yearStr);
+  };
+
   return (
-    <div className="flex mb-4">
+    <div className="flex justify-center mb-4">
       <input
         type="text"
         value={inputYear}
-        onChange={(e) => setInputYear(e.target.value)}
+        onChange={handleChange}  // Trigger search as user types
         placeholder="Enter year..."
-        className="px-4 py-2 border rounded-l-md focus:outline-none"
+        className="px-4 py-2 border rounded-md focus:outline-none"
       />
-      <button
-        onClick={handleSearch}
-        className="px-4 py-2 bg-blue-500 text-white rounded-r-md hover:bg-blue-700 focus:outline-none"
-      >
-        Search
-      </button>
     </div>
   );
 };

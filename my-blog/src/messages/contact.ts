@@ -11,7 +11,8 @@ const messages = {
     street: "Clos Telerch",
     county: "Rumney",
     city: "Cardiff",
-    country: "United Kingdom"
+    country: "United Kingdom",
+    postcode: "CF3 3NJ"
   },
   lorem: {
     p1: "Lorem ipsum odor amet, consectetuer adipiscing elit. Aenean dui maximus euismod porta pulvinar eu dis. Sit et libero efficitur suscipit sit nec nullam ante. Morbi in massa nibh nec tellus, eu fusce cras. Gravida aptent mi per egestas, turpis himenaeos suspendisse. Orci mattis diam interdum sed imperdiet montes.",

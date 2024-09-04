@@ -18,7 +18,7 @@ import LoadingPage from './views/pages/assets_pages/LoadingPage';
 import RadioPage from './views/pages/assets_pages/RadioPage';
 import VideosPage from './views/pages/assets_pages/VideosPage';
 import AssetsPage from './views/pages/AssetsPage';
-import Contacts from './views/pages/ContactsPage';
+import ContactPage from './views/pages/ContactsPage';
 import CreateBlogPostPage from './views/pages/CreateBlogPostPage';
 import EditBlogPostPage from './views/pages/EditBlogPostPage';
 import InterestsPage from './views/pages/InterestsPage';
@@ -45,7 +45,7 @@ const App: React.FC = () => {
       <Route path="/edit-worklog/:worklog_id" element={<EditWorklogPageController />} />
 
       <Route path="/about" element={<AboutPage />} />
-      <Route path="/contact" element={<Contacts />} />
+      <Route path="/contact" element={<ContactPage />} />
       <Route path="/interests" element={<InterestsPage />} />
 
       <Route path="/assets" element={<AssetsPage />} />

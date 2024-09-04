@@ -1,20 +1,19 @@
-// src/components/BlogList.tsx
 import React from 'react';
 import { WorkLogData } from '../../../models/WorkLogData';
 import WorkLogCard from './WorkLogCard';
-
 
 interface WorkLogListProps {
   workLogData: WorkLogData;
 }
 
 const WorkLogGrid: React.FC<WorkLogListProps> = ({ workLogData }) => {
-
   return (
-    <div className="h-full flex">
-      {
-        <WorkLogCard key={workLogData.id} worklog_id={workLogData.worklog_id} taskTitle={workLogData.work_title} description={workLogData.body} />
-      }
+    <div className="h-full w-full">
+      <WorkLogCard 
+        key={workLogData.id} 
+        worklogData={workLogData} 
+        // className="h-full w-full" // Ensure the card itself also fills the grid space
+      />
     </div>
   );
 };

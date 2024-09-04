@@ -43,7 +43,14 @@ class WorklogConnector {
         try {
             const response = await axios.get(`${this.baseUrl}/blog/worklog/get/all`);
             console.log('[WorklogsConnector][getAllworklogs] Data retrieved:', response.data);
-            return { data: response.data };
+
+            const worklogs: WorkLogData[] = response.data.map((worklog: any) => ({
+                ...worklog,
+                created_at: new Date(worklog.created_at),
+                updated_at: new Date(worklog.updated_at),
+            }));
+
+            return { data: worklogs };
         } catch (error) {
             if (axios.isAxiosError(error)) {
                 console.error(
@@ -65,6 +72,7 @@ class WorklogConnector {
             }
         }
     }
+
 
 
     async updateWorklogById(worklog_id: string, newWorkLogData: WorkLogData): Promise<{ data?: WorkLogData; error?: string }> {

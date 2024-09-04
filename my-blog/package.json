@@ -4,6 +4,8 @@
   "private": true,
   "homepage": "https://mywyau.github.io/",
   "dependencies": {
+    "@fortawesome/free-solid-svg-icons": "^6.6.0",
+    "@fortawesome/react-fontawesome": "^0.2.2",
     "@testing-library/user-event": "^13.5.0",
     "@types/jest": "^29.5.12",
     "@types/node": "^16.18.101",
@@ -20,6 +22,7 @@
     "react-lazy-load-image-component": "^1.6.2",
     "react-router-dom": "^6.24.1",
     "react-scripts": "^5.0.1",
+    "react-toastify": "^10.0.5",
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"
   },

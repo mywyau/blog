@@ -4,4 +4,6 @@ export interface SkillData {
     skill_id: string;
     skill_name: string;
     body: string;
+    created_at: Date;
+    updated_at: Date;
 }

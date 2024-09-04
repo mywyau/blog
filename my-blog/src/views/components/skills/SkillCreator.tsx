@@ -17,36 +17,45 @@ const SkillCreator: React.FC = () => {
   const maxSkillIdLength = 50;
   const maxContentLength = 400;
 
-  const createPost = async () => {
+  const createSkill = async () => {
     if (skill_name.trim() === '' || content.trim() === '') {
       alert('Skill Name and content cannot be empty');
       return;
     }
 
-    const postData: SkillData = {
+    const skillData: SkillData = {
       id: id,
       skill_id: skill_id,
       skill_name: skill_name,
-      body: content
+      body: content,
+      created_at: new Date(),
+      updated_at: new Date()
     };
 
     setIsLoading(true);
     try {
-      const response = await axios.post(API_BASE_URL + '/blog/skill/create', postData);
-      console.log('Post created successfully:', response.data);
+      const response = await axios.post(API_BASE_URL + '/blog/skill/create', 
+        {
+          ...skillData,
+          created_at: skillData.created_at.toISOString(),
+          updated_at: skillData.updated_at.toISOString(),
+        }
+
+      );
+      console.log('Skill created successfully:', response.data);
       setSkillName('');
       setSkillId('');
       setContent('');
     } catch (error) {
-      console.error('Error creating post:', error);
-      alert(`[SkillCreator][axios.post] Failed to create the post. Please try again. ${API_BASE_URL}/blog/skill/create`);
+      console.error('Error creating skill:', error);
+      alert(`[SkillCreator][axios.post] Failed to create the skill. Please try again. ${API_BASE_URL}/blog/skill/create`);
     } finally {
       setIsLoading(false);
     }
   };
 
-  const remainingskill_nameChars = maxSkillNameLength - skill_name.length;
-  const remainingPostIdChars = maxSkillIdLength - skill_id.length;
+  const remainingSkillNameChars = maxSkillNameLength - skill_name.length;
+  const remainingSkillIdChars = maxSkillIdLength - skill_id.length;
   const remainingContentChars = maxContentLength - content.length;
 
   return (
@@ -54,7 +63,7 @@ const SkillCreator: React.FC = () => {
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          createPost();
+          createSkill();
         }}
       >
         <div className="mb-4">
@@ -70,7 +79,7 @@ const SkillCreator: React.FC = () => {
             />
           </label>
           <p className="text-gray-600 text-sm">
-            {remainingskill_nameChars} characters remaining
+            {remainingSkillNameChars} characters remaining
           </p>
         </div>
         <div>
@@ -86,7 +95,7 @@ const SkillCreator: React.FC = () => {
             />
           </label>
           <p className="text-gray-600 text-sm">
-            {remainingPostIdChars} characters remaining
+            {remainingSkillIdChars} characters remaining
           </p>
         </div>
         <div className="mt-4 mb-4">

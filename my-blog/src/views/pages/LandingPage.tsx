@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { PostData } from '../../models/PostData';
 import BlogList from '../blog/BlogList';
+import DeleteAllBlogPostsButton from '../components/buttons/DeleteAllBlogPostsButton';
 import Copyright from '../components/Copyright';
 import Navbar from '../components/navigation_bar/NavBar';
 import Pagination from '../components/Pagination';
 import SearchBar from '../components/SearchBar';
-import DeleteAllBlogPostsButton from '../components/buttons/DeleteAllBlogPostsButton';
 
 interface LandingPageProps {
   posts: PostData[];
@@ -36,9 +36,6 @@ const LandingPage: React.FC<LandingPageProps> = ({ posts, errorMessage }) => {
       </header>
       <main className="container mx-auto p-10">
 
-        {/* {loading && <p>Loading...</p>} */}
-        {errorMessage && <p className='text-xl text-purple-800'>Error: {errorMessage}</p>}
-
         {/* Use the SearchBar component */}
         <div className="w-full md:w-2/3 lg:w-1/3 mx-auto">
           <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
@@ -52,6 +49,9 @@ const LandingPage: React.FC<LandingPageProps> = ({ posts, errorMessage }) => {
             ) : (
               <BlogList posts={currentPosts} />
             )}
+
+            {/* {loading && <p>Loading...</p>} */}
+            {errorMessage && <p className='text-lg text-center text-red-500'>Error: {errorMessage}</p>}
 
             <Pagination
               postsPerPage={postsPerPage}
