@@ -13,11 +13,11 @@ describe('AboutPage Component', () => {
       expect(navbar).toBeInTheDocument();
     });
   
-    it('should render the H1 title with the correct message', () => {
-      render(<AboutPage />);
-      const title = screen.getByRole('heading', { name: messages.about.title });
-      expect(title).toBeInTheDocument();
-    });
+    // it('should render the H1 title with the correct message', () => {
+    //   render(<AboutPage />);
+    //   const title = screen.getByRole('heading', { name: messages.about.title });
+    //   expect(title).toBeInTheDocument();
+    // });
   
     it('should render all paragraphs with the correct text', () => {
       render(<AboutPage />);

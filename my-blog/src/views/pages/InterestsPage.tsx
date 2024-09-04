@@ -5,6 +5,8 @@ import Copyright from '../components/Copyright';
 import InterestsCard from '../components/InterestsCard';
 import H1 from '../components/general/H1';
 import Navbar from '../components/navigation_bar/NavBar';
+import Spacer from '../components/Spacer';
+import NavbarPages from '../../models/ADTs/NavbarPages';
 
 
 const InterestsGrid: React.FC = () => {
@@ -24,8 +26,9 @@ const InterestsGrid: React.FC = () => {
 const Interests: React.FC = () => {
   return (
     <div className="flex flex-col min-h-screen font-nunito bg-gray-100">
-      <Navbar />
-      <H1 id={"interests"} message={messages.title} className={""} />
+      <Navbar page={NavbarPages.Interests} />
+      {/* <H1 id={"interests"} message={messages.title} className={""} /> */}
+      <Spacer size='p-20'/>
       <InterestsGrid />
       <Copyright />
     </div>

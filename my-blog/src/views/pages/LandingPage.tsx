@@ -51,7 +51,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ posts, errorMessage }) => {
             )}
 
             {/* {loading && <p>Loading...</p>} */}
-            {errorMessage && <p className='text-lg text-center text-purple-800'>Error: {errorMessage}</p>}
+            {errorMessage && <p className='text-lg text-center text-red-500'>Error: {errorMessage}</p>}
 
             <Pagination
               postsPerPage={postsPerPage}

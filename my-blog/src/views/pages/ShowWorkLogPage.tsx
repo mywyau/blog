@@ -10,6 +10,8 @@ import WorkLogGrid from '../components/worklog/WorkLogGrid';
 import WorkLogPagination from '../components/worklog/WorkLogPagination';
 import YearFilter from '../components/worklog/YearFilter';
 import YearSearchBar from '../components/worklog/YearSearchBar';
+import NavbarPages from '../../models/ADTs/NavbarPages';
+import Spacer from '../components/Spacer';
 
 interface WorkLogPageProps {
   worklogs: WorkLogData[];
@@ -48,8 +50,9 @@ const ShowWorkLogPage: React.FC<WorkLogPageProps> = ({ worklogs, errorMessage })
 
   return (
     <div className="flex flex-col min-h-screen font-nunito bg-gray-100">
-      <Navbar />
-      <H1 id={"worklog"} message={messages.about.title} className={""} />
+      <Navbar page={NavbarPages.Worklog} />
+      <Spacer size={"p-20"} />
+      {/* <H1 id={"worklog"} message={messages.about.title} className={""} /> */}
       <div className="flex flex-col flex-grow container mx-auto">
 
         {/* Year Filter Component
@@ -68,7 +71,7 @@ const ShowWorkLogPage: React.FC<WorkLogPageProps> = ({ worklogs, errorMessage })
           />
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 mt-4"> {/* Ensure equal height p-2 sm:p-3 h-full flex */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 h-full w-full gap-4 mt-4"> {/* Ensure equal height p-2 sm:p-3 h-full flex */}
           {currentTasks.map(worklog =>
             <WorkLogGrid workLogData={worklog} />
           )}

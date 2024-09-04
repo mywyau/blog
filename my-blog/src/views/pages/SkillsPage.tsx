@@ -8,6 +8,8 @@ import H1 from '../components/general/H1';
 import Navbar from '../components/navigation_bar/NavBar';
 import SkillList from '../components/skills/SkillsList';
 import SkillsPagination from '../components/skills/SkillsPagination';
+import NavbarPages from '../../models/ADTs/NavbarPages';
+import Spacer from '../components/Spacer';
 
 interface SkillsPageProps {
   skills: SkillData[];
@@ -29,8 +31,10 @@ const SkillsPage: React.FC<SkillsPageProps> = ({ skills, errorMessage }) => {
 
   return (
     <div className="flex flex-col min-h-screen font-nunito bg-gray-100">
-      <Navbar />
-      <H1 id={"skills"} message={messages.about.title} className={""} />
+      <Navbar page={NavbarPages.Skills} />
+
+      {/* <H1 id={"skills"} message={messages.about.title} className={""} /> */}
+      <Spacer size={"p-20"} />
       
       <div className="flex flex-col flex-grow container mx-auto">
 

@@ -9,6 +9,7 @@ const EditSkillPage: React.FC = () => {
     const [sqlSkillId, setSqlSkillId] = useState('');
     const [skillName, setSkillName] = useState('');
     const [content, setContent] = useState('');
+    const [createdAt, setCreatedAt] = useState<Date>(new Date);
 
     const [isLoading, setIsLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -38,6 +39,7 @@ const EditSkillPage: React.FC = () => {
                 setSqlSkillId(data.skill_id);
                 setSkillName(data.skill_name);
                 setContent(data.body);
+                setCreatedAt(data.created_at);
             }
 
             setIsLoading(false);
@@ -51,11 +53,13 @@ const EditSkillPage: React.FC = () => {
         try {
             const updatedSkill:
                 SkillData = {
-                    id: sqlId, // Use the current postId
-                    skill_id: sqlSkillId, // Use the updated post_id from state
-                    skill_name: skillName, // Use the updated skillName from state
-                    body: content // Use the updated content from state
-                };
+                id: sqlId, // Use the current postId
+                skill_id: sqlSkillId, // Use the updated post_id from state
+                skill_name: skillName, // Use the updated skillName from state
+                body: content, // Use the updated content from state
+                created_at: createdAt,
+                updated_at: new Date
+            };
 
             const { data, error } = await SkillsConnector.updateSkillById(sqlSkillId, updatedSkill);
             if (error) {
