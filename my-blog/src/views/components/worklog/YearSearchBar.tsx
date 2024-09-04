@@ -31,7 +31,7 @@ const YearSearchBar: React.FC<YearSearchBarProps> = ({ onYearSearch }) => {
         value={inputYear}
         onChange={handleChange}  // Trigger search as user types
         placeholder="Enter year..."
-        className="px-4 py-2 border rounded-md focus:outline-none"
+        className="w-1/4 sm:w-1/4 px-4 py-2 text-base border rounded-lg focus:outline-none"
       />
     </div>
   );
