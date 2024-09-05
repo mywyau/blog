@@ -24,6 +24,7 @@ import EditBlogPostPage from './views/pages/EditBlogPostPage';
 import InterestsPage from './views/pages/InterestsPage';
 import PrivacyPolicyPage from './views/pages/PrivacyPolicyPage';
 import TermsOfServicePage from './views/pages/TermsOfServicePage';
+import CreateUserForm from './forms/CreateUserForm';
 
 
 
@@ -59,6 +60,8 @@ const App: React.FC = () => {
 
       <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
       <Route path="/terms-of-service" element={<TermsOfServicePage />} />
+
+      <Route path="/create/new/account" element={<CreateUserForm />} />
 
     </Routes>
   );
