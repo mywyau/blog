@@ -61,8 +61,9 @@ const CreateUserForm: React.FC = () => {
             {errorMessage && <p className="text-red-500 mb-4">{errorMessage}</p>}
 
             <div className="mb-4">
-                <label className="block text-gray-700">Role Id</label>
+                <label htmlFor="roleId" className="block text-gray-700">Role Id</label>
                 <input
+                    id="roleId"
                     type="text"
                     value={roleId}
                     onChange={(e) => setRoleId(e.target.value)}
@@ -71,8 +72,9 @@ const CreateUserForm: React.FC = () => {
             </div>
 
             <div className="mb-4">
-                <label className="block text-gray-700">User Type</label>
+                <label htmlFor="userType" className="block text-gray-700">User Type</label>
                 <input
+                    id="userType"
                     type="text"
                     value={userType}
                     onChange={(e) => setUserType(e.target.value)}
@@ -81,8 +83,9 @@ const CreateUserForm: React.FC = () => {
             </div>
 
             <div className="mb-4">
-                <label className="block text-gray-700">Username</label>
+                <label htmlFor="username" className="block text-gray-700">Username</label>
                 <input
+                    id="username"
                     type="text"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
@@ -91,8 +94,9 @@ const CreateUserForm: React.FC = () => {
             </div>
 
             <div className="mb-4">
-                <label className="block text-gray-700">Email</label>
+                <label htmlFor="email" className="block text-gray-700">Email</label>
                 <input
+                    id="email"
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
@@ -101,8 +105,9 @@ const CreateUserForm: React.FC = () => {
             </div>
 
             <div className="mb-4">
-                <label className="block text-gray-700">Password</label>
+                <label htmlFor="password" className="block text-gray-700">Password</label>
                 <input
+                    id="password"
                     type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
@@ -113,8 +118,7 @@ const CreateUserForm: React.FC = () => {
             <button
                 type="submit"
                 disabled={loading}
-                className={`w-full py-2 px-4 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors ${loading ? 'opacity-50 cursor-not-allowed' : ''
-                    }`}
+                className={`w-full py-2 px-4 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
             >
                 {loading ? 'Creating...' : 'Create User'}
             </button>
