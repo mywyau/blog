@@ -50,8 +50,9 @@ const LoginForm: React.FC = () => {
 
                 <form onSubmit={handleLogin}>
                     <div className="mb-4">
-                        <label className="block text-gray-700">Username</label>
+                        <label className="block text-gray-700" htmlFor="username">Username</label>
                         <input
+                            id="username"
                             type="text"
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
@@ -61,8 +62,9 @@ const LoginForm: React.FC = () => {
                     </div>
 
                     <div className="mb-4">
-                        <label className="block text-gray-700">Password</label>
+                        <label className="block text-gray-700" htmlFor="password">Password</label>
                         <input
+                            id="password"
                             type="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
