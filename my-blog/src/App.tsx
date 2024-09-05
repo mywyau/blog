@@ -3,10 +3,13 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import BlogPostController from './controllers/BlogPostController';
 import CreateSkillsController from './controllers/CreateSkillsController';
+import CreateUserController from './controllers/CreateUserController';
 import CreateWorklogController from './controllers/CreateWorklogController';
 import EditSkillPageController from './controllers/EditSkillsPageController';
 import EditWorklogPageController from './controllers/EditWorklogPageController copy';
+import ForgottenPasswordController from './controllers/ForgottenPasswordController';
 import LandingPageController from './controllers/LandingPageController';
+import LoginController from './controllers/LoginController';
 import ShowSkillsPageController from './controllers/ShowSkillsPageController';
 import ShowWorklogsPageController from './controllers/ShowWorklogsPageController';
 import AboutPage from './views/pages/AboutPage';
@@ -59,6 +62,10 @@ const App: React.FC = () => {
 
       <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
       <Route path="/terms-of-service" element={<TermsOfServicePage />} />
+
+      <Route path="/login" element={<LoginController />} />
+      <Route path="/register" element={<CreateUserController />} />
+      <Route path="/forgot/password" element={<ForgottenPasswordController />} />
 
     </Routes>
   );
