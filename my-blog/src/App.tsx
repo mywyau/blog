@@ -22,7 +22,9 @@ import ContactPage from './views/pages/ContactsPage';
 import CreateBlogPostPage from './views/pages/CreateBlogPostPage';
 import CreateNewUserPage from './views/pages/CreateNewUserPage';
 import EditBlogPostPage from './views/pages/EditBlogPostPage';
+import ForgottenPasswordPage from './views/pages/ForgottenPasswordPage';
 import InterestsPage from './views/pages/InterestsPage';
+import LoginPage from './views/pages/LoginPage';
 import PrivacyPolicyPage from './views/pages/PrivacyPolicyPage';
 import TermsOfServicePage from './views/pages/TermsOfServicePage';
 
@@ -61,7 +63,9 @@ const App: React.FC = () => {
       <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
       <Route path="/terms-of-service" element={<TermsOfServicePage />} />
 
-      <Route path="/create/new/account" element={<CreateNewUserPage />} />
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/register" element={<CreateNewUserPage />} />
+      <Route path="/forgot/password" element={<ForgottenPasswordPage />} />
 
     </Routes>
   );

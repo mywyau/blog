@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import CreateUserConnector from '../connectors/CreateUserConnector';
-import { CreateUserFormData } from '../models/UserData';
+import CreateUserConnector from '../../connectors/CreateUserConnector';
+import { CreateUserFormData } from '../../models/UserData';
 
 const CreateUserForm: React.FC = () => {
     const [roleId, setRoleId] = useState('');
@@ -56,7 +56,7 @@ const CreateUserForm: React.FC = () => {
 
     return (
         <form onSubmit={handleSubmit} className="max-w-md mx-auto mt-8 p-8 bg-white rounded-lg shadow-md">
-            <h2 className="text-3xl font-semibold text-gray-800 mb-8">Create New User</h2>
+            <h2 className="text-3xl font-semibold text-gray-800 mb-8 text-center">Create New User</h2>
 
             {errorMessage && <p className="text-red-500 mb-4">{errorMessage}</p>}
 

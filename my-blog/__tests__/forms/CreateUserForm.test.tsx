@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import CreateUserForm from '../../src/forms/CreateUserForm';
+import CreateUserForm from '../../src/views/forms/CreateUserForm';
 import CreateUserConnector from '../../src/connectors/CreateUserConnector';
 
 // Mock the connector

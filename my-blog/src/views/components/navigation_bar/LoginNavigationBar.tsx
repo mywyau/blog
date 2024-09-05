@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import NavbarPages from '../../../models/ADTs/NavbarPages';
+import LoginNavbarPages from '../../../models/ADTs/LoginNavbarPages';
 
-interface NavbarProps {
-  page?: NavbarPages;
+interface LoginNavbarProps {
+  page?: LoginNavbarPages;
 }
 
-const Navbar: React.FC<NavbarProps> = ({ page = NavbarPages.Default }) => {
+const LoginNavigationbar: React.FC<LoginNavbarProps> = ({ page = LoginNavbarPages.Default }) => {
 
-  const linkClassName = (navbarPages: NavbarPages) => {
+  const linkClassName = (LoginnavbarPages: LoginNavbarPages) => {
     return (
-      page === navbarPages
+      page === LoginnavbarPages
         ? "text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-pink-300 animate-bounce text-xl hover:text-pink-200 transition-colors"
         : "text-white text-xl hover:text-gray-300 transition-colors duration-300"
     )
@@ -73,60 +73,25 @@ const Navbar: React.FC<NavbarProps> = ({ page = NavbarPages.Default }) => {
           <div className="flex flex-col md:flex-row md:items-center md:space-x-6 space-y-4 md:space-y-0">
             {/* Conditionally render the "About Me" link */}
             <Link
-              id="about-me"
-              to="/about"
-              className={linkClassName(NavbarPages.About)}
-            >
-              About Me
-            </Link>
-            <Link
-              id="contact"
-              to="/contact"
-              className={linkClassName(NavbarPages.Contact)}
-            >
-              Contact
-            </Link>
-            <Link
-              id="interests"
-              to="/interests"
-              className={linkClassName(NavbarPages.Interests)}
-            >
-              Interests
-            </Link>
-            <Link
-              id="skills"
-              to="/skills"
-              className={linkClassName(NavbarPages.Skills)}
-            >
-              Skills
-            </Link>
-            <Link
-              id="worklog-nav"
-              to="/worklog"
-              className={linkClassName(NavbarPages.Worklog)}
-            >
-              WorkLog
-            </Link>
-            <Link
-              id="assets"
-              to="/assets"
-              className={linkClassName(NavbarPages.Assets)}
-            >
-              Assets
-            </Link>
-            <Link
-              id="create-blog-post"
+              id="login"
               to="/login"
-              className={linkClassName(NavbarPages.Login)}
+              className={linkClassName(LoginNavbarPages.Login)}
             >
               Login
             </Link>
             <Link
-              id="create-blog-post"
-              to="/create-blog-post"
-              className="bg-green-500 text-white text-lg font-semibold py-2 px-5 rounded hover:bg-green-400 hover:text-gray-700 transition-colors duration-300 flex items-center justify-center"
+              id="create-new-account"
+              to="/register"
+              className={linkClassName(LoginNavbarPages.CreateAccount)}
             >
-              Create Blog Post
+              Create Account
+            </Link>
+            <Link
+              id="forgot-password"
+              to="/forgot/password"
+              className={linkClassName(LoginNavbarPages.ForgottenPassword)}
+            >
+              Forgotten Password
             </Link>
           </div>
         </div>
@@ -135,4 +100,4 @@ const Navbar: React.FC<NavbarProps> = ({ page = NavbarPages.Default }) => {
   );
 };
 
-export default Navbar;
+export default LoginNavigationbar;
