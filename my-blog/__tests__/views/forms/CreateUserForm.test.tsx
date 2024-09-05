@@ -1,10 +1,9 @@
-import React from 'react';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import CreateUserForm from '../../src/views/forms/CreateUserForm';
-import CreateUserConnector from '../../src/connectors/CreateUserConnector';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import CreateUserConnector from '../../../src/connectors/CreateUserConnector';
+import CreateUserForm from '../../../src/views/forms/CreateUserForm';
 
 // Mock the connector
-jest.mock('../../src/connectors/CreateUserConnector', () => ({
+jest.mock('../../../src/connectors/CreateUserConnector', () => ({
     postCreateUser: jest.fn(),
 }));
 

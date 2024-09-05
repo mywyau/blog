@@ -43,8 +43,9 @@ const ForgotPasswordForm: React.FC = () => {
 
                 <form onSubmit={handleForgotPassword}>
                     <div className="mb-4">
-                        <label className="block text-gray-700">Email</label>
+                        <label htmlFor="email" className="block text-gray-700">Email</label>
                         <input
+                            id="email"
                             type="email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}

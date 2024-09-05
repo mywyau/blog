@@ -1,7 +1,7 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
-import LoginForm from '../../src/views/forms/LoginForm';
+import LoginForm from '../../../src/views/forms/LoginForm';
 
 const mockAxios = new MockAdapter(axios);
 
