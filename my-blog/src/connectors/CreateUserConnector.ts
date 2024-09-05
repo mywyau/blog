@@ -1,10 +1,11 @@
 import axios, { AxiosError } from 'axios';
+import { CreateUserFormData, UserData } from '../models/UserData';
 
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
 class CreateUserConnector {
 
-    async postCreateUser(createUserFormData: CreateUserForm): Promise<{ data?: UserData; error?: string }> {
+    async postCreateUser(createUserFormData: CreateUserFormData): Promise<{ data?: UserData; error?: string }> {
 
         try {
             const response =
