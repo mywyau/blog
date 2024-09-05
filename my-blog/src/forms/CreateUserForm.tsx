@@ -55,13 +55,13 @@ const CreateUserForm: React.FC = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit} className="max-w-md mx-auto mt-8 p-6 bg-white rounded-lg shadow-md">
-            <h2 className="text-2xl font-semibold text-gray-800 mb-4">Create New User</h2>
+        <form onSubmit={handleSubmit} className="max-w-md mx-auto mt-8 p-8 bg-white rounded-lg shadow-md">
+            <h2 className="text-3xl font-semibold text-gray-800 mb-8">Create New User</h2>
 
             {errorMessage && <p className="text-red-500 mb-4">{errorMessage}</p>}
 
-            <div className="mb-4">
-                <label htmlFor="roleId" className="block text-gray-700">Role Id</label>
+            <div className="mb-6">
+                <label htmlFor="roleId" className="text-lg block text-gray-800">Role Id</label>
                 <input
                     id="roleId"
                     type="text"
@@ -71,8 +71,8 @@ const CreateUserForm: React.FC = () => {
                 />
             </div>
 
-            <div className="mb-4">
-                <label htmlFor="userType" className="block text-gray-700">User Type</label>
+            <div className="mb-6">
+                <label htmlFor="userType" className="text-lg block text-gray-800">User Type</label>
                 <input
                     id="userType"
                     type="text"
@@ -82,8 +82,8 @@ const CreateUserForm: React.FC = () => {
                 />
             </div>
 
-            <div className="mb-4">
-                <label htmlFor="username" className="block text-gray-700">Username</label>
+            <div className="mb-6">
+                <label htmlFor="username" className="text-lg block text-gray-800">Username</label>
                 <input
                     id="username"
                     type="text"
@@ -93,8 +93,8 @@ const CreateUserForm: React.FC = () => {
                 />
             </div>
 
-            <div className="mb-4">
-                <label htmlFor="email" className="block text-gray-700">Email</label>
+            <div className="mb-6">
+                <label htmlFor="email" className="text-lg block text-gray-800">Email</label>
                 <input
                     id="email"
                     type="email"
@@ -104,8 +104,8 @@ const CreateUserForm: React.FC = () => {
                 />
             </div>
 
-            <div className="mb-4">
-                <label htmlFor="password" className="block text-gray-700">Password</label>
+            <div className="mb-10">
+                <label htmlFor="password" className="text-lg block text-gray-800">Password</label>
                 <input
                     id="password"
                     type="password"

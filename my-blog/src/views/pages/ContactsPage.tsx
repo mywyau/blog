@@ -85,7 +85,7 @@ const ContactPage: React.FC = () => {
                   />
                 </div>
 
-                <div className="flex items-center justify-center mb-4">
+                <div className="flex items-center justify-center">
                   <p className="text-lg sm:text-2xl text-gray-700">
                     {messages.address.houseNumber} {messages.address.street}
                   </p>

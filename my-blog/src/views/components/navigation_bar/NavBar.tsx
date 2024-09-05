@@ -116,10 +116,17 @@ const Navbar: React.FC<NavbarProps> = ({ page = NavbarPages.Default }) => {
             </Link>
             <Link
               id="create-blog-post"
-              to="/create-blog-post"
-              className="bg-emerald text-white text-lg font-semibold py-3 px-7 rounded hover:bg-green-300 hover:text-gray-900 transition-colors duration-300 flex items-center justify-center"
+              to="/create/new/account"
+              className={linkClassName(NavbarPages.Login)}
             >
-              Create
+              Login
+            </Link>
+            <Link
+              id="create-blog-post"
+              to="/create-blog-post"
+              className="bg-green-500 text-white text-lg font-semibold py-2 px-5 rounded hover:bg-green-400 hover:text-gray-700 transition-colors duration-300 flex items-center justify-center"
+            >
+              Create Blog Post
             </Link>
           </div>
         </div>

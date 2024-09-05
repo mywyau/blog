@@ -20,11 +20,11 @@ import VideosPage from './views/pages/assets_pages/VideosPage';
 import AssetsPage from './views/pages/AssetsPage';
 import ContactPage from './views/pages/ContactsPage';
 import CreateBlogPostPage from './views/pages/CreateBlogPostPage';
+import CreateNewUserPage from './views/pages/CreateNewUserPage';
 import EditBlogPostPage from './views/pages/EditBlogPostPage';
 import InterestsPage from './views/pages/InterestsPage';
 import PrivacyPolicyPage from './views/pages/PrivacyPolicyPage';
 import TermsOfServicePage from './views/pages/TermsOfServicePage';
-import CreateUserForm from './forms/CreateUserForm';
 
 
 
@@ -61,7 +61,7 @@ const App: React.FC = () => {
       <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
       <Route path="/terms-of-service" element={<TermsOfServicePage />} />
 
-      <Route path="/create/new/account" element={<CreateUserForm />} />
+      <Route path="/create/new/account" element={<CreateNewUserPage />} />
 
     </Routes>
   );
