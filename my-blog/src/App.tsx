@@ -3,10 +3,13 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import BlogPostController from './controllers/BlogPostController';
 import CreateSkillsController from './controllers/CreateSkillsController';
+import CreateUserController from './controllers/CreateUserController';
 import CreateWorklogController from './controllers/CreateWorklogController';
 import EditSkillPageController from './controllers/EditSkillsPageController';
 import EditWorklogPageController from './controllers/EditWorklogPageController copy';
+import ForgottenPasswordController from './controllers/ForgottenPasswordController';
 import LandingPageController from './controllers/LandingPageController';
+import LoginController from './controllers/LoginController';
 import ShowSkillsPageController from './controllers/ShowSkillsPageController';
 import ShowWorklogsPageController from './controllers/ShowWorklogsPageController';
 import AboutPage from './views/pages/AboutPage';
@@ -20,11 +23,8 @@ import VideosPage from './views/pages/assets_pages/VideosPage';
 import AssetsPage from './views/pages/AssetsPage';
 import ContactPage from './views/pages/ContactsPage';
 import CreateBlogPostPage from './views/pages/CreateBlogPostPage';
-import CreateNewUserPage from './views/pages/CreateNewUserPage';
 import EditBlogPostPage from './views/pages/EditBlogPostPage';
-import ForgottenPasswordPage from './views/pages/ForgottenPasswordPage';
 import InterestsPage from './views/pages/InterestsPage';
-import LoginPage from './views/pages/LoginPage';
 import PrivacyPolicyPage from './views/pages/PrivacyPolicyPage';
 import TermsOfServicePage from './views/pages/TermsOfServicePage';
 
@@ -63,9 +63,9 @@ const App: React.FC = () => {
       <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
       <Route path="/terms-of-service" element={<TermsOfServicePage />} />
 
-      <Route path="/login" element={<LoginPage />} />
-      <Route path="/register" element={<CreateNewUserPage />} />
-      <Route path="/forgot/password" element={<ForgottenPasswordPage />} />
+      <Route path="/login" element={<LoginController />} />
+      <Route path="/register" element={<CreateUserController />} />
+      <Route path="/forgot/password" element={<ForgottenPasswordController />} />
 
     </Routes>
   );
