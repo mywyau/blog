@@ -10,7 +10,6 @@ const CreateUserForm: React.FC = () => {
         return `user-${timestamp}${randomNumber}`;
     };
 
-
     const [user_id, setUserId] = useState('');
     const [userType, setUserType] = useState('');
     const [username, setUsername] = useState('');
@@ -34,7 +33,7 @@ const CreateUserForm: React.FC = () => {
 
         const userToCreate: CreateUserFormData = {
             user_id: generateUserId(),
-            user_type: "admin",
+            user_type: "user",
             username: username,
             password: password,
             email: email,

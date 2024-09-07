@@ -17,7 +17,7 @@ class LoginConnector {
   async fetchProtectedData() {
     const response = await fetch('/admin/only', {
       method: 'GET',
-        credentials: 'include',  // This ensures cookies are sent with the request
+      credentials: 'include',  // This ensures cookies are sent with the request
     });
 
     if (response.ok) {
@@ -29,8 +29,6 @@ class LoginConnector {
   }
 
 
-
-
   // this login funciton will get the cookie back from the backend server.
 
   async login(loginDetails: LoginDetails) {
@@ -39,8 +37,8 @@ class LoginConnector {
       const response =
         await axios.post(`${API_BASE_URL}/login`,
           loginDetails, {
-            withCredentials: true,  // Ensures cookies are sent and received
-          }
+          withCredentials: true,  // Ensures cookies are sent and received
+        }
         );
       return { data: response.data };
     } catch (error) {
@@ -51,6 +49,15 @@ class LoginConnector {
       };
     }
   }
+
+
+  async getRole() {
+    const response =
+      await axios.get(`${process.env.REACT_APP_API_BASE_URL}/get-user-role`, {
+        withCredentials: true
+      });
+    return (response)
+  };
 
 }
 

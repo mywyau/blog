@@ -2,11 +2,13 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 const UserRole = () => {
+    
   const [role, setRole] = useState('');
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
 
   useEffect(() => {
+
     const fetchUserRole = async () => {
       try {
         const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/get-user-role`, {
