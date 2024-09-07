@@ -1,5 +1,5 @@
-import axios from 'axios';
 import React, { useState } from 'react';
+import LoginConnector from '../../connectors/LoginConnector';
 
 const LoginForm: React.FC = () => {
     const [username, setUsername] = useState('');
@@ -20,17 +20,16 @@ const LoginForm: React.FC = () => {
         }
 
         try {
-            const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/login`, {
-                username,
-                password,
-            });
+            const response =
+                await LoginConnector.login({
+                    username,
+                    password,
+                });
 
-            if (response.data.token) {
-                // Save token in local storage and redirect the user to the dashboard or home page
-                localStorage.setItem('token', response.data.token);
-                window.location.href = '/dashboard'; // or any route you'd like to redirect to after login
+            if (response.error) {
+                setErrorMessage(`Invalid login credentials. Error: ${response.error}`);
             } else {
-                setErrorMessage('Invalid login credentials.');
+                window.location.href = '/';
             }
         } catch (error) {
             setErrorMessage('An error occurred while logging in. Please try again.');
