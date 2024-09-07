@@ -51,7 +51,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ posts, errorMessage }) => {
   }, []); // Empty dependency array means this effect runs once on mount
 
   function renderLoggedInContent(): JSX.Element {
-    
+
     if (userRole === UserTypes.Admin) {
       return (
         <div>
@@ -66,7 +66,9 @@ const LandingPage: React.FC<LandingPageProps> = ({ posts, errorMessage }) => {
       );
     } else {
       return (
-        <></>
+        <div>
+          <p className="text-lg text-purple-400 text-right">Not logged in</p>
+        </div>
       );
     }
   }
