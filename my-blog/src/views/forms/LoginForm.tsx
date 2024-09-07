@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
 import axios from 'axios';
+import React, { useState } from 'react';
 
 const LoginForm: React.FC = () => {
     const [username, setUsername] = useState('');
@@ -50,7 +50,7 @@ const LoginForm: React.FC = () => {
 
                 <form onSubmit={handleLogin}>
                     <div className="mb-4">
-                        <label className="block text-gray-700" htmlFor="username">Username</label>
+                        <label className="block text-gray-700" htmlFor="username">Username:</label>
                         <input
                             id="username"
                             type="text"
@@ -62,7 +62,7 @@ const LoginForm: React.FC = () => {
                     </div>
 
                     <div className="mb-4">
-                        <label className="block text-gray-700" htmlFor="password">Password</label>
+                        <label className="block text-gray-700" htmlFor="password">Password:</label>
                         <input
                             id="password"
                             type="password"
@@ -73,16 +73,19 @@ const LoginForm: React.FC = () => {
                         />
                     </div>
 
-                    <button
-                        type="submit"
-                        disabled={loading}
-                        className={`w-full py-2 px-4 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
-                    >
-                        {loading ? 'Logging in...' : 'Login'}
-                    </button>
+                    {/* Center the button */}
+                    <div className='flex justify-center pt-6 pb-6'>
+                        <button
+                            type="submit"
+                            disabled={loading}
+                            className={`w-1/2 py-2 px-4 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
+                        >
+                            {loading ? 'Logging in...' : 'Login'}
+                        </button>
+                    </div>
                 </form>
 
-                <div className="mt-4 text-center">
+                <div className="mt-4 text-center text-sm">
                     <p className="text-gray-600">
                         Don't have an account?{' '}
                         <a href="/register" className="text-blue-500 hover:underline">

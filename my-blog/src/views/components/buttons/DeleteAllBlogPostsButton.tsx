@@ -1,16 +1,14 @@
 import React, { useState } from 'react';
-
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import BlogPostConnector from "../../../connectors/BlogPostConnector";
 import { DeleteResponseBody } from '../../../models/DeleteResponseBody';
 import { PostData } from '../../../models/PostData';
 
-
 const DeleteAllBlogPostsButton: React.FC<{ posts: PostData[]; setPosts: React.Dispatch<React.SetStateAction<PostData[]>> }> =
-
     ({ posts, setPosts }) => {
 
         const [deleteResponseBody, setDeleteResponseBody] = useState<DeleteResponseBody | null>(null);
-        const [errorMessage, setErrorMessage] = useState<string | null>(null);
         const [loading, setLoading] = useState<boolean>(false);
 
         const handleDelete = async () => {
@@ -18,8 +16,6 @@ const DeleteAllBlogPostsButton: React.FC<{ posts: PostData[]; setPosts: React.Di
             if (!confirmDelete) return;
 
             setLoading(true);
-            setErrorMessage(null);
-            setDeleteResponseBody(null);
 
             const previousPosts = [...posts]; // Save a copy of the current posts for potential rollback
             setPosts([]); // Optimistically clear the posts from UI
@@ -27,10 +23,25 @@ const DeleteAllBlogPostsButton: React.FC<{ posts: PostData[]; setPosts: React.Di
             const { data, error } = await BlogPostConnector.deleteAllRequest();
 
             if (error) {
-                setErrorMessage(error);
+                toast.error("Error deleting posts", {
+                    position: "bottom-right",
+                    autoClose: 2000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                });
                 setPosts(previousPosts); // Revert to the previous state if the delete failed
             } else if (data) {
                 setDeleteResponseBody(data);
+                toast.success("All blog posts deleted successfully", {
+                    position: "bottom-right",
+                    autoClose: 2000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                });
             }
 
             setLoading(false);
@@ -52,14 +63,13 @@ const DeleteAllBlogPostsButton: React.FC<{ posts: PostData[]; setPosts: React.Di
                         {loading ? 'Loading...' : 'Delete All Blog Posts'}
                     </button>
 
-                    {errorMessage && <p className="text-red-500 mt-2">{errorMessage}</p>}
                     {deleteResponseBody && (
                         <div className="mt-4">
-                            <p id="delete-button-response-body" className="text-xl text-red-500 mb-4">{deleteResponseBody.message}</p>
+                            {/* <p id="delete-button-response-body" className="text-xl text-red-500 mb-4">{deleteResponseBody.message}</p> */}
                         </div>
                     )}
                 </div>
-            </ form>
+            </form>
         );
     };
 

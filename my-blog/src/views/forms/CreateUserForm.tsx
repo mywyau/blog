@@ -3,7 +3,15 @@ import CreateUserConnector from '../../connectors/CreateUserConnector';
 import { CreateUserFormData } from '../../models/UserData';
 
 const CreateUserForm: React.FC = () => {
-    const [roleId, setRoleId] = useState('');
+
+    const generateUserId = () => {
+        const timestamp = Date.now();
+        const randomNumber = Math.floor(Math.random() * 10000);  // A random number between 0 and 9999  or we could use uuid library
+        return `user-${timestamp}${randomNumber}`;
+    };
+
+
+    const [user_id, setUserId] = useState('');
     const [userType, setUserType] = useState('');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -14,7 +22,7 @@ const CreateUserForm: React.FC = () => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
-        if (!username || !email || !password || !userType || !roleId) {
+        if (!username || !email || !password) {
             setErrorMessage('All fields are required.');
             return;
         }
@@ -25,8 +33,8 @@ const CreateUserForm: React.FC = () => {
         const connector = CreateUserConnector;
 
         const userToCreate: CreateUserFormData = {
-            role_id: roleId,
-            user_type: userType,
+            user_id: generateUserId(),
+            user_type: "viewer",
             username: username,
             password: password,
             email: email,
@@ -39,7 +47,7 @@ const CreateUserForm: React.FC = () => {
 
             if (data) {
                 alert('User created successfully');
-                setRoleId('');
+                setUserId('');
                 setUserType('');
                 setUsername('');
                 setPassword('');
@@ -61,29 +69,7 @@ const CreateUserForm: React.FC = () => {
             {errorMessage && <p className="text-red-500 mb-4">{errorMessage}</p>}
 
             <div className="mb-6">
-                <label htmlFor="roleId" className="text-lg block text-gray-800">Role Id</label>
-                <input
-                    id="roleId"
-                    type="text"
-                    value={roleId}
-                    onChange={(e) => setRoleId(e.target.value)}
-                    className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-200"
-                />
-            </div>
-
-            <div className="mb-6">
-                <label htmlFor="userType" className="text-lg block text-gray-800">User Type</label>
-                <input
-                    id="userType"
-                    type="text"
-                    value={userType}
-                    onChange={(e) => setUserType(e.target.value)}
-                    className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-200"
-                />
-            </div>
-
-            <div className="mb-6">
-                <label htmlFor="username" className="text-lg block text-gray-800">Username</label>
+                <label htmlFor="username" className="text-lg block text-gray-800">Username:</label>
                 <input
                     id="username"
                     type="text"
@@ -94,7 +80,7 @@ const CreateUserForm: React.FC = () => {
             </div>
 
             <div className="mb-6">
-                <label htmlFor="email" className="text-lg block text-gray-800">Email</label>
+                <label htmlFor="email" className="text-lg block text-gray-800">Email:</label>
                 <input
                     id="email"
                     type="email"
@@ -105,7 +91,7 @@ const CreateUserForm: React.FC = () => {
             </div>
 
             <div className="mb-10">
-                <label htmlFor="password" className="text-lg block text-gray-800">Password</label>
+                <label htmlFor="password" className="text-lg block text-gray-800">Password:</label>
                 <input
                     id="password"
                     type="password"

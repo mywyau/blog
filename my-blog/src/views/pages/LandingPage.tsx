@@ -6,6 +6,7 @@ import Copyright from '../components/Copyright';
 import Navbar from '../components/navigation_bar/NavBar';
 import Pagination from '../components/Pagination';
 import SearchBar from '../components/SearchBar';
+import { ToastContainer } from 'react-toastify';
 
 interface LandingPageProps {
   posts: PostData[];
@@ -50,9 +51,6 @@ const LandingPage: React.FC<LandingPageProps> = ({ posts, errorMessage }) => {
               <BlogList posts={currentPosts} />
             )}
 
-            {/* {loading && <p>Loading...</p>} */}
-            {errorMessage && <p className='text-lg text-center text-red-500'>Error: {errorMessage}</p>}
-
             <Pagination
               postsPerPage={postsPerPage}
               totalPosts={filteredPosts.length}
@@ -72,7 +70,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ posts, errorMessage }) => {
       <footer className="mt-auto">
         <Copyright />
       </footer>
-
+      <ToastContainer />
     </div>
   );
 };
