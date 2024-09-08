@@ -1,6 +1,9 @@
 import { Option } from 'fp-ts/Option';
 import React from 'react';
+import RoleProtected from '../../contexts/RoleProtected';
+import { UserRoleProvider } from '../../contexts/UserRoleContext';
 import UseDeleteBlogPost from '../../hooks/UseDeleteBlogPost';
+import UserTypes from '../../models/ADTs/UserType';
 import { PostData } from '../../models/PostData';
 import Copyright from '../components/Copyright';
 import DeleteBlogPostButton from '../components/buttons/DeleteBlogPostButton';
@@ -21,26 +24,32 @@ const BlogPostPage: React.FC<BlogPostPageProps> = ({ post, loading, errorMessage
   const { handleDelete, loadingState, deleteErrorMessage, deleteResponseBody } = UseDeleteBlogPost();
 
   return (
-    <div className="font-nunito min-h-screen bg-gray-100 flex flex-col">
+    <UserRoleProvider>
+      <div className="font-nunito min-h-screen bg-gray-100 flex flex-col">
 
-      <header className="bg-celadon-600 text-raisin-black py-4">
+        {/* <header className="bg-celadon-600 text-raisin-black py-4"> */}
         <Navbar />
-      </header>
+        {/* </header> */}
 
-      <main className="container mx-auto p-4 flex-grow max-w-4xl px-8">
-        <div className="flex flex-col space-y-4">
-          <RenderBlogPost post={post} loading={loading} errorMessage={errorMessage} />
-          <EditButton />
-          <div className="flex space-x-4">
-            <DeleteBlogPostButton handleDelete={handleDelete} loading={loadingState} errorMessage={deleteErrorMessage} deleteResponseBody={deleteResponseBody} />
+        <main className="container mx-auto p-4 flex-grow max-w-4xl px-8">
+          <div className="flex flex-col space-y-4">
+            <RenderBlogPost post={post} loading={loading} errorMessage={errorMessage} />
+
+            <RoleProtected roles={[UserTypes.Admin]}>
+              <EditButton />
+              <div className="flex space-x-4">
+                <DeleteBlogPostButton handleDelete={handleDelete} loading={loadingState} errorMessage={deleteErrorMessage} deleteResponseBody={deleteResponseBody} />
+              </div>
+            </ RoleProtected>
+
           </div>
-        </div>
-      </main>
+        </main>
 
-      <footer>
-        <Copyright />
-      </footer>
-    </div>
+        <footer>
+          <Copyright />
+        </footer>
+      </div>
+    </UserRoleProvider>
   );
 };
 

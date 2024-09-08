@@ -93,6 +93,14 @@ const LandingPage: React.FC<LandingPageProps> = ({ posts, errorMessage }) => {
 
         <div className="flex flex-grow container mx-auto font-nunito min-h-screen bg-gray-100">
           <div className="w-full md:w-3/4 lg:w-2/3 mx-auto">
+
+            {
+              optionFold<JSX.Element, JSX.Element>(
+                () => <></>, // Render nothing for the None case
+                (content) => content // Render content for the Some case
+              )(userBasedContent)
+            }
+
             {/* Render Blog Posts */}
             {currentPosts.length === 0 ? (
               <p className="text-center text-gray-500">No blog posts found.</p>
@@ -101,12 +109,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ posts, errorMessage }) => {
             )}
 
             {/* Render User Role Content */}
-            {
-              optionFold<JSX.Element, JSX.Element>(
-                () => <></>, // Render nothing for the None case
-                (content) => content // Render content for the Some case
-              )(userBasedContent)
-            }
+
 
             {/* Pagination */}
             <Pagination
@@ -124,12 +127,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ posts, errorMessage }) => {
           </div>
         </div>
       </main>
-
-      {/* Footer */}
-      <footer className="mt-auto">
-        <Copyright />
-      </footer>
-
+      <Copyright />
       {/* Toast Notifications */}
       <ToastContainer />
     </div>
