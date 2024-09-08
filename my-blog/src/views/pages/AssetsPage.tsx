@@ -6,13 +6,6 @@ const AssetsPage: React.FC = () => {
 
   const [isLoading, setIsLoading] = useState(true);
 
-  // useEffect(() => {
-  //   // Simulate a network request or some async operation
-  //   setTimeout(() => {
-  //     setIsLoading(false);
-  //   }, 1000); //  seconds delay
-  // }, []);
-
   return (
     <div className="flex flex-col min-h-screen font-nunito bg-gray-50">
       <AssetsNavigationBar />
