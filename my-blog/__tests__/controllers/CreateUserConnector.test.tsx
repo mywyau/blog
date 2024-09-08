@@ -32,7 +32,7 @@ describe('CreateUserConnector', () => {
         };
 
         const createUserFormData: CreateUserFormData = {
-            role_id: 'admin',
+            user_id: 'admin',
             user_type: 'Admin',
             username: 'testuser',
             password: 'password123',
@@ -55,7 +55,7 @@ describe('CreateUserConnector', () => {
 
     it('should return error message if the user creation fails', async () => {
         const createUserFormData: CreateUserFormData = {
-            role_id: 'admin',
+            user_id: 'admin',
             user_type: 'Admin',
             username: 'testuser',
             password: 'password123',
@@ -79,7 +79,7 @@ describe('CreateUserConnector', () => {
 
     it('should handle network or unexpected errors gracefully', async () => {
         const createUserFormData: CreateUserFormData = {
-            role_id: 'admin',
+            user_id: 'admin',
             user_type: 'Admin',
             username: 'testuser',
             password: 'password123',

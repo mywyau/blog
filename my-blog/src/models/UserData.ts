@@ -1,6 +1,6 @@
 export interface UserData {
     id: number,
-    role_id: string,
+    user_id: string,
     user_type: string,
     username: string,
     password: string,
@@ -11,7 +11,7 @@ export interface UserData {
 
 
 export interface CreateUserFormData {
-    role_id: string,
+    user_id: string,
     user_type: string,
     username: string,
     password: string,

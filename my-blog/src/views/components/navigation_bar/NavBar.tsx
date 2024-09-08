@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import NavbarPages from '../../../models/ADTs/NavbarPages';
+import LogoutButton from '../buttons/LogoutButton';
 
 interface NavbarProps {
   page?: NavbarPages;
@@ -128,6 +129,7 @@ const Navbar: React.FC<NavbarProps> = ({ page = NavbarPages.Default }) => {
             >
               Create Blog Post
             </Link>
+            <LogoutButton />
           </div>
         </div>
       </div>

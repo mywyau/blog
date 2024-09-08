@@ -1,17 +1,14 @@
 // src/pages/About.tsx
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { messages } from '../../messages/worklog';
+import NavbarPages from '../../models/ADTs/NavbarPages';
 import { WorkLogData } from '../../models/WorkLogData';
 import Copyright from '../components/Copyright';
-import H1 from '../components/general/H1';
 import Navbar from '../components/navigation_bar/NavBar';
+import Spacer from '../components/Spacer';
 import WorkLogGrid from '../components/worklog/WorkLogGrid';
 import WorkLogPagination from '../components/worklog/WorkLogPagination';
-import YearFilter from '../components/worklog/YearFilter';
 import YearSearchBar from '../components/worklog/YearSearchBar';
-import NavbarPages from '../../models/ADTs/NavbarPages';
-import Spacer from '../components/Spacer';
 
 interface WorkLogPageProps {
   worklogs: WorkLogData[];
@@ -20,18 +17,14 @@ interface WorkLogPageProps {
 
 const ShowWorkLogPage: React.FC<WorkLogPageProps> = ({ worklogs, errorMessage }) => {
 
+  function sortByWorkLogCreationTime(worklogs: WorkLogData[]): WorkLogData[] {
+    return worklogs.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+  }
+
   const [selectedYear, setSelectedYear] = useState<number>(new Date().getFullYear());
   const [searchYear, setSearchYear] = useState<number | null>(null);
 
-  // Filter worklogs based on the selected year - Year Tabs
-  // const filteredWorklogs = worklogs.filter(worklog => {
-  //   const worklogYear = new Date(worklog.created_at).getFullYear();
-  //   return worklogYear === selectedYear;
-  // });
-
-  // Extract unique years from worklogs for the filter
   const years = Array.from(new Set(worklogs.map(worklog => new Date(worklog.created_at).getFullYear())));
-
 
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -46,7 +39,7 @@ const ShowWorkLogPage: React.FC<WorkLogPageProps> = ({ worklogs, errorMessage })
     : worklogs;
 
 
-  const currentTasks = filteredWorklogs.slice(indexOfFirstTask, indexOfLastTask);
+  const currentTasks = sortByWorkLogCreationTime(filteredWorklogs).slice(indexOfFirstTask, indexOfLastTask);
 
   return (
     <div className="flex flex-col min-h-screen font-nunito bg-gray-100">
@@ -54,10 +47,6 @@ const ShowWorkLogPage: React.FC<WorkLogPageProps> = ({ worklogs, errorMessage })
       <Spacer size={"p-20"} />
       {/* <H1 id={"worklog"} message={messages.about.title} className={""} /> */}
       <div className="flex flex-col flex-grow container mx-auto">
-
-        {/* Year Filter Component
-        <YearFilter years={years} selectedYear={selectedYear} onYearSelect={setSelectedYear} /> */}
-
 
         {/* Year Search Bar */}
         <YearSearchBar onYearSearch={setSearchYear} />

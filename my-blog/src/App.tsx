@@ -12,6 +12,7 @@ import LandingPageController from './controllers/LandingPageController';
 import LoginController from './controllers/LoginController';
 import ShowSkillsPageController from './controllers/ShowSkillsPageController';
 import ShowWorklogsPageController from './controllers/ShowWorklogsPageController';
+import UserRole from './views/components/RoleBasedComp';
 import AboutPage from './views/pages/AboutPage';
 import ButtonsPage from './views/pages/assets_pages/ButtonsPage';
 import CheckboxesPage from './views/pages/assets_pages/CheckboxesPage';
@@ -66,6 +67,8 @@ const App: React.FC = () => {
       <Route path="/login" element={<LoginController />} />
       <Route path="/register" element={<CreateUserController />} />
       <Route path="/forgot/password" element={<ForgottenPasswordController />} />
+
+      <Route path="/test-user-access" element={<UserRole />} />
 
     </Routes>
   );
