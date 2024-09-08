@@ -1,12 +1,12 @@
 import debounce from 'lodash.debounce'; // Import debounce from lodash
 import { useCallback, useEffect, useState } from 'react';
+import { FaCheckCircle, FaSpinner, FaTimesCircle } from 'react-icons/fa'; // Icons for validation feedback
 import CreateUserConnector from '../../connectors/CreateUserConnector';
 import RoleProtected from '../../contexts/RoleProtected';
 import { UserRoleProvider } from '../../contexts/UserRoleContext';
 import UserTypes from '../../models/ADTs/UserType';
 import { CreateUserFormData } from '../../models/UserData';
 import { checkEmailExists, checkUsernameExists } from '../../service/ValidationService';
-// import { checkUsernameExists, checkEmailExists } from '../../service/ValidationService'; // Import validation services
 
 // Utility function to generate user ID
 const generateUserId = () => {
@@ -16,10 +16,9 @@ const generateUserId = () => {
 };
 
 const CreateUserForm: React.FC = () => {
-    // Initialize state with default role as 'viewer'
     const [formData, setFormData] = useState({
         user_id: '',
-        userTypeState: 'viewer', // Set 'viewer' as the default role
+        userTypeState: 'viewer',
         username: '',
         password: '',
         email: '',
@@ -29,7 +28,6 @@ const CreateUserForm: React.FC = () => {
 
     const [loading, setLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
-
     const [usernameTaken, setUsernameTaken] = useState(false); // State for username check
     const [emailTaken, setEmailTaken] = useState(false); // State for email check
 
@@ -42,35 +40,33 @@ const CreateUserForm: React.FC = () => {
     // Debounced check for username availability
     const debouncedCheckUsername = useCallback(
         debounce(async (username: string) => {
-            console.log('Checking username:', username); // Add this
             if (username) {
                 const exists = await checkUsernameExists(username);
                 setUsernameTaken(exists);
             }
-        }, 500), // Wait 500ms before making the API call
+        }, 500),
         []
     );
 
     // Debounced check for email availability
     const debouncedCheckEmail = useCallback(
         debounce(async (email: string) => {
-            console.log('Checking email:', email); // Add this
             if (email) {
                 const exists = await checkEmailExists(email);
                 setEmailTaken(exists);
             }
-        }, 500), // Wait 500ms before making the API call
+        }, 500),
         []
     );
 
     // Trigger username validation with debouncing
     useEffect(() => {
-        debouncedCheckUsername(username);
+        if (username) debouncedCheckUsername(username);
     }, [username, debouncedCheckUsername]);
 
     // Trigger email validation with debouncing
     useEffect(() => {
-        debouncedCheckEmail(email);
+        if (email) debouncedCheckEmail(email);
     }, [email, debouncedCheckEmail]);
 
     // Handle form submission
@@ -97,7 +93,7 @@ const CreateUserForm: React.FC = () => {
 
         const userToCreate: CreateUserFormData = {
             user_id: generateUserId(),
-            user_type: userTypeState || 'viewer',  // Ensure 'viewer' is used if no role is selected
+            user_type: userTypeState || 'viewer',
             username,
             password,
             email,
@@ -106,13 +102,13 @@ const CreateUserForm: React.FC = () => {
         };
 
         try {
-            const { data, error } = await CreateUserConnector.postCreateUser(userToCreate);
+            const { data } = await CreateUserConnector.postCreateUser(userToCreate);
 
             if (data) {
                 alert('User created successfully');
                 setFormData({
                     user_id: '',
-                    userTypeState: 'viewer', // Reset form with default role as 'viewer'
+                    userTypeState: 'viewer',
                     username: '',
                     password: '',
                     email: '',
@@ -140,8 +136,11 @@ const CreateUserForm: React.FC = () => {
                     type="text"
                     value={username}
                     onChange={handleChange}
+                    validationMessage={
+                        usernameTaken && username ? 'Username is already taken.' : 'Username is available.'
+                    }
+                    isValid={!!username && !usernameTaken}
                 />
-                {usernameTaken && <p className="text-red-500">Username is already taken.</p>}
 
                 <InputField
                     id="email"
@@ -149,8 +148,11 @@ const CreateUserForm: React.FC = () => {
                     type="email"
                     value={email}
                     onChange={handleChange}
+                    validationMessage={
+                        emailTaken && email ? 'Email is already registered.' : 'Email is available.'
+                    }
+                    isValid={!!email && !emailTaken}
                 />
-                {emailTaken && <p className="text-red-500">Email is already registered.</p>}
 
                 <InputField
                     id="password"
@@ -180,32 +182,57 @@ const CreateUserForm: React.FC = () => {
                     disabled={loading}
                     className={`w-full py-2 px-4 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
                 >
-                    {loading ? 'Creating...' : 'Create User'}
+                    {loading ? <FaSpinner className="animate-spin" /> : 'Create User'}
                 </button>
             </form>
         </UserRoleProvider>
     );
 };
 
-// Reusable input field component
+// Reusable input field component with validation feedback
 interface InputFieldProps {
     id: string;
     label: string;
     type: string;
     value: string;
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    validationMessage?: string;
+    isValid?: boolean;
 }
 
-const InputField: React.FC<InputFieldProps> = ({ id, label, type, value, onChange }) => (
-    <div className="mb-6">
-        <label htmlFor={id} className="text-lg block text-gray-800">{label}:</label>
+const InputField: React.FC<InputFieldProps> = ({
+    id,
+    label,
+    type,
+    value,
+    onChange,
+    validationMessage,
+    isValid
+}) => (
+    <div className="mb-6 relative">
+        <label htmlFor={id} className="text-lg block text-gray-800 mb-1">{label}:</label>
         <input
             id={id}
             type={type}
             value={value}
             onChange={onChange}
-            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-200"
+            className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-200 
+                ${isValid === false ? 'border-red-500 focus:ring-red-300' : ''}
+                ${isValid === true ? 'border-green-500 focus:ring-green-300' : ''}
+            `}
         />
+        {value && validationMessage && (
+            <div className="text-sm mt-1 flex items-center space-x-2">
+                {isValid ? (
+                    <FaCheckCircle className="text-green-500" />
+                ) : (
+                    <FaTimesCircle className="text-red-500" />
+                )}
+                <span className={isValid ? 'text-green-500' : 'text-red-500'}>
+                    {validationMessage}
+                </span>
+            </div>
+        )}
     </div>
 );
 
