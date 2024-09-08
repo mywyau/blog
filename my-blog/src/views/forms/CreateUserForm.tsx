@@ -1,9 +1,12 @@
-import { useState } from 'react';
+import debounce from 'lodash.debounce'; // Import debounce from lodash
+import { useCallback, useEffect, useState } from 'react';
 import CreateUserConnector from '../../connectors/CreateUserConnector';
 import RoleProtected from '../../contexts/RoleProtected';
 import { UserRoleProvider } from '../../contexts/UserRoleContext';
 import UserTypes from '../../models/ADTs/UserType';
 import { CreateUserFormData } from '../../models/UserData';
+import { checkEmailExists, checkUsernameExists } from '../../service/ValidationService';
+// import { checkUsernameExists, checkEmailExists } from '../../service/ValidationService'; // Import validation services
 
 // Utility function to generate user ID
 const generateUserId = () => {
@@ -13,35 +16,79 @@ const generateUserId = () => {
 };
 
 const CreateUserForm: React.FC = () => {
-    // Destructure state into a single object for form values
-    const [formData, setFormData] =
-        useState(
-            {
-                user_id: '',
-                userType: '',
-                username: '',
-                password: '',
-                email: '',
-            }
-        );
+    // Initialize state with default role as 'viewer'
+    const [formData, setFormData] = useState({
+        user_id: '',
+        userTypeState: 'viewer', // Set 'viewer' as the default role
+        username: '',
+        password: '',
+        email: '',
+    });
 
-    const { username, password, email, userType } = formData;
+    const { username, password, email, userTypeState } = formData;
 
     const [loading, setLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
 
-    // Generalized input handler for all fields
+    const [usernameTaken, setUsernameTaken] = useState(false); // State for username check
+    const [emailTaken, setEmailTaken] = useState(false); // State for email check
+
+    // Input change handler for form fields
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { id, value } = e.target;
         setFormData({ ...formData, [id]: value });
     };
 
+    // Debounced check for username availability
+    const debouncedCheckUsername = useCallback(
+        debounce(async (username: string) => {
+            console.log('Checking username:', username); // Add this
+            if (username) {
+                const exists = await checkUsernameExists(username);
+                setUsernameTaken(exists);
+            }
+        }, 500), // Wait 500ms before making the API call
+        []
+    );
+
+    // Debounced check for email availability
+    const debouncedCheckEmail = useCallback(
+        debounce(async (email: string) => {
+            console.log('Checking email:', email); // Add this
+            if (email) {
+                const exists = await checkEmailExists(email);
+                setEmailTaken(exists);
+            }
+        }, 500), // Wait 500ms before making the API call
+        []
+    );
+
+    // Trigger username validation with debouncing
+    useEffect(() => {
+        debouncedCheckUsername(username);
+    }, [username, debouncedCheckUsername]);
+
+    // Trigger email validation with debouncing
+    useEffect(() => {
+        debouncedCheckEmail(email);
+    }, [email, debouncedCheckEmail]);
+
     // Handle form submission
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
-        if (!username || !email || !password || !userType) {
-            setErrorMessage('All fields, including role, are required.');
+        if (!username || !email || !password) {
+            setErrorMessage('All fields are required.');
+            return;
+        }
+
+        if (usernameTaken) {
+            setErrorMessage('Username is already taken.');
+            return;
+        }
+
+        if (emailTaken) {
+            setErrorMessage('Email is already registered.');
             return;
         }
 
@@ -50,7 +97,7 @@ const CreateUserForm: React.FC = () => {
 
         const userToCreate: CreateUserFormData = {
             user_id: generateUserId(),
-            user_type: userType, // Ensure this matches the role selected
+            user_type: userTypeState || 'viewer',  // Ensure 'viewer' is used if no role is selected
             username,
             password,
             email,
@@ -58,20 +105,14 @@ const CreateUserForm: React.FC = () => {
             updated_at: new Date(),
         };
 
-        // Debug: Log the payload to see what is being sent
-        console.log("User to create:", userToCreate);
-
         try {
             const { data, error } = await CreateUserConnector.postCreateUser(userToCreate);
-
-            // Debug: Log response to see what's coming from the API
-            console.log("API Response:", data, error);
 
             if (data) {
                 alert('User created successfully');
                 setFormData({
                     user_id: '',
-                    userType: '',
+                    userTypeState: 'viewer', // Reset form with default role as 'viewer'
                     username: '',
                     password: '',
                     email: '',
@@ -100,6 +141,7 @@ const CreateUserForm: React.FC = () => {
                     value={username}
                     onChange={handleChange}
                 />
+                {usernameTaken && <p className="text-red-500">Username is already taken.</p>}
 
                 <InputField
                     id="email"
@@ -108,6 +150,7 @@ const CreateUserForm: React.FC = () => {
                     value={email}
                     onChange={handleChange}
                 />
+                {emailTaken && <p className="text-red-500">Email is already registered.</p>}
 
                 <InputField
                     id="password"
@@ -119,16 +162,15 @@ const CreateUserForm: React.FC = () => {
 
                 <RoleProtected roles={[UserTypes.Admin]}>
                     <div className="mb-6">
-                        <label htmlFor="userType" className="text-lg block text-gray-800">Role:</label>
+                        <label htmlFor="userTypeState" className="text-lg block text-gray-800">Role:</label>
                         <select
-                            id="userType"
-                            value={userType}
+                            id="userTypeState"
+                            value={userTypeState}
                             onChange={handleChange}
                             className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-200"
                         >
-                            <option value="" disabled>Select Role</option>
-                            <option value="admin">Admin</option>
                             <option value="viewer">Viewer</option>
+                            <option value="admin">Admin</option>
                         </select>
                     </div>
                 </RoleProtected>
