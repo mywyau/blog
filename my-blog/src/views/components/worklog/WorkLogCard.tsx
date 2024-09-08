@@ -1,6 +1,8 @@
 import React from 'react';
+import RoleProtected from '../../../contexts/RoleProtected';
 import TextCountHelper from '../../../helpers/TextCountHelper';
 import DeleteWorklog from '../../../hooks/DeleteWorklog';
+import UserTypes from '../../../models/ADTs/UserType';
 import { WorkLogData } from '../../../models/WorkLogData';
 import DeleteWorklogButton from '../buttons/DeleteWorklogButton';
 import EditWorklogButton from '../buttons/EditWorklogButton';
@@ -38,10 +40,12 @@ const WorkLogCard: React.FC<WorkLogCardProps> = ({ worklogData }) => {
                     </div>
                     <p className="text-base text-gray-700 mb-4">{worklogData.body}</p>
                 </div>
-                <div className="flex space-x-4 pt-4"> {/* Flex container for buttons */}
-                    <EditWorklogButton worklogId={worklogData.worklog_id} />
-                    <DeleteWorklogButton handleDelete={handleDelete} loading={loadingState} errorMessage={deleteErrorMessage} deleteResponseBody={deleteResponseBody} />
-                </div>
+                <RoleProtected roles={[UserTypes.Admin]}>
+                    <div className="flex space-x-4 pt-4"> {/* Flex container for buttons */}
+                        <EditWorklogButton worklogId={worklogData.worklog_id} />
+                        <DeleteWorklogButton handleDelete={handleDelete} loading={loadingState} errorMessage={deleteErrorMessage} deleteResponseBody={deleteResponseBody} />
+                    </div>
+                </RoleProtected >
             </div>
         </div>
     );

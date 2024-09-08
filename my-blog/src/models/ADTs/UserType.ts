@@ -3,6 +3,7 @@ class UserTypes {
 
   static readonly Viewer = new UserTypes("Viewer");
   static readonly Admin = new UserTypes("Admin");
+  static readonly NotLoggedIn = new UserTypes("NotLoggedIn");
 
   toString() {
     return this.name;
@@ -11,7 +12,8 @@ class UserTypes {
 
 type UserType =
   typeof UserTypes.Viewer |
-  typeof UserTypes.Admin
+  typeof UserTypes.Admin |
+  typeof UserTypes.NotLoggedIn
 
 
 export default UserTypes;
