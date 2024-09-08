@@ -38,26 +38,28 @@ const CreateUserForm: React.FC = () => {
     };
 
     // Debounced check for username availability
-    const debouncedCheckUsername = useCallback(
-        debounce(async (username: string) => {
-            if (username) {
-                const exists = await checkUsernameExists(username);
-                setUsernameTaken(exists);
-            }
-        }, 500),
-        []
-    );
+    const debouncedCheckUsername =
+        useCallback(
+            debounce(async (username: string) => {
+                if (username) {
+                    const exists = await checkUsernameExists(username);
+                    setUsernameTaken(exists);
+                }
+            }, 500),
+            []
+        );
 
     // Debounced check for email availability
-    const debouncedCheckEmail = useCallback(
-        debounce(async (email: string) => {
-            if (email) {
-                const exists = await checkEmailExists(email);
-                setEmailTaken(exists);
-            }
-        }, 500),
-        []
-    );
+    const debouncedCheckEmail =
+        useCallback(
+            debounce(async (email: string) => {
+                if (email) {
+                    const exists = await checkEmailExists(email);
+                    setEmailTaken(exists);
+                }
+            }, 500),
+            []
+        );
 
     // Trigger username validation with debouncing
     useEffect(() => {
