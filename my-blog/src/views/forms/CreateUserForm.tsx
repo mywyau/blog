@@ -33,7 +33,7 @@ const CreateUserForm: React.FC = () => {
 
         const userToCreate: CreateUserFormData = {
             user_id: generateUserId(),
-            user_type: "user",
+            user_type: "viewer",
             username: username,
             password: password,
             email: email,

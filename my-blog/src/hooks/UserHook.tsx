@@ -1,8 +1,9 @@
 import { fold } from 'fp-ts/Either';
 import { Either } from 'fp-ts/lib/Either';
 import { default as UserTypes } from '../models/ADTs/UserType';
-import UserTypeErrors from '../models/ADTs/UserTypeErrors';
 import AuthService from '../service/AuthService';
+import UserTypeErrors from '../models/ADTs/UserTypeErrors';
+
 
 // interface HandleUserType<T> {
 //     viewer: () => T;

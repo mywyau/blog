@@ -1,6 +1,6 @@
 import { Either, fold } from 'fp-ts/lib/Either';
-import { Option, none, some } from 'fp-ts/Option';
 import { fold as optionFold } from 'fp-ts/lib/Option';
+import { Option, none, some } from 'fp-ts/Option';
 import React, { useEffect, useState } from 'react';
 import { ToastContainer } from 'react-toastify';
 import { default as UserTypes } from '../../models/ADTs/UserType';
@@ -101,10 +101,12 @@ const LandingPage: React.FC<LandingPageProps> = ({ posts, errorMessage }) => {
             )}
 
             {/* Render User Role Content */}
-            {optionFold<JSX.Element, JSX.Element>(
-              () => <></>, // Render nothing for the None case
-              (content) => content // Render content for the Some case
-            )(userBasedContent)}
+            {
+              optionFold<JSX.Element, JSX.Element>(
+                () => <></>, // Render nothing for the None case
+                (content) => content // Render content for the Some case
+              )(userBasedContent)
+            }
 
             {/* Pagination */}
             <Pagination
