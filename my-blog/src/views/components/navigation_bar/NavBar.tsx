@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
+import { Either, fold } from 'fp-ts/lib/Either';
+import { none, Option, fold as optionFold, some } from 'fp-ts/lib/Option';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import RoleProtected from '../../../contexts/RoleProtected';
 import { UserRoleProvider } from '../../../contexts/UserRoleContext';
 import NavbarPages from '../../../models/ADTs/NavbarPages';
 import UserTypes from '../../../models/ADTs/UserType';
+import UserTypeErrors from '../../../models/ADTs/UserTypeErrors';
+import AuthService from '../../../service/AuthService';
 import LogoutButton from '../buttons/LogoutButton';
 
 interface NavbarProps {
@@ -26,6 +30,53 @@ const Navbar: React.FC<NavbarProps> = ({ page = NavbarPages.Default }) => {
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
+
+  const [userBasedContent, setUserBasedContent] = useState<Option<JSX.Element>>(none); // State to track user role
+
+
+  // Fetch user role when component mounts
+  useEffect(() => {
+    const renderContent = async () => {
+      const result: Either<UserTypeErrors, UserTypes> = await AuthService.getRole();
+
+      fold<UserTypeErrors, UserTypes, void>(
+        (error) => {
+          switch (error) {
+            case UserTypeErrors.UnknownUserType:
+              setUserBasedContent(none); // No content for unknown user type
+              break;
+            default:
+              setUserBasedContent(none); // No content for other errors
+              break;
+          }
+        },
+        (userType) => {
+          switch (userType) {
+            case UserTypes.Admin:
+              setUserBasedContent(some(
+                <div>
+                  <p className="text-lg text-pink-300 text-right">Logged in as Admin</p>
+                </div>
+              ));
+              break;
+            case UserTypes.Viewer:
+              setUserBasedContent(some(
+                <div>
+                  <p className="text-lg text-pink-300 text-right">Logged in as Viewer</p>
+                </div>
+              ));
+              break;
+            default:
+              setUserBasedContent(none); // No content for other cases
+              break;
+          }
+        }
+      )(result);
+    };
+
+    renderContent(); // Invoke the function to fetch and set the content based on the user role
+  }, []); // Empty dependency array to run only on mount
+
 
   return (
     <UserRoleProvider>
@@ -138,6 +189,12 @@ const Navbar: React.FC<NavbarProps> = ({ page = NavbarPages.Default }) => {
                 </Link>
               </ RoleProtected>
               <LogoutButton />
+              {
+                optionFold<JSX.Element, JSX.Element>(
+                  () => <></>, // Render nothing for the None case
+                  (content) => content // Render content for the Some case
+                )(userBasedContent)
+              }
             </div>
           </div>
         </div>

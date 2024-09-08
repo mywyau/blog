@@ -35,50 +35,50 @@ const LandingPage: React.FC<LandingPageProps> = ({ posts, errorMessage }) => {
 
   const [post, setPost] = useState<PostData[]>(posts); // Initialize posts state with the posts prop
 
-  const [userBasedContent, setUserBasedContent] = useState<Option<JSX.Element>>(none); // State to track user role
+  // const [userBasedContent, setUserBasedContent] = useState<Option<JSX.Element>>(none); // State to track user role
 
-  // Fetch user role when component mounts
-  useEffect(() => {
-    const renderContent = async () => {
-      const result: Either<UserTypeErrors, UserTypes> = await AuthService.getRole();
+  // // Fetch user role when component mounts
+  // useEffect(() => {
+  //   const renderContent = async () => {
+  //     const result: Either<UserTypeErrors, UserTypes> = await AuthService.getRole();
 
-      fold<UserTypeErrors, UserTypes, void>(
-        (error) => {
-          switch (error) {
-            case UserTypeErrors.UnknownUserType:
-              setUserBasedContent(none); // No content for unknown user type
-              break;
-            default:
-              setUserBasedContent(none); // No content for other errors
-              break;
-          }
-        },
-        (userType) => {
-          switch (userType) {
-            case UserTypes.Admin:
-              setUserBasedContent(some(
-                <div>
-                  <p className="text-lg text-purple-400 text-right">Logged in as Admin</p>
-                </div>
-              ));
-              break;
-            case UserTypes.Viewer:
-              setUserBasedContent(some(
-                <div>
-                  <p className="text-lg text-purple-400 text-right">Logged in as Viewer</p>
-                </div>
-              ));
-              break;
-            default:
-              setUserBasedContent(none); // No content for other cases
-              break;
-          }
-        }
-      )(result);
-    };
+  //     fold<UserTypeErrors, UserTypes, void>(
+  //       (error) => {
+  //         switch (error) {
+  //           case UserTypeErrors.UnknownUserType:
+  //             setUserBasedContent(none); // No content for unknown user type
+  //             break;
+  //           default:
+  //             setUserBasedContent(none); // No content for other errors
+  //             break;
+  //         }
+  //       },
+  //       (userType) => {
+  //         switch (userType) {
+  //           case UserTypes.Admin:
+  //             setUserBasedContent(some(
+  //               <div>
+  //                 <p className="text-lg text-purple-400 text-right">Logged in as Admin</p>
+  //               </div>
+  //             ));
+  //             break;
+  //           case UserTypes.Viewer:
+  //             setUserBasedContent(some(
+  //               <div>
+  //                 <p className="text-lg text-purple-400 text-right">Logged in as Viewer</p>
+  //               </div>
+  //             ));
+  //             break;
+  //           default:
+  //             setUserBasedContent(none); // No content for other cases
+  //             break;
+  //         }
+  //       }
+  //     )(result);
+  //   };
 
-    renderContent(); // Invoke the function to fetch and set the content based on the user role
-  }, []); // Empty dependency array to run only on mount
+  //   renderContent(); // Invoke the function to fetch and set the content based on the user role
+  // }, []); // Empty dependency array to run only on mount
 
   return (
     <div className="font-nunito min-h-screen bg-gray-100">
@@ -94,12 +94,12 @@ const LandingPage: React.FC<LandingPageProps> = ({ posts, errorMessage }) => {
         <div className="flex flex-grow container mx-auto font-nunito min-h-screen bg-gray-100">
           <div className="w-full md:w-3/4 lg:w-2/3 mx-auto">
 
-            {
+            {/* {
               optionFold<JSX.Element, JSX.Element>(
                 () => <></>, // Render nothing for the None case
                 (content) => content // Render content for the Some case
               )(userBasedContent)
-            }
+            } */}
 
             {/* Render Blog Posts */}
             {currentPosts.length === 0 ? (

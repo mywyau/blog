@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import LoginNavbarPages from '../../../models/ADTs/LoginNavbarPages';
+import LogoutButton from '../buttons/LogoutButton';
 
 interface LoginNavbarProps {
   page?: LoginNavbarPages;
@@ -93,6 +94,7 @@ const LoginNavigationbar: React.FC<LoginNavbarProps> = ({ page = LoginNavbarPage
             >
               Forgotten Password
             </Link>
+            <LogoutButton />
           </div>
         </div>
       </div>
