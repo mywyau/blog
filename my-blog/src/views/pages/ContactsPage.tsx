@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import messages from '../../messages/contact';
 import Copyright from '../components/Copyright';
 import Navbar from '../components/navigation_bar/NavBar';
@@ -21,9 +21,17 @@ import NavbarPages from '../../models/ADTs/NavbarPages';
 import Spacer from '../components/Spacer';
 
 const ContactPage: React.FC = () => {
+  const [showImages, setShowImages] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowImages(true); // Show images after a delay (e.g., 2 seconds)
+    }, 20); // Adjust this delay as needed (2000ms = 2 seconds)
+
+    return () => clearTimeout(timer); // Cleanup the timer on component unmount
+  }, []);
 
   const copyToClipboard = (text: string, valueCopied: string) => {
-    console.log("copyToClipboard called with:", text);
     navigator.clipboard.writeText(text);
     toast.success(`Copied ${valueCopied} to clipboard!`, {
       position: "bottom-right",
@@ -32,7 +40,6 @@ const ContactPage: React.FC = () => {
       closeOnClick: true,
       pauseOnHover: true,
       draggable: true,
-      progress: undefined,
     });
   };
 
@@ -49,19 +56,20 @@ const ContactPage: React.FC = () => {
 
       <div className="flex-grow container mx-auto p-4">
         <div className="flex flex-col space-y-4 md:space-y-0 md:space-x-4">
-
           <div className="flex flex-col w-full pt-10 pb-10">
-            {/* Change grid-cols-3 to grid-cols-1 for small screens */}
-            <div className="grid grid-cols-1 md:grid-cols-3 bg-white rounded-lg shadow-lg p-4 sm:p-8 mt-4 sm:mt-12 mb-12"> 
+            <div className="grid grid-cols-1 md:grid-cols-3 bg-white rounded-lg shadow-lg p-4 sm:p-8 mt-4 sm:mt-12 mb-12">
 
+              {/* Lazy load images only after the delay */}
               <div className="flex flex-col items-center text-center text-xl bg-gradient-to-r from-blue-500 to-green-500 bg-clip-text text-transparent">
                 <div className="w-1/2 md:w-1/3 lg:w-1/2 mt-4 sm:mt-10 p-4 sm:p-6">
-                  <LazyLoadImage
-                    src={telephone_icon}
-                    alt="telephone_icon"
-                    effect="opacity"
-                    className="w-full h-auto rounded-lg"
-                  />
+                  {showImages && (
+                    <LazyLoadImage
+                      src={telephone_icon}
+                      alt="telephone_icon"
+                      effect="opacity"
+                      className="w-full h-auto rounded-lg"
+                    />
+                  )}
                 </div>
                 <div className="flex items-center justify-center mt-6">
                   <p className="text-lg sm:text-2xl text-gray-700 mb-2 pt-2">{messages.phoneNumber.mobile}</p>
@@ -77,12 +85,14 @@ const ContactPage: React.FC = () => {
 
               <div className="flex flex-col items-center text-center text-xl bg-gradient-to-r from-blue-500 to-green-500 bg-clip-text text-transparent">
                 <div className="w-full md:w-3/4 lg:w-2/3 p-4 sm:p-6">
-                  <LazyLoadImage
-                    src={home_icon}
-                    alt="home_icon"
-                    effect="opacity"
-                    className="w-full h-auto rounded-lg"
-                  />
+                  {showImages && (
+                    <LazyLoadImage
+                      src={home_icon}
+                      alt="home_icon"
+                      effect="opacity"
+                      className="w-full h-auto rounded-lg"
+                    />
+                  )}
                 </div>
 
                 <div className="flex items-center justify-center">
@@ -108,12 +118,14 @@ const ContactPage: React.FC = () => {
 
               <div className="flex flex-col items-center text-center text-xl bg-gradient-to-r from-blue-500 to-green-500 bg-clip-text text-transparent">
                 <div className="w-1/2 md:w-1/3 lg:w-1/2 mt-4 sm:mt-10 p-4 sm:p-8">
-                  <LazyLoadImage
-                    src={email_icon}
-                    alt="email_icon"
-                    effect="opacity"
-                    className="w-full h-auto rounded-lg"
-                  />
+                  {showImages && (
+                    <LazyLoadImage
+                      src={email_icon}
+                      alt="email_icon"
+                      effect="opacity"
+                      className="w-full h-auto rounded-lg"
+                    />
+                  )}
                 </div>
                 <div className="flex items-center justify-center mt-10">
                   <p className="text-lg sm:text-2xl text-gray-700">{messages.email}</p>
