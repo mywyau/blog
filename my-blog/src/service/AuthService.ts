@@ -1,21 +1,24 @@
+import { Either, left, right } from 'fp-ts/Either';
 import LoginConnector from '../connectors/LoginConnector';
 import UserTypes from '../models/ADTs/UserType';
 import UserTypeErrors from '../models/ADTs/UserTypeErrors';
 
 class AuthService {
-
-    async getRole(): Promise<UserTypes | UserTypeErrors> {
+    async getRole(): Promise<Either<UserTypeErrors, UserTypes>> {
         try {
             const { data } = await LoginConnector.getRole();
 
-            if (data.role === "admin") {
-                return UserTypes.Admin;
-            } else {
-                return UserTypes.Viewer;
+            switch (data.role) {
+                case 'admin':
+                    return right(UserTypes.Admin)
+                case 'viewer':
+                    return right(UserTypes.Viewer)
+                default:
+                    return right(UserTypes.NotLoggedIn)
             }
         } catch (error) {
             console.error("Error fetching user role:", error);
-            return UserTypeErrors.UnknownUserType;
+            return left(UserTypeErrors.UnknownUserType); // Error case
         }
     }
 }
