@@ -15,15 +15,22 @@ interface NavbarProps {
 }
 
 const Navbar: React.FC<NavbarProps> = ({ page = NavbarPages.Default }) => {
-
   const linkClassName = (navbarPages: NavbarPages) => {
-    return (
-      page === navbarPages
-        ? "text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-pink-300 animate-bounce text-xl hover:text-pink-200 transition-colors"
-        : "text-white text-xl hover:text-gray-300 transition-colors duration-300"
-    )
-  }
-
+    switch (navbarPages) {
+      case NavbarPages.Home:
+        return (
+          page === navbarPages
+            ? "text-4xl text-transparent bg-clip-text bg-gradient-to-r from-purple-500 via-pink-500 to-pink-600 animate-bounce hover:text-pink-200 transition-colors"
+            : "text-4xl text-black  hover:text-gray-500  transition-colors duration-300"
+        );
+      default:
+        return (
+          page === navbarPages
+            ? "text-transparent bg-clip-text bg-gradient-to-r from-purple-500 via-pink-500 to-pink-600 animate-bounce text-xl hover:text-pink-200 transition-colors"
+            : "text-black text-xl hover:text-gray-500 transition-colors duration-300"
+        );
+    }
+  };
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -32,7 +39,6 @@ const Navbar: React.FC<NavbarProps> = ({ page = NavbarPages.Default }) => {
   };
 
   const [userBasedContent, setUserBasedContent] = useState<Option<JSX.Element>>(none); // State to track user role
-
 
   // Fetch user role when component mounts
   useEffect(() => {
@@ -55,14 +61,14 @@ const Navbar: React.FC<NavbarProps> = ({ page = NavbarPages.Default }) => {
             case UserTypes.Admin:
               setUserBasedContent(some(
                 <div>
-                  <p className="text-lg text-pink-300 text-right">Logged in as Admin</p>
+                  <p className="text-lg text-pink-500 text-right">Logged in as Admin</p>
                 </div>
               ));
               break;
             case UserTypes.Viewer:
               setUserBasedContent(some(
                 <div>
-                  <p className="text-lg text-pink-300 text-right">Logged in as Viewer</p>
+                  <p className="text-lg text-pink-500 text-right">Logged in as Viewer</p>
                 </div>
               ));
               break;
@@ -77,17 +83,16 @@ const Navbar: React.FC<NavbarProps> = ({ page = NavbarPages.Default }) => {
     renderContent(); // Invoke the function to fetch and set the content based on the user role
   }, []); // Empty dependency array to run only on mount
 
-
   return (
     <UserRoleProvider>
-      <nav className="bg-true-blue p-4 shadow-lg fixed w-full z-50">
+      <nav className="bg-gray-100 p-4 fixed w-full z-50 border-b-2 border-gray-300">
         <div className="container mx-auto flex justify-between items-center">
           {/* Brand or Home Link */}
           <div className="flex items-center space-x-4">
             <Link
               id="home"
               to="/"
-              className="text-white text-4xl font-bold hover:text-gray-300"
+              className={linkClassName(NavbarPages.Home)}
             >
               Home
             </Link>
@@ -171,7 +176,7 @@ const Navbar: React.FC<NavbarProps> = ({ page = NavbarPages.Default }) => {
                 >
                   Assets
                 </Link>
-              </ RoleProtected>
+              </RoleProtected>
               <Link
                 id="login-nav"
                 to="/login"
@@ -179,27 +184,29 @@ const Navbar: React.FC<NavbarProps> = ({ page = NavbarPages.Default }) => {
               >
                 Login
               </Link>
-              <RoleProtected roles={[UserTypes.Admin]}>
-                <Link
-                  id="create-blog-post"
-                  to="/create-blog-post"
-                  className="bg-green-500 text-white text-lg font-semibold py-2 px-5 rounded hover:bg-green-400 hover:text-gray-700 transition-colors duration-300 flex items-center justify-center"
-                >
-                  Create Blog Post
-                </Link>
-              </ RoleProtected>
-              <LogoutButton />
               {
                 optionFold<JSX.Element, JSX.Element>(
                   () => <></>, // Render nothing for the None case
                   (content) => content // Render content for the Some case
                 )(userBasedContent)
               }
+              <RoleProtected roles={[UserTypes.Admin]}>
+                <div className="flex flex-col space-y-2">
+                  <Link
+                    id="create-blog-post"
+                    to="/create-blog-post"
+                    className="bg-green-500 text-white text-lg font-semibold py-2 px-5 rounded hover:bg-green-400 hover:text-gray-700 transition-colors duration-300 flex items-center justify-center"
+                  >
+                    Create Blog Post
+                  </Link>
+                  <LogoutButton />
+                </div>
+              </RoleProtected>
             </div>
           </div>
         </div>
       </nav>
-    </ UserRoleProvider>
+    </UserRoleProvider>
   );
 };
 

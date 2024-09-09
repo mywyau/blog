@@ -32,8 +32,8 @@ const WorkLogCard: React.FC<WorkLogCardProps> = ({ worklogData }) => {
     return (
         <div className="h-full w-full pt-6 pb-6 md:w-auto">
             <div className="bg-white rounded-lg shadow-lg p-6 md:p-8 h-full">
-                <div className="text-blue-500">
-                    <h2 className="text-2xl pt-2">{worklogData.work_title}</h2>
+                <div className="">
+                    <h2 className="text-2xl text-black pt-2">{worklogData.work_title}</h2>
                     <div className="flex justify-between items-center pt-4 pb-5">
                         <p className="text-sm text-blue-500 mb-4 pt-4 text-left">{`Date created: ${formatDate(worklogData.created_at)}`}</p>
                         <p className="text-sm text-pink-500 mb-4 pt-4 text-right">{`Word Count: ${TextCountHelper.countWords(worklogData.body)}`}</p>

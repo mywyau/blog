@@ -6,7 +6,7 @@ import RoleProtected from '../../contexts/RoleProtected';
 import { UserRoleProvider } from '../../contexts/UserRoleContext';
 import UserTypes from '../../models/ADTs/UserType';
 import { CreateUserFormData } from '../../models/UserData';
-import { checkEmailExists, checkUsernameExists } from '../../service/ValidationService';
+import { checkEmailExists, checkUsernameExists } from '../../service/LoginValidationService';
 
 // Utility function to generate user ID
 const generateUserId = () => {
