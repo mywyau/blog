@@ -97,6 +97,8 @@ const Navbar: React.FC<NavbarProps> = ({ page = NavbarPages.Default }) => {
               <Link id="interests" to="/interests" className={generateLinkClassName(page, NavbarPages.Interests)}>Interests</Link>
               <Link id="skills" to="/skills" className={generateLinkClassName(page, NavbarPages.Skills)}>Skills</Link>
               <Link id="worklog-nav" to="/worklog" className={generateLinkClassName(page, NavbarPages.Worklog)}>WorkLog</Link>
+              {/* Login Link */}
+              <Link id="login-nav" to="/login" className={generateLinkClassName(page, NavbarPages.Login)}>Login</Link>
 
               {/* Admin-specific links */}
               <RoleProtected roles={[UserTypes.Admin]}>
@@ -109,8 +111,6 @@ const Navbar: React.FC<NavbarProps> = ({ page = NavbarPages.Default }) => {
                 </div>
               </RoleProtected>
 
-              {/* Login Link */}
-              <Link id="login-nav" to="/login" className={generateLinkClassName(page, NavbarPages.Login)}>Login</Link>
 
               {/* User-specific content */}
               {userBasedContent && userBasedContent._tag === 'Some' && userBasedContent.value}
