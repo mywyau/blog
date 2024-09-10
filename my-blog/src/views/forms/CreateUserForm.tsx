@@ -183,9 +183,16 @@ const CreateUserForm: React.FC = () => {
                     <button
                         type="submit"
                         disabled={loading}
-                        className={`mt-6 mb-6 w-1/2 py-2 px-4 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
+                        className={`mt-6 w-1/2 py-2 px-4 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors flex justify-center items-center space-x-2 ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
                     >
-                        {loading ? <FaSpinner className="animate-spin" /> : 'Create User'}
+                        {loading ? (
+                            <>
+                                <FaSpinner className="animate-spin" />
+                                <span>Creating user...</span> {/* Message shown while loading */}
+                            </>
+                        ) : (
+                            'Create User'
+                        )}
                     </button>
                 </div>
             </form>

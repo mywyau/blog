@@ -12,10 +12,9 @@ import Spacer from '../components/Spacer';
 
 interface LandingPageProps {
   posts: PostData[];
-  errorMessage: string;
 }
 
-const LandingPage: React.FC<LandingPageProps> = ({ posts, errorMessage }) => {
+const LandingPage: React.FC<LandingPageProps> = ({ posts }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const postsPerPage = 5;
 

@@ -5,17 +5,13 @@ import LandingPage from '../views/pages/LandingPage';
 
 interface State {
     posts: PostData[];
-    errorMessage: string | null;
-    loading: boolean;
 }
 
 const LandingPageController: React.FC = () => {
 
     const [state, setState] =
         useState<State>({
-            posts: [],
-            errorMessage: null,
-            loading: true,
+            posts: []
         });
 
     useEffect(() => {
@@ -33,14 +29,12 @@ const LandingPageController: React.FC = () => {
                 if (data.length === 0) {
                     setState(prevState => ({
                         ...prevState,
-                        errorMessage: '[LandingPageController][getAllPosts] No blog posts retrieved, database likely empty',
                         loading: false,
                     }));
                 } else {
                     setState(prevState => ({
                         ...prevState,
                         posts: data,
-                        errorMessage: null,
                         loading: false,
                     }));
                 }
@@ -52,7 +46,7 @@ const LandingPageController: React.FC = () => {
     console.log('[LandingPageController][getAllPosts] Data retrieved:', state.posts);
 
     return (
-        <LandingPage posts={state.posts} errorMessage={state.errorMessage ?? ''} />
+        <LandingPage posts={state.posts} />
     );
 };
 
