@@ -4,7 +4,7 @@ import UserTypes from '../models/ADTs/UserType';
 import UserTypeErrors from '../models/ADTs/UserTypeErrors';
 
 class AuthService {
-    async getRole(): Promise<Either<UserTypeErrors, UserTypes>> {
+    async getRole() {
         try {
             const { data } = await LoginConnector.getRole();
 

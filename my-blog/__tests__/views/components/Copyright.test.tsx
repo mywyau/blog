@@ -1,4 +1,3 @@
-import React from 'react';
 import { render, screen } from '@testing-library/react';
 import Copyright from '../../../src/views/components/Copyright';
 
@@ -28,7 +27,7 @@ describe('Copyright component', () => {
   test('has the correct class names', () => {
     render(<Copyright />);
     const footerElement = screen.getByRole('contentinfo');
-    expect(footerElement).toHaveClass('w-full', 'font-nunito', 'bg-true-blue', 'text-white', 'py-1', 'fixed', 'bottom-0');
+    expect(footerElement).toHaveClass('w-full font-nunito bg-gray-100 text-black py-1 fixed bottom-0 border-t-2');
   });
 
   test('renders with responsive padding', () => {
@@ -48,7 +47,7 @@ describe('Copyright component', () => {
     const privacyPolicyLink = screen.getByText(/Privacy Policy/i);
     const termsOfServiceLink = screen.getByText(/Terms of Service/i);
 
-    expect(privacyPolicyLink).toHaveClass('text-white', 'underline', 'hover:text-gray-300', 'ml-2', 'sm:ml-4', 'sm:mr-2');
-    expect(termsOfServiceLink).toHaveClass('text-white', 'underline', 'hover:text-gray-300', 'ml-2');
+    expect(privacyPolicyLink).toHaveClass('text-black underline hover:text-gray-500 ml-2 sm:ml-4 sm:mr-2');
+    expect(termsOfServiceLink).toHaveClass('text-black', 'underline', 'hover:text-gray-500', 'ml-2');
   });
 });

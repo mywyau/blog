@@ -3,6 +3,7 @@ import { CreateUserFormData, UserData } from '../models/UserData';
 import axiosInstance from './axiosInstance';
 
 class CreateUserConnector {
+
     async postCreateUser(createUserFormData: CreateUserFormData): Promise<{ data?: UserData; error?: string }> {
         try {
             const response = await axiosInstance.post('/create/account/user', {
@@ -18,9 +19,7 @@ class CreateUserConnector {
             return {
                 error:
                     axiosError.response?.data?.message ||
-                    `[CreateUserConnector][postCreateUser] An error occurred while trying to create the user. Please check all necessary information is provided 
-                    ${axiosError.response?.data?.message}
-                    `,
+                    `[CreateUserConnector][postCreateUser] An error occurred while trying to create the user. Please check all necessary information is provided.`,
             };
         }
     }
