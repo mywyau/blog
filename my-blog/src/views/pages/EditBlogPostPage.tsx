@@ -2,8 +2,8 @@
 import React from 'react';
 import Copyright from '../components/Copyright';
 import EditPostForm from '../components/EditPostForm';
-import Navbar from '../components/navigation_bar/NavBar';
 import H1 from '../components/general/H1';
+import Navbar from '../components/navigation_bar/NavBar';
 
 const EditBlogPostPage: React.FC = () => {
 

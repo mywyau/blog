@@ -1,4 +1,3 @@
-// src/pages/About.tsx
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import RoleProtected from '../../contexts/RoleProtected';
@@ -20,81 +19,88 @@ interface WorkLogPageProps {
 
 const ShowWorkLogPage: React.FC<WorkLogPageProps> = ({ worklogs, errorMessage }) => {
 
+  // Helper function to sort worklogs by creation time
   function sortByWorkLogCreationTime(worklogs: WorkLogData[]): WorkLogData[] {
     return worklogs.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
   }
 
+  // State to manage pagination and year filtering
+  const [currentPage, setCurrentPage] = useState(1);
   const [selectedYear, setSelectedYear] = useState<number>(new Date().getFullYear());
   const [searchYear, setSearchYear] = useState<number | null>(null);
 
+  // Determine years available for filtering
   const years = Array.from(new Set(worklogs.map(worklog => new Date(worklog.created_at).getFullYear())));
 
-  const [currentPage, setCurrentPage] = useState(1);
-
+  // Define worklogs per page and pagination calculations
   const worklogPerPage = 2;
   const indexOfLastTask = currentPage * worklogPerPage;
   const indexOfFirstTask = indexOfLastTask - worklogPerPage;
 
-
-  // Filter worklogs based on the searched year - Search Bar
+  // Filter worklogs based on searchYear if applicable
   const filteredWorklogs = searchYear
     ? worklogs.filter(worklog => new Date(worklog.created_at).getFullYear() === searchYear)
     : worklogs;
 
-
+  // Get current worklogs to display on the page
   const currentTasks = sortByWorkLogCreationTime(filteredWorklogs).slice(indexOfFirstTask, indexOfLastTask);
 
   return (
     <UserRoleProvider>
-    <div className="flex flex-col min-h-screen font-nunito bg-gray-100">
-      <Navbar page={NavbarPages.Worklog} />
-      <Spacer size={"p-20"} />
-      {/* <H1 id={"worklog"} message={messages.about.title} className={""} /> */}
-      <div className="flex flex-col flex-grow container mx-auto">
+      <div className="flex flex-col min-h-screen font-nunito bg-gradient-to-r from-pink-100 via-purple-200 to-blue-200">
+        <Navbar page={NavbarPages.Worklog} />
+        <Spacer size={"p-20"} />
 
-        {/* Year Search Bar */}
-        <YearSearchBar onYearSearch={setSearchYear} />
+        <div className="flex flex-col flex-grow container mx-auto">
+          {/* Year Search Bar */}
+          <YearSearchBar onYearSearch={setSearchYear} />
 
-
-        <div className="sm:p-2">
-          <WorkLogPagination
-            worklogPerPage={worklogPerPage}
-            totalWorklogs={filteredWorklogs.length}
-            paginate={(pageNumber) => setCurrentPage(pageNumber)}
-          />
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 h-full w-full gap-4 mt-4"> {/* Ensure equal height p-2 sm:p-3 h-full flex */}
-          {currentTasks.map(worklog =>
-            <WorkLogGrid workLogData={worklog} />
-          )}
-        </div>
-
-        <div className="flex justify-start pb-10">
-          <div className="sm:p-4">
+          {/* Top Pagination */}
+          <div className="sm:p-2">
             <WorkLogPagination
               worklogPerPage={worklogPerPage}
               totalWorklogs={filteredWorklogs.length}
+              currentPage={currentPage}  // Pass currentPage to pagination
               paginate={(pageNumber) => setCurrentPage(pageNumber)}
             />
           </div>
+
+          {/* Worklog Grid Display */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 h-full w-full gap-4 mt-4">
+            {currentTasks.map(worklog => (
+              <WorkLogGrid key={worklog.id} workLogData={worklog} />
+            ))}
+          </div>
+
+          {/* Bottom Pagination */}
+          <div className="flex justify-start pb-10">
+            <div className="sm:p-4">
+              <WorkLogPagination
+                worklogPerPage={worklogPerPage}
+                totalWorklogs={filteredWorklogs.length}
+                currentPage={currentPage}  // Pass currentPage to pagination
+                paginate={(pageNumber) => setCurrentPage(pageNumber)}
+              />
+            </div>
+          </div>
+
+          {/* Add New Work Log Button for Admin Users */}
+          <RoleProtected roles={[UserTypes.Admin]}>
+            <div className="flex justify-start pb-20">
+              <Link
+                id="add-new-work"
+                to="/worklog/add/new/worklog"
+                className="inline-block font-nunito p-2 pr-6 pl-6 rounded-md focus:outline-none bg-green-600 text-white hover:bg-green-700 justify-center"
+              >
+                Add New Piece of Work
+              </Link>
+            </div>
+          </RoleProtected>
         </div>
 
-        <RoleProtected roles={[UserTypes.Admin]}>
-          <div className="flex justify-start pb-20">
-            <Link
-              id="add-new-work"
-              to="/worklog/add/new/worklog"
-              className="inline-block font-nunito p-2 pr-6 pl-6 rounded-md focus:outline-none bg-green-600 text-white hover:bg-green-700 justify-center"
-            >
-              Add New Piece of Work
-            </Link>
-          </div>
-        </RoleProtected>
+        <Spacer size='pb-20' />
+        <Copyright />
       </div>
-      <Spacer size='pb-20' />
-      <Copyright />
-    </div>
     </UserRoleProvider>
   );
 };

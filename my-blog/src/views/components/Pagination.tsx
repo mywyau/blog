@@ -23,6 +23,7 @@ const Pagination: React.FC<PaginationProps> = ({ postsPerPage, totalPosts, pagin
             <button
               onClick={() => paginate(number)}
               className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600"
+              data-testid={`pagination-button-${number}`} // Add the data-testid attribute
             >
               {number}
             </button>

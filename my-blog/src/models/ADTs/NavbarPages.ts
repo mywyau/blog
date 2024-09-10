@@ -1,6 +1,7 @@
 class NavbarPages {
   private constructor(public readonly name: string) { }
 
+  static readonly Home = new NavbarPages("Home");
   static readonly About = new NavbarPages("About");
   static readonly Contact = new NavbarPages("Contact");
   static readonly Interests = new NavbarPages("Interests");
@@ -16,6 +17,7 @@ class NavbarPages {
 }
 
 type NavbarPage =
+  typeof NavbarPages.Home |
   typeof NavbarPages.About |
   typeof NavbarPages.Contact |
   typeof NavbarPages.Interests |

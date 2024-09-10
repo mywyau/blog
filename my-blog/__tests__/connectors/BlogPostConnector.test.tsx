@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { config } from 'dotenv';
 import BlogPostConnector from '../../src/connectors/BlogPostConnector';
-import { PostData } from '../../src/models/PostData';
 import { DeleteResponseBody } from '../../src/models/DeleteResponseBody';
+import { PostData } from '../../src/models/PostData';
 
 config({ path: '../../.env' });
 
@@ -21,11 +21,14 @@ describe('BlogPostConnector API functions', () => {
 
         it('should return post data when API call is successful', async () => {
 
-            const mockPost: PostData = {
+            const mockPost:
+                PostData = {
                 id: 1,
                 post_id: 'mikey-1',
                 title: 'Test Post',
                 body: 'This is a test post.',
+                created_at: new Date(),
+                updated_at: new Date(),
             };
 
             mockedAxios.get.mockResolvedValueOnce({ data: mockPost });
@@ -62,6 +65,8 @@ describe('BlogPostConnector API functions', () => {
                 post_id: 'mikey-2',
                 title: 'Test Post',
                 body: 'This is a test post.',
+                created_at: new Date(),
+                updated_at: new Date(),
             };
 
             mockedAxios.get.mockResolvedValueOnce({ data: mockPost });
@@ -98,6 +103,8 @@ describe('BlogPostConnector API functions', () => {
                 post_id: 'mikey-2',
                 title: 'Hardcoded title update',
                 body: 'Some updated content',
+                created_at: new Date(),
+                updated_at: new Date(),
             };
 
             mockedAxios.put.mockResolvedValueOnce({ data: updatedPost });
@@ -124,6 +131,8 @@ describe('BlogPostConnector API functions', () => {
                 post_id: 'mikey-2',
                 title: 'Hardcoded title update',
                 body: 'Some updated content',
+                created_at: new Date(),
+                updated_at: new Date(),
             };
 
             mockedAxios.put.mockRejectedValueOnce({

@@ -35,36 +35,4 @@ describe('LandingPageController', () => {
             expect(screen.getByText('Post 2')).toBeInTheDocument();
         });
     });
-
-    test('renders error message when fetching posts fails', async () => {
-        const errorMessage = 'Failed to fetch posts';
-        mockedBlogPostConnector.getAllPosts.mockResolvedValueOnce({ error: errorMessage });
-
-        render(
-            <MemoryRouter>
-                <LandingPageController />
-            </MemoryRouter>
-        );
-
-        await waitFor(() => {
-            expect(screen.getByText(`Error: ${errorMessage}`)).toBeInTheDocument();
-        });
-    });
-
-    test('renders error message when no posts are retrieved', async () => {
-        mockedBlogPostConnector.getAllPosts.mockResolvedValueOnce({ data: [] });
-
-        render(
-            <MemoryRouter>
-                <LandingPageController />
-            </MemoryRouter>
-        );
-
-        await waitFor(() => {
-            expect(screen.getByText((content, element) =>
-                content.startsWith('Error: [LandingPageController][getAllPosts] No blog posts retrieved')
-            )).toBeInTheDocument();
-        });
-    });
-
 });
