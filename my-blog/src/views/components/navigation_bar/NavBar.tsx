@@ -20,8 +20,8 @@ const Navbar: React.FC<NavbarProps> = ({ page = NavbarPages.Default }) => {
       case NavbarPages.Home:
         return (
           page === navbarPages
-            ? "text-4xl text-transparent bg-clip-text bg-gradient-to-r from-purple-500 via-pink-500 to-pink-600 animate-bounce hover:text-pink-200 transition-colors"
-            : "text-4xl text-black  hover:text-gray-500  transition-colors duration-300"
+            ? "text-3xl text-transparent bg-clip-text bg-gradient-to-r from-purple-500 via-pink-500 to-pink-600 animate-bounce hover:text-pink-200 transition-colors"
+            : "text-3xl text-black  hover:text-gray-500  transition-colors duration-300"
         );
       default:
         return (

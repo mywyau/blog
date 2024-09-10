@@ -3,16 +3,13 @@ import { fold, getOrElse, Option } from 'fp-ts/Option';
 import React from 'react';
 import TextCountHelper from '../../helpers/TextCountHelper';
 import { PostData } from '../../models/PostData';
-import H1 from '../components/general/H1';
 import Spacer from '../components/Spacer';
-import { size } from 'fp-ts/lib/ReadonlyRecord';
 
 interface RenderBlogPostProps {
     post: Option<PostData>;
     loading: Option<boolean>;
     errorMessage: Option<string>;
 }
-
 
 function paragraph(postBody: string): JSX.Element[] {
     return postBody.split('\n').map((para, index) => (
@@ -31,43 +28,30 @@ const RenderBlogPost: React.FC<RenderBlogPostProps> = ({ post, loading, errorMes
                 fold(() => <></>,
                     (post) => (
                         <div>
-                            {/* <H1 id={`blog-post-${post.post_id}`} message={post.title} className={''} /> */}
                             <Spacer size="pt-20" />
-                            <h1 id={post.post_id} className={`text-4xl font-bold bg-gradient-to-r from-blue-500 to-green-500 bg-clip-text text-transparent pt-6`}>
+                            <h1 id={post.post_id} className={`text-4xl text-black font-bold pt-6`}>
                                 {post.title}
                             </h1>
-                            <div className="mt-4">
-                                <p className='text-sm text-gray-600 mb-6 pt-2'>
+
+                            {/* Flex container for word count and read time */}
+                            <div className="flex justify-between items-center mt-10 mb-10 text-sm">
+                                <p className="text-left text-blue-600">
                                     Word Count: {textCountHelper.countWords(post.body)}
                                 </p>
-                            </div>
-                            <div>
-                                <p className="text-gray-600 text-sm mb-4">
-                                    Read time: {textCountHelper.calculateReadingTime(textCountHelper.countWords(post.body))}
+                                <p className="text-right text-pink-600">
+                                    Read Time: {textCountHelper.calculateReadingTime(textCountHelper.countWords(post.body))}
                                 </p>
                             </div>
-                            <div>
+
+                            <div className="mt-6">
                                 {paragraph(post.body)}
                             </div>
                         </div>
                     )
                 )
             )
-        )
-    };
-
-    function H1Html(post: Option<PostData>): JSX.Element {
-        return (
-            pipe(
-                post,
-                fold(() => <></>,
-                    (post) => (
-                        <H1 id={`blog-post-${post.post_id}`} message={post.title} className={''} />
-                    )
-                )
-            )
-        )
-    };
+        );
+    }
 
     const handledError =
         pipe(
@@ -80,7 +64,6 @@ const RenderBlogPost: React.FC<RenderBlogPostProps> = ({ post, loading, errorMes
             loading,
             getOrElse(() => false)
         );
-
 
     return (
         <div>

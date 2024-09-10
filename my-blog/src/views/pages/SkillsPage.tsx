@@ -31,13 +31,9 @@ const SkillsPage: React.FC<SkillsPageProps> = ({ skills, errorMessage }) => {
   const currentSkills = sortBySkillName(skills).slice(indexOfFirstSkill, indexOfLastSkill);
 
 
-
-
-
-
   return (
     <UserRoleProvider>
-      <div className="flex flex-col min-h-screen font-nunito bg-gray-100">
+      <div className="flex flex-col min-h-screen font-nunito bg-gradient-to-r from-green-200 to-orange-300">
         <Navbar page={NavbarPages.Skills} />
 
         {/* <H1 id={"skills"} message={messages.about.title} className={""} /> */}
@@ -59,6 +55,7 @@ const SkillsPage: React.FC<SkillsPageProps> = ({ skills, errorMessage }) => {
             <div className="p-2 sm:p-4">
               <SkillsPagination
                 skillsPerPage={skillsPerPage}
+                currentPage={currentPage}
                 totalSkills={skills.length}
                 paginate={(pageNumber) => setCurrentPage(pageNumber)}
               />

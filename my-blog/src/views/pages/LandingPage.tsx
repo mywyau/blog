@@ -32,7 +32,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ posts, errorMessage }) => {
   const [post, setPost] = useState<PostData[]>(posts); // Initialize posts state with the posts prop
 
   return (
-    <div className="font-nunito min-h-screen bg-gray-100">
+    <div className="font-nunito min-h-screen bg-stone-300">
       <header>
         <Navbar page={NavbarPages.Home} />
       </header>
@@ -43,7 +43,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ posts, errorMessage }) => {
           <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
         </div>
 
-        <div className="flex flex-grow container mx-auto font-nunito min-h-screen bg-gray-100">
+        <div className="flex flex-grow container mx-auto font-nunito min-h-screen bg-stone-300">
           <div className="w-full md:w-3/4 lg:w-2/3 mx-auto">
 
             {/* Render Blog Posts */}

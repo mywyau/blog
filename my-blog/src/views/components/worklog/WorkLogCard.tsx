@@ -31,7 +31,7 @@ const WorkLogCard: React.FC<WorkLogCardProps> = ({ worklogData }) => {
 
     return (
         <div className="h-full w-full pt-6 pb-6 md:w-auto">
-            <div className="bg-white rounded-lg shadow-lg p-6 md:p-8 h-full">
+            <div className="bg-stone-100/75 rounded-lg shadow-lg p-6 md:p-8 h-full">
                 <div className="">
                     <h2 className="text-2xl text-black pt-2">{worklogData.work_title}</h2>
                     <div className="flex justify-between items-center pt-4 pb-5">

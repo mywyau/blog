@@ -15,7 +15,7 @@ import 'react-lazy-load-image-component/src/effects/blur.css';
 import 'react-lazy-load-image-component/src/effects/opacity.css';
 
 import email_icon from '../../assets/email_icon.png';
-import home_icon from '../../assets/home_icon.png';
+import house_icon from '../../assets/house_icon.png';
 import telephone_icon from '../../assets/telephone_icon.png';
 import NavbarPages from '../../models/ADTs/NavbarPages';
 import Spacer from '../components/Spacer';
@@ -57,7 +57,7 @@ const ContactPage: React.FC = () => {
       <div className="flex-grow container mx-auto p-4">
         <div className="flex flex-col space-y-4 md:space-y-0 md:space-x-4">
           <div className="flex flex-col w-full pt-10 pb-10">
-            <div className="grid grid-cols-1 md:grid-cols-3 bg-white rounded-lg shadow-lg p-4 sm:p-8 mt-4 sm:mt-12 mb-12">
+            <div className="grid grid-cols-1 md:grid-cols-3 rounded-lg p-4 sm:p-8 mt-4 sm:mt-12 mb-12">
 
               {/* Lazy load images only after the delay */}
               <div className="flex flex-col items-center text-center text-xl bg-gradient-to-r from-blue-500 to-green-500 bg-clip-text text-transparent">
@@ -72,7 +72,7 @@ const ContactPage: React.FC = () => {
                   )}
                 </div>
                 <div className="flex items-center justify-center mt-6">
-                  <p className="text-lg sm:text-2xl text-gray-700 mb-2 pt-2">{messages.phoneNumber.mobile}</p>
+                  <p className="text-lg sm:text-2xl text-black mb-2 pt-2">{messages.phoneNumber.mobile}</p>
                   <div data-testid="copy-mobile-number-icon" id="copy-mobile-number-icon" className="flex items-center justify-center">
                     <FontAwesomeIcon
                       icon={faCopy}
@@ -84,19 +84,19 @@ const ContactPage: React.FC = () => {
               </div>
 
               <div className="flex flex-col items-center text-center text-xl bg-gradient-to-r from-blue-500 to-green-500 bg-clip-text text-transparent">
-                <div className="w-full md:w-3/4 lg:w-2/3 p-4 sm:p-6">
+                <div className="w-full md:w-1/2 lg:w-1/2 p-4 sm:p-6">
                   {showImages && (
                     <LazyLoadImage
-                      src={home_icon}
-                      alt="home_icon"
+                      src={house_icon}
+                      alt="house_icon"
                       effect="opacity"
-                      className="w-full h-auto rounded-lg"
+                      className="w-full h-auto rounded-lg pt-8 pb-10"
                     />
                   )}
                 </div>
 
                 <div className="flex items-center justify-center">
-                  <p className="text-lg sm:text-2xl text-gray-700">
+                  <p className="text-lg sm:text-2xl text-black">
                     {messages.address.houseNumber} {messages.address.street}
                   </p>
                   <div data-testid="copy-address-icon" id="copy-address-icon" className="flex items-center justify-center">
@@ -109,10 +109,10 @@ const ContactPage: React.FC = () => {
                 </div>
 
                 <div className="flex flex-col items-center justify-center mb-4">
-                  <p className="text-lg sm:text-2xl text-gray-700">{messages.address.county}</p>
-                  <p className="text-lg sm:text-2xl text-gray-700">{messages.address.city}</p>
-                  <p className="text-lg sm:text-2xl text-gray-700">{messages.address.country}</p>
-                  <p className="text-lg sm:text-2xl text-gray-700">{messages.address.postcode}</p>
+                  <p className="text-lg sm:text-2xl text-black">{messages.address.county}</p>
+                  <p className="text-lg sm:text-2xl text-black">{messages.address.city}</p>
+                  <p className="text-lg sm:text-2xl text-black">{messages.address.country}</p>
+                  <p className="text-lg sm:text-2xl text-black">{messages.address.postcode}</p>
                 </div>
               </div>
 
@@ -127,8 +127,8 @@ const ContactPage: React.FC = () => {
                     />
                   )}
                 </div>
-                <div className="flex items-center justify-center mt-10">
-                  <p className="text-lg sm:text-2xl text-gray-700">{messages.email}</p>
+                <div className="flex items-center justify-center mt-8">
+                  <p className="text-lg sm:text-2xl text-black">{messages.email}</p>
                   <div data-testid="copy-email-icon" id="copy-email-icon" className="flex items-center justify-center">
                     <FontAwesomeIcon
                       icon={faCopy}

@@ -54,16 +54,16 @@ const BlogCard: React.FC<PostData> = ({ id, post_id, title, body, created_at, up
   }, []);
 
   return (
-    <div className="bg-white rounded-lg shadow-lg p-6 mb-4">
+    <div className="bg-stone-100 rounded-lg shadow-lg p-6 mb-4">
       <h2 id={`h2-${title.replaceAll(" ", "-")}`} ref={titleRef} tabIndex={0} className="text-2xl font-bold mb-2">
-        <Link id={`${title.replaceAll(" ", "-")}-link`} to={`/post/${post_id}`} className="text-green-500 hover:underline">
+        <Link id={`${title.replaceAll(" ", "-")}-link`} to={`/post/${post_id}`} className="text-slate-700 hover:text-slate-400">
           {title}
         </Link>
       </h2>
       <p ref={textRef} tabIndex={0} className="text-gray-700">
         {textCountHelper.takeNumberOfWords(body, 100)}
       </p>
-      <Link to={`/post/${post_id}`} id={`read-more-${post_id}`} className="text-azure hover:underline mt-4 inline-block">
+      <Link to={`/post/${post_id}`} id={`read-more-${post_id}`} className="text-cyan-500 hover:text-cyan-300 underline mt-4 inline-block">
         Read more
       </Link>
     </div>

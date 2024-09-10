@@ -179,13 +179,15 @@ const CreateUserForm: React.FC = () => {
                     </div>
                 </RoleProtected>
 
-                <button
-                    type="submit"
-                    disabled={loading}
-                    className={`w-full py-2 px-4 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
-                >
-                    {loading ? <FaSpinner className="animate-spin" /> : 'Create User'}
-                </button>
+                <div className="flex justify-center">
+                    <button
+                        type="submit"
+                        disabled={loading}
+                        className={`mt-6 mb-6 w-1/2 py-2 px-4 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
+                    >
+                        {loading ? <FaSpinner className="animate-spin" /> : 'Create User'}
+                    </button>
+                </div>
             </form>
         </UserRoleProvider>
     );
@@ -218,8 +220,9 @@ const InputField: React.FC<InputFieldProps> = ({
             type={type}
             value={value}
             onChange={onChange}
-            className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-200 
-                ${isValid === false ? 'border-red-500 focus:ring-red-300' : ''}
+            className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-200
+                ${!value ? 'border-blue-500' : ''}  // Apply blue border when field is empty
+                ${isValid === false && value ? 'border-red-500 focus:ring-red-300' : ''}
                 ${isValid === true ? 'border-green-500 focus:ring-green-300' : ''}
             `}
         />
@@ -237,5 +240,6 @@ const InputField: React.FC<InputFieldProps> = ({
         )}
     </div>
 );
+
 
 export default CreateUserForm;
