@@ -26,8 +26,8 @@ export const generateLinkClassName = (page: NavbarPages, navbarPages: NavbarPage
   const baseClasses = 'transition-colors duration-300';
   const activeClasses = 'bg-clip-text bg-gradient-to-r from-purple-500 via-pink-500 to-pink-600 animate-bounce';
   return page === navbarPages
-    ? `text-3xl text-transparent ${activeClasses} hover:text-pink-200`
-    : `text-black ${baseClasses} hover:text-gray-500`;
+    ? `text-2xl text-transparent ${activeClasses} hover:text-pink-200`
+    : `text-lg text-black ${baseClasses} hover:text-gray-500`;
 };
 
 // Fetch User Role and Generate Role-specific Content
