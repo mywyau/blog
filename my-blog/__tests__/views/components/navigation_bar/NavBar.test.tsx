@@ -1,80 +1,129 @@
-import '@testing-library/jest-dom';
-import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { BrowserRouter } from 'react-router-dom';
-
+import { MemoryRouter } from 'react-router-dom';
+import NavbarPages from '../../../../src/models/ADTs/NavbarPages';
+import UserTypes from '../../../../src/models/ADTs/UserType';
+import UserTypeErrors from '../../../../src/models/ADTs/UserTypeErrors';
+import AuthService from '../../../../src/service/AuthService';
 import Navbar from '../../../../src/views/components/navigation_bar/NavBar';
 
+// Mocking the AuthService to simulate fetching user roles
+jest.mock('../../../../src/service/AuthService', () => ({
+  getRole: jest.fn(),
+}));
 
-describe('Navbar', () => {
-  test('renders Home link', () => {
-    render(
-      <BrowserRouter>
-        <Navbar />
-      </BrowserRouter>
-    );
-    const homeLink = screen.getByText(/Home/i);
-    expect(homeLink).toBeInTheDocument();
+// Mocking the useUserRole hook from UserRoleContext to simulate user roles
+jest.mock('../../../../src/contexts/UserRoleContext', () => ({
+  useUserRole: jest.fn(),
+}));
+
+// Mocking the LogoutButton component
+jest.mock('../../../../src/views/components/buttons/LogoutButton', () => () => <div>Logout</div>);
+
+describe('Navbar Component', () => {
+
+  beforeEach(() => {
+    // Reset mocks before each test to avoid cross-test interference
+    jest.clearAllMocks();
   });
 
-  test('renders About link', () => {
+  it('renders the Navbar with default links', () => {
     render(
-      <BrowserRouter>
+      <MemoryRouter>
         <Navbar />
-      </BrowserRouter>
+      </MemoryRouter>
     );
-    const aboutLink = screen.getByText(/About/i);
-    expect(aboutLink).toBeInTheDocument();
+    expect(screen.getByText('Home')).toBeInTheDocument();
+    expect(screen.getByText('About Me')).toBeInTheDocument();
+    expect(screen.getByText('Contact')).toBeInTheDocument();
   });
 
-  test('renders Contact link', () => {
+  it('applies active class to Home link when on Home page', () => {
     render(
-      <BrowserRouter>
-        <Navbar />
-      </BrowserRouter>
+      <MemoryRouter>
+        <Navbar page={NavbarPages.Home} />
+      </MemoryRouter>
     );
-    const contactLink = screen.getByText(/Contact/i);
-    expect(contactLink).toBeInTheDocument();
+    const homeLink = screen.getByText('Home');
+    expect(homeLink).toHaveClass('text-3xl text-transparent bg-clip-text');
   });
 
-  test('renders Interests link', () => {
+  it('renders Admin-specific links if user role is Admin', async () => {
+    // Mock the getRole method to return Admin
+    (AuthService.getRole as jest.Mock).mockResolvedValue({
+      _tag: 'Right',
+      right: UserTypes.Admin,
+    });
+
+    // Mock the useUserRole hook to simulate an Admin user
+    const { useUserRole } = require('../../../../src/contexts/UserRoleContext');
+    useUserRole.mockReturnValue({ userRole: UserTypes.Admin });
+
     render(
-      <BrowserRouter>
+      <MemoryRouter>
         <Navbar />
-      </BrowserRouter>
+      </MemoryRouter>
     );
-    const interestsLink = screen.getByText(/Interests/i);
-    expect(interestsLink).toBeInTheDocument();
+
+    // Wait for the async role fetching and check if Admin content is displayed
+    expect(await screen.findByText('Logged in as Admin')).toBeInTheDocument();
+    expect(screen.getByText('Create Blog Post')).toBeInTheDocument();
   });
 
-  test('renders Skills link', () => {
+  it('renders Viewer-specific content when user role is Viewer', async () => {
+    // Mock the getRole method to return Viewer
+    (AuthService.getRole as jest.Mock).mockResolvedValue({
+      _tag: 'Right',
+      right: UserTypes.Viewer,
+    });
+
+    // Mock the useUserRole hook to simulate a Viewer user
+    const { useUserRole } = require('../../../../src/contexts/UserRoleContext');
+    useUserRole.mockReturnValue({ userRole: UserTypes.Viewer });
+
     render(
-      <BrowserRouter>
+      <MemoryRouter>
         <Navbar />
-      </BrowserRouter>
+      </MemoryRouter>
     );
-    const skillsLink = screen.getByText(/Skills/i);
-    expect(skillsLink).toBeInTheDocument();
+
+    // Wait for the async role fetching and check if Viewer content is displayed
+    expect(await screen.findByText('Logged in as Viewer')).toBeInTheDocument();
   });
 
-  test('renders WorkLog link', () => {
+  it('renders no user-specific content when role fetching fails', async () => {
+    // Mock the getRole method to return an error
+    (AuthService.getRole as jest.Mock).mockResolvedValue({
+      _tag: 'Left',
+      left: UserTypeErrors.UnknownUserType,
+    });
+
+    // Mock the useUserRole hook to return no role
+    const { useUserRole } = require('../../../../src/contexts/UserRoleContext');
+    useUserRole.mockReturnValue({ userRole: null });
+
     render(
-      <BrowserRouter>
+      <MemoryRouter>
         <Navbar />
-      </BrowserRouter>
+      </MemoryRouter>
     );
-    const workLogLink = screen.getByText(/WorkLog/i);
-    expect(workLogLink).toBeInTheDocument();
+
+    // Ensure no user-specific content is displayed in case of an error
+    expect(screen.queryByText('Logged in as Admin')).toBeNull();
+    expect(screen.queryByText('Logged in as Viewer')).toBeNull();
   });
 
-  test('renders Create button', () => {
-    render(
-      <BrowserRouter>
-        <Navbar />
-      </BrowserRouter>
-    );
-    const createButton = screen.getByText(/Create/i);
-    expect(createButton).toBeInTheDocument();
-    expect(createButton).toHaveClass('bg-green-500');
-  });
+  //   it('toggles the mobile menu when the button is clicked', () => {
+  //     render(<Navbar />);
+
+  //     const menuButton = screen.getByRole('button');
+  //     expect(screen.getByText('Home').closest('div')).toHaveClass('hidden');
+
+  //     // Click to open the mobile menu
+  //     fireEvent.click(menuButton);
+  //     expect(screen.getByText('Home').closest('div')).toHaveClass('block');
+
+  //     // Click again to close the mobile menu
+  //     fireEvent.click(menuButton);
+  //     expect(screen.getByText('Home').closest('div')).toHaveClass('hidden');
+  //   });
 });

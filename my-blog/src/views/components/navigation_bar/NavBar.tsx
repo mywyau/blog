@@ -15,6 +15,7 @@ interface NavbarProps {
 }
 
 const Navbar: React.FC<NavbarProps> = ({ page = NavbarPages.Default }) => {
+  
   const linkClassName = (navbarPages: NavbarPages) => {
     switch (navbarPages) {
       case NavbarPages.Home:

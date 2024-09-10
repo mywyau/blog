@@ -1,139 +1,103 @@
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
-import axios from 'axios';
-import MockAdapter from 'axios-mock-adapter';
+import { render, fireEvent, screen, waitFor } from '@testing-library/react';
 import LoginForm from '../../../src/views/forms/LoginForm';
+import LoginConnector from '../../../src/connectors/LoginConnector';
 
-const mockAxios = new MockAdapter(axios);
 
-describe('LoginForm', () => {
+// Mock the LoginConnector to simulate login API behavior
+jest.mock('../../../src/connectors/LoginConnector');
+
+describe('LoginForm Component', () => {
     beforeEach(() => {
-        mockAxios.reset();
+        jest.clearAllMocks();
     });
 
-    test('renders login form correctly', () => {
+    it('should render form elements correctly', () => {
         render(<LoginForm />);
 
-        // Check if the form elements are rendered
+        // Check if form inputs and button are present
         expect(screen.getByLabelText(/username/i)).toBeInTheDocument();
         expect(screen.getByLabelText(/password/i)).toBeInTheDocument();
         expect(screen.getByRole('button', { name: /login/i })).toBeInTheDocument();
     });
 
-    test('shows error message if fields are empty', async () => {
+    it('should show an error message if fields are empty on submission', async () => {
         render(<LoginForm />);
 
-        // Simulate form submission without entering username or password
+        // Click the submit button without entering any credentials
         fireEvent.click(screen.getByRole('button', { name: /login/i }));
 
-        // Check if the error message is displayed
-        await waitFor(() => {
-            expect(screen.getByText('Please fill in both fields.')).toBeInTheDocument();
-        });
+        // Check if the error message appears
+        expect(await screen.findByText(/please fill in both fields/i)).toBeInTheDocument();
     });
 
-    test('shows loading state while logging in', async () => {
+    it('should show an error message if login fails', async () => {
+        // Mock failed login response
+        LoginConnector.login.mockResolvedValue({
+            error: 'Invalid credentials',
+        });
+
         render(<LoginForm />);
 
-        // Fill in the fields
-        fireEvent.change(screen.getByLabelText(/username/i), {
-            target: { value: 'testuser' },
-        });
-        fireEvent.change(screen.getByLabelText(/password/i), {
-            target: { value: 'password' },
-        });
-
-        // Simulate a successful login response
-        mockAxios.onPost(`${process.env.REACT_APP_API_BASE_URL}/login`).reply(200, {
-            token: 'fake-token',
-        });
+        // Fill in the username and password fields
+        fireEvent.change(screen.getByLabelText(/username/i), { target: { value: 'testuser' } });
+        fireEvent.change(screen.getByLabelText(/password/i), { target: { value: 'wrongpassword' } });
 
         // Submit the form
         fireEvent.click(screen.getByRole('button', { name: /login/i }));
 
-        // Check if the loading text is displayed
-        expect(screen.getByRole('button', { name: /logging in/i })).toBeInTheDocument();
+        // Check if the error message appears
+        expect(await screen.findByText(/invalid login credentials/i)).toBeInTheDocument();
     });
 
-    // TODO: Fix this test
-    // test('successful login stores token and redirects', async () => {
-    //     const mockSetItem = jest.spyOn(Storage.prototype, 'setItem');
-    //     const mockWindowLocation = jest.spyOn(window, 'location', 'get');
-    //     const mockHref = jest.fn();
-    //     mockWindowLocation.mockReturnValue({ href: mockHref });
+    it('should redirect to home page on successful login', async () => {
+        // Mock successful login response
+        LoginConnector.login.mockResolvedValue({
+            error: null,
+        });
 
-    //     render(<LoginForm />);
+        // Mock window.location.href to test the redirect
+        delete window.location;
+        window.location = { href: jest.fn() };
 
-    //     // Fill in the fields
-    //     fireEvent.change(screen.getByLabelText(/username/i), {
-    //         target: { value: 'testuser' },
-    //     });
-    //     fireEvent.change(screen.getByLabelText(/password/i), {
-    //         target: { value: 'password' },
-    //     });
-
-    //     // Simulate a successful login response
-    //     mockAxios.onPost(`${process.env.REACT_APP_API_BASE_URL}/login`).reply(200, {
-    //         token: 'fake-token',
-    //     });
-
-    //     // Submit the form
-    //     fireEvent.click(screen.getByRole('button', { name: /login/i }));
-
-    //     // Wait for the login process to complete
-    //     await waitFor(() => {
-    //         expect(mockSetItem).toHaveBeenCalledWith('token', 'fake-token');
-    //         expect(mockHref).toHaveBeenCalledWith('/dashboard');
-    //     });
-
-    //     mockSetItem.mockRestore();
-    // });
-
-    // TODO: Fix this test
-    // test('shows error message on failed login', async () => {
-    //     render(<LoginForm />);
-
-    //     // Fill in the fields
-    //     fireEvent.change(screen.getByLabelText(/username/i), {
-    //         target: { value: 'testuser' },
-    //     });
-    //     fireEvent.change(screen.getByLabelText(/password/i), {
-    //         target: { value: 'wrongpassword' },
-    //     });
-
-    //     // Simulate a failed login response
-    //     mockAxios.onPost(`${process.env.REACT_APP_API_BASE_URL}/login`).reply(401, {
-    //         message: 'Invalid credentials',
-    //     });
-
-    //     // Submit the form
-    //     fireEvent.click(screen.getByRole('button', { name: /login/i }));
-
-    //     // Wait for the error message to be displayed
-    //     await waitFor(() => {
-    //         expect(screen.getByText('Invalid login credentials.')).toBeInTheDocument();
-    //     });
-    // });
-
-    test('handles network error gracefully', async () => {
         render(<LoginForm />);
 
-        // Fill in the fields
-        fireEvent.change(screen.getByLabelText(/username/i), {
-            target: { value: 'testuser' },
-        });
-        fireEvent.change(screen.getByLabelText(/password/i), {
-            target: { value: 'password' },
-        });
-
-        // Simulate a network error
-        mockAxios.onPost(`${process.env.REACT_APP_API_BASE_URL}/login`).networkError();
+        // Fill in the username and password fields
+        fireEvent.change(screen.getByLabelText(/username/i), { target: { value: 'testuser' } });
+        fireEvent.change(screen.getByLabelText(/password/i), { target: { value: 'correctpassword' } });
 
         // Submit the form
         fireEvent.click(screen.getByRole('button', { name: /login/i }));
 
-        // Wait for the error message to be displayed
+        // Wait for the redirect
         await waitFor(() => {
-            expect(screen.getByText('An error occurred while logging in. Please try again.')).toBeInTheDocument();
+            expect(window.location.href).toBe('/');
+        });
+    });
+
+    it('should display "Logging in..." and disable button during submission', async () => {
+        // Mock successful login response
+        LoginConnector.login.mockResolvedValue({
+            error: null,
+        });
+
+        render(<LoginForm />);
+
+        // Fill in the username and password fields
+        fireEvent.change(screen.getByLabelText(/username/i), { target: { value: 'testuser' } });
+        fireEvent.change(screen.getByLabelText(/password/i), { target: { value: 'correctpassword' } });
+
+        // Submit the form
+        fireEvent.click(screen.getByRole('button', { name: /login/i }));
+
+        // Check if the button shows "Logging in..." and is disabled
+        expect(screen.getByRole('button', { name: /logging in/i })).toBeDisabled();
+
+        // Wait for the login process to complete
+        await waitFor(() => {
+            expect(LoginConnector.login).toHaveBeenCalledWith({
+                username: 'testuser',
+                password: 'correctpassword',
+            });
         });
     });
 });
