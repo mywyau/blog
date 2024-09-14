@@ -5,8 +5,10 @@ import { InputField } from './InputField';
 
 
 const LoginForm: React.FC = () => {
+
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [showPassword, setShowPassword] = useState(false);  // State to toggle password visibility
     const [loading, setLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
 
@@ -67,7 +69,7 @@ const LoginForm: React.FC = () => {
 
                     <InputField
                         id="password"
-                        type="password"
+                        type={showPassword ? "text" : "password"}  // Toggle type based on state
                         value={password}
                         placeholder="Enter your password"
                         onChange={
@@ -75,7 +77,6 @@ const LoginForm: React.FC = () => {
                         }
                         className='w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-200'
                     />
-
                     {/* Center the button */}
                     <div className='flex justify-center pt-6 pb-6'>
                         <button
