@@ -103,6 +103,11 @@ const Navbar: React.FC<NavbarProps> = ({ page = NavbarPages.Default }) => {
               {/* Admin-specific links */}
               <RoleProtected roles={[UserTypes.Admin]}>
                 <Link id="assets" to="/assets" className={generateLinkClassName(page, NavbarPages.Assets)}>Assets</Link>
+              </RoleProtected>
+
+              {userBasedContent && userBasedContent._tag === 'Some' && userBasedContent.value}
+
+              <RoleProtected roles={[UserTypes.Admin]}>
                 <div className="flex flex-col space-y-2">
                   <Link id="create-blog-post" to="/create-blog-post" className="bg-green-500 text-white text-lg font-semibold py-2 px-5 rounded hover:bg-green-400 hover:text-gray-700 transition-colors duration-300 flex items-center justify-center">
                     Create Blog Post
@@ -110,10 +115,7 @@ const Navbar: React.FC<NavbarProps> = ({ page = NavbarPages.Default }) => {
                   <LogoutButton />
                 </div>
               </RoleProtected>
-
-
               {/* User-specific content */}
-              {userBasedContent && userBasedContent._tag === 'Some' && userBasedContent.value}
             </div>
           </div>
         </div>

@@ -1,11 +1,16 @@
 import React, { useState } from 'react';
 import LoginConnector from '../../connectors/LoginConnector';
+import InputSanitizer from '../../utils/InputSanitizer';
+import { InputField } from './InputField';
+
 
 const LoginForm: React.FC = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
+
+    const inputSanitizer = InputSanitizer;
 
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -48,29 +53,28 @@ const LoginForm: React.FC = () => {
                 )}
 
                 <form onSubmit={handleLogin}>
-                    <div className="mb-4">
-                        <label className="block text-gray-700" htmlFor="username">Username:</label>
-                        <input
-                            id="username"
-                            type="text"
-                            value={username}
-                            onChange={(e) => setUsername(e.target.value)}
-                            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-200"
-                            placeholder="Enter your username"
-                        />
-                    </div>
 
-                    <div className="mb-4">
-                        <label className="block text-gray-700" htmlFor="password">Password:</label>
-                        <input
-                            id="password"
-                            type="password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-200"
-                            placeholder="Enter your password"
-                        />
-                    </div>
+                    <InputField
+                        id="username"
+                        type="text"
+                        value={username}
+                        placeholder="Enter your username"
+                        onChange={
+                            (sanitizedValue: string) => { setUsername(sanitizedValue) }  // Update the state with sanitized value // Pass the handler that manages state
+                        }
+                        className='w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-200'
+                    />
+
+                    <InputField
+                        id="password"
+                        type="password"
+                        value={password}
+                        placeholder="Enter your password"
+                        onChange={
+                            (sanitizedValue: string) => { setPassword(sanitizedValue) }
+                        }
+                        className='w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-200'
+                    />
 
                     {/* Center the button */}
                     <div className='flex justify-center pt-6 pb-6'>

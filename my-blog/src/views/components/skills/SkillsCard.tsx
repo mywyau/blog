@@ -1,11 +1,9 @@
-import { Either, fold } from 'fp-ts/lib/Either';
 import { fold as optionFold } from 'fp-ts/lib/Option';
 import { Option, none, some } from 'fp-ts/Option';
 import React, { useEffect, useState } from 'react';
+import RoleProtected from '../../../contexts/RoleProtected';
 import UseDeleteSkill from '../../../hooks/UseDeleteSkill';
 import UserTypes from '../../../models/ADTs/UserType';
-import UserTypeErrors from '../../../models/ADTs/UserTypeErrors';
-import AuthService from '../../../service/AuthService';
 import DeleteSkillButton from '../buttons/DeleteSkillButton';
 import EditSkillButton from '../buttons/EditSkillButton';
 
@@ -24,28 +22,20 @@ const SkillsCard: React.FC<SkillsCardProps> = ({ id, skill_id, skill, descriptio
     useEffect(() => {
         const fetchUserRole = async () => {
             try {
-                const result: Either<UserTypeErrors, UserTypes> = await AuthService.getRole();
 
-                fold<UserTypeErrors, UserTypes, void>(
-                    () => setUserBasedContent(none), // Handle error cases, including unknown user type
-                    (userType) => {
-                        if (userType === UserTypes.Admin) {
-                            setUserBasedContent(some(
-                                <div className="flex space-x-4">
-                                    <EditSkillButton skillId={skill_id} />
-                                    <DeleteSkillButton
-                                        handleDelete={handleDelete}
-                                        loading={loadingState}
-                                        errorMessage={deleteErrorMessage}
-                                        deleteResponseBody={deleteResponseBody}
-                                    />
-                                </div>
-                            ));
-                        } else {
-                            setUserBasedContent(none); // Hide content for non-admin users (e.g., Viewer)
-                        }
-                    }
-                )(result);
+                setUserBasedContent(some(
+                    <div className="flex space-x-4">
+                        <RoleProtected roles={[UserTypes.Admin]}>
+                            <EditSkillButton skillId={skill_id} />
+                            <DeleteSkillButton
+                                handleDelete={handleDelete}
+                                loading={loadingState}
+                                errorMessage={deleteErrorMessage}
+                                deleteResponseBody={deleteResponseBody}
+                            />
+                        </RoleProtected>
+                    </div>
+                ));
             } catch (error) {
                 console.error('Error fetching user role:', error);
                 setUserBasedContent(none);
