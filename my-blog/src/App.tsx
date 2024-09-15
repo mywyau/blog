@@ -31,8 +31,8 @@ import UnauthorizedPage from './views/pages/UnauthorizedPage';
 
 import RouteAuth from './contexts/RouteAuth';
 import { UserRoleProvider } from './contexts/UserRoleContext';
-import UserTypes from './models/ADTs/UserType';
 import CreateSkillsController from './controllers/CreateSkillsController';
+import UserTypes from './models/ADTs/UserType';
 
 
 const App: React.FC = () => {
@@ -40,11 +40,7 @@ const App: React.FC = () => {
     <Routes>
 
       <Route path="/" element={
-        <UserRoleProvider>
-          <RouteAuth roles={[UserTypes.Admin]}>
-            <LandingPageController />
-          </RouteAuth>
-        </UserRoleProvider>
+        <LandingPageController />
       } />
 
       < Route path="/create-blog-post" element={
@@ -73,8 +69,8 @@ const App: React.FC = () => {
             < EditSkillPageController />
           </RouteAuth>
         </UserRoleProvider >
-      } />   
-      
+      } />
+
       < Route path="/create/skill" element={
         < UserRoleProvider >
           <RouteAuth roles={[UserTypes.Admin]}>

@@ -9,7 +9,7 @@ interface RouteAuthProps {
   children: React.ReactNode;
 }
 
-const RouteAuth: React.FC<RouteAuthProps> = ({ roles, fallback, children }) => {
+const RouteAuth: React.FC<RouteAuthProps> = ({ roles = [UserTypes.NotLoggedIn], fallback, children }) => {
   const { userRole } = useUserRole(); // Get the user role from context
   const navigate = useNavigate(); // Get navigate function from React Router
 
@@ -18,6 +18,7 @@ const RouteAuth: React.FC<RouteAuthProps> = ({ roles, fallback, children }) => {
     if (userRole && !roles.includes(userRole)) {
       navigate('/unauthorized');
     }
+
   }, [userRole, roles, navigate]); // Dependencies for useEffect
 
   // If the role is correct, render children

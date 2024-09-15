@@ -107,15 +107,19 @@ const Navbar: React.FC<NavbarProps> = ({ page = NavbarPages.Default }) => {
 
               {userBasedContent && userBasedContent._tag === 'Some' && userBasedContent.value}
 
+              {/* User-specific content */}
               <RoleProtected roles={[UserTypes.Admin]}>
                 <div className="flex flex-col space-y-2">
                   <Link id="create-blog-post" to="/create-blog-post" className="bg-green-500 text-white text-lg font-semibold py-2 px-5 rounded hover:bg-green-400 hover:text-gray-700 transition-colors duration-300 flex items-center justify-center">
                     Create Blog Post
                   </Link>
-                  <LogoutButton />
                 </div>
               </RoleProtected>
-              {/* User-specific content */}
+
+              <RoleProtected roles={[UserTypes.Admin, UserTypes.Viewer]}>
+                <LogoutButton />
+              </RoleProtected>
+
             </div>
           </div>
         </div>
