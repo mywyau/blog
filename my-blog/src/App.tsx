@@ -2,7 +2,6 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import BlogPostController from './controllers/BlogPostController';
-import CreateSkillsController from './controllers/CreateSkillsController';
 import CreateUserController from './controllers/CreateUserController';
 import CreateWorklogController from './controllers/CreateWorklogController';
 import EditSkillPageController from './controllers/EditSkillsPageController';
@@ -28,49 +27,104 @@ import EditBlogPostPage from './views/pages/EditBlogPostPage';
 import InterestsPage from './views/pages/InterestsPage';
 import PrivacyPolicyPage from './views/pages/PrivacyPolicyPage';
 import TermsOfServicePage from './views/pages/TermsOfServicePage';
+import UnauthorizedPage from './views/pages/UnauthorizedPage';
 
+import RouteAuth from './contexts/RouteAuth';
+import { UserRoleProvider } from './contexts/UserRoleContext';
+import UserTypes from './models/ADTs/UserType';
+import CreateSkillsController from './controllers/CreateSkillsController';
 
 
 const App: React.FC = () => {
   return (
     <Routes>
-      <Route path="/" element={<LandingPageController />} />
 
-      <Route path="/create-blog-post" element={<CreateBlogPostPage />} />
-      <Route path="/post/:id" element={<BlogPostController />} />
-      <Route path="/edit-blog-post/:post_id" element={<EditBlogPostPage />} />
+      <Route path="/" element={
+        <UserRoleProvider>
+          <RouteAuth roles={[UserTypes.Admin]}>
+            <LandingPageController />
+          </RouteAuth>
+        </UserRoleProvider>
+      } />
 
-      <Route path="/create/skill" element={<CreateSkillsController />} />
-      <Route path="/skills" element={<ShowSkillsPageController />} />
-      <Route path="/edit-skill/:skill_id" element={<EditSkillPageController />} />
+      < Route path="/create-blog-post" element={
+        < UserRoleProvider >
+          <RouteAuth roles={[UserTypes.Admin]}>
+            <CreateBlogPostPage />
+          </RouteAuth>
+        </UserRoleProvider >
+      } />
 
-      <Route path="/worklog" element={<ShowWorklogsPageController />} />
-      <Route path="worklog/add/new/worklog" element={<CreateWorklogController />} />
-      <Route path="/edit-worklog/:worklog_id" element={<EditWorklogPageController />} />
+      < Route path="/post/:id" element={< BlogPostController />} />
 
-      <Route path="/about" element={<AboutPage />} />
-      <Route path="/contact" element={<ContactPage />} />
-      <Route path="/interests" element={<InterestsPage />} />
+      < Route path="/edit-blog-post/:post_id" element={
+        < UserRoleProvider >
+          <RouteAuth roles={[UserTypes.Admin]}>
+            <EditBlogPostPage />
+          </RouteAuth>
+        </UserRoleProvider >
+      } />
 
-      <Route path="/assets" element={<AssetsPage />} />
-      <Route path="/buttons" element={<ButtonsPage />} />
-      <Route path="/images" element={<ImagesPage />} />
-      <Route path="/loading" element={<LoadingPage />} />
-      <Route path="/forms" element={<FormsPage />} />
-      <Route path="/checkboxes" element={<CheckboxesPage />} />
-      <Route path="/radios" element={<RadioPage />} />
-      <Route path="/videos" element={<VideosPage />} />
+      < Route path="/skills" element={< ShowSkillsPageController />} />
 
-      <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
-      <Route path="/terms-of-service" element={<TermsOfServicePage />} />
+      < Route path="/edit-skill/:skill_id" element={
+        < UserRoleProvider >
+          <RouteAuth roles={[UserTypes.Admin]}>
+            < EditSkillPageController />
+          </RouteAuth>
+        </UserRoleProvider >
+      } />   
+      
+      < Route path="/create/skill" element={
+        < UserRoleProvider >
+          <RouteAuth roles={[UserTypes.Admin]}>
+            < CreateSkillsController />
+          </RouteAuth>
+        </UserRoleProvider >
+      } />
 
-      <Route path="/login" element={<LoginController />} />
-      <Route path="/register" element={<CreateUserController />} />
-      <Route path="/forgot/password" element={<ForgottenPasswordController />} />
+      < Route path="/worklog" element={< ShowWorklogsPageController />} />
 
-      <Route path="/test-user-access" element={<UserRole />} />
+      < Route path="worklog/add/new/worklog" element={
+        < UserRoleProvider >
+          <RouteAuth roles={[UserTypes.Admin]}>
+            < CreateWorklogController />
+          </RouteAuth>
+        </UserRoleProvider >
+      } />
 
-    </Routes>
+      < Route path="/edit-worklog/:worklog_id" element={
+        < UserRoleProvider >
+          <RouteAuth roles={[UserTypes.Admin]}>
+            < EditWorklogPageController />
+          </RouteAuth>
+        </UserRoleProvider >
+      } />
+
+      < Route path="/about" element={< AboutPage />} />
+      < Route path="/contact" element={< ContactPage />} />
+      < Route path="/interests" element={< InterestsPage />} />
+
+      < Route path="/assets" element={< AssetsPage />} />
+      < Route path="/buttons" element={< ButtonsPage />} />
+      < Route path="/images" element={< ImagesPage />} />
+      < Route path="/loading" element={< LoadingPage />} />
+      < Route path="/forms" element={< FormsPage />} />
+      < Route path="/checkboxes" element={< CheckboxesPage />} />
+      < Route path="/radios" element={< RadioPage />} />
+      < Route path="/videos" element={< VideosPage />} />
+
+      < Route path="/privacy-policy" element={< PrivacyPolicyPage />} />
+      < Route path="/terms-of-service" element={< TermsOfServicePage />} />
+
+      < Route path="/login" element={< LoginController />} />
+      < Route path="/register" element={< CreateUserController />} />
+      < Route path="/forgot/password" element={< ForgottenPasswordController />} />
+
+      < Route path="/test-user-access" element={< UserRole />} />
+
+      < Route path="/unauthorized" element={< UnauthorizedPage />} />
+    </Routes >
   );
 };
 
