@@ -9,7 +9,6 @@ import Spacer from '../components/Spacer';
 const CreateBlogPostPage: React.FC = () => {
   return (
     <div className="flex flex-col min-h-screen font-nunito bg-gray-100">
-      <Navbar />
       <Spacer size='pb-20' />
       <H1 id={"create-post"} message={"Create a new blog post"} className={""} />
       <div className="flex-grow container mx-auto p-4">

@@ -9,7 +9,6 @@ import Spacer from '../../components/Spacer';
 const CreateSkillsPage: React.FC = () => {
   return (
     <div className="flex flex-col min-h-screen font-nunito bg-gray-100">
-      <Navbar />
       <Spacer size='pb-20' />
       <H1 id={"add-a-new-skill-h1"} message={"Add a new skill"} className={""} />
       <div className="flex-grow container mx-auto p-4">

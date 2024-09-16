@@ -25,10 +25,6 @@ const LandingPage: React.FC<LandingPageProps> = ({ posts }) => {
 
   return (
     <div className="font-nunito min-h-screen bg-stone-300">
-      <header>
-        <Navbar page={NavbarPages.Home} />
-      </header>
-
       <main className="container mx-auto p-10">
         <Spacer size="p-10" />
 

@@ -8,7 +8,6 @@ import Spacer from '../components/Spacer';
 const AboutPage: React.FC = () => {
   return (
     <div className="flex flex-col min-h-screen font-nunito bg-gray-100">
-      <Navbar page={NavbarPages.About} />
       <Spacer size="p-10"/>
       <div className="flex flex-grow container mx-auto pt-28 flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
         <div className="flex flex-col flex-none w-full md:max-w-4xl lg:max-w-5xl pt-0 pb-5 md:pt-0 pr-8 pl-8 mx-auto">
