@@ -1,24 +1,24 @@
 import React from 'react';
 
-
-interface SkillsPaginationProps {
-  skillsPerPage: number;
-  totalSkills: number;
+interface PaginationProps {
+  postsPerPage: number;
+  totalPosts: number;
   paginate: (pageNumber: number) => void;
   currentPage: number; // Add currentPage prop to track the active page
-
 }
 
-const SkillsPagination: React.FC<SkillsPaginationProps> = ({ skillsPerPage, totalSkills, paginate, currentPage }) => {
+
+const BlogPostPagination: React.FC<PaginationProps> = ({ postsPerPage, totalPosts, paginate, currentPage }) => {
+
 
   const pageNumbers = [];
 
   // Don't show pagination if there are no worklogs
-  if (totalSkills === 0) {
+  if (totalPosts === 0) {
     return null;
   }
 
-  for (let i = 1; i <= Math.ceil(totalSkills / skillsPerPage); i++) {
+  for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
     pageNumbers.push(i);
   }
 
@@ -37,8 +37,8 @@ const SkillsPagination: React.FC<SkillsPaginationProps> = ({ skillsPerPage, tota
           </button>
         </li>
 
-           {/* Page Numbers */}
-           {pageNumbers.map((number) => (
+        {/* Page Numbers */}
+        {pageNumbers.map((number) => (
           <li key={number}>
             <button
               onClick={() => paginate(number)}
@@ -62,7 +62,23 @@ const SkillsPagination: React.FC<SkillsPaginationProps> = ({ skillsPerPage, tota
         </li>
       </ul>
     </nav>
+
+    // <nav className='pl-2'>
+    //   <ul className="flex justify-right space-x-4 mt-8">
+    //     {pageNumbers.map((number) => (
+    //       <li key={number}>
+    //         <button
+    //           onClick={() => paginate(number)}
+    //           className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600"
+    //           data-testid={`pagination-button-${number}`} // Add the data-testid attribute
+    //         >
+    //           {number}
+    //         </button>
+    //       </li>
+    //     ))}
+    //   </ul>
+    // </nav>
   );
 };
 
-export default SkillsPagination;
+export default BlogPostPagination;

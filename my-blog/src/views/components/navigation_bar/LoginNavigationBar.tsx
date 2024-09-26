@@ -13,10 +13,13 @@ interface LoginNavbarProps {
 const LoginNavigationbar: React.FC<LoginNavbarProps> = ({ page = LoginNavbarPages.Default }) => {
 
   const linkClassName = (LoginNavbarPages: LoginNavbarPages) => {
+    const baseClasses = 'transition-colors duration-300';
+    const activeClasses = 'bg-clip-text bg-gradient-to-r from-purple-500 via-pink-500 to-pink-600 animate-bounce';
+
     return (
       page === LoginNavbarPages
-        ? "text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-pink-300 animate-bounce text-xl hover:text-pink-200 transition-colors"
-        : "text-white text-xl hover:text-gray-300 transition-colors duration-300"
+        ? `text-xl text-transparent ${activeClasses} hover:text-pink-200`
+        : `text-lg text-black ${baseClasses} hover:text-gray-500`
     )
   }
 
@@ -29,15 +32,11 @@ const LoginNavigationbar: React.FC<LoginNavbarProps> = ({ page = LoginNavbarPage
 
   return (
     <UserRoleProvider>
-      <nav className="bg-true-blue p-4 shadow-lg fixed w-full z-50">
+      <nav className="bg-gray-100 p-4 fixed w-full z-50 border-b-2 border-gray-300 h-16 md:h-20">
         <div className="container mx-auto flex justify-between items-center">
           {/* Brand or Home Link */}
           <div className="flex items-center space-x-4">
-            <Link
-              id="home"
-              to="/"
-              className="text-white text-4xl font-bold hover:text-gray-300"
-            >
+            <Link id="home" to="/" className={`transition-colors duration-300 text-xl text-black hover:text-gray-500`}>
               Home
             </Link>
           </div>

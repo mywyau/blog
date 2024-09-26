@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
-import Pagination from '../../../src/views/components/Pagination';
+import Pagination from '../../../src/views/components/BlogPostPagination';
 
 describe('Pagination Component', () => {
   it('renders the correct number of page buttons', () => {

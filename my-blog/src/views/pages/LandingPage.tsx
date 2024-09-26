@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
 import { ToastContainer } from 'react-toastify';
-import NavbarPages from '../../models/ADTs/NavbarPages';
 import { PostData } from '../../models/PostData';
 import BlogList from '../blog/BlogList';
+import BlogPostPagination from '../components/BlogPostPagination';
 import DeleteAllBlogPostsButton from '../components/buttons/DeleteAllBlogPostsButton';
 import Copyright from '../components/Copyright';
-import Navbar from '../components/navigation_bar/NavBar';
-import Pagination from '../components/Pagination';
 import SearchBar from '../components/SearchBar';
 import Spacer from '../components/Spacer';
 
@@ -37,8 +35,9 @@ const LandingPage: React.FC<LandingPageProps> = ({ posts }) => {
         <div className="flex flex-grow container mx-auto font-nunito min-h-screen bg-stone-300">
           <div className="w-full md:w-3/4 lg:w-2/3 mx-auto">
             {renderBlogList(currentPosts)}
-            <Pagination
+            <BlogPostPagination
               postsPerPage={postsPerPage}
+              currentPage={currentPage}
               totalPosts={filteredPosts.length}
               paginate={setCurrentPage}
             />

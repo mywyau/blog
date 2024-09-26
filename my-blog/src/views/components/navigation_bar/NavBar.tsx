@@ -2,6 +2,7 @@ import { fold } from 'fp-ts/lib/Either';
 import { none, Option, some } from 'fp-ts/lib/Option';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../../../contexts/AuthContext';
 import RoleProtected from '../../../contexts/RoleProtected';
 import { UserRoleProvider } from '../../../contexts/UserRoleContext';
 import NavbarPages from '../../../models/ADTs/NavbarPages';
@@ -52,6 +53,7 @@ export const fetchUserRole = async (setUserBasedContent: React.Dispatch<Option<J
   )(result);
 };
 const Navbar: React.FC<NavbarProps> = ({ page = NavbarPages.Default }) => {
+  const { isLoggedIn, logout } = useAuth();
   const { isOpen, toggleMenu } = useToggleMenu();
   const [userBasedContent, setUserBasedContent] = useState<Option<JSX.Element>>(none);
 
@@ -61,7 +63,7 @@ const Navbar: React.FC<NavbarProps> = ({ page = NavbarPages.Default }) => {
   // Fetch user role when the component mounts
   useEffect(() => {
     fetchUserRole(setUserBasedContent);
-  }, []);
+  }, [isLoggedIn]);
 
   // Toggle dropdown menu
   const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
@@ -69,8 +71,9 @@ const Navbar: React.FC<NavbarProps> = ({ page = NavbarPages.Default }) => {
   return (
     <UserRoleProvider>
       {/* Main Navbar */}
-      <nav className="bg-gray-100 p-4 fixed w-full z-50 border-b-2 border-gray-300 h-16 md:h-20">
-        <div className="container mx-auto flex justify-between items-center h-full">
+      {/* Removed fixed height for dynamic adjustment */}
+      <nav className="bg-gray-100 p-4 fixed w-full z-50 border-b-2 border-gray-200">
+        <div className="container mx-auto flex justify-between items-start md:items-center"> {/* Align with items-start to support stacking */}
           {/* Home Link */}
           <div className="flex items-center space-x-4">
             <Link id="home" to="/" className={`${generateLinkClassName(page, NavbarPages.Home)}`}>
@@ -95,18 +98,16 @@ const Navbar: React.FC<NavbarProps> = ({ page = NavbarPages.Default }) => {
           </div>
 
           {/* Navigation Links */}
-          <div className={`md:flex items-center md:space-x-6 ${isOpen ? 'block' : 'hidden'} md:block absolute md:static right-0 top-16 md:top-auto bg-true-blue md:bg-transparent p-4 md:p-0 w-64 md:w-auto shadow-md md:shadow-none rounded-lg md:rounded-none transition-all duration-300`}>
+          {/* Removed height dependency and stacked with flex-col */}
+          <div className={`md:flex md:flex-row md:space-x-6 ${isOpen ? 'block' : 'hidden'} md:block absolute md:static right-0 top-16 md:top-auto bg-true-blue md:bg-transparent p-4 md:p-0 w-64 md:w-auto shadow-md md:shadow-none rounded-lg md:rounded-none transition-all duration-300`}>
             <div className="flex flex-col md:flex-row md:items-center md:space-x-6 space-y-4 md:space-y-0">
               {/* Static Navigation Links */}
-
               <Link id="about-me" to="/about" className={`text-lg ${generateLinkClassName(page, NavbarPages.About)}`}>
                 About Me
               </Link>
               <Link id="contact" to="/contact" className={`text-lg ${generateLinkClassName(page, NavbarPages.Contact)}`}>
                 Contact
               </Link>
-
-              {/* Other Links */}
               <Link id="skills" to="/skills" className={`text-lg ${generateLinkClassName(page, NavbarPages.Skills)}`}>
                 Skills
               </Link>
@@ -121,10 +122,22 @@ const Navbar: React.FC<NavbarProps> = ({ page = NavbarPages.Default }) => {
 
               {userBasedContent && userBasedContent._tag === 'Some' && userBasedContent.value}
 
-              {/* Logout Button */}
-              <RoleProtected roles={[UserTypes.Admin, UserTypes.Viewer]}>
-                <LogoutButton />
-              </RoleProtected>
+              {/* Stack the buttons vertically */}
+              <div className='flex flex-col space-y-4'>
+                <RoleProtected roles={[UserTypes.Admin]}>
+                  <Link
+                    id="login-nav" to="/create-blog-post"
+                    className={`bg-green-500 text-white px-6 py-2 rounded-md hover:bg-green-600 transition-colors`}
+                  >
+                    Create blog post
+                  </Link>
+                </RoleProtected>
+
+                {/* Logout Button */}
+                <RoleProtected roles={[UserTypes.Admin, UserTypes.Viewer]}>
+                  <LogoutButton />
+                </RoleProtected>
+              </div>
 
               <RoleProtected roles={[UserTypes.Admin]}>
                 {/* Assets Dropdown */}
