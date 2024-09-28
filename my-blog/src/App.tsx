@@ -5,7 +5,7 @@ import BlogPostController from './controllers/BlogPostController';
 import CreateUserController from './controllers/CreateUserController';
 import CreateWorklogController from './controllers/CreateWorklogController';
 import EditSkillPageController from './controllers/EditSkillsPageController';
-import EditWorklogPageController from './controllers/EditWorklogPageController copy';
+import EditWorklogPageController from './controllers/EditWorklogPageController';
 import ForgottenPasswordController from './controllers/ForgottenPasswordController';
 import LandingPageController from './controllers/LandingPageController';
 import LoginController from './controllers/LoginController';
