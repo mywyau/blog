@@ -20,7 +20,6 @@ import ImagesPage from './views/pages/assets_pages/ImagesPage';
 import LoadingPage from './views/pages/assets_pages/LoadingPage';
 import RadioPage from './views/pages/assets_pages/RadioPage';
 import VideosPage from './views/pages/assets_pages/VideosPage';
-import AssetsPage from './views/pages/AssetsPage';
 import ContactPage from './views/pages/ContactsPage';
 import CreateBlogPostPage from './views/pages/CreateBlogPostPage';
 import EditBlogPostPage from './views/pages/EditBlogPostPage';
@@ -130,7 +129,6 @@ const App: React.FC = () => {
         < Route path="/contact" element={< ContactPage />} />
         < Route path="/interests" element={< InterestsPage />} />
 
-        < Route path="/assets" element={< AssetsPage />} />
         < Route path="/assets/buttons" element={< ButtonsPage />} />
         < Route path="/assets/images" element={< ImagesPage />} />
         < Route path="/assets/loading" element={< LoadingPage />} />

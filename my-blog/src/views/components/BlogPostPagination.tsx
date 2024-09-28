@@ -29,6 +29,7 @@ const BlogPostPagination: React.FC<PaginationProps> = ({ postsPerPage, totalPost
         {/* Previous Button */}
         <li>
           <button
+            id="previous"
             onClick={() => paginate(currentPage - 1)}
             className={`px-2 py-1 text-base rounded text-gray-800 ${currentPage === 1 ? 'opacity-50 cursor-not-allowed line-through' : ''} hover:bg-blue-200`}
             disabled={currentPage === 1}
@@ -39,8 +40,10 @@ const BlogPostPagination: React.FC<PaginationProps> = ({ postsPerPage, totalPost
 
         {/* Page Numbers */}
         {pageNumbers.map((number) => (
-          <li key={number}>
+          <li key={number} data-testid="blog-post-pages">
             <button
+              data-testid={`page-buttons`}
+              id={`page-${number}`}
               onClick={() => paginate(number)}
               className={`px-2 py-1 text-base rounded ${currentPage === number ? 'text-black animate-bounce' : 'text-gray-500 hover:bg-blue-200'}`}
             >
@@ -53,6 +56,7 @@ const BlogPostPagination: React.FC<PaginationProps> = ({ postsPerPage, totalPost
         {/* Next Button */}
         <li>
           <button
+            id="next"
             onClick={() => paginate(currentPage + 1)}
             className={`px-2 py-1 text-base rounded text-gray-800 ${currentPage === pageNumbers.length ? 'opacity-50 cursor-not-allowed line-through' : ''} hover:bg-blue-200`}
             disabled={currentPage === pageNumbers.length}
@@ -62,22 +66,6 @@ const BlogPostPagination: React.FC<PaginationProps> = ({ postsPerPage, totalPost
         </li>
       </ul>
     </nav>
-
-    // <nav className='pl-2'>
-    //   <ul className="flex justify-right space-x-4 mt-8">
-    //     {pageNumbers.map((number) => (
-    //       <li key={number}>
-    //         <button
-    //           onClick={() => paginate(number)}
-    //           className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600"
-    //           data-testid={`pagination-button-${number}`} // Add the data-testid attribute
-    //         >
-    //           {number}
-    //         </button>
-    //       </li>
-    //     ))}
-    //   </ul>
-    // </nav>
   );
 };
 

@@ -25,7 +25,7 @@ jest.mock('../src/views/pages/assets_pages/ImagesPage', () => () => <div>ImagesP
 jest.mock('../src/views/pages/assets_pages/LoadingPage', () => () => <div>LoadingPage Component</div>);
 jest.mock('../src/views/pages/assets_pages/RadioPage', () => () => <div>RadioPage Component</div>);
 jest.mock('../src/views/pages/assets_pages/VideosPage', () => () => <div>VideosPage Component</div>);
-jest.mock('../src/views/pages/AssetsPage', () => () => <div>AssetsPage Component</div>);
+
 jest.mock('../src/views/pages/ContactsPage', () => () => <div>ContactsPage Component</div>);
 jest.mock('../src/views/pages/CreateBlogPostPage', () => () => <div>CreateBlogPostPage Component</div>);
 jest.mock('../src/views/pages/EditBlogPostPage', () => () => <div>EditBlogPostPage Component</div>);
