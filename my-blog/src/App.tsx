@@ -31,9 +31,10 @@ import UnauthorizedPage from './views/pages/UnauthorizedPage';
 import RouteAuth from './contexts/RouteAuth';
 import { UserRoleProvider } from './contexts/UserRoleContext';
 import CreateSkillsController from './controllers/CreateSkillsController';
+import LoginNavbarPages from './models/ADTs/LoginNavbarPages';
 import NavbarPages from './models/ADTs/NavbarPages';
 import UserTypes from './models/ADTs/UserType';
-import AssetsNavigationBar from './views/components/navigation_bar/AssetsNavigationBar';
+import LoginNavigationbar from './views/components/navigation_bar/LoginNavigationBar';
 import Navbar from './views/components/navigation_bar/NavBar';
 
 
@@ -58,12 +59,28 @@ const App: React.FC = () => {
     }
   };
 
+  const loginRelatedPaths = ['/login', '/register', '/forgot/password'];
+  const isLoginPage = loginRelatedPaths.includes(location.pathname);
+  
+  const getCurrentPageLogin = () => {
+    switch (location.pathname) {
+      case '/login':
+        return LoginNavbarPages.Login;
+      case '/forgot/password':
+        return LoginNavbarPages.ForgottenPassword;
+      case '/register':
+        return LoginNavbarPages.CreateAccount;
+      default:
+        return LoginNavbarPages.Login;
+    }
+  };
+
   return (
 
     <div className="flex flex-col min-h-screen font-nunito bg-gray-100">
       {/* Navbar will render once and persist across all routes */}
       <header>
-        <Navbar page={getCurrentPage()} />
+        {!isLoginPage ? <Navbar page={getCurrentPage()} /> : <LoginNavigationbar page={getCurrentPageLogin()} />}  {/* Render SimpleNavbar on login page */}
       </header>
 
       <Routes>

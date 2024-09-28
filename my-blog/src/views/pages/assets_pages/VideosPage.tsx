@@ -37,6 +37,7 @@ const Videos: React.FC = () => {
     <div className="flex flex-col min-h-screen font-nunito bg-gray-100">
       <Spacer size='pb-20' />
       <div className="flex-grow container mx-auto p-4">
+        <Spacer size='pb-20' />
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
           {videos.map((video) => (
             <div key={video.id} className="bg-white rounded-lg shadow-lg p-4">
